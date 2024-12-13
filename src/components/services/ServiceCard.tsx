@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Music, Film } from 'lucide-react';
+import { Music, Film } from 'lucide-react';
 
 interface ServiceCardProps {
   title: string;
@@ -10,7 +10,6 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ title, icon, description, features }) => {
   const IconComponent = {
-    
     Music,
     Film
   }[icon] || Music;

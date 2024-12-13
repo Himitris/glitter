@@ -14,17 +14,17 @@ const Footer = () => {
               Faire briller chaque moment, ensemble !
             </p>
           </div>
-
+          
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <p className="text-gray-400">Email: contact@glitterproduction.com</p>
             <p className="text-gray-400">Tel: +33 (0)1 23 45 67 89</p>
           </div>
-
+          
           <div>
             <h4 className="text-lg font-semibold mb-4">Suivez-nous</h4>
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/glitter_prod/" className="text-white hover:text-pink-400 transition-colors">
+              <a href="#" className="text-white hover:text-pink-400 transition-colors">
                 <Instagram size={24} />
               </a>
               <a href="#" className="text-white hover:text-pink-400 transition-colors">
@@ -36,7 +36,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
+        
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>&copy; {new Date().getFullYear()} Glitter Production. Tous droits réservés.</p>
         </div>
