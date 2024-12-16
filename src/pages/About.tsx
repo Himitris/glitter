@@ -2,23 +2,24 @@ import React from 'react';
 import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import TeamMember from '../components/ui/TeamMember';
+import ValueCard from '../components/ui/ValueCard';
 import { teamMembers } from '../data/team';
 import { Star, Heart, Sparkles } from 'lucide-react';
 
 const About = () => {
   const values = [
     {
-      icon: <Star className="w-8 h-8 text-pink-500" />,
+      icon: Star,
       title: "Excellence",
       description: "Nous visons l'excellence dans chaque projet, chaque détail compte."
     },
     {
-      icon: <Heart className="w-8 h-8 text-purple-500" />,
+      icon: Heart,
       title: "Passion",
       description: "La passion pour l'art et la musique guide chacune de nos actions."
     },
     {
-      icon: <Sparkles className="w-8 h-8 text-orange-500" />,
+      icon: Sparkles,
       title: "Innovation",
       description: "Nous repoussons les limites pour créer des expériences uniques."
     }
@@ -34,7 +35,7 @@ const About = () => {
 
       <Section>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-pink-500 to-orange-500 text-transparent bg-clip-text">
+          <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
             Notre Histoire
           </h2>
           <p className="text-gray-300 mb-8">
@@ -49,25 +50,23 @@ const About = () => {
       </Section>
 
       <Section className="bg-black/50">
-        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-pink-500 to-orange-500 text-transparent bg-clip-text">
+        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
           Nos Valeurs
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {values.map((value, index) => (
-            <div
+            <ValueCard
               key={index}
-              className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800"
-            >
-              <div className="mb-6 flex justify-center">{value.icon}</div>
-              <h3 className="text-xl font-bold mb-4">{value.title}</h3>
-              <p className="text-gray-400">{value.description}</p>
-            </div>
+              icon={value.icon}
+              title={value.title}
+              description={value.description}
+            />
           ))}
         </div>
       </Section>
 
       <Section>
-        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-pink-500 to-orange-500 text-transparent bg-clip-text">
+        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
           Notre Équipe
         </h2>
         <div className="grid md:grid-cols-3 gap-8">

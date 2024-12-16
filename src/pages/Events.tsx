@@ -4,14 +4,11 @@ import Section from '../components/ui/Section';
 import EventCard from '../components/events/EventCard';
 import EventFilter from '../components/events/EventFilter';
 import { events } from '../data/events';
-import { Event } from '../types';
+import { filterEvents, EventFilterType } from '../utils/eventFilters';
 
 const Events = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
-
-  const filteredEvents = events.filter((event: Event) => 
-    activeFilter === 'all' ? true : event.type === activeFilter
-  );
+  const [activeFilter, setActiveFilter] = useState<EventFilterType>('all');
+  const filteredEvents = filterEvents(events, activeFilter);
 
   return (
     <div>
