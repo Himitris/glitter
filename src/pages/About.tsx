@@ -3,10 +3,31 @@ import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import TeamMember from '../components/ui/TeamMember';
 import ValueCard from '../components/ui/ValueCard';
-import { teamMembers } from '../data/team';
 import { Star, Heart, Sparkles } from 'lucide-react';
+import GradientText from '../components/ui/GradientText';
 
 const About = () => {
+  const founders = [
+    {
+      name: "Chloé Jolly",
+      role: "Co-fondatrice",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&auto=format&fit=crop&q=80",
+      description: "Professionnelle expérimentée et polyvalente dans l'administration et la production de spectacle vivant. Son expertise s'étend de la gestion de contrats à la direction de production d'événements.",
+      socialLinks: {
+        instagram: "https://instagram.com"
+      }
+    },
+    {
+      name: "Matisse Pellegrin",
+      role: "Co-fondatrice",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&auto=format&fit=crop&q=80",
+      description: "Professionnelle accomplie dans l'administration, la production et le management de groupes musicaux. Son expérience englobe la régie d'événements et la coordination technique.",
+      socialLinks: {
+        instagram: "https://instagram.com"
+      }
+    }
+  ];
+
   const values = [
     {
       icon: Star,
@@ -20,8 +41,8 @@ const About = () => {
     },
     {
       icon: Sparkles,
-      title: "Innovation",
-      description: "Nous repoussons les limites pour créer des expériences uniques."
+      title: "Créativité",
+      description: "Nous repoussons les limites pour créer des expériences uniques et mémorables."
     }
   ];
 
@@ -29,22 +50,22 @@ const About = () => {
     <div>
       <PageHeader
         title="À Propos de Nous"
-        subtitle="Une équipe passionnée au service de vos événements"
+        subtitle="Une structure dédiée à la production, l'administration et le management"
         backgroundImage="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&auto=format&fit=crop&q=80"
       />
 
       <Section>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
+          <GradientText as="h2" className="text-3xl font-bold mb-6">
             Notre Histoire
-          </h2>
+          </GradientText>
           <p className="text-gray-300 mb-8">
-            Fondée en 2020, Glitter Production est née de la passion pour la création d'événements uniques et mémorables. 
-            Notre mission est de faire briller chaque moment en créant des expériences qui marquent les esprits et touchent les cœurs.
+            Créée en 2024 par Chloé Jolly et Matisse Pellegrin, Glitter Productions est une structure dédiée à la production, 
+            l'administration et le management dans le domaine de la musique et du spectacle vivant, située entre les Landes et le Tarn.
           </p>
           <p className="text-gray-300">
-            Aujourd'hui, nous sommes fiers de collaborer avec des artistes talentueux et des partenaires de confiance 
-            pour donner vie à vos projets les plus ambitieux.
+            Forte de la passion et de l'expertise de ses fondatrices, Glitter Productions propose des services adaptés aux besoins 
+            des artistes et des événements artistiques en se positionnant comme un véritable partenaire.
           </p>
         </div>
       </Section>
@@ -67,12 +88,21 @@ const About = () => {
 
       <Section>
         <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
-          Notre Équipe
+          Nos Fondatrices
         </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {founders.map((member, index) => (
             <TeamMember key={index} {...member} />
           ))}
+        </div>
+        
+        <div className="text-center mt-16">
+          <p className="text-gray-300 mb-8">
+            Leur complémentarité et leur vision commune de l'accompagnement artistique sont au cœur de la réussite de Glitter Productions.
+          </p>
+          <a href="https://instagram.com/glitter_prod" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 transition-colors">
+            Instagram: @glitter_prod
+          </a>
         </div>
       </Section>
     </div>

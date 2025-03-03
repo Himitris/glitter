@@ -4,9 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import ServiceCard from '../components/services/ServiceCard';
-import ProductionStep from '../components/ui/ProductionStep';
-import { services } from '../data/services';
-import { Star, Music, Video, Users } from 'lucide-react';
+import { Music, FileText, Users, Calendar, DollarSign, FileCheck } from 'lucide-react';
 import { colors } from '../utils/theme';
 
 const Services = () => {
@@ -15,21 +13,66 @@ const Services = () => {
     threshold: 0.1,
   });
 
-  const productionSteps = [
+  const artistServices = [
     {
-      title: "Pré-production",
-      description: "Planification détaillée, budgétisation et coordination avec les artistes et prestataires.",
-      icon: <Music className="w-8 h-8 text-pink-500" />
+      title: "Administration et Gestion",
+      icon: "FileText",
+      description: "Nous prenons en charge les aspects administratifs et financiers, permettant aux artistes de se concentrer pleinement sur leur créativité.",
+      features: [
+        "Édition des contrats de cession et des factures",
+        "Gestion de la paie des artistes et techniciens",
+        "Accompagnement à l'intermittence",
+        "Gestion des droits d'auteur"
+      ]
     },
     {
-      title: "Production",
-      description: "Gestion technique, coordination des équipes et supervision artistique le jour J.",
-      icon: <Video className="w-8 h-8 text-purple-500" />
+      title: "Production Musicale",
+      icon: "Music",
+      description: "De la pré-production à la post-production, nous travaillons en étroite collaboration avec les artistes pour les aider dans l'élaboration des enregistrements.",
+      features: [
+        "Accompagnement artistique",
+        "Coordination technique",
+        "Production d'albums",
+        "Stratégie de sortie"
+      ]
     },
     {
-      title: "Post-production",
-      description: "Montage vidéo, retours d'expérience et optimisation pour les futurs événements.",
-      icon: <Users className="w-8 h-8 text-orange-500" />
+      title: "Production de Tournée",
+      icon: "Calendar",
+      description: "Organisation complète de vos tournées pour vous permettre de vous concentrer sur votre art.",
+      features: [
+        "Élaboration des budgets de tournée",
+        "Gestion de la logistique (transport, hébergement)",
+        "Organisation des résidences",
+        "Recherche de financements"
+      ]
+    },
+    {
+      title: "Management Artistique",
+      icon: "Users",
+      description: "Nous développons des stratégies sur mesure pour maximiser votre visibilité et votre évolution artistique.",
+      features: [
+        "Gestion de l'image",
+        "Relations publiques",
+        "Coordination des tournées",
+        "Développement stratégique"
+      ]
+    }
+  ];
+
+  const eventServices = [
+    {
+      title: "Régie Événementielle",
+      icon: "Calendar",
+      description: "Services de régie pour tous types d'événements artistiques.",
+      features: [
+        "Régie site et logistique",
+        "Régie artistes",
+        "Régie cashless",
+        "Régie bénévoles",
+        "Direction de production",
+        "Gestion des paies"
+      ]
     }
   ];
 
@@ -37,47 +80,43 @@ const Services = () => {
     <div>
       <PageHeader
         title="Nos Services"
-        subtitle="Une expertise complète pour vos projets"
+        subtitle="Des services adaptés aux besoins des artistes et des événements"
         backgroundImage="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&auto=format&fit=crop&q=80"
       />
 
       <Section>
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className={`absolute inset-0 bg-gradient-to-r ${colors.gradient.primary} blur-xl opacity-50`} />
-              <Star className="relative w-12 h-12 text-pink-500" />
-            </div>
-          </div>
           <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text animate-gradient bg-[length:200%_200%]">
-            Une Production Sur Mesure
+            Services aux Projets Artistiques
           </h2>
           <p className="text-gray-300">
-            De la conception à la réalisation, nous vous accompagnons dans toutes les étapes
-            de votre projet pour créer des moments inoubliables.
+            Chez Glitter Productions, nous accompagnons les projets artistiques à chaque étape de leur parcours artistique et professionnel.
           </p>
         </div>
 
-        {/* Production Steps */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {productionSteps.map((step, index) => (
-            <ProductionStep
-              key={index}
-              {...step}
-              index={index + 1}
-            />
-          ))}
-        </div>
-
-        {/* Services Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <ServiceCard key={service.id} {...service} />
+        <div className="grid md:grid-cols-2 gap-8 mb-20">
+          {artistServices.map((service, index) => (
+            <ServiceCard key={index} {...service} />
           ))}
         </div>
       </Section>
 
-      {/* Rest of the component remains the same */}
+      <Section className="bg-black/50">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
+            Services aux Organisateurs d'Événements
+          </h2>
+          <p className="text-gray-300">
+            Glitter Productions propose des services de régie pour tous types d'événements artistiques.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-1 lg:grid-cols-1 max-w-2xl mx-auto">
+          {eventServices.map((service, index) => (
+            <ServiceCard key={index} {...service} />
+          ))}
+        </div>
+      </Section>
     </div>
   );
 };
