@@ -71,7 +71,7 @@ const About = () => {
       </Section>
 
       <Section className="bg-black/50">
-        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
+        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-transparent bg-clip-text">
           Nos Valeurs
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -87,7 +87,7 @@ const About = () => {
       </Section>
 
       <Section>
-        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
+        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-transparent bg-clip-text">
           Nos Fondatrices
         </h2>
         <div className="grid md:grid-cols-2 gap-8 mb-16">
@@ -100,7 +100,7 @@ const About = () => {
           <p className="text-gray-300 mb-8">
             Leur complémentarité et leur vision commune de l'accompagnement artistique sont au cœur de la réussite de Glitter Productions.
           </p>
-          <a href="https://instagram.com/glitter_prod" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 transition-colors">
+          <a href="https://instagram.com/glitter_prod" target="_blank" rel="noopener noreferrer" className="text-[#FF4D8F] hover:text-[#FF8C60] transition-colors">
             Instagram: @glitter_prod
           </a>
         </div>

@@ -16,8 +16,8 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
     : "hidden md:flex space-x-8";
     
   const itemClassName = (isActive: boolean) => `
-    relative text-white transition-colors
-    ${isActive ? 'text-pink-400' : 'hover:text-pink-400'}
+    relative text-white transition-colors tracking-wider uppercase text-sm font-medium
+    ${isActive ? 'text-[#FF4D8F]' : 'hover:text-[#FF4D8F]'}
   `;
   
   const activePillClassName = `
