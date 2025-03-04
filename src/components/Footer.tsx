@@ -14,13 +14,13 @@ const Footer = () => {
               Faire briller chaque moment, ensemble !
             </p>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <p className="text-gray-400">Email: glitterproductions24@gmail.com</p>
             <p className="text-gray-400">Située entre les Landes et le Tarn</p>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-4">Suivez-nous</h4>
             <div className="flex space-x-4">
@@ -33,9 +33,16 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>&copy; {new Date().getFullYear()} Glitter Productions. Tous droits réservés.</p>
+          <div className="flex justify-center space-x-4 mt-4 text-sm">
+            <a href="#" className="hover:text-pink-400 transition-colors">Politique de confidentialité</a>
+            <span className="text-gray-600">•</span>
+            <a href="#" className="hover:text-pink-400 transition-colors">Conditions d'utilisation</a>
+            <span className="text-gray-600">•</span>
+            <a href="#" className="hover:text-pink-400 transition-colors">Mentions légales</a>
+          </div>
         </div>
       </div>
     </footer>

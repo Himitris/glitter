@@ -8,6 +8,7 @@ import GradientText from '../components/ui/GradientText';
 import Star from '../components/ui/Star';
 import { Star as StarIcon, Heart, Sparkles, Instagram } from 'lucide-react';
 import { typography } from '../utils/theme';
+import ParallaxBanner from '../components/ui/ParallaxBanner';
 
 const About = () => {
   const founders = [
@@ -56,11 +57,32 @@ const About = () => {
 
   return (
     <div>
-      <PageHeader
-        title="À Propos de Nous"
-        subtitle="Une structure dédiée à la production, l'administration et le management"
-        backgroundImage="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&auto=format&fit=crop&q=80"
-      />
+      <ParallaxBanner
+        image="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&auto=format&fit=crop&q=80"
+        height="50vh"
+      >
+        <div className="text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-bold mb-4"
+          >
+            <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-transparent bg-clip-text">
+              À Propos de Nous
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl md:text-2xl text-gray-200"
+          >
+            Une structure dédiée à la production, l'administration et le management
+          </motion.p>
+        </div>
+      </ParallaxBanner>
 
       <Section>
         <div className="max-w-3xl mx-auto text-center">
@@ -72,11 +94,11 @@ const About = () => {
             <Star className="text-[#FF4D8F]" size="sm" />
           </div>
           <p className="text-gray-300 mb-8">
-            Créée en 2024 par Chloé Jolly et Matisse Pellegrin, Glitter Productions est une structure dédiée à la production, 
+            Créée en 2024 par Chloé Jolly et Matisse Pellegrin, Glitter Productions est une structure dédiée à la production,
             l'administration et le management dans le domaine de la musique et du spectacle vivant, située entre les Landes et le Tarn.
           </p>
           <p className="text-gray-300">
-            Forte de la passion et de l'expertise de ses fondatrices, Glitter Productions propose des services adaptés aux besoins 
+            Forte de la passion et de l'expertise de ses fondatrices, Glitter Productions propose des services adaptés aux besoins
             des artistes et des événements artistiques en se positionnant comme un véritable partenaire.
           </p>
         </div>
@@ -135,15 +157,15 @@ const About = () => {
             </motion.div>
           ))}
         </div>
-        
+
         <div className="text-center mt-16">
           <p className="text-gray-300 mb-8">
             Leur complémentarité et leur vision commune de l'accompagnement artistique sont au cœur de la réussite de Glitter Productions.
           </p>
-          <motion.a 
-            href="https://instagram.com/glitter_prod" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <motion.a
+            href="https://instagram.com/glitter_prod"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             className="inline-flex items-center gap-2 text-[#FF4D8F] hover:text-[#FF8C60] transition-colors"
           >

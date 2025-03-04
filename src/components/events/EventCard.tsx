@@ -12,7 +12,7 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
   // Map pour les couleurs de gradient selon le type d'événement
-  const gradientMap = {
+  const gradientMap: { [key: string]: 'production' | 'administration' | 'prestation' | 'primary' } = {
     'concert': 'production',
     'show': 'administration',
     'private': 'prestation'
