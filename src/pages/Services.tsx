@@ -1,13 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import ServiceCard from '../components/services/ServiceCard';
 import GradientText from '../components/ui/GradientText';
 import Star from '../components/ui/Star';
-import { Music, FileText, Users, Calendar } from 'lucide-react';
-import { colors, typography } from '../utils/theme';
+import { typography } from '../utils/theme';
+import ParallaxBanner from '../components/ui/ParallaxBanner';
 
 const Services = () => {
   const [ref, inView] = useInView({
@@ -92,11 +91,34 @@ const Services = () => {
 
   return (
     <div>
-      <PageHeader
-        title="Nos Services"
-        subtitle="Des services adaptés aux besoins des artistes et des événements"
-        backgroundImage="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&auto=format&fit=crop&q=80"
-      />
+      {/* Remplacer le PageHeader par */}
+      <ParallaxBanner
+        image="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&auto=format&fit=crop&q=80"
+        height="45vh"
+        className="mt-0"
+      >
+        <div className="text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-bold mb-4"
+          >
+            <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-transparent bg-clip-text">
+              Nos Services
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl md:text-2xl text-gray-200"
+          >
+            Des services adaptés aux besoins des artistes et des événements
+          </motion.p>
+        </div>
+      </ParallaxBanner>
 
       <Section>
         <div className="max-w-3xl mx-auto text-center mb-16">

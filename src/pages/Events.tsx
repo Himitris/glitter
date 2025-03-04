@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import EventCard from '../components/events/EventCard';
 import EventFilter from '../components/events/EventFilter';
@@ -10,6 +9,7 @@ import { Calendar } from 'lucide-react';
 import { events } from '../data/events';
 import { filterEvents, EventFilterType } from '../utils/eventFilters';
 import { typography } from '../utils/theme';
+import ParallaxBanner from '../components/ui/ParallaxBanner';
 
 const Events = () => {
   const [activeFilter, setActiveFilter] = useState<EventFilterType>('all');
@@ -17,11 +17,33 @@ const Events = () => {
 
   return (
     <div>
-      <PageHeader
-        title="Nos Événements"
-        subtitle="Découvrez nos prochains événements"
-        backgroundImage="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1600&auto=format&fit=crop&q=80"
-      />
+      <ParallaxBanner
+        image="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1600&auto=format&fit=crop&q=80"
+        height="45vh"
+        className="mt-0"
+      >
+        <div className="text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-bold mb-4"
+          >
+            <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-transparent bg-clip-text">
+              Nos Événements
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl md:text-2xl text-gray-200"
+          >
+            Découvrez nos prochains événements
+          </motion.p>
+        </div>
+      </ParallaxBanner>
 
       <Section>
         <div className="text-center mb-12">
@@ -34,7 +56,7 @@ const Events = () => {
             Programmation
           </GradientText>
           <p className="text-gray-300 max-w-2xl mx-auto mb-10">
-            Découvrez notre sélection d'événements uniques, où chaque moment est conçu pour 
+            Découvrez notre sélection d'événements uniques, où chaque moment est conçu pour
             briller et vous offrir une expérience inoubliable.
           </p>
         </div>
@@ -79,7 +101,7 @@ const Events = () => {
             Vous souhaitez organiser un événement ?
           </GradientText>
           <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-            Glitter Productions met son expertise à votre service pour créer des moments uniques 
+            Glitter Productions met son expertise à votre service pour créer des moments uniques
             et mémorables. Contactez-nous pour discuter de votre projet.
           </p>
           <motion.a

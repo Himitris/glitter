@@ -1,39 +1,55 @@
-// Créez un nouveau fichier src/components/ui/ParallaxBanner.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useId } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface ParallaxBannerProps {
   image: string;
   height?: string;
   children: React.ReactNode;
+  className?: string;
 }
 
 const ParallaxBanner: React.FC<ParallaxBannerProps> = ({ 
   image,
   height = "40vh",
-  children 
+  children,
+  className = ""
 }) => {
+  // Générer un ID unique pour chaque instance du composant
+  const uniqueId = useId();
+  const containerId = `parallax-container-${uniqueId}`;
+  
   const [elementTop, setElementTop] = useState(0);
   const { scrollY } = useScroll();
   
   useEffect(() => {
-    const element = document.getElementById('parallax-container');
-    if (element) {
-      const { top } = element.getBoundingClientRect();
-      setElementTop(top + window.scrollY);
-    }
-  }, []);
+    const updatePosition = () => {
+      const element = document.getElementById(containerId);
+      if (element) {
+        const { top } = element.getBoundingClientRect();
+        setElementTop(top + window.scrollY);
+      }
+    };
+    
+    // Mettre à jour la position initiale
+    updatePosition();
+    
+    // Réagir aux changements de taille de fenêtre
+    window.addEventListener('resize', updatePosition);
+    return () => {
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, [containerId]);
 
   const y = useTransform(
     scrollY,
-    [elementTop - 500, elementTop + 500],
-    [0, 200]
+    [elementTop - 300, elementTop + 300],
+    [0, 100] // Réduire l'amplitude du parallaxe
   );
 
   return (
     <div 
-      id="parallax-container"
-      className="relative overflow-hidden" 
+      id={containerId}
+      className={`relative overflow-hidden ${className}`}
       style={{ height }}
     >
       <motion.div 

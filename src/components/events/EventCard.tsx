@@ -4,7 +4,8 @@ import GradientText from '../ui/GradientText';
 import Star from '../ui/Star';
 import { Event } from '../../types';
 import { eventTypeColors } from '../../utils/eventStyles';
-import { typography, effects } from '../../utils/theme';
+import { typography } from '../../utils/theme';
+import LazyImage from '../ui/LazyImage';
 
 interface EventCardProps {
   event: Event;
@@ -17,14 +18,14 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
     'show': 'administration',
     'private': 'prestation'
   };
-  
+
   // Déterminer le gradient à utiliser
   const gradientType = gradientMap[event.type] || 'primary';
 
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl overflow-hidden group hover:shadow-lg hover:shadow-[#8C52FF]/10 transition-all h-full flex flex-col">
       <div className="aspect-video relative overflow-hidden">
-        <img
+        <LazyImage
           src={event.image}
           alt={event.title}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -42,24 +43,24 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
           <Star className="text-white/70" size="sm" />
         </div>
       </div>
-      
+
       <div className="p-6 flex flex-col flex-grow">
         <GradientText as="h3" gradient={gradientType} className={`${typography.heading.h3} mb-4`}>
           {event.title}
         </GradientText>
-        
+
         <div className={`flex items-center ${typography.body.base} mb-2`}>
           <Calendar size={16} className="mr-2 text-[#FF4D8F]" />
           <span>{event.date}</span>
         </div>
-        
+
         <div className={`flex items-center ${typography.body.base} mb-4`}>
           <MapPin size={16} className="mr-2 text-[#FF4D8F]" />
           <span>{event.location}</span>
         </div>
-        
+
         <p className={`${typography.body.base} mb-6 flex-grow`}>{event.description}</p>
-        
+
         <div className="mt-auto">
           {event.ticketLink ? (
             <a

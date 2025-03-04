@@ -5,6 +5,8 @@ import { Calendar, Music, Users } from 'lucide-react';
 import GradientText from '../components/ui/GradientText';
 import Star from '../components/ui/Star';
 import { typography } from '../utils/theme';
+import Testimonials from '../components/home/Testimonials';
+import ParallaxBanner from '../components/ui/ParallaxBanner';
 
 const Home = () => {
   const [ref, inView] = useInView({
@@ -21,18 +23,12 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&auto=format&fit=crop&q=80"
-            alt="Background"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30" />
-        </div>
-        
-        <div className="relative container mx-auto px-4 text-center">
+      <ParallaxBanner
+        image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&auto=format&fit=crop&q=80"
+        height="100vh"
+        className="mt-0"
+      >
+        <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -44,13 +40,13 @@ const Home = () => {
               <Star className="text-[#FF4D8F]" size="md" />
               <Star className="text-[#FF8C60]" size="sm" />
             </div>
-            
+
             <GradientText as="h1" className={typography.heading.h1}>
               Faire briller chaque moment,
               <br />
               ensemble !
             </GradientText>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -59,7 +55,7 @@ const Home = () => {
             >
               Production d'événements uniques et mémorables
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -77,7 +73,7 @@ const Home = () => {
             </motion.div>
           </motion.div>
         </div>
-      </section>
+      </ParallaxBanner>
 
       {/* Upcoming Event Section */}
       <section className="py-20 bg-black/80">
@@ -91,7 +87,7 @@ const Home = () => {
               <Star className="text-[#FFC74F]" size="sm" />
             </div>
           </div>
-          
+
           <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
@@ -123,7 +119,7 @@ const Home = () => {
                 <p className="text-gray-300 mb-6 flex items-center">
                   <span className="mr-2">📍</span> {upcomingEvent.location}
                 </p>
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                   className="bg-gradient-to-r from-[#FFC74F] to-[#FF8C60] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity self-start uppercase tracking-wider text-sm"
@@ -148,7 +144,7 @@ const Home = () => {
               <Star className="text-[#8C52FF]" size="sm" />
             </div>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -180,7 +176,7 @@ const Home = () => {
               >
                 {/* Effet de bordure en hover */}
                 <div className={`absolute inset-0 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur-xl`} />
-                
+
                 <div className="relative p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 group-hover:border-transparent transition-all h-full">
                   <div className="mb-6 flex justify-center">{feature.icon}</div>
                   <GradientText as="h3" gradient={feature.color} className="text-xl font-bold mb-4 text-center uppercase">
@@ -191,9 +187,9 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
-          
+
           <div className="mt-12 text-center">
-            <motion.a 
+            <motion.a
               href="/services"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -204,7 +200,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-      
+
+      <Testimonials />
+
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-br from-[#8C52FF]/10 via-[#FF4D8F]/10 to-[#FF8C60]/10">
         <div className="container mx-auto px-4 text-center">
@@ -215,7 +213,7 @@ const Home = () => {
             Découvrez comment Glitter Productions peut transformer votre vision en réalité éclatante.
             Contactez-nous dès aujourd'hui pour discuter de vos idées.
           </p>
-          <motion.a 
+          <motion.a
             href="/contact"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
