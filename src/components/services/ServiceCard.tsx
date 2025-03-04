@@ -1,7 +1,7 @@
 import React from 'react';
 import { Music, Film, Calendar, FileText, Users } from 'lucide-react';
 import GradientText from '../ui/GradientText';
-import { colors, effects } from '../../utils/theme';
+import { colors } from '../../utils/theme';
 
 interface ServiceCardProps {
   title: string;
