@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Section from '../components/ui/Section';
 import EventCard from '../components/events/EventCard';

@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Instagram, Send } from 'lucide-react';
-import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import GradientText from '../components/ui/GradientText';
 import Star from '../components/ui/Star';

@@ -1,6 +1,5 @@
 // Modification du composant TeamMember.tsx
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Instagram, Globe, Music } from 'lucide-react';
 import GradientText from './GradientText';
 import Star from './Star';

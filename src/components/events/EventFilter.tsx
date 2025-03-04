@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { eventFilters } from '../../utils/eventFilters';
-import { colors } from '../../utils/theme';
 
 interface EventFilterProps {
   activeFilter: string;

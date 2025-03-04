@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
-import GradientText from './GradientText';
 
 interface ValueCardProps {
   icon: LucideIcon;

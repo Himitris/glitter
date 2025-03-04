@@ -1,5 +1,5 @@
 // Créez un nouveau fichier src/components/home/Testimonials.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import GradientText from '../ui/GradientText';

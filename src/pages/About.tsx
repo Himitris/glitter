@@ -1,6 +1,4 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import TeamMember from '../components/ui/TeamMember';
 import ValueCard from '../components/ui/ValueCard';
