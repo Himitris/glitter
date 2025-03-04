@@ -12,12 +12,14 @@ export const colors = {
     // Dégradé secondaire à deux couleurs
     secondary: 'from-[#FF4D8F] to-[#FF8C60]',
     // Dégradés spécifiques par activité
-    production: 'bg-[#8C52FF]',
-    administration: 'bg-[#FF4D8F]',
-    management: 'bg-[#FF8C60]',
-    prestation: 'bg-[#FFC74F]',
-    // Dégradé pour les effets de hover
-    hover: 'from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60]',
+    production: 'from-[#8C52FF] to-[#8C52FF]',
+    administration: 'from-[#FF4D8F] to-[#FF4D8F]',
+    management: 'from-[#FF8C60] to-[#FF8C60]',
+    prestation: 'from-[#FFC74F] to-[#FFC74F]',
+    // Dégradé pour les cartes
+    card: 'from-gray-900/95 to-black/95',
+    // Dégradé dark
+    dark: 'from-gray-900 to-black',
   },
   background: {
     dark: 'from-gray-900 to-black',
@@ -41,6 +43,7 @@ export const typography = {
   body: {
     base: 'text-gray-300',
     large: 'text-lg text-gray-200',
+    uppercase: 'uppercase tracking-wider text-sm',
   }
 } as const;
 

@@ -1,3 +1,6 @@
+// Modification du fichier src/components/ui/GradientText.tsx
+// Les couleurs sont déjà bien définies dans votre composant, mais assurons-nous que les dégradés correspondent parfaitement à la charte
+
 import React from 'react';
 import { typography, colors } from '../../utils/theme';
 

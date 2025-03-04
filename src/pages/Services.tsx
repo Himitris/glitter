@@ -4,13 +4,22 @@ import { useInView } from 'react-intersection-observer';
 import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import ServiceCard from '../components/services/ServiceCard';
-import { Music, FileText, Users, Calendar, DollarSign, FileCheck } from 'lucide-react';
-import { colors } from '../utils/theme';
+import GradientText from '../components/ui/GradientText';
+import Star from '../components/ui/Star';
+import { Music, FileText, Users, Calendar } from 'lucide-react';
+import { colors, typography } from '../utils/theme';
 
 const Services = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.05,  // Réduire à 5% au lieu de 10%
+    rootMargin: '0px 0px -10% 0px'  // Déclencher l'animation avant même que l'élément entre dans la vue
+  });
+
+  const [artistsRef, artistsInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.05,
+    rootMargin: '0px 0px -20% 0px'  // Ceci déclenchera l'animation encore plus tôt
   });
 
   const artistServices = [
@@ -23,7 +32,8 @@ const Services = () => {
         "Gestion de la paie des artistes et techniciens",
         "Accompagnement à l'intermittence",
         "Gestion des droits d'auteur"
-      ]
+      ],
+      color: "administration"
     },
     {
       title: "Production Musicale",
@@ -34,7 +44,8 @@ const Services = () => {
         "Coordination technique",
         "Production d'albums",
         "Stratégie de sortie"
-      ]
+      ],
+      color: "production"
     },
     {
       title: "Production de Tournée",
@@ -45,7 +56,8 @@ const Services = () => {
         "Gestion de la logistique (transport, hébergement)",
         "Organisation des résidences",
         "Recherche de financements"
-      ]
+      ],
+      color: "production"
     },
     {
       title: "Management Artistique",
@@ -56,7 +68,8 @@ const Services = () => {
         "Relations publiques",
         "Coordination des tournées",
         "Développement stratégique"
-      ]
+      ],
+      color: "management"
     }
   ];
 
@@ -72,7 +85,8 @@ const Services = () => {
         "Régie bénévoles",
         "Direction de production",
         "Gestion des paies"
-      ]
+      ],
+      color: "prestation"
     }
   ];
 
@@ -86,26 +100,45 @@ const Services = () => {
 
       <Section>
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text animate-gradient bg-[length:200%_200%]">
-            Services aux Projets Artistiques
-          </h2>
+          <div className="flex justify-center items-center gap-2 mb-4">
+            <Star className="text-[#8C52FF]" size="sm" />
+            <GradientText as="h2" gradient="primary" className={typography.heading.h2}>
+              Services aux Projets Artistiques
+            </GradientText>
+            <Star className="text-[#FF4D8F]" size="sm" />
+          </div>
           <p className="text-gray-300">
             Chez Glitter Productions, nous accompagnons les projets artistiques à chaque étape de leur parcours artistique et professionnel.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 gap-8 mb-20" ref={artistsRef}>
           {artistServices.map((service, index) => (
-            <ServiceCard key={index} {...service} />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={artistsInView ? { opacity: 1, y: 0 } : {}}  // Utilisez artistsInView au lieu de inView
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <ServiceCard
+                key={index}
+                {...service}
+                color={service.color as "production" | "administration" | "management" | "prestation"}
+              />
+            </motion.div>
           ))}
         </div>
       </Section>
 
       <Section className="bg-black/50">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-transparent bg-clip-text">
-            Services aux Organisateurs d'Événements
-          </h2>
+          <div className="flex justify-center items-center gap-2 mb-4">
+            <Star className="text-[#FFC74F]" size="sm" />
+            <GradientText as="h2" gradient="prestation" className={typography.heading.h2}>
+              Services aux Organisateurs d'Événements
+            </GradientText>
+            <Star className="text-[#FFC74F]" size="sm" />
+          </div>
           <p className="text-gray-300">
             Glitter Productions propose des services de régie pour tous types d'événements artistiques.
           </p>
@@ -113,7 +146,19 @@ const Services = () => {
 
         <div className="grid md:grid-cols-1 lg:grid-cols-1 max-w-2xl mx-auto">
           {eventServices.map((service, index) => (
-            <ServiceCard key={index} {...service} />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              ref={ref}
+            >
+              <ServiceCard
+                key={index}
+                {...service}
+                color={service.color as "production" | "administration" | "management" | "prestation"}
+              />
+            </motion.div>
           ))}
         </div>
       </Section>

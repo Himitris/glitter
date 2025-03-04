@@ -1,12 +1,16 @@
+// Modification du composant TeamMember.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Instagram, Globe, Music } from 'lucide-react';
+import GradientText from './GradientText';
+import Star from './Star';
 
 interface TeamMemberProps {
   name: string;
   role: string;
   image: string;
   description: string;
+  department?: 'production' | 'administration' | 'management' | 'prestation';
   socialLinks?: {
     instagram?: string;
     website?: string;
@@ -14,19 +18,42 @@ interface TeamMemberProps {
   };
 }
 
-const TeamMember: React.FC<TeamMemberProps> = ({ name, role, image, description, socialLinks }) => {
+const TeamMember: React.FC<TeamMemberProps> = ({ 
+  name, 
+  role, 
+  image, 
+  description, 
+  department = 'production',
+  socialLinks 
+}) => {
+  // Map des couleurs par département
+  const colorMap = {
+    'production': '#8C52FF',
+    'administration': '#FF4D8F',
+    'management': '#FF8C60',
+    'prestation': '#FFC74F'
+  };
+  
+  const departmentColor = colorMap[department];
+
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl overflow-hidden">
+    <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl overflow-hidden group">
       <div className="aspect-square relative overflow-hidden">
         <img
           src={image}
           alt={name}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
+        {/* Ajouter une étoile selon la charte */}
+        <div className="absolute top-4 right-4">
+          <Star className={`text-[${departmentColor}]`} size="sm" />
+        </div>
       </div>
       <div className="p-6">
-        <h3 className="text-2xl font-bold mb-2">{name}</h3>
-        <p className="text-pink-400 mb-4">{role}</p>
+        <GradientText as="h3" gradient={department} className="text-2xl font-bold mb-2">
+          {name}
+        </GradientText>
+        <p className={`text-[${departmentColor}] mb-4 uppercase tracking-wider text-sm`}>{role}</p>
         <p className="text-gray-400 mb-6">{description}</p>
         
         {socialLinks && (
@@ -36,7 +63,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({ name, role, image, description,
                 href={socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-pink-400 transition-colors"
+                className={`text-white hover:text-[${departmentColor}] transition-colors`}
               >
                 <Instagram size={20} />
               </a>
@@ -46,7 +73,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({ name, role, image, description,
                 href={socialLinks.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-pink-400 transition-colors"
+                className={`text-white hover:text-[${departmentColor}] transition-colors`}
               >
                 <Globe size={20} />
               </a>
@@ -56,7 +83,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({ name, role, image, description,
                 href={socialLinks.spotify}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-pink-400 transition-colors"
+                className={`text-white hover:text-[${departmentColor}] transition-colors`}
               >
                 <Music size={20} />
               </a>

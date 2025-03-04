@@ -1,10 +1,13 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import PageHeader from '../components/ui/PageHeader';
 import Section from '../components/ui/Section';
 import TeamMember from '../components/ui/TeamMember';
 import ValueCard from '../components/ui/ValueCard';
-import { Star, Heart, Sparkles } from 'lucide-react';
 import GradientText from '../components/ui/GradientText';
+import Star from '../components/ui/Star';
+import { Star as StarIcon, Heart, Sparkles, Instagram } from 'lucide-react';
+import { typography } from '../utils/theme';
 
 const About = () => {
   const founders = [
@@ -15,7 +18,8 @@ const About = () => {
       description: "Professionnelle expérimentée et polyvalente dans l'administration et la production de spectacle vivant. Son expertise s'étend de la gestion de contrats à la direction de production d'événements.",
       socialLinks: {
         instagram: "https://instagram.com"
-      }
+      },
+      department: "administration" as "administration" // Pour la couleur spécifique
     },
     {
       name: "Matisse Pellegrin",
@@ -24,25 +28,29 @@ const About = () => {
       description: "Professionnelle accomplie dans l'administration, la production et le management de groupes musicaux. Son expérience englobe la régie d'événements et la coordination technique.",
       socialLinks: {
         instagram: "https://instagram.com"
-      }
+      },
+      department: "production" as "production" // Pour la couleur spécifique
     }
   ];
 
   const values = [
     {
-      icon: Star,
+      icon: StarIcon,
       title: "Excellence",
-      description: "Nous visons l'excellence dans chaque projet, chaque détail compte."
+      description: "Nous visons l'excellence dans chaque projet, chaque détail compte.",
+      color: "#8C52FF" // Violet - Production
     },
     {
       icon: Heart,
       title: "Passion",
-      description: "La passion pour l'art et la musique guide chacune de nos actions."
+      description: "La passion pour l'art et la musique guide chacune de nos actions.",
+      color: "#FF4D8F" // Rose - Administration
     },
     {
       icon: Sparkles,
       title: "Créativité",
-      description: "Nous repoussons les limites pour créer des expériences uniques et mémorables."
+      description: "Nous repoussons les limites pour créer des expériences uniques et mémorables.",
+      color: "#FF8C60" // Orange - Management
     }
   ];
 
@@ -56,9 +64,13 @@ const About = () => {
 
       <Section>
         <div className="max-w-3xl mx-auto text-center">
-          <GradientText as="h2" className="text-3xl font-bold mb-6">
-            Notre Histoire
-          </GradientText>
+          <div className="flex justify-center items-center gap-2 mb-6">
+            <Star className="text-[#FF4D8F]" size="sm" />
+            <GradientText as="h2" className={`${typography.heading.h2}`}>
+              Notre Histoire
+            </GradientText>
+            <Star className="text-[#FF4D8F]" size="sm" />
+          </div>
           <p className="text-gray-300 mb-8">
             Créée en 2024 par Chloé Jolly et Matisse Pellegrin, Glitter Productions est une structure dédiée à la production, 
             l'administration et le management dans le domaine de la musique et du spectacle vivant, située entre les Landes et le Tarn.
@@ -71,28 +83,56 @@ const About = () => {
       </Section>
 
       <Section className="bg-black/50">
-        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-transparent bg-clip-text">
-          Nos Valeurs
-        </h2>
+        <div className="text-center mb-12">
+          <div className="flex justify-center items-center gap-2 mb-6">
+            <Star className="text-[#FFC74F]" size="sm" />
+            <GradientText as="h2" gradient="prestation" className={typography.heading.h2}>
+              Nos Valeurs
+            </GradientText>
+            <Star className="text-[#FFC74F]" size="sm" />
+          </div>
+        </div>
         <div className="grid md:grid-cols-3 gap-8">
           {values.map((value, index) => (
-            <ValueCard
+            <motion.div
               key={index}
-              icon={value.icon}
-              title={value.title}
-              description={value.description}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-20%" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <ValueCard
+                icon={value.icon}
+                title={value.title}
+                description={value.description}
+                color={value.color}
+              />
+            </motion.div>
           ))}
         </div>
       </Section>
 
       <Section>
-        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-transparent bg-clip-text">
-          Nos Fondatrices
-        </h2>
+        <div className="text-center mb-12">
+          <div className="flex justify-center items-center gap-2 mb-6">
+            <Star className="text-[#8C52FF]" size="sm" />
+            <GradientText as="h2" gradient="management" className={typography.heading.h2}>
+              Nos Fondatrices
+            </GradientText>
+            <Star className="text-[#8C52FF]" size="sm" />
+          </div>
+        </div>
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {founders.map((member, index) => (
-            <TeamMember key={index} {...member} />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-20%" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <TeamMember key={index} {...member} />
+            </motion.div>
           ))}
         </div>
         
@@ -100,9 +140,16 @@ const About = () => {
           <p className="text-gray-300 mb-8">
             Leur complémentarité et leur vision commune de l'accompagnement artistique sont au cœur de la réussite de Glitter Productions.
           </p>
-          <a href="https://instagram.com/glitter_prod" target="_blank" rel="noopener noreferrer" className="text-[#FF4D8F] hover:text-[#FF8C60] transition-colors">
-            Instagram: @glitter_prod
-          </a>
+          <motion.a 
+            href="https://instagram.com/glitter_prod" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center gap-2 text-[#FF4D8F] hover:text-[#FF8C60] transition-colors"
+          >
+            <Instagram size={20} />
+            @glitter_prod
+          </motion.a>
         </div>
       </Section>
     </div>
