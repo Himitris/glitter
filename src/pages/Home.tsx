@@ -1,7 +1,9 @@
+// Modification de la section principale de src/pages/Home.tsx
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Calendar, Music, Users } from 'lucide-react';
 import GradientText from '../components/ui/GradientText';
+import AnimatedGradientText from '../components/ui/AnimatedGradientText';
 import Star from '../components/ui/Star';
 import { typography } from '../utils/theme';
 import Testimonials from '../components/home/Testimonials';
@@ -40,11 +42,11 @@ const Home = () => {
               <Star className="text-[#FF8C60]" size="sm" />
             </div>
 
-            <GradientText as="h1" className={typography.heading.h1}>
+            <AnimatedGradientText as="h1" className={typography.heading.h1} speed="medium">
               Faire briller chaque moment,
               <br />
               ensemble !
-            </GradientText>
+            </AnimatedGradientText>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -80,9 +82,9 @@ const Home = () => {
           <div className="text-center mb-12">
             <div className="flex justify-center items-center gap-2">
               <Star className="text-[#FFC74F]" size="sm" />
-              <GradientText as="h2" gradient="prestation" className={typography.heading.h2 + " inline-block"}>
+              <AnimatedGradientText as="h2" gradient="prestation" className={typography.heading.h2 + " inline-block"} speed="fast">
                 Prochain Événement
-              </GradientText>
+              </AnimatedGradientText>
               <Star className="text-[#FFC74F]" size="sm" />
             </div>
           </div>
@@ -137,9 +139,9 @@ const Home = () => {
           <div className="text-center mb-12">
             <div className="flex justify-center items-center gap-2">
               <Star className="text-[#8C52FF]" size="sm" />
-              <GradientText as="h2" gradient="primary" className={typography.heading.h2 + " inline-block"}>
+              <AnimatedGradientText as="h2" gradient="primary" className={typography.heading.h2 + " inline-block"} speed="medium">
                 Nos Services
-              </GradientText>
+              </AnimatedGradientText>
               <Star className="text-[#8C52FF]" size="sm" />
             </div>
           </div>
@@ -178,9 +180,9 @@ const Home = () => {
 
                 <div className="relative p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 group-hover:border-transparent transition-all h-full">
                   <div className="mb-6 flex justify-center">{feature.icon}</div>
-                  <GradientText as="h3" gradient={feature.color} className="text-xl font-bold mb-4 text-center uppercase">
+                  <AnimatedGradientText as="h3" gradient={feature.color} className="text-xl font-bold mb-4 text-center uppercase" speed="fast">
                     {feature.title}
-                  </GradientText>
+                  </AnimatedGradientText>
                   <p className="text-gray-400 text-center">{feature.description}</p>
                 </div>
               </motion.div>
@@ -200,14 +202,12 @@ const Home = () => {
         </div>
       </section>
 
-      <Testimonials />
-
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-br from-[#8C52FF]/10 via-[#FF4D8F]/10 to-[#FF8C60]/10">
         <div className="container mx-auto px-4 text-center">
-          <GradientText as="h2" className="text-3xl font-bold mb-6">
+          <AnimatedGradientText as="h2" className="text-3xl font-bold mb-6" speed="medium">
             Prêt à faire briller votre projet ?
-          </GradientText>
+          </AnimatedGradientText>
           <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
             Découvrez comment Glitter Productions peut transformer votre vision en réalité éclatante.
             Contactez-nous dès aujourd'hui pour discuter de vos idées.

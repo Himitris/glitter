@@ -1,8 +1,9 @@
-// Créez un nouveau fichier src/components/home/Testimonials.tsx
+// Mise à jour du fichier src/components/home/Testimonials.tsx
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import GradientText from '../ui/GradientText';
+import AnimatedGradientText from '../ui/AnimatedGradientText';
 import Star from '../ui/Star';
 import TestimonialModal from './TestimonialModal';
 import { typography } from '../../utils/theme';
@@ -46,9 +47,9 @@ const Testimonials = () => {
             <Quote className="w-10 h-10 text-[#FF8C60]" />
             <Star className="text-[#FF8C60]" size="sm" />
           </div>
-          <GradientText as="h2" gradient="management" className={typography.heading.h2 + " mb-6"}>
+          <AnimatedGradientText as="h2" gradient="management" className={typography.heading.h2 + " mb-6"} speed="medium">
             Ce qu'ils disent de nous
-          </GradientText>
+          </AnimatedGradientText>
           <p className="text-gray-300 max-w-2xl mx-auto">
             Découvrez les témoignages de nos clients et partenaires qui nous ont fait confiance.
           </p>

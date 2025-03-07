@@ -10,6 +10,7 @@ import { events } from '../data/events';
 import { filterEvents, EventFilterType } from '../utils/eventFilters';
 import { typography } from '../utils/theme';
 import ParallaxBanner from '../components/ui/ParallaxBanner';
+import AnimatedGradientText from '../components/ui/AnimatedGradientText';
 
 const Events = () => {
   const [activeFilter, setActiveFilter] = useState<EventFilterType>('all');
@@ -23,16 +24,14 @@ const Events = () => {
         className="mt-0"
       >
         <div className="text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+          <AnimatedGradientText
+            as="h2"
+            gradient="primary"
             className="text-4xl md:text-6xl font-bold mb-4"
+            speed="medium"
           >
-            <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-transparent bg-clip-text">
-              Nos Événements
-            </span>
-          </motion.h1>
+            Nos Services
+          </AnimatedGradientText>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}

@@ -8,16 +8,22 @@ export default {
       },
       animation: {
         'gradient': 'gradient 8s linear infinite',
+        'gradient-slow': 'gradient 10s linear infinite',
+        'gradient-medium': 'gradient 6s linear infinite',
+        'gradient-fast': 'gradient 3s linear infinite',
         'glow': 'glow 2s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
         gradient: {
-          '0%, 100%': {
+          '0%': {
             'background-position': '0% 50%',
           },
           '50%': {
             'background-position': '100% 50%',
+          },
+          '100%': {
+            'background-position': '0% 50%',
           },
         },
         glow: {

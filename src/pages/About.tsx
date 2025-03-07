@@ -7,6 +7,7 @@ import Star from '../components/ui/Star';
 import { Star as StarIcon, Heart, Sparkles, Instagram } from 'lucide-react';
 import { typography } from '../utils/theme';
 import ParallaxBanner from '../components/ui/ParallaxBanner';
+import AnimatedGradientText from '../components/ui/AnimatedGradientText';
 
 const About = () => {
   const founders = [
@@ -61,16 +62,13 @@ const About = () => {
         className="mt-0"
       >
         <div className="text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+          <AnimatedGradientText
+            as="h2" gradient="primary"
             className="text-4xl md:text-6xl font-bold mb-4"
+            speed="medium"
           >
-            <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-transparent bg-clip-text">
-              À Propos de Nous
-            </span>
-          </motion.h1>
+            À Propos de Nous
+          </AnimatedGradientText>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -87,9 +85,9 @@ const About = () => {
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex justify-center items-center gap-2 mb-6">
             <Star className="text-[#FF4D8F]" size="sm" />
-            <GradientText as="h2" className={`${typography.heading.h2}`}>
+            <AnimatedGradientText as="h2" className={`${typography.heading.h2}`}>
               Notre Histoire
-            </GradientText>
+            </AnimatedGradientText>
             <Star className="text-[#FF4D8F]" size="sm" />
           </div>
           <p className="text-gray-300 mb-8">

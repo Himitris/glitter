@@ -1,0 +1,17 @@
+/* Animation pour le texte en vague */
+@keyframes wave-text {
+    0% {
+      background-position: 200% 50%;
+    }  
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Animation pour une progression continue */
+  .animate-wave-text {
+    animation: wave-text 5s linear infinite;
+  }
