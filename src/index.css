@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Frunchy Sage';
+    src: url('/Frunchy Sage/Frunchy.ttf') format('truetype'),
+        url('/Frunchy Sage/Frunchy.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
