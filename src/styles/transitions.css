@@ -1,0 +1,65 @@
+/* src/styles/transitions.css */
+
+/* Transition douce pour les éléments de navigation */
+.page-transition-fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  .page-transition-fade-out {
+    animation: fadeOut 0.5s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Effet doux pour l'indicateur actif dans la navigation */
+  .nav-indicator {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, #FF4D8F, #FF8C60);
+    transform-origin: 0 0;
+  }
+  
+  /* Transition plus lisse pour l'apparition/disparition du header */
+  .header-visible {
+    transform: translateY(0);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .header-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Effet de transition entre les pages */
+  .page-wrapper {
+    position: relative;
+    min-height: calc(100vh - 80px); /* Hauteur de la navbar */
+  }
+  
+  /* Améliorer la fluidité des transitions au hover */
+  a, button {
+    transition: all 0.2s ease-in-out;
+  }

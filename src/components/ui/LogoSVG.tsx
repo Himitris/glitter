@@ -4,19 +4,36 @@ import { Link } from 'react-router-dom';
 interface LogoSVGProps {
     className?: string;
     colorScheme?: 'dark' | 'light';
+    size?: 'small' | 'medium' | 'large';
 }
 
-const LogoSVG: React.FC<LogoSVGProps> = ({ className = '', colorScheme = 'dark' }) => {
+const LogoSVG: React.FC<LogoSVGProps> = ({ 
+    className = '', 
+    colorScheme = 'dark',
+    size = 'medium' 
+}) => {
     // Définition des couleurs en fonction du thème choisi
     const textColor = colorScheme === 'dark' ? '#FFFFFF' : '#000000';
+    
+    // Définition des tailles en fonction de l'écran
+    const getSizeStyles = () => {
+        switch(size) {
+            case 'small':
+                return 'h-12 w-auto';
+            case 'large':
+                return 'h-24 w-auto';
+            case 'medium':
+            default:
+                return 'h-20 w-auto';
+        }
+    };
 
     return (
         <Link to="/" className={`block ${className}`}>
             <svg
-                viewBox="0 0 250 80"
-                width="300"
-                height="80"
-                className="h-20 w-auto"
+                viewBox="0 0 300 80"
+                className={`${getSizeStyles()} max-w-[180px] sm:max-w-[200px] md:max-w-none`}
+                aria-label="Glitter Productions"
             >
                 {/* Fond transparent */}
                 <rect x="0" y="0" width="250" height="80" fill="transparent" />
@@ -44,7 +61,7 @@ const LogoSVG: React.FC<LogoSVGProps> = ({ className = '', colorScheme = 'dark' 
                     fontFamily="'Frunchy Sage', serif"
                     fontWeight={300}
                     fill={textColor}
-                    letterSpacing="2"
+                    letterSpacing="1"
                 >
                     GLITTER
                 </text>
