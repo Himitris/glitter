@@ -48,7 +48,7 @@ function App() {
             <ScrollIndicator />
             <Header />
             {/* Ajustement de l'espace pour le contenu principal en fonction de la hauteur de la navbar */}
-            <main className="pt-16 sm:pt-20">
+            <main className="pt-12 md:pt-16">
               <AnimatedRoutes />
             </main>
             <Footer />
