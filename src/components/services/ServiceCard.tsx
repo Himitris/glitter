@@ -20,10 +20,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, icon, description, fea
     Users
   }[icon] || Music;
 
-  // Détermine la couleur du gradient en fonction du type de service
-  const gradientColor = `from-${colors.brand[color]}/20 to-${colors.brand[color]}/5`;
-  const iconColor = `text-${colors.brand[color]}`;
-  
   // Associe chaque couleur au département correspondant
   const colorMap = {
     "production": "text-[#8C52FF]",
@@ -33,11 +29,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, icon, description, fea
   };
 
   return (
-    <div className="relative group">
+    <div className="relative group w-full h-full">
       {/* Gradient Border Effect */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${colors.gradient[color]} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur-xl`} />
-      
-      <div className="relative bg-gradient-to-br from-gray-900/95 to-black/95 border border-gray-800 rounded-2xl p-8 backdrop-blur-sm group-hover:border-transparent transition-all">
+      <div className={`absolute inset-0 bg-gradient-to-r ${colors.gradient[color]} rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity blur-xl`} />
+
+      <div className="relative bg-white border border-gray-200 rounded-2xl p-8 backdrop-blur-sm group-hover:border-transparent transition-all w-full h-full flex flex-col">
         {/* Icon with gradient background */}
         <div className="relative w-16 h-16 mb-6">
           <div className={`absolute inset-0 bg-gradient-to-r ${colors.gradient[color]} rounded-lg opacity-20 blur`} />
@@ -45,17 +41,17 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, icon, description, fea
             <IconComponent className={`w-8 h-8 ${colorMap[color]}`} />
           </div>
         </div>
-        
+
         {/* Title with gradient text */}
         <GradientText as="h3" gradient={color} className="text-2xl font-bold mb-4">
           {title}
         </GradientText>
-        
-        <p className="text-gray-400 mb-6">{description}</p>
-        
+
+        <p className="text-gray-600 mb-6 flex-grow">{description}</p>
+
         <ul className="space-y-3">
           {features.map((feature, index) => (
-            <li key={index} className="flex items-center text-gray-300 group/item">
+            <li key={index} className="flex items-center text-gray-700 group/item">
               {/* Animated gradient dot */}
               <div className="relative w-2 h-2 mr-3 rounded-full overflow-hidden">
                 <div className={`absolute inset-0 bg-gradient-to-r ${colors.gradient[color]} animate-gradient bg-[length:200%_200%]`} />

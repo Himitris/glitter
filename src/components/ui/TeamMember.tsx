@@ -1,4 +1,3 @@
-// Modification du composant TeamMember.tsx
 import React from 'react';
 import { Instagram, Globe, Music } from 'lucide-react';
 import GradientText from './GradientText';
@@ -36,7 +35,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
   const departmentColor = colorMap[department];
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl overflow-hidden group">
+    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden group">
       <div className="aspect-square relative overflow-hidden">
         <img
           src={image}
@@ -53,7 +52,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
           {name}
         </GradientText>
         <p className={`text-[${departmentColor}] mb-4 uppercase tracking-wider text-sm`}>{role}</p>
-        <p className="text-gray-400 mb-6">{description}</p>
+        <p className="text-gray-600 mb-6">{description}</p>
         
         {socialLinks && (
           <div className="flex space-x-4">
@@ -62,7 +61,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
                 href={socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-white hover:text-[${departmentColor}] transition-colors`}
+                className={`text-gray-600 hover:text-[${departmentColor}] transition-colors`}
               >
                 <Instagram size={20} />
               </a>
@@ -72,7 +71,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
                 href={socialLinks.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-white hover:text-[${departmentColor}] transition-colors`}
+                className={`text-gray-600 hover:text-[${departmentColor}] transition-colors`}
               >
                 <Globe size={20} />
               </a>
@@ -82,7 +81,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
                 href={socialLinks.spotify}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-white hover:text-[${departmentColor}] transition-colors`}
+                className={`text-gray-600 hover:text-[${departmentColor}] transition-colors`}
               >
                 <Music size={20} />
               </a>

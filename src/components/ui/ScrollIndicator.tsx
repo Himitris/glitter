@@ -1,4 +1,3 @@
-// Créez un nouveau fichier src/components/ui/ScrollIndicator.tsx
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 

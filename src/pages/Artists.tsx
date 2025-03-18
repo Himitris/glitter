@@ -1,16 +1,73 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import Section from '../components/ui/Section';
 import ArtistCard from '../components/artists/ArtistCard';
 import { artists } from '../data/artists';
-import { Music } from 'lucide-react';
 import GradientText from '../components/ui/GradientText';
 import Star from '../components/ui/Star';
 import { typography } from '../utils/theme';
 import ParallaxBanner from '../components/ui/ParallaxBanner';
 import AnimatedGradientText from '../components/ui/AnimatedGradientText';
+import ServiceCard from '../components/services/ServiceCard';
 
 const Artists = () => {
+  const [artistsRef, artistsInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.05,
+    rootMargin: '0px 0px -20% 0px'  // Ceci déclenchera l'animation encore plus tôt
+  });
+
+  const artistServices = [
+    {
+      title: "Administration et Gestion",
+      icon: "FileText",
+      description: "",
+      features: [
+        "Édition des contrats de cession et des factures",
+        "Gestion de la paie des artistes et techniciens",
+        "Accompagnement à l'intermittence",
+        "Gestion des droits d'auteur"
+      ],
+      color: "administration"
+    },
+    {
+      title: "Production Musicale",
+      icon: "Music",
+      description: "",
+      features: [
+        "Accompagnement artistique",
+        "Coordination technique",
+        "Production d'albums",
+        "Stratégie de sortie"
+      ],
+      color: "production"
+    },
+    {
+      title: "Production de Tournée",
+      icon: "Calendar",
+      description: "",
+      features: [
+        "Élaboration des budgets de tournée",
+        "Gestion de la logistique (transport, hébergement)",
+        "Organisation des résidences",
+        "Recherche de financements"
+      ],
+      color: "prestation"
+    },
+    {
+      title: "Management Artistique",
+      icon: "Users",
+      description: "",
+      features: [
+        "Gestion de l'image",
+        "Relations publiques",
+        "Coordination des tournées",
+        "Développement stratégique"
+      ],
+      color: "management"
+    }
+  ];
+
   return (
     <div>
       <ParallaxBanner
@@ -37,24 +94,26 @@ const Artists = () => {
         </div>
       </ParallaxBanner>
       <Section>
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="flex justify-center items-center gap-2 mb-6">
-            <Star className="text-[#FF4D8F]" size="sm" />
-            <Music className="w-12 h-12 text-[#FF8C60]" />
-            <Star className="text-[#FF4D8F]" size="sm" />
-          </div>
-          <AnimatedGradientText
-            as="h2" gradient="primary"
-            className={typography.heading.h2 + " mb-6"}
-            speed="medium"
-          >
-            Une Communauté d'Artistes Passionnés
-          </AnimatedGradientText>
-          <p className="text-gray-300">
-            Nous accompagnons des artistes talentueux dans leur développement artistique,
-            en leur offrant un environnement propice à la création et à l'expression de leur art.
-          </p>
+
+
+        <div className="grid md:grid-cols-4 gap-8 mb-20" ref={artistsRef}>
+          {artistServices.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={artistsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex"
+            >
+              <ServiceCard
+                key={index}
+                {...service}
+                color={service.color as "production" | "administration" | "management" | "prestation"}
+              />
+            </motion.div>
+          ))}
         </div>
+
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {artists.map((artist, index) => (
@@ -71,7 +130,7 @@ const Artists = () => {
         </div>
       </Section>
 
-      <Section className="bg-black/50">
+      <Section className="bg-gray-50">
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex justify-center items-center gap-2 mb-6">
             <Star className="text-[#8C52FF]" size="sm" />
@@ -80,7 +139,7 @@ const Artists = () => {
             </GradientText>
             <Star className="text-[#8C52FF]" size="sm" />
           </div>
-          <p className="text-gray-300 mb-8">
+          <p className="text-gray-600 mb-8">
             Vous êtes un artiste et souhaitez collaborer avec nous ?
             Nous sommes toujours à la recherche de nouveaux talents pour enrichir notre communauté.
           </p>

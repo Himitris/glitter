@@ -1,4 +1,3 @@
-// Modification du composant src/components/events/EventFilter.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { eventFilters } from '../../utils/eventFilters';
@@ -20,8 +19,8 @@ const EventFilter: React.FC<EventFilterProps> = ({ activeFilter, onFilterChange 
           className={`
             px-6 py-2 rounded-full transition-all uppercase tracking-wider text-sm
             ${activeFilter === filter.id
-              ? `bg-gradient-to-r from-[#FFC74F] to-[#FF8C60] text-white`
-              : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+              ? `bg-gradient-to-r from-[#FFC74F] to-[#FF8C60] text-white shadow-md`
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200'
             }
           `}
         >

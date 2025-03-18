@@ -3,7 +3,7 @@ import { Calendar, MapPin } from 'lucide-react';
 import GradientText from '../ui/GradientText';
 import Star from '../ui/Star';
 import { Event } from '../../types';
-import { eventTypeColors } from '../../utils/eventStyles';
+import { eventTypeColorsLight } from '../../utils/eventStyles';
 import { typography } from '../../utils/theme';
 import LazyImage from '../ui/LazyImage';
 
@@ -23,7 +23,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const gradientType = gradientMap[event.type] || 'primary';
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl overflow-hidden group hover:shadow-lg hover:shadow-[#8C52FF]/10 transition-all h-full flex flex-col">
+    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden group hover:shadow-lg hover:shadow-[#8C52FF]/10 transition-all h-full flex flex-col">
       <div className="aspect-video relative overflow-hidden">
         <LazyImage
           src={event.image}
@@ -33,7 +33,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         <div className="absolute top-4 right-4">
           <span className={`
             px-3 py-1 rounded-full text-sm font-medium uppercase tracking-wider
-            ${eventTypeColors[event.type]}
+            ${eventTypeColorsLight[event.type]}
           `}>
             {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
           </span>
@@ -49,17 +49,17 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
           {event.title}
         </GradientText>
 
-        <div className={`flex items-center ${typography.body.base} mb-2`}>
+        <div className={`flex items-center text-gray-600 mb-2`}>
           <Calendar size={16} className="mr-2 text-[#FF4D8F]" />
           <span>{event.date}</span>
         </div>
 
-        <div className={`flex items-center ${typography.body.base} mb-4`}>
+        <div className={`flex items-center text-gray-600 mb-4`}>
           <MapPin size={16} className="mr-2 text-[#FF4D8F]" />
           <span>{event.location}</span>
         </div>
 
-        <p className={`${typography.body.base} mb-6 flex-grow`}>{event.description}</p>
+        <p className={`text-gray-600 mb-6 flex-grow`}>{event.description}</p>
 
         <div className="mt-auto">
           {event.ticketLink ? (

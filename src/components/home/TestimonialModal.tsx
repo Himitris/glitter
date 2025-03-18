@@ -1,4 +1,3 @@
-// Créez un nouveau fichier src/components/home/TestimonialModal.tsx
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Star } from 'lucide-react';
@@ -34,17 +33,17 @@ const TestimonialModal: React.FC<TestimonialModalProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={handleBackdropClick}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 max-w-md w-full relative"
+            className="bg-white border border-gray-200 rounded-2xl p-8 max-w-md w-full relative shadow-xl"
           >
             <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
               onClick={onClose}
             >
               <X size={24} />
@@ -56,17 +55,17 @@ const TestimonialModal: React.FC<TestimonialModalProps> = ({
                   <Star
                     key={i}
                     size={16}
-                    className={i < testimonial.rating ? "text-[#FFC74F] fill-[#FFC74F]" : "text-gray-600"}
+                    className={i < testimonial.rating ? "text-[#FFC74F] fill-[#FFC74F]" : "text-gray-300"}
                   />
                 ))}
               </div>
             </div>
             
-            <p className="text-gray-300 italic mb-6">"{testimonial.content}"</p>
+            <p className="text-gray-600 italic mb-6">"{testimonial.content}"</p>
             
             <div>
-              <p className="font-semibold text-white">{testimonial.name}</p>
-              <p className="text-gray-400 text-sm">{testimonial.role}</p>
+              <p className="font-semibold text-gray-800">{testimonial.name}</p>
+              <p className="text-gray-500 text-sm">{testimonial.role}</p>
             </div>
           </motion.div>
         </motion.div>

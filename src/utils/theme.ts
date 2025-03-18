@@ -16,18 +16,18 @@ export const colors = {
     administration: 'from-[#FF4D8F] to-[#FF4D8F]',
     management: 'from-[#FF8C60] to-[#FF8C60]',
     prestation: 'from-[#FFC74F] to-[#FFC74F]',
-    // Dégradé pour les cartes
-    card: 'from-gray-900/95 to-black/95',
-    // Dégradé dark
-    dark: 'from-gray-900 to-black',
+    // Dégradé pour les cartes (version claire)
+    card: 'from-white to-gray-50',
+    // Dégradé light
+    light: 'from-gray-50 to-white',
   },
   background: {
-    dark: 'from-gray-900 to-black',
-    glass: 'bg-black/80 backdrop-blur-sm',
+    light: 'from-white to-gray-50',
+    glass: 'bg-white/80 backdrop-blur-sm',
   },
   text: {
-    primary: 'text-white',
-    secondary: 'text-gray-300',
+    primary: 'text-gray-800',
+    secondary: 'text-gray-600',
     gradient: 'bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] via-[#FF8C60] to-[#FFC74F] text-transparent bg-clip-text',
   }
 } as const;
@@ -35,14 +35,14 @@ export const colors = {
 // Système de typographie
 export const typography = {
   heading: {
-    h1: 'text-5xl md:text-7xl font-bold tracking-tight uppercase',
-    h2: 'text-3xl md:text-4xl font-bold uppercase',
-    h3: 'text-2xl font-bold uppercase',
+    h1: 'text-5xl md:text-7xl font-bold tracking-tight uppercase text-gray-800',
+    h2: 'text-3xl md:text-4xl font-bold uppercase text-gray-800',
+    h3: 'text-2xl font-bold uppercase text-gray-800',
     gradient: 'bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] via-[#FF8C60] to-[#FFC74F] text-transparent bg-clip-text',
   },
   body: {
-    base: 'text-gray-300',
-    large: 'text-lg text-gray-200',
+    base: 'text-gray-600',
+    large: 'text-lg text-gray-700',
     uppercase: 'uppercase tracking-wider text-sm',
   }
 } as const;
@@ -51,10 +51,10 @@ export const typography = {
 export const components = {
   card: {
     base: `
-      bg-gradient-to-br from-gray-900/95 to-black/95
-      border border-gray-800 rounded-2xl
+      bg-white
+      border border-gray-200 rounded-2xl
       backdrop-blur-sm
-      hover:border-gray-700 transition-all
+      hover:border-gray-300 transition-all
       overflow-hidden
     `,
     hover: 'hover:border-[#FF4D8F]/30 hover:shadow-lg hover:shadow-[#FF4D8F]/10',
@@ -71,9 +71,9 @@ export const components = {
     `,
     secondary: `
       bg-gradient-to-r from-[#8C52FF]/10 to-[#FF4D8F]/10
-      border border-gray-700
+      border border-gray-300
       hover:border-[#FF4D8F]/50 hover:bg-[#FF4D8F]/10
-      text-white
+      text-gray-800
       px-6 py-3
     `,
     outline: `
@@ -85,7 +85,7 @@ export const components = {
   },
   section: {
     base: 'py-20',
-    dark: 'bg-gradient-to-br from-black/90 to-[#8C52FF]/20',
+    light: 'bg-gradient-to-br from-gray-50 to-white',
   },
   container: 'container mx-auto px-4',
 } as const;
@@ -99,7 +99,7 @@ export const effects = {
   gradient: {
     animate: 'animate-gradient bg-[size:400%_400%]',
   },
-  glass: 'backdrop-blur-sm bg-black/40',
+  glass: 'backdrop-blur-sm bg-white/40',
 } as const;
 
 // Style pour l'affichage des artistes façon charte graphique

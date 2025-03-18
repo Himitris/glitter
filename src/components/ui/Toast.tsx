@@ -1,4 +1,3 @@
-// Créez un nouveau fichier src/components/ui/Toast.tsx
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
@@ -37,6 +36,12 @@ const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
     info: 'from-[#FF8C60] to-[#FFC74F]',
   };
 
+  const bgColors = {
+    success: 'bg-green-50 border-green-100',
+    error: 'bg-red-50 border-red-100',
+    info: 'bg-blue-50 border-blue-100',
+  };
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -46,14 +51,14 @@ const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
           exit={{ opacity: 0, y: -50 }}
           className="fixed top-4 right-4 z-50"
         >
-          <div className="bg-gray-900 border border-gray-800 rounded-lg shadow-lg overflow-hidden max-w-md">
+          <div className={`bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden max-w-md ${bgColors[type]}`}>
             <div className="flex items-center p-4">
               <div className="flex-1">
-                <p className="text-white">{message}</p>
+                <p className="text-gray-800">{message}</p>
               </div>
               <button
                 onClick={onClose}
-                className="ml-4 text-gray-400 hover:text-white"
+                className="ml-4 text-gray-400 hover:text-gray-600"
               >
                 <X size={18} />
               </button>

@@ -14,7 +14,7 @@ const About = () => {
     {
       name: "Chloé Jolly",
       role: "Co-fondatrice",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&auto=format&fit=crop&q=80",
+      image: "../assets/about/matisse.png",
       description: "Professionnelle expérimentée et polyvalente dans l'administration et la production de spectacle vivant. Son expertise s'étend de la gestion de contrats à la direction de production d'événements.",
       socialLinks: {
         instagram: "https://instagram.com"
@@ -24,7 +24,7 @@ const About = () => {
     {
       name: "Matisse Pellegrin",
       role: "Co-fondatrice",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&auto=format&fit=crop&q=80",
+      image: "../assets/about/chloe.png",
       description: "Professionnelle accomplie dans l'administration, la production et le management de groupes musicaux. Son expérience englobe la régie d'événements et la coordination technique.",
       socialLinks: {
         instagram: "https://instagram.com"
@@ -90,18 +90,18 @@ const About = () => {
             </AnimatedGradientText>
             <Star className="text-[#FF4D8F]" size="sm" />
           </div>
-          <p className="text-gray-300 mb-8">
+          <p className="text-gray-600 mb-8">
             Créée en 2024 par Chloé Jolly et Matisse Pellegrin, Glitter Productions est une structure dédiée à la production,
             l'administration et le management dans le domaine de la musique et du spectacle vivant, située entre les Landes et le Tarn.
           </p>
-          <p className="text-gray-300">
+          <p className="text-gray-600">
             Forte de la passion et de l'expertise de ses fondatrices, Glitter Productions propose des services adaptés aux besoins
             des artistes et des événements artistiques en se positionnant comme un véritable partenaire.
           </p>
         </div>
       </Section>
 
-      <Section className="bg-black/50">
+      <Section className="bg-gray-50">
         <div className="text-center mb-12">
           <div className="flex justify-center items-center gap-2 mb-6">
             <Star className="text-[#FFC74F]" size="sm" />
@@ -156,7 +156,7 @@ const About = () => {
         </div>
 
         <div className="text-center mt-16">
-          <p className="text-gray-300 mb-8">
+          <p className="text-gray-600 mb-8">
             Leur complémentarité et leur vision commune de l'accompagnement artistique sont au cœur de la réussite de Glitter Productions.
           </p>
           <motion.a

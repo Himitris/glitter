@@ -1,4 +1,3 @@
-// Mise à jour du fichier src/components/home/Testimonials.tsx
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
@@ -50,7 +49,7 @@ const Testimonials = () => {
           <AnimatedGradientText as="h2" gradient="management" className={typography.heading.h2 + " mb-6"} speed="medium">
             Ce qu'ils disent de nous
           </AnimatedGradientText>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Découvrez les témoignages de nos clients et partenaires qui nous ont fait confiance.
           </p>
         </div>
@@ -63,16 +62,16 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-6 cursor-pointer hover:border-gray-700 transition-all"
+              className="bg-white border border-gray-200 rounded-2xl p-6 cursor-pointer hover:border-gray-300 transition-all shadow-sm hover:shadow-md"
               onClick={() => setSelectedTestimonial(testimonial)}
             >
               <div className="mb-4">
                 <Quote className="w-8 h-8 text-[#FF8C60] opacity-50" />
               </div>
-              <p className="text-gray-300 italic mb-6">"{testimonial.shortContent}"</p>
+              <p className="text-gray-600 italic mb-6">"{testimonial.shortContent}"</p>
               <div className="mt-auto">
-                <p className="font-semibold text-white">{testimonial.name}</p>
-                <p className="text-gray-400 text-sm">{testimonial.role}</p>
+                <p className="font-semibold text-gray-800">{testimonial.name}</p>
+                <p className="text-gray-500 text-sm">{testimonial.role}</p>
               </div>
             </motion.div>
           ))}

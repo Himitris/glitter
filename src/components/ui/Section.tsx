@@ -5,7 +5,7 @@ import { components } from '../../utils/theme';
 
 interface SectionProps {
   children: React.ReactNode;
-  variant?: 'default' | 'dark';
+  variant?: 'default' | 'light';
   className?: string;
   delay?: number;
 }
@@ -23,7 +23,7 @@ const Section: React.FC<SectionProps> = ({
 
   const baseClassName = `
     ${components.section.base}
-    ${variant === 'dark' ? components.section.dark : ''}
+    ${variant === 'light' ? components.section.light : ''}
     ${className}
   `;
 

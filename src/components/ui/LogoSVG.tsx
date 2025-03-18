@@ -9,7 +9,7 @@ interface LogoSVGProps {
 
 const LogoSVG: React.FC<LogoSVGProps> = ({ 
     className = '', 
-    colorScheme = 'dark',
+    colorScheme = 'light',
     size = 'medium' 
 }) => {
     // Définition des couleurs en fonction du thème choisi
@@ -44,7 +44,7 @@ const LogoSVG: React.FC<LogoSVGProps> = ({
                     y="65"
                     fontSize="6"
                     fontFamily="'Montserrat', sans-serif"
-                    fontWeight={200}
+                    fontWeight={500}
                     fill={textColor}
                     transform="rotate(-90, 18, 45)"
                     letterSpacing="2"
@@ -59,11 +59,11 @@ const LogoSVG: React.FC<LogoSVGProps> = ({
                     y="62"
                     fontSize="74"
                     fontFamily="'Frunchy Sage', serif"
-                    fontWeight={300}
+                    fontWeight={500}
                     fill={textColor}
                     letterSpacing="1"
                 >
-                    GLITTER
+                    G
                 </text>
 
                 {/* Étoiles avec le code original complet (4 étoiles) positionnées plus bas et agrandies */}

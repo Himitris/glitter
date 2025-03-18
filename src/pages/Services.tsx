@@ -15,63 +15,6 @@ const Services = () => {
     rootMargin: '0px 0px -10% 0px'  // Déclencher l'animation avant même que l'élément entre dans la vue
   });
 
-  const [artistsRef, artistsInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.05,
-    rootMargin: '0px 0px -20% 0px'  // Ceci déclenchera l'animation encore plus tôt
-  });
-
-  const artistServices = [
-    {
-      title: "Administration et Gestion",
-      icon: "FileText",
-      description: "Nous prenons en charge les aspects administratifs et financiers, permettant aux artistes de se concentrer pleinement sur leur créativité.",
-      features: [
-        "Édition des contrats de cession et des factures",
-        "Gestion de la paie des artistes et techniciens",
-        "Accompagnement à l'intermittence",
-        "Gestion des droits d'auteur"
-      ],
-      color: "administration"
-    },
-    {
-      title: "Production Musicale",
-      icon: "Music",
-      description: "De la pré-production à la post-production, nous travaillons en étroite collaboration avec les artistes pour les aider dans l'élaboration des enregistrements.",
-      features: [
-        "Accompagnement artistique",
-        "Coordination technique",
-        "Production d'albums",
-        "Stratégie de sortie"
-      ],
-      color: "production"
-    },
-    {
-      title: "Production de Tournée",
-      icon: "Calendar",
-      description: "Organisation complète de vos tournées pour vous permettre de vous concentrer sur votre art.",
-      features: [
-        "Élaboration des budgets de tournée",
-        "Gestion de la logistique (transport, hébergement)",
-        "Organisation des résidences",
-        "Recherche de financements"
-      ],
-      color: "production"
-    },
-    {
-      title: "Management Artistique",
-      icon: "Users",
-      description: "Nous développons des stratégies sur mesure pour maximiser votre visibilité et votre évolution artistique.",
-      features: [
-        "Gestion de l'image",
-        "Relations publiques",
-        "Coordination des tournées",
-        "Développement stratégique"
-      ],
-      color: "management"
-    }
-  ];
-
   const eventServices = [
     {
       title: "Régie Événementielle",
@@ -91,7 +34,6 @@ const Services = () => {
 
   return (
     <div>
-      {/* Remplacer le PageHeader par */}
       <ParallaxBanner
         image="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&auto=format&fit=crop&q=80"
         height="45vh"
@@ -118,44 +60,7 @@ const Services = () => {
         </div>
       </ParallaxBanner>
 
-      <Section>
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="flex justify-center items-center gap-2 mb-4">
-            <Star className="text-[#8C52FF]" size="sm" />
-            <AnimatedGradientText
-              as="h2"
-              gradient="primary"
-              className={typography.heading.h2}
-              speed="medium"
-            >
-              Services aux Projets Artistiques
-            </AnimatedGradientText>
-            <Star className="text-[#FF4D8F]" size="sm" />
-          </div>
-          <p className="text-gray-300">
-            Chez Glitter Productions, nous accompagnons les projets artistiques à chaque étape de leur parcours artistique et professionnel.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 mb-20" ref={artistsRef}>
-          {artistServices.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={artistsInView ? { opacity: 1, y: 0 } : {}}  // Utilisez artistsInView au lieu de inView
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <ServiceCard
-                key={index}
-                {...service}
-                color={service.color as "production" | "administration" | "management" | "prestation"}
-              />
-            </motion.div>
-          ))}
-        </div>
-      </Section>
-
-      <Section className="bg-black/50">
+      <Section className="bg-gray-50">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="flex justify-center items-center gap-2 mb-4">
             <Star className="text-[#FFC74F]" size="sm" />
@@ -164,7 +69,7 @@ const Services = () => {
             </GradientText>
             <Star className="text-[#FFC74F]" size="sm" />
           </div>
-          <p className="text-gray-300">
+          <p className="text-gray-600">
             Glitter Productions propose des services de régie pour tous types d'événements artistiques.
           </p>
         </div>

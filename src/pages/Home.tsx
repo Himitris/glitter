@@ -1,4 +1,3 @@
-// Modification de la section principale de src/pages/Home.tsx
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Calendar, Music, Users } from 'lucide-react';
@@ -43,16 +42,16 @@ const Home = () => {
             </div>
 
             <AnimatedGradientText as="h1" className={typography.heading.h1} speed="medium">
-              Faire briller chaque moment,
-              <br />
-              ensemble !
+
+              Glitter Productions
+              
             </AnimatedGradientText>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className={`${typography.body.large} mt-6 uppercase tracking-widest`}
+              className={`text-xl md:text-2xl text-gray-200`}
             >
               Production d'événements uniques et mémorables
             </motion.p>
@@ -77,7 +76,7 @@ const Home = () => {
       </ParallaxBanner>
 
       {/* Upcoming Event Section */}
-      <section className="py-20 bg-black/80">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="flex justify-center items-center gap-2">
@@ -95,7 +94,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8 }}
-            className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl overflow-hidden shadow-2xl group hover:border-[#FFC74F]/30 transition-all"
+            className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-md group hover:border-[#FFC74F]/30 transition-all"
           >
             <div className="grid md:grid-cols-2 gap-8">
               <div className="relative h-64 md:h-full overflow-hidden">
@@ -105,7 +104,7 @@ const Home = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 {/* Overlay dégradé */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 {/* Étoile décorative */}
                 <Star className="absolute top-4 right-4 text-white" size="sm" />
               </div>
@@ -113,11 +112,11 @@ const Home = () => {
                 <GradientText as="h4" gradient="prestation" className="text-3xl font-bold mb-4">
                   {upcomingEvent.title}
                 </GradientText>
-                <p className="text-gray-300 mb-2 flex items-center">
+                <p className="text-gray-600 mb-2 flex items-center">
                   <Calendar size={16} className="mr-2 text-[#FFC74F]" />
                   {upcomingEvent.date}
                 </p>
-                <p className="text-gray-300 mb-6 flex items-center">
+                <p className="text-gray-600 mb-6 flex items-center">
                   <span className="mr-2">📍</span> {upcomingEvent.location}
                 </p>
                 <motion.button
@@ -176,14 +175,14 @@ const Home = () => {
                 className="relative group"
               >
                 {/* Effet de bordure en hover */}
-                <div className={`absolute inset-0 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity blur-xl`} />
+                <div className={`absolute inset-0 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity blur-xl`} />
 
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 group-hover:border-transparent transition-all h-full">
+                <div className="relative p-8 rounded-2xl bg-white border border-gray-200 group-hover:border-transparent transition-all h-full shadow-sm">
                   <div className="mb-6 flex justify-center">{feature.icon}</div>
                   <AnimatedGradientText as="h3" gradient={feature.color} className="text-xl font-bold mb-4 text-center uppercase" speed="fast">
                     {feature.title}
                   </AnimatedGradientText>
-                  <p className="text-gray-400 text-center">{feature.description}</p>
+                  <p className="text-gray-600 text-center">{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -194,7 +193,7 @@ const Home = () => {
               href="/services"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-transparent border border-[#8C52FF] text-white px-8 py-3 rounded-full hover:bg-[#8C52FF]/10 transition-all uppercase tracking-wider text-sm"
+              className="inline-block bg-transparent border border-[#8C52FF] text-gray-800 px-8 py-3 rounded-full hover:bg-[#8C52FF]/10 transition-all uppercase tracking-wider text-sm"
             >
               Tous nos services
             </motion.a>
@@ -202,13 +201,16 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <Testimonials />
+
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-br from-[#8C52FF]/10 via-[#FF4D8F]/10 to-[#FF8C60]/10">
+      <section className="py-20 bg-gradient-to-br from-[#8C52FF]/5 via-[#FF4D8F]/5 to-[#FF8C60]/5">
         <div className="container mx-auto px-4 text-center">
           <AnimatedGradientText as="h2" className="text-3xl font-bold mb-6" speed="medium">
             Prêt à faire briller votre projet ?
           </AnimatedGradientText>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
             Découvrez comment Glitter Productions peut transformer votre vision en réalité éclatante.
             Contactez-nous dès aujourd'hui pour discuter de vos idées.
           </p>

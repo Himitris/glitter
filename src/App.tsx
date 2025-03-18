@@ -44,7 +44,7 @@ function App() {
       <ToastProvider>
         <Router>
           <ScrollToTop />
-          <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+          <div className="min-h-screen bg-white text-gray-800">
             <ScrollIndicator />
             <Header />
             {/* Ajustement de l'espace pour le contenu principal en fonction de la hauteur de la navbar */}

@@ -30,7 +30,7 @@ const Events = () => {
             className="text-4xl md:text-6xl font-bold mb-4"
             speed="medium"
           >
-            Nos Services
+            Événements
           </AnimatedGradientText>
 
           <motion.p
@@ -54,7 +54,7 @@ const Events = () => {
           <GradientText as="h2" gradient="prestation" className={typography.heading.h2 + " mb-8"}>
             Programmation
           </GradientText>
-          <p className="text-gray-300 max-w-2xl mx-auto mb-10">
+          <p className="text-gray-600 max-w-2xl mx-auto mb-10">
             Découvrez notre sélection d'événements uniques, où chaque moment est conçu pour
             briller et vous offrir une expérience inoubliable.
           </p>
@@ -80,7 +80,7 @@ const Events = () => {
         </div>
 
         {filteredEvents.length === 0 && (
-          <div className="text-center text-gray-400 py-12">
+          <div className="text-center text-gray-500 py-12">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -94,12 +94,12 @@ const Events = () => {
       </Section>
 
       {/* Section pour événements passés ou à venir */}
-      <Section className="bg-black/50">
+      <Section className="bg-gray-50">
         <div className="text-center mb-12">
           <GradientText as="h2" gradient="primary" className={typography.heading.h2 + " mb-6"}>
             Vous souhaitez organiser un événement ?
           </GradientText>
-          <p className="text-gray-300 max-w-2xl mx-auto mb-8">
+          <p className="text-gray-600 max-w-2xl mx-auto mb-8">
             Glitter Productions met son expertise à votre service pour créer des moments uniques
             et mémorables. Contactez-nous pour discuter de votre projet.
           </p>

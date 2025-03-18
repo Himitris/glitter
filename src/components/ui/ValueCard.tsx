@@ -1,4 +1,3 @@
-// Modification du composant ValueCard.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
@@ -19,7 +18,7 @@ const ValueCard: React.FC<ValueCardProps> = ({ icon: Icon, title, description, c
       className="relative group"
     >
       {/* Card with gradient background */}
-      <div className="p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 group-hover:border-[color:var(--icon-color)] transition-all duration-300" style={{'--icon-color': color} as any}>
+      <div className="p-8 rounded-2xl bg-white border border-gray-200 shadow-sm group-hover:border-[color:var(--icon-color)] transition-all duration-300" style={{'--icon-color': color} as any}>
         {/* Icon */}
         <div className="relative w-16 h-16 mx-auto mb-6">
           <div className="absolute inset-0 rounded-full bg-[color:var(--icon-color)] opacity-10" style={{'--icon-color': color} as any} />
@@ -34,7 +33,7 @@ const ValueCard: React.FC<ValueCardProps> = ({ icon: Icon, title, description, c
         </h3>
 
         {/* Description */}
-        <p className="text-gray-300 text-center">
+        <p className="text-gray-600 text-center">
           {description}
         </p>
       </div>

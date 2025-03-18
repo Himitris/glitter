@@ -1,4 +1,3 @@
-// Créez un nouveau fichier src/pages/Contact.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Instagram, Send } from 'lucide-react';
@@ -13,7 +12,6 @@ import ParallaxBanner from '../components/ui/ParallaxBanner';
 import AnimatedGradientText from '../components/ui/AnimatedGradientText';
 
 const Contact = () => {
-
   const { showToast } = useToast();
   const {
     values,
@@ -46,6 +44,7 @@ const Contact = () => {
       }, 1000);
     }
   };
+
   return (
     <div>
       <ParallaxBanner
@@ -60,7 +59,7 @@ const Contact = () => {
             className="text-4xl md:text-6xl font-bold mb-4"
             speed="medium"
           >
-            Nos Artistes
+            Contactez-nous
           </AnimatedGradientText>
 
           <motion.p
@@ -83,7 +82,7 @@ const Contact = () => {
               </GradientText>
               <Star className="text-[#8C52FF]" size="sm" />
             </div>
-            <p className="text-gray-300 max-w-2xl mx-auto">
+            <p className="text-gray-600 max-w-2xl mx-auto">
               Que vous soyez un artiste cherchant un accompagnement ou un organisateur d'événement,
               nous sommes là pour vous aider à faire briller votre projet.
             </p>
@@ -91,14 +90,14 @@ const Contact = () => {
 
           <div className="grid md:grid-cols-2 gap-12">
             {/* Formulaire de contact */}
-            <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8">
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
               <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-[#FF4D8F] to-[#FF8C60] text-transparent bg-clip-text">
                 Envoyez-nous un message
               </h3>
 
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="space-y-2">
-                  <label htmlFor="name" className="block text-gray-300">Nom</label>
+                  <label htmlFor="name" className="block text-gray-700">Nom</label>
                   <input
                     type="text"
                     id="name"
@@ -106,8 +105,8 @@ const Contact = () => {
                     value={values.name}
                     onChange={(e) => handleChange(e, { required: true, minLength: 2 })}
                     onBlur={() => handleBlur('name')}
-                    className={`w-full px-4 py-3 bg-gray-800/50 border ${touched.name && errors.name ? 'border-red-500' : 'border-gray-700'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-white`}
+                    className={`w-full px-4 py-3 bg-gray-50 border ${touched.name && errors.name ? 'border-red-500' : 'border-gray-300'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-gray-800`}
                     placeholder="Votre nom"
                   />
                   {touched.name && errors.name && (
@@ -116,7 +115,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="email" className="block text-gray-300">Email</label>
+                  <label htmlFor="email" className="block text-gray-700">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -124,8 +123,8 @@ const Contact = () => {
                     value={values.email}
                     onChange={(e) => handleChange(e, { required: true, isEmail: true })}
                     onBlur={() => handleBlur('email')}
-                    className={`w-full px-4 py-3 bg-gray-800/50 border ${touched.email && errors.email ? 'border-red-500' : 'border-gray-700'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-white`}
+                    className={`w-full px-4 py-3 bg-gray-50 border ${touched.email && errors.email ? 'border-red-500' : 'border-gray-300'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-gray-800`}
                     placeholder="Votre email"
                   />
                   {touched.email && errors.email && (
@@ -134,7 +133,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="block text-gray-300">Message</label>
+                  <label htmlFor="message" className="block text-gray-700">Message</label>
                   <textarea
                     id="message"
                     name="message"
@@ -142,8 +141,8 @@ const Contact = () => {
                     value={values.message}
                     onChange={(e) => handleChange(e, { required: true, minLength: 10 })}
                     onBlur={() => handleBlur('message')}
-                    className={`w-full px-4 py-3 bg-gray-800/50 border ${touched.message && errors.message ? 'border-red-500' : 'border-gray-700'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-white`}
+                    className={`w-full px-4 py-3 bg-gray-50 border ${touched.message && errors.message ? 'border-red-500' : 'border-gray-300'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-gray-800`}
                     placeholder="Comment pouvons-nous vous aider ?"
                   ></textarea>
                   {touched.message && errors.message && (
@@ -175,8 +174,8 @@ const Contact = () => {
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-white mb-1">Email</h4>
-                    <p className="text-gray-300">glitterproductions24@gmail.com</p>
+                    <h4 className="text-xl font-semibold text-gray-800 mb-1">Email</h4>
+                    <p className="text-gray-600">glitterproductions24@gmail.com</p>
                   </div>
                 </div>
 
@@ -185,8 +184,8 @@ const Contact = () => {
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-white mb-1">Situation</h4>
-                    <p className="text-gray-300">Située entre les Landes et le Tarn</p>
+                    <h4 className="text-xl font-semibold text-gray-800 mb-1">Situation</h4>
+                    <p className="text-gray-600">Située entre les Landes et le Tarn</p>
                   </div>
                 </div>
 
@@ -195,7 +194,7 @@ const Contact = () => {
                     <Instagram className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-white mb-1">Instagram</h4>
+                    <h4 className="text-xl font-semibold text-gray-800 mb-1">Instagram</h4>
                     <a
                       href="https://instagram.com/glitter_prod"
                       target="_blank"
