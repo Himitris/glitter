@@ -11,7 +11,6 @@ import ParallaxBanner from '../components/ui/ParallaxBanner';
 import AnimatedGradientText from '../components/ui/AnimatedGradientText';
 
 const DJs = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
 
   // Préparer une version future avec possibilité de filtrer par genre musical
   const djCategories = [
@@ -65,25 +64,6 @@ const DJs = () => {
           <p className="text-gray-600 max-w-2xl mx-auto mb-10">
             Découvrez les DJ et producteurs qui font vibrer vos événements avec leurs sets uniques et leur énergie contagieuse.
           </p>
-        </div>
-
-        {/* Pour une version future - filtres par genre musical */}
-        <div className="flex flex-wrap gap-4 justify-center mb-12 opacity-70">
-          {djCategories.map((category) => (
-            <button
-              key={category.id}
-              className={`
-                px-6 py-2 rounded-full transition-all uppercase tracking-wider text-sm
-                ${activeCategory === category.id
-                  ? 'bg-gradient-to-r from-[#8C52FF] to-[#FF4D8F] text-white'
-                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                }
-              `}
-              onClick={() => setActiveCategory(category.id)}
-            >
-              {category.label}
-            </button>
-          ))}
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
