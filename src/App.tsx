@@ -14,7 +14,7 @@ import { ToastProvider } from './contexts/ToastContext';
 import Home from './pages/Home';
 import About from './pages/About';
 import Artists from './pages/Artists';
-import DJs from './pages/Djs';
+import DJs from './pages/DJS';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 
