@@ -13,8 +13,8 @@ import { ToastProvider } from './contexts/ToastContext';
 // Pages
 import Home from './pages/Home';
 import About from './pages/About';
-import Events from './pages/Events';
 import Artists from './pages/Artists';
+import DJs from './pages/Djs';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 
@@ -27,8 +27,8 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
-        <Route path="/events" element={<PageTransition><Events /></PageTransition>} />
         <Route path="/artists" element={<PageTransition><Artists /></PageTransition>} />
+        <Route path="/djs" element={<PageTransition><DJs /></PageTransition>} />
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         {/* Redirect all unknown routes to home */}
