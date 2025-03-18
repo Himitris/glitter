@@ -254,34 +254,44 @@ const Services = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={experiencesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#8C52FF]/10 transition-all"
+              className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#8C52FF]/10 transition-all h-full"
             >
-              <div className="p-5">
-                <div className="flex justify-between items-start mb-3">
-                  <GradientText as="h3" gradient="production" className="text-xl font-bold">
-                    {exp.title}
-                  </GradientText>
-                  <span className="bg-[#8C52FF]/10 text-[#8C52FF] px-2 py-1 rounded-full text-xs font-medium">
-                    {exp.year}
-                  </span>
+              <div className="grid grid-cols-4 h-full">
+                {/* Logo container - 1/4 de la largeur */}
+                <div className="bg-gray-50 flex items-center justify-center p-3">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#8C52FF] to-[#FF4D8F] opacity-10 flex items-center justify-center">
+                    <span className="text-[#8C52FF] font-bold text-xs">{exp.title.substring(0, 2)}</span>
+                  </div>
                 </div>
-                
-                <div className="flex items-center text-gray-600 mb-3 text-sm">
-                  <MapPin size={14} className="mr-1 text-[#FF4D8F]" />
-                  <span>{exp.location}</span>
-                </div>
-                
-                <p className="text-gray-600 text-sm mb-4">{exp.description}</p>
-                
-                <div className="flex flex-wrap gap-1">
-                  {exp.services.map((service, serviceIndex) => (
-                    <span 
-                      key={serviceIndex}
-                      className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs"
-                    >
-                      {service}
+
+                {/* Description container - 3/4 de la largeur */}
+                <div className="p-4 col-span-3">
+                  <div className="flex justify-between items-start mb-2">
+                    <GradientText as="h3" gradient="production" className="text-lg font-bold">
+                      {exp.title}
+                    </GradientText>
+                    <span className="bg-[#8C52FF]/10 text-[#8C52FF] px-2 py-1 rounded-full text-xs font-medium">
+                      {exp.year}
                     </span>
-                  ))}
+                  </div>
+                  
+                  <div className="flex items-center text-gray-600 mb-2 text-xs">
+                    <MapPin size={12} className="mr-1 text-[#FF4D8F]" />
+                    <span>{exp.location}</span>
+                  </div>
+                  
+                  <p className="text-gray-600 text-xs mb-3">{exp.description}</p>
+                  
+                  <div className="flex flex-wrap gap-1">
+                    {exp.services.map((service, serviceIndex) => (
+                      <span 
+                        key={serviceIndex}
+                        className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full text-xs"
+                      >
+                        {service}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
