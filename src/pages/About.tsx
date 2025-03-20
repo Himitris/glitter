@@ -14,7 +14,7 @@ const About = () => {
     {
       name: "Chloé Jolly",
       role: "Co-fondatrice",
-      image: "/images/about/matisse.png",
+      image: "/images/about/chloe.jpg",
       description: "Professionnelle expérimentée et polyvalente dans l'administration et la production de spectacle vivant. Son expertise s'étend de la gestion de contrats à la direction de production d'événements.",
       socialLinks: {
         instagram: "https://instagram.com"
@@ -24,7 +24,7 @@ const About = () => {
     {
       name: "Matisse Pellegrin",
       role: "Co-fondatrice",
-      image: "/images/about/matisse.png",
+      image: "/images/about/matisse.jpg",
       description: "Professionnelle accomplie dans l'administration, la production et le management de groupes musicaux. Son expérience englobe la régie d'événements et la coordination technique.",
       socialLinks: {
         instagram: "https://instagram.com"

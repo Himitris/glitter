@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Section from '../components/ui/Section';
 import ArtistCard from '../components/artists/ArtistCard';
-import { artists } from '../data/artists';
+import { artists, artistServices } from '../data/artists';
 import GradientText from '../components/ui/GradientText';
 import Star from '../components/ui/Star';
 import { typography } from '../utils/theme';
@@ -16,57 +16,6 @@ const Artists = () => {
     threshold: 0.05,
     rootMargin: '0px 0px -20% 0px'  // Ceci déclenchera l'animation encore plus tôt
   });
-
-  const artistServices = [
-    {
-      title: "Administration et Gestion",
-      icon: "FileText",
-      description: "",
-      features: [
-        "Édition des contrats de cession et des factures",
-        "Gestion de la paie des artistes et techniciens",
-        "Accompagnement à l'intermittence",
-        "Gestion des droits d'auteur"
-      ],
-      color: "administration"
-    },
-    {
-      title: "Production Musicale",
-      icon: "Music",
-      description: "",
-      features: [
-        "Accompagnement artistique",
-        "Coordination technique",
-        "Production d'albums",
-        "Stratégie de sortie"
-      ],
-      color: "production"
-    },
-    {
-      title: "Production de Tournée",
-      icon: "Calendar",
-      description: "",
-      features: [
-        "Élaboration des budgets de tournée",
-        "Gestion de la logistique (transport, hébergement)",
-        "Organisation des résidences",
-        "Recherche de financements"
-      ],
-      color: "prestation"
-    },
-    {
-      title: "Management Artistique",
-      icon: "Users",
-      description: "",
-      features: [
-        "Gestion de l'image",
-        "Relations publiques",
-        "Coordination des tournées",
-        "Développement stratégique"
-      ],
-      color: "management"
-    }
-  ];
 
   return (
     <div>

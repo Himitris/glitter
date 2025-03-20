@@ -1,24 +1,24 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Section from '../components/ui/Section';
 import ArtistCard from '../components/artists/ArtistCard';
+import { useInView } from 'react-intersection-observer';
 import GradientText from '../components/ui/GradientText';
 import Star from '../components/ui/Star';
 import { Disc, Music, MusicIcon } from 'lucide-react';
 import { dj } from '../data/artists';
 import { typography } from '../utils/theme';
+import { djServices } from '../data/artists';
 import ParallaxBanner from '../components/ui/ParallaxBanner';
 import AnimatedGradientText from '../components/ui/AnimatedGradientText';
+import ServiceCard from '../components/services/ServiceCard';
 
 const DJs = () => {
 
-  // Préparer une version future avec possibilité de filtrer par genre musical
-  const djCategories = [
-    { id: 'all', label: 'Tous' },
-    { id: 'electro', label: 'Électro' },
-    { id: 'house', label: 'House' },
-    { id: 'techno', label: 'Techno' }
-  ];
+  const [artistsRef, artistsInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.05,
+    rootMargin: '0px 0px -20% 0px'  // Ceci déclenchera l'animation encore plus tôt
+  });
 
   // Dans le futur, implémenter la fonctionnalité de filtrage réelle
   const filteredDJs = dj;
@@ -46,24 +46,28 @@ const DJs = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-200"
           >
-            Vibrez au rythme de nos talents
+            Découvrez les DJs qui nous font confiance
           </motion.p>
         </div>
       </ParallaxBanner>
 
       <Section>
-        <div className="text-center mb-12">
-          <div className="flex justify-center items-center gap-2 mb-6">
-            <Star className="text-[#8C52FF]" size="sm" />
-            <Disc className="w-10 h-10 text-[#8C52FF]" />
-            <Star className="text-[#8C52FF]" size="sm" />
-          </div>
-          <GradientText as="h2" gradient="production" className={typography.heading.h2 + " mb-8"}>
-            Nos DJ 
-          </GradientText>
-          <p className="text-gray-600 max-w-2xl mx-auto mb-10">
-            Découvrez les DJ et producteurs qui font vibrer vos événements avec leurs sets uniques et leur énergie contagieuse.
-          </p>
+        <div className="grid md:grid-cols-3 gap-8 mb-20" ref={artistsRef}>
+          {djServices.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={artistsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex"
+            >
+              <ServiceCard
+                key={index}
+                {...service}
+                color={service.color as "production" | "administration" | "management" | "prestation"}
+              />
+            </motion.div>
+          ))}
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
