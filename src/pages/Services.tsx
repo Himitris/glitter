@@ -82,7 +82,7 @@ const Services = () => {
                      service.icon === "MapPin" ? <MapPin size={18} className={`text-${service.color === "production" ? "[#8C52FF]" : service.color === "administration" ? "[#FF4D8F]" : service.color === "management" ? "[#FF8C60]" : "[#FFC74F]"}`} /> :
                      <Calendar size={18} className={`text-${service.color === "production" ? "[#8C52FF]" : service.color === "administration" ? "[#FF4D8F]" : service.color === "management" ? "[#FF8C60]" : "[#FFC74F]"}`} />}
                   </div>
-                  <GradientText as="h3" gradient={service.color} className="text-lg font-bold">
+                  <GradientText as="h3" gradient={service.color as 'primary' | 'secondary' | 'production' | 'administration' | 'management' | 'prestation'} className="text-lg font-bold">
                     {service.title}
                   </GradientText>
                 </div>
