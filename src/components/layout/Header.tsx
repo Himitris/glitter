@@ -47,14 +47,14 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const headerClassName = `
-    fixed w-full z-50 transition-all duration-300
+    fixed w-full z-50 transition-all duration-300 pb-3
     ${isScrolled ? 'bg-white/90 backdrop-blur-sm shadow-md' : 'bg-transparent'}
     ${visible ? 'translate-y-0' : '-translate-y-full'}
   `;
 
   return (
     <header className={headerClassName}>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 ">
         <div className="flex items-center justify-between h-16 sm:h-20">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
