@@ -56,21 +56,21 @@ const Header = () => {
     <header className={headerClassName}>
       <div className="container mx-auto px-4 ">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             className="flex-shrink-0"
           >
             {/* Logo avec taille adaptative selon l'écran */}
-            <LogoSVG 
-              colorScheme="light" 
-              size="small" 
+            <LogoSVG
+              colorScheme="light"
+              size="small"
               className="block sm:hidden" // Petite taille sur mobile
             />
-            <LogoSVG 
-              colorScheme="light" 
-              size="medium" 
+            <LogoSVG
+              colorScheme="light"
+              size="medium"
               className="hidden sm:block" // Taille moyenne sur tablette et desktop
             />
           </motion.div>
@@ -83,7 +83,7 @@ const Header = () => {
           <motion.button
             className="lg:hidden text-gray-800 p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -94,17 +94,14 @@ const Header = () => {
         {/* Mobile Menu avec animation améliorée */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div 
+            <motion.div
               className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 bg-white/95 backdrop-blur-md z-40"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "calc(100vh - 4rem)" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <Navigation
-                isMobile
-                onItemClick={() => setIsMenuOpen(false)}
-              />
+              <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
             </motion.div>
           )}
         </AnimatePresence>
