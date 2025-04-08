@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Calendar, Music, Users } from 'lucide-react';
-import GradientText from '../components/ui/GradientText';
-import AnimatedGradientText from '../components/ui/AnimatedGradientText';
-import Star from '../components/ui/Star';
-import { typography } from '../utils/theme';
-import Testimonials from '../components/home/Testimonials';
-import ParallaxBanner from '../components/ui/ParallaxBanner';
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Calendar, Music, Users } from "lucide-react";
+import GradientText from "../components/ui/GradientText";
+import AnimatedGradientText from "../components/ui/AnimatedGradientText";
+import Star from "../components/ui/Star";
+import { typography } from "../utils/theme";
+import Testimonials from "../components/home/Testimonials";
+import ParallaxBanner from "../components/ui/ParallaxBanner";
 
 const Home = () => {
   const [ref, inView] = useInView({
@@ -18,7 +18,8 @@ const Home = () => {
     title: "Summer Vibes Festival",
     date: "15 Juillet 2024",
     location: "Parc des Expositions, Paris",
-    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1600&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1600&auto=format&fit=crop&q=80",
   };
 
   return (
@@ -41,10 +42,12 @@ const Home = () => {
               <Star className="text-[#FF8C60]" size="sm" />
             </div>
 
-            <AnimatedGradientText as="h1" className={typography.heading.h1} speed="medium">
-
+            <AnimatedGradientText
+              as="h1"
+              className={typography.heading.h1}
+              speed="medium"
+            >
               Glitter Productions
-              
             </AnimatedGradientText>
 
             <motion.p
@@ -81,7 +84,12 @@ const Home = () => {
           <div className="text-center mb-12">
             <div className="flex justify-center items-center gap-2">
               <Star className="text-[#FFC74F]" size="sm" />
-              <AnimatedGradientText as="h2" gradient="prestation" className={typography.heading.h2 + " inline-block"} speed="fast">
+              <AnimatedGradientText
+                as="h2"
+                gradient="prestation"
+                className={typography.heading.h2 + " inline-block"}
+                speed="fast"
+              >
                 Prochain Événement
               </AnimatedGradientText>
               <Star className="text-[#FFC74F]" size="sm" />
@@ -109,7 +117,11 @@ const Home = () => {
                 <Star className="absolute top-4 right-4 text-white" size="sm" />
               </div>
               <div className="p-8 flex flex-col justify-center">
-                <GradientText as="h4" gradient="prestation" className="text-3xl font-bold mb-4">
+                <GradientText
+                  as="h4"
+                  gradient="prestation"
+                  className="text-3xl font-bold mb-4"
+                >
                   {upcomingEvent.title}
                 </GradientText>
                 <p className="text-gray-600 mb-2 flex items-center">
@@ -138,7 +150,12 @@ const Home = () => {
           <div className="text-center mb-12">
             <div className="flex justify-center items-center gap-2">
               <Star className="text-[#8C52FF]" size="sm" />
-              <AnimatedGradientText as="h2" gradient="primary" className={typography.heading.h2 + " inline-block"} speed="medium">
+              <AnimatedGradientText
+                as="h2"
+                gradient="primary"
+                className={typography.heading.h2 + " inline-block"}
+                speed="medium"
+              >
                 Nos Services
               </AnimatedGradientText>
               <Star className="text-[#8C52FF]" size="sm" />
@@ -151,20 +168,20 @@ const Home = () => {
                 icon: <Calendar className="w-12 h-12 text-[#FF4D8F]" />,
                 title: "Événements Uniques",
                 description: "Des expériences sur mesure pour chaque occasion",
-                color: "administration"
+                color: "administration",
               },
               {
                 icon: <Music className="w-12 h-12 text-[#8C52FF]" />,
                 title: "Production Artistique",
                 description: "Accompagnement complet des artistes",
-                color: "production"
+                color: "production",
               },
               {
                 icon: <Users className="w-12 h-12 text-[#FF8C60]" />,
                 title: "Management",
                 description: "Un réseau d'artistes et de passionnés",
-                color: "management"
-              }
+                color: "management",
+              },
             ].map((feature, index) => (
               <motion.div
                 key={index}
@@ -175,14 +192,23 @@ const Home = () => {
                 className="relative group"
               >
                 {/* Effet de bordure en hover */}
-                <div className={`absolute inset-0 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity blur-xl`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity blur-xl`}
+                />
 
                 <div className="relative p-8 rounded-2xl bg-white border border-gray-200 group-hover:border-transparent transition-all h-full shadow-sm">
                   <div className="mb-6 flex justify-center">{feature.icon}</div>
-                  <AnimatedGradientText as="h3" gradient={feature.color} className="text-xl font-bold mb-4 text-center uppercase" speed="fast">
+                  <AnimatedGradientText
+                    as="h3"
+                    gradient={feature.color}
+                    className="text-xl font-bold mb-4 text-center uppercase"
+                    speed="fast"
+                  >
                     {feature.title}
                   </AnimatedGradientText>
-                  <p className="text-gray-600 text-center">{feature.description}</p>
+                  <p className="text-gray-600 text-center">
+                    {feature.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -202,17 +228,22 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section */}
-      <Testimonials />
+      {/* <Testimonials /> */}
 
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-br from-[#8C52FF]/5 via-[#FF4D8F]/5 to-[#FF8C60]/5">
         <div className="container mx-auto px-4 text-center">
-          <AnimatedGradientText as="h2" className="text-3xl font-bold mb-6" speed="medium">
+          <AnimatedGradientText
+            as="h2"
+            className="text-3xl font-bold mb-6"
+            speed="medium"
+          >
             Prêt à faire briller votre projet ?
           </AnimatedGradientText>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Découvrez comment Glitter Productions peut transformer votre vision en réalité éclatante.
-            Contactez-nous dès aujourd'hui pour discuter de vos idées.
+            Découvrez comment Glitter Productions peut transformer votre vision
+            en réalité éclatante. Contactez-nous dès aujourd'hui pour discuter
+            de vos idées.
           </p>
           <motion.a
             href="/contact"
