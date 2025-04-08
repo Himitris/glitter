@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Calendar, Music, Users } from "lucide-react";
+import {
+  Calendar,
+  Music,
+  Users,
+  FileText,
+  Briefcase,
+  MapPin,
+} from "lucide-react";
 import GradientText from "../components/ui/GradientText";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import Star from "../components/ui/Star";
@@ -21,6 +28,47 @@ const Home = () => {
     image:
       "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1600&auto=format&fit=crop&q=80",
   };
+
+  // Liste complète des services proposés
+  const allServices = [
+    {
+      icon: <Calendar className="w-12 h-12 text-[#FF4D8F]" />,
+      title: "ADMINISTRATION",
+      description: "Gestion administrative des projets artistiques",
+      color: "administration",
+    },
+    {
+      icon: <Music className="w-12 h-12 text-[#8C52FF]" />,
+      title: "PRODUCTION",
+      description: "Accompagnement complet pour les productions artistiques",
+      color: "production",
+    },
+    {
+      icon: <Users className="w-12 h-12 text-[#FF8C60]" />,
+      title: "MANAGEMENT",
+      description: "Développement de carrière et stratégie artistique",
+      color: "management",
+    },
+    {
+      icon: <FileText className="w-12 h-12 text-[#FFC74F]" />,
+      title: "RÉGIE ARTISTES",
+      description:
+        "Coordination des besoins des artistes durant les événements",
+      color: "prestation",
+    },
+    {
+      icon: <Briefcase className="w-12 h-12 text-[#FF4D8F]" />,
+      title: "DIRECTION DE PRODUCTION",
+      description: "Supervision globale de la production d'événements",
+      color: "administration",
+    },
+    {
+      icon: <MapPin className="w-12 h-12 text-[#8C52FF]" />,
+      title: "RÉGIE SITE",
+      description: "Organisation et gestion logistique des sites d'événements",
+      color: "production",
+    },
+  ];
 
   return (
     <div>
@@ -144,7 +192,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Services Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -160,35 +208,20 @@ const Home = () => {
               </AnimatedGradientText>
               <Star className="text-[#8C52FF]" size="sm" />
             </div>
+            <p className="text-gray-600 max-w-2xl mx-auto mt-4">
+              Découvrez notre gamme complète de services adaptés aux besoins des
+              artistes et des organisateurs d'événements.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Calendar className="w-12 h-12 text-[#FF4D8F]" />,
-                title: "Événements Uniques",
-                description: "Des expériences sur mesure pour chaque occasion",
-                color: "administration",
-              },
-              {
-                icon: <Music className="w-12 h-12 text-[#8C52FF]" />,
-                title: "Production Artistique",
-                description: "Accompagnement complet des artistes",
-                color: "production",
-              },
-              {
-                icon: <Users className="w-12 h-12 text-[#FF8C60]" />,
-                title: "Management",
-                description: "Un réseau d'artistes et de passionnés",
-                color: "management",
-              },
-            ].map((feature, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allServices.map((service, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative group"
               >
                 {/* Effet de bordure en hover */}
@@ -196,33 +229,24 @@ const Home = () => {
                   className={`absolute inset-0 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity blur-xl`}
                 />
 
-                <div className="relative p-8 rounded-2xl bg-white border border-gray-200 group-hover:border-transparent transition-all h-full shadow-sm">
-                  <div className="mb-6 flex justify-center">{feature.icon}</div>
-                  <AnimatedGradientText
-                    as="h3"
-                    gradient={feature.color}
-                    className="text-xl font-bold mb-4 text-center uppercase"
-                    speed="fast"
-                  >
-                    {feature.title}
-                  </AnimatedGradientText>
+                <div className="relative p-8 rounded-2xl bg-white border border-gray-200 group-hover:border-transparent transition-all h-full shadow-sm flex flex-col items-center">
+                  <div className="mb-6 flex justify-center">{service.icon}</div>
+                  <div className="text-center w-full">
+                    <AnimatedGradientText
+                      as="h3"
+                      gradient={service.color}
+                      className="text-xl font-bold mb-4 text-center inline-block"
+                      speed="fast"
+                    >
+                      {service.title}
+                    </AnimatedGradientText>
+                  </div>
                   <p className="text-gray-600 text-center">
-                    {feature.description}
+                    {service.description}
                   </p>
                 </div>
               </motion.div>
             ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <motion.a
-              href="/services"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-transparent border border-[#8C52FF] text-gray-800 px-8 py-3 rounded-full hover:bg-[#8C52FF]/10 transition-all uppercase tracking-wider text-sm"
-            >
-              Tous nos services
-            </motion.a>
           </div>
         </div>
       </section>
