@@ -163,7 +163,7 @@ export const dj: Artist[] = [
   {
     id: "bonnie-spacey",
     name: "Bonnie Spacey",
-    image: "/images/artists/bonniespacey.png",
+    image: "/images/artists/bonniespacey.jpg",
     description: "Description de Bonnie Spacey.",
     socialLinks: {
       instagram: "https://instagram.com/bonnie_spacey",
@@ -173,7 +173,7 @@ export const dj: Artist[] = [
   {
     id: "dame-fleuraux",
     name: "Dame Fleuraux",
-    image: "/images/artists/damefleuraux.png",
+    image: "/images/artists/damefleuraux.jpg",
     description: "Description de Dame Fleuraux.",
     socialLinks: {
       instagram: "https://instagram.com/dame_fleuraux",
@@ -184,7 +184,8 @@ export const dj: Artist[] = [
     id: "elona",
     name: "Elona",
     image: "/images/artists/elona.png",
-    description: "Curatrice, bassiste et productrice, sillonnent entre la house, break et electronica. Elle a notamment eu l’opportunité de mixer auprès de DJ reconnu·es tels que Dee Nasty, pionnier du hip-hop en France, Ian Pooley, figure emblématique de la house allemande, et Alpha Tracks, producteur influent de la scène techno contemporaine. Souhaitant avant tout offrir une expérience mouvementée et transcendante aux percussions entêtantes et frissonnantes, poussant les basses et jouant sur les contre-temps.",
+    description:
+      "Curatrice, bassiste et productrice, sillonnent entre la house, break et electronica. Elle a notamment eu l’opportunité de mixer auprès de DJ reconnu·es tels que Dee Nasty, pionnier du hip-hop en France, Ian Pooley, figure emblématique de la house allemande, et Alpha Tracks, producteur influent de la scène techno contemporaine. Souhaitant avant tout offrir une expérience mouvementée et transcendante aux percussions entêtantes et frissonnantes, poussant les basses et jouant sur les contre-temps.",
     socialLinks: {
       instagram: "https://instagram.com/elona_dj",
       spotify: "https://open.spotify.com/artist",
