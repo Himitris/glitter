@@ -12,7 +12,7 @@ export interface Event {
 export interface Artist {
   id: string;
   name: string;
-  image: string;
+  image: string | string[];
   description: string;
   socialLinks: {
     spotify?: string;

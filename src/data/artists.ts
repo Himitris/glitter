@@ -94,7 +94,10 @@ export const artists: Artist[] = [
   {
     id: "kimia",
     name: "KIMIA",
-    image: "/images/artists/kimia.png",
+    image: [
+      "/images/artists/kimia.png",
+      "/images/artists/kimia2.jpg"
+    ],
     description:
       'La collaboration entre Kimia et le producteur Julien "Noko" Decoret mêle leurs univers, leurs deux animalités complémentaires teintées de différentes influences et chargées de poésie au service d\'une musique afro électro, transe.',
     socialLinks: {
@@ -106,7 +109,9 @@ export const artists: Artist[] = [
   {
     id: "altess-ego",
     name: "ALTESS EGO",
-    image: "/images/artists/altesseego.png",
+    image: [
+      "/images/artists/altesseego.png",
+    ],
     description:
       "Basses musclées et beats tranchants, textures électriques tressées d'électro et section vocale chatoyante fondent l'ADN d'Altess Ego. On peut y déceler une dualité entre hip-hop railleur et RnB suave, entre sons organiques et ondes électroniques.",
     socialLinks: {
@@ -150,7 +155,10 @@ export const artists: Artist[] = [
   {
     id: "forro-da-lua",
     name: "FORRÓ DA LUA",
-    image: "/images/artists/forrodalua.png",
+    image: [
+      "/images/artists/forrodalua.jpg",
+      "/images/artists/forrodalua2.png",
+    ],
     description:
       "Forró Da Lua c'est un bal en plein cœur, un hymne à la joie, un hymne à la vie. Au son des voix, de l'accordéon, du saxophone et de la zabumba, laissez-vous danser, semelles au plancher et tête dans les étoiles : le bonheur est juste là... Só alegria !",
     socialLinks: {
@@ -163,17 +171,23 @@ export const dj: Artist[] = [
   {
     id: "bonnie-spacey",
     name: "Bonnie Spacey",
-    image: "/images/artists/bonniespacey.jpg",
-    description: "Description de Bonnie Spacey.",
+    image: [
+      "/images/artists/bonniespacey.jpg",
+    ],
+    description:
+      "La DJ et productrice berlinoise Bonnie Spacey enflamme les dancefloors à travers le monde depuis près d'une décennie. Elle brille tant derrière les platines que dans ses productions, s'étant immergée dans l'univers de la musique électronique dès son plus jeune âge. Fusionnant ces sons avec sa première passion, la guitare, Bonnie propose un mélange audacieux d'indie dance, de techno captivante et de dark disco.\n\nProductrice prolifique, elle a publié des titres sur des labels prestigieux comme Exploited, Phisica, Jeahmon!, et Lumière Noire, entre autres. En 2019, elle a fondé Critical Monday, où elle a sorti le single « Don't » qui a immédiatement rencontré le succès, soutenu par Dixon et Jennifer Cardini. Dédié à la fusion électrisante de la techno et du rock, Critical Monday se consacre définitivement à la musique de club, comme en témoignent les sorties de Curses, Rafael Cerato, Shubostar, Tony Y Not, Günce Aci et Mala Ika.",
     socialLinks: {
       instagram: "https://instagram.com/bonnie_spacey",
-      spotify: "https://open.spotify.com/artist",
+      spotify: "https://open.spotify.com/artist/",
+      website: "https://criticalmonday.com",
     },
   },
   {
     id: "dame-fleuraux",
     name: "Dame Fleuraux",
-    image: "/images/artists/damefleuraux.jpg",
+    image: [
+      "/images/artists/damefleuraux.jpg",
+    ],
     description: "Description de Dame Fleuraux.",
     socialLinks: {
       instagram: "https://instagram.com/dame_fleuraux",
@@ -183,9 +197,14 @@ export const dj: Artist[] = [
   {
     id: "elona",
     name: "Elona",
-    image: "/images/artists/elona.png",
+    image: [
+      "/images/artists/elona.png",
+      "/images/artists/elona2.jpg",
+      "/images/artists/elona3.png",
+      "/images/artists/elona4.png",
+    ],
     description:
-      "Curatrice, bassiste et productrice, sillonnent entre la house, break et electronica. Elle a notamment eu l’opportunité de mixer auprès de DJ reconnu·es tels que Dee Nasty, pionnier du hip-hop en France, Ian Pooley, figure emblématique de la house allemande, et Alpha Tracks, producteur influent de la scène techno contemporaine. Souhaitant avant tout offrir une expérience mouvementée et transcendante aux percussions entêtantes et frissonnantes, poussant les basses et jouant sur les contre-temps.",
+      "Curatrice, bassiste et productrice, sillonnent entre la house, break et electronica. Elle a notamment eu l'opportunité de mixer auprès de DJ reconnu·es tels que Dee Nasty, pionnier du hip-hop en France, Ian Pooley, figure emblématique de la house allemande, et Alpha Tracks, producteur influent de la scène techno contemporaine. Souhaitant avant tout offrir une expérience mouvementée et transcendante aux percussions entêtantes et frissonnantes, poussant les basses et jouant sur les contre-temps.",
     socialLinks: {
       instagram: "https://instagram.com/elona_dj",
       spotify: "https://open.spotify.com/artist",
@@ -194,7 +213,9 @@ export const dj: Artist[] = [
   {
     id: "khey-mysterio",
     name: "Khey Mysterio",
-    image: "/images/artists/kheymysterio.jpg",
+    image: [
+      "/images/artists/kheymysterio.jpg"
+    ],
     description: "Description de Khey Mysterio.",
     socialLinks: {
       instagram: "https://instagram.com/khey_mysterio",

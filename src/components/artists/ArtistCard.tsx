@@ -3,7 +3,7 @@ import { Music, Instagram, Globe, ChevronDown, ChevronUp } from "lucide-react";
 import { Artist } from "../../types";
 import GradientText from "../ui/GradientText";
 import Star from "../ui/Star";
-import LazyImage from "../ui/LazyImage";
+import ImageCarousel from "../ui/ImageCarousel";
 
 interface ArtistCardProps {
   artist: Artist;
@@ -12,14 +12,19 @@ interface ArtistCardProps {
 const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
   const [expanded, setExpanded] = useState(false);
 
+  // Gestion des images multiples ou simples
+  const artistImages = Array.isArray(artist.image)
+    ? artist.image
+    : [artist.image];
+
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden group relative h-full flex flex-col">
       {/* Hover effect avec le dégradé selon la charte graphique */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
 
       <div className="aspect-square relative overflow-hidden">
-        <LazyImage
-          src={artist.image}
+        <ImageCarousel
+          images={artistImages}
           alt={artist.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
