@@ -1,4 +1,4 @@
-import { Artist } from '../types';
+import { Artist } from "../types";
 
 export const artistServices = [
   {
@@ -9,9 +9,9 @@ export const artistServices = [
       "Édition des contrats de cession et des factures",
       "Gestion de la paie des artistes et techniciens",
       "Accompagnement à l'intermittence",
-      "Gestion des droits d'auteur"
+      "Gestion des droits d'auteur",
     ],
-    color: "administration"
+    color: "administration",
   },
   {
     title: "Production Musicale",
@@ -21,9 +21,9 @@ export const artistServices = [
       "Accompagnement artistique",
       "Coordination technique",
       "Production d'albums",
-      "Stratégie de sortie"
+      "Stratégie de sortie",
     ],
-    color: "production"
+    color: "production",
   },
   {
     title: "Production de Tournée",
@@ -33,9 +33,9 @@ export const artistServices = [
       "Élaboration des budgets de tournée",
       "Gestion de la logistique (transport, hébergement)",
       "Organisation des résidences",
-      "Recherche de financements"
+      "Recherche de financements",
     ],
-    color: "prestation"
+    color: "prestation",
   },
   {
     title: "Management Artistique",
@@ -45,10 +45,10 @@ export const artistServices = [
       "Gestion de l'image",
       "Relations publiques",
       "Coordination des tournées",
-      "Développement stratégique"
+      "Développement stratégique",
     ],
-    color: "management"
-  }
+    color: "management",
+  },
 ];
 
 export const djServices = [
@@ -60,9 +60,9 @@ export const djServices = [
       "Édition des contrats de cession et des factures",
       "Gestion de la paie des artistes et techniciens",
       "Accompagnement à l'intermittence",
-      "Gestion des droits d'auteur"
+      "Gestion des droits d'auteur",
     ],
-    color: "administration"
+    color: "administration",
   },
   {
     title: "Production Musicale",
@@ -72,9 +72,9 @@ export const djServices = [
       "Accompagnement artistique",
       "Coordination technique",
       "Production d'albums",
-      "Stratégie de sortie"
+      "Stratégie de sortie",
     ],
-    color: "production"
+    color: "production",
   },
   {
     title: "Management Artistique",
@@ -84,72 +84,78 @@ export const djServices = [
       "Gestion de l'image",
       "Relations publiques",
       "Coordination des tournées",
-      "Développement stratégique"
+      "Développement stratégique",
     ],
-    color: "management"
-  }
+    color: "management",
+  },
 ];
 
 export const artists: Artist[] = [
   {
     id: "kimia",
-    name: "Kimia",
+    name: "KIMIA",
     image: "/images/artists/kimia.png",
-    description: "La collaboration entre Kimia et le producteur Julien \"Noko\" Decoret mêle leurs univers, leurs deux animalités complémentaires teintées de différentes influences et chargées de poésie au service d'une musique afro électro, transe.",
+    description:
+      'La collaboration entre Kimia et le producteur Julien "Noko" Decoret mêle leurs univers, leurs deux animalités complémentaires teintées de différentes influences et chargées de poésie au service d\'une musique afro électro, transe.',
     socialLinks: {
       instagram: "https://instagram.com/official_kimia_music",
-      spotify: "https://open.spotify.com/artist"
-    }
+      spotify:
+        "https://open.spotify.com/intl-fr/artist/0pwRlHwZ0MnJOcwQcgJBkl?si=_T6KNJQISMSznKjaDdMCBA",
+    },
   },
   {
-    id: "altesse-ego",
-    name: "Altesse Ego",
+    id: "altess-ego",
+    name: "ALTESS EGO",
     image: "/images/artists/altesseego.png",
-    description: "Basses musclées et beats tranchants, textures électriques tressées d'électro et section vocale chatoyante fondent l'ADN d'Altesse Ego. On peut y déceler une dualité entre hip-hop railleur et RnB suave, entre sons organiques et ondes électroniques.",
+    description:
+      "Basses musclées et beats tranchants, textures électriques tressées d'électro et section vocale chatoyante fondent l'ADN d'Altess Ego. On peut y déceler une dualité entre hip-hop railleur et RnB suave, entre sons organiques et ondes électroniques.",
     socialLinks: {
       instagram: "https://instagram.com/altessego",
-      spotify: "https://open.spotify.com/artist"
-    }
+      spotify:
+        "https://open.spotify.com/intl-fr/artist/6stGd2BIhFkQMZElFbDX8Y?si=BCLqOdLaT1apmAIAoTuUAQ",
+    },
   },
   {
     id: "kairos",
-    name: "Kaîros",
+    name: "KAÎROS",
     image: "/images/artists/kairos.png",
-    description: "Le mot « Kaîros » vient du grecque ancien et signifie, le bon moment, le moment opportun. Le projet s'appuie sur des moments chorégraphiques, précis et esthétiques, une rencontre entre le cirque et la danse, plus précisément l'acrobatie, la danse contemporaine et le hip hop.",
+    description:
+      "Le mot « Kaîros » vient du grecque ancien et signifie, le bon moment, le moment opportun. Le projet s'appuie sur des moments chorégraphiques, précis et esthétiques, une rencontre entre le cirque et la danse, plus précisément l'acrobatie, la danse contemporaine et le hip hop.",
     socialLinks: {
-      instagram: "https://instagram.com/altessego",
-      spotify: "https://open.spotify.com/artist"
-    }
+      instagram: "https://www.instagram.com/compagnie_fika/",
+    },
   },
   {
     id: "melanie",
     name: "MELANIE LESAGE",
     image: "/images/artists/melanie.jpg",
-    description: "Mélanie Lesage vous embarque sur un voilier le long des côtes françaises et vous invite dans l’intimité de sa cabine... Réchauffées par le timbre solaire de Mélanie, les chansons de ce jeune trio sont simples et légères, accompagnées par les notes d’un Rhodes, d’un Lapsteel et d’une Contrebasse. Laissez-vous happer par cet univers poétique et plongez la tête la première dans ce cocon Pop-Folk pour un moment hors du temps ! Vous y croiserez probablement Pomme, First Aid Kit ou Norah Jones.",
+    description:
+      "Mélanie Lesage vous embarque sur un voilier le long des côtes françaises et vous invite dans l'intimité de sa cabine... Réchauffées par le timbre solaire de Mélanie, les chansons de ce jeune trio sont simples et légères, accompagnées par les notes d'un Rhodes, d'un Lapsteel et d'une Contrebasse. Laissez-vous happer par cet univers poétique et plongez la tête la première dans ce cocon Pop-Folk pour un moment hors du temps ! Vous y croiserez probablement Pomme, First Aid Kit ou Norah Jones.",
     socialLinks: {
-      instagram: "https://instagram.com/forro_dalua",
-      spotify: "https://open.spotify.com/artist"
-    }
+      instagram: "https://www.instagram.com/melanielesage.musique/",
+      spotify:
+        "https://open.spotify.com/intl-fr/artist/0leE4KQwJFxSkCDVrKEyDU?si=t4DQ8MXpRtuh3NVDSrwHNw",
+    },
   },
   {
     id: "cie-del-caravaggio",
     name: "CIE DEL CARAVAGGIO",
     image: "/images/artists/cie.jpg",
-    description: "« Abel » est le making of d'une pièce de théâtre, où ce qui est joué masque la véritable histoire. La comédienne, la seule à rester, déçue par le rôle attribué et les promesses non tenues, veut abandonner le projet. Le metteur en scène va tout mettre en œuvre pour ne pas la laisser partir. Entre débats et répétitions, il cherche la bonne fin, mais chaque scène est le déclencheur des nouvelles histoires plein des possibilités et problèmes. Seront-ils combien sur scène au salut final ?",
+    description:
+      "« Abel » est le making of d'une pièce de théâtre, où ce qui est joué masque la véritable histoire. La comédienne, la seule à rester, déçue par le rôle attribué et les promesses non tenues, veut abandonner le projet. Le metteur en scène va tout mettre en œuvre pour ne pas la laisser partir. Entre débats et répétitions, il cherche la bonne fin, mais chaque scène est le déclencheur des nouvelles histoires plein des possibilités et problèmes. Seront-ils combien sur scène au salut final ?",
     socialLinks: {
-      instagram: "https://instagram.com/forro_dalua",
-      spotify: "https://open.spotify.com/artist"
-    }
+      instagram: "https://www.instagram.com/del_caravaggio/",
+    },
   },
   {
     id: "forro-da-lua",
-    name: "Forró Da Lua",
+    name: "FORRÓ DA LUA",
     image: "/images/artists/forrodalua.png",
-    description: "Forró Da Lua c'est un bal en plein cœur, un hymne à la joie, un hymne à la vie. Au son des voix, de l'accordéon, du saxophone et de la zabumba, laissez-vous danser, semelles au plancher et tête dans les étoiles : le bonheur est juste là... Só alegria !",
+    description:
+      "Forró Da Lua c'est un bal en plein cœur, un hymne à la joie, un hymne à la vie. Au son des voix, de l'accordéon, du saxophone et de la zabumba, laissez-vous danser, semelles au plancher et tête dans les étoiles : le bonheur est juste là... Só alegria !",
     socialLinks: {
       instagram: "https://instagram.com/forro_dalua",
-      spotify: "https://open.spotify.com/artist"
-    }
+    },
   },
 ];
 
@@ -161,8 +167,8 @@ export const dj: Artist[] = [
     description: "Description de Bonnie Spacey.",
     socialLinks: {
       instagram: "https://instagram.com/bonnie_spacey",
-      spotify: "https://open.spotify.com/artist"
-    }
+      spotify: "https://open.spotify.com/artist",
+    },
   },
   {
     id: "dame-fleuraux",
@@ -171,28 +177,28 @@ export const dj: Artist[] = [
     description: "Description de Dame Fleuraux.",
     socialLinks: {
       instagram: "https://instagram.com/dame_fleuraux",
-      spotify: "https://open.spotify.com/artist"
-    }
+      spotify: "https://open.spotify.com/artist",
+    },
   },
   {
     id: "elona",
     name: "Elona",
     image: "/images/artists/elona.png",
-    description: "Description d'Elona.",
+    description: "Curatrice, bassiste et productrice, sillonnent entre la house, break et electronica. Elle a notamment eu l’opportunité de mixer auprès de DJ reconnu·es tels que Dee Nasty, pionnier du hip-hop en France, Ian Pooley, figure emblématique de la house allemande, et Alpha Tracks, producteur influent de la scène techno contemporaine. Souhaitant avant tout offrir une expérience mouvementée et transcendante aux percussions entêtantes et frissonnantes, poussant les basses et jouant sur les contre-temps.",
     socialLinks: {
       instagram: "https://instagram.com/elona_dj",
-      spotify: "https://open.spotify.com/artist"
-    }
+      spotify: "https://open.spotify.com/artist",
+    },
   },
   {
     id: "khey-mysterio",
     name: "Khey Mysterio",
-    image: "/images/artists/kheymysterio.png",
+    image: "/images/artists/kheymysterio.jpg",
     description: "Description de Khey Mysterio.",
     socialLinks: {
       instagram: "https://instagram.com/khey_mysterio",
-      spotify: "https://open.spotify.com/artist"
-    }
+      spotify: "https://open.spotify.com/artist",
+    },
   },
   {
     id: "marie-prude",
@@ -201,7 +207,7 @@ export const dj: Artist[] = [
     description: "Description de Marie Prude.",
     socialLinks: {
       instagram: "https://instagram.com/marie_prude",
-      spotify: "https://open.spotify.com/artist"
-    }
-  }
+      spotify: "https://open.spotify.com/artist",
+    },
+  },
 ];

@@ -48,7 +48,7 @@ const Contact = () => {
   return (
     <div>
       <ParallaxBanner
-        image="https://images.unsplash.com/photo-1508997449629-303059a039c0?w=1600&auto=format&fit=crop&q=80"
+        image="/images/photo3.jpg"
         height="45vh"
         className="mt-0"
       >

@@ -48,12 +48,22 @@ const TeamMember: React.FC<TeamMemberProps> = ({
         </div>
       </div>
       <div className="p-6">
-        <GradientText as="h3" gradient={department} className="text-2xl font-bold mb-2">
+        <GradientText
+          as="h3"
+          gradient={department}
+          className="text-2xl font-bold mb-2"
+        >
           {name}
         </GradientText>
-        <p className={`text-[${departmentColor}] mb-4 uppercase tracking-wider text-sm`}>{role}</p>
-        <p className="text-gray-600 mb-6">{description}</p>
-        
+        <p
+          className={`text-[${departmentColor}] mb-4 uppercase tracking-wider text-sm`}
+        >
+          {role}
+        </p>
+        <div className="text-gray-600 mb-6 whitespace-pre-line">
+          {description}
+        </div>
+
         {socialLinks && (
           <div className="flex space-x-4">
             {socialLinks.instagram && (

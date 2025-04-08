@@ -1,20 +1,20 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import Section from '../components/ui/Section';
-import ArtistCard from '../components/artists/ArtistCard';
-import { artists, artistServices } from '../data/artists';
-import GradientText from '../components/ui/GradientText';
-import Star from '../components/ui/Star';
-import { typography } from '../utils/theme';
-import ParallaxBanner from '../components/ui/ParallaxBanner';
-import AnimatedGradientText from '../components/ui/AnimatedGradientText';
-import ServiceCard from '../components/services/ServiceCard';
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import Section from "../components/ui/Section";
+import ArtistCard from "../components/artists/ArtistCard";
+import { artists, artistServices } from "../data/artists";
+import GradientText from "../components/ui/GradientText";
+import Star from "../components/ui/Star";
+import { typography } from "../utils/theme";
+import ParallaxBanner from "../components/ui/ParallaxBanner";
+import AnimatedGradientText from "../components/ui/AnimatedGradientText";
+import ServiceCard from "../components/services/ServiceCard";
 
 const Artists = () => {
   const [artistsRef, artistsInView] = useInView({
     triggerOnce: true,
     threshold: 0.05,
-    rootMargin: '0px 0px -20% 0px'  // Ceci déclenchera l'animation encore plus tôt
+    rootMargin: "0px 0px -20% 0px", // Ceci déclenchera l'animation encore plus tôt
   });
 
   return (
@@ -26,7 +26,8 @@ const Artists = () => {
       >
         <div className="text-center">
           <AnimatedGradientText
-            as="h2" gradient="primary"
+            as="h2"
+            gradient="primary"
             className="text-4xl md:text-6xl font-bold mb-4"
             speed="medium"
           >
@@ -43,9 +44,10 @@ const Artists = () => {
         </div>
       </ParallaxBanner>
       <Section>
-
-
-        <div className="grid md:grid-cols-4 gap-8 mb-20" ref={artistsRef}>
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16"
+          ref={artistsRef}
+        >
           {artistServices.map((service, index) => (
             <motion.div
               key={index}
@@ -57,14 +59,19 @@ const Artists = () => {
               <ServiceCard
                 key={index}
                 {...service}
-                color={service.color as "production" | "administration" | "management" | "prestation"}
+                color={
+                  service.color as
+                    | "production"
+                    | "administration"
+                    | "management"
+                    | "prestation"
+                }
               />
             </motion.div>
           ))}
         </div>
 
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 h-full">
           {artists.map((artist, index) => (
             <motion.div
               key={artist.id}
@@ -72,6 +79,7 @@ const Artists = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-25%" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="h-full"
             >
               <ArtistCard artist={artist} />
             </motion.div>
@@ -83,14 +91,19 @@ const Artists = () => {
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex justify-center items-center gap-2 mb-6">
             <Star className="text-[#8C52FF]" size="sm" />
-            <GradientText as="h2" gradient="administration" className={typography.heading.h2 + " mb-6"}>
-              Rejoignez Notre Collectif
+            <GradientText
+              as="h2"
+              gradient="administration"
+              className={typography.heading.h2 + " mb-6"}
+            >
+              REJOIGNEZ-NOUS!
             </GradientText>
             <Star className="text-[#8C52FF]" size="sm" />
           </div>
           <p className="text-gray-600 mb-8">
-            Vous êtes un artiste et souhaitez collaborer avec nous ?
-            Nous sommes toujours à la recherche de nouveaux talents pour enrichir notre communauté.
+            Vous êtes un artiste et souhaitez collaborer avec nous ? Nous sommes
+            toujours à la recherche de nouveaux talents pour enrichir notre
+            communauté.
           </p>
           <motion.a
             href="/contact"
