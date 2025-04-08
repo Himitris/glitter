@@ -1,2 +1,3 @@
-section "Prochain evenement" page accueil, par quoi remplacer ?
-link spotify et insta artiste + dj
+
+link spotify et insta dj
+deux boutons contact page dj ?
