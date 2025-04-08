@@ -136,53 +136,7 @@ const DJs = () => {
         )}
       </Section>
 
-      <Section className="bg-gray-50">
-        <div className="max-w-3xl mx-auto text-center">
-          <GradientText
-            as="h2"
-            gradient="production"
-            className={typography.heading.h2 + " mb-6"}
-          >
-            Vous cherchez un DJ pour votre événement ?
-          </GradientText>
-          <p className="text-gray-600 mb-8">
-            Glitter Productions vous propose des DJs talentueux pour tous types
-            d'événements : soirées privées, mariages, festivals, événements
-            d'entreprise...
-          </p>
-          <div className="grid md:grid-cols-3 gap-8 mb-10">
-            <div className="bg-white p-6 rounded-xl border border-gray-200">
-              <Music className="w-10 h-10 text-[#8C52FF] mb-4 mx-auto" />
-              <h3 className="text-lg font-bold mb-2">Style varié</h3>
-              <p className="text-gray-600 text-sm">
-                Tous genres musicaux selon vos préférences
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-xl border border-gray-200">
-              <Disc className="w-10 h-10 text-[#8C52FF] mb-4 mx-auto" />
-              <h3 className="text-lg font-bold mb-2">Équipement pro</h3>
-              <p className="text-gray-600 text-sm">
-                Matériel de sonorisation haut de gamme
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-xl border border-gray-200">
-              <MusicIcon className="w-10 h-10 text-[#8C52FF] mb-4 mx-auto" />
-              <h3 className="text-lg font-bold mb-2">Expérience</h3>
-              <p className="text-gray-600 text-sm">
-                DJ confirmés avec des références solides
-              </p>
-            </div>
-          </div>
-          <motion.a
-            href="/contact"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="inline-block bg-gradient-to-r from-[#8C52FF] to-[#FF4D8F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity uppercase tracking-wider text-sm"
-          >
-            Contact
-          </motion.a>
-        </div>
-      </Section>
+    
 
       <Section className="bg-white">
         <div className="max-w-3xl mx-auto text-center">

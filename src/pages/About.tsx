@@ -17,7 +17,6 @@ const About = () => {
         description:
           "Son domaine c'est la paie!\n\nMais pas que! Chloé gère différents aspects dans le domaine du spectacle vivant, tels que la coordination des projets, la gestion des contrats, la facturation.\n\nChloé possède également de nombreuses expériences sur des événements artistiques comme responsable bénévoles, directrice de production, chargée de recrutement.",
         socialLinks: {
-          instagram: "https://instagram.com",
         },
         department: "administration" as "administration", 
       },
@@ -28,7 +27,6 @@ const About = () => {
         description:
           "Son truc, c'est la prod!\n\nMais Matisse a aussi fait ses preuves en administration et management de projets. Elle a été régisseuse de tournées pour différents groupes de musique.\n\nMatisse possède aussi des compétences en régie d'événements suite à ses expériences de directrice de production adjointe, régisseuse artistes et logistiques!",
         socialLinks: {
-          instagram: "https://instagram.com",
         },
         department: "production" as "production", 
       },
@@ -37,7 +35,7 @@ const About = () => {
   return (
     <div>
       <ParallaxBanner
-        image="/images/photo1.jpg"
+        image="/images/background/photo1.jpg"
         height="45vh"
         className="mt-0"
       >
