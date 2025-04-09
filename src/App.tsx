@@ -81,7 +81,6 @@ const AnimatedRoutes = () => {
             </PageTransition>
           }
         />
-        {/* Nouvelle route pour la page de succès */}
         <Route
           path="/success"
           element={
