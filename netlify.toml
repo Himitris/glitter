@@ -2,6 +2,9 @@
   command = "vite build"
   publish = "dist"
 
+[build.environment]
+  NODE_VERSION = "20"
+
 # Configuration des formulaires
 [build.processing.html]
   pretty_urls = true
