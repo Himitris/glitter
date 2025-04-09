@@ -24,6 +24,7 @@ import Artists from "./pages/Artists";
 import DJs from "./pages/DJS";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import Success from "./pages/Success"; // Importation de la page Success
 
 // AnimatedRoutes component pour permettre les transitions de page
 const AnimatedRoutes = () => {
@@ -77,6 +78,15 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <Contact />
+            </PageTransition>
+          }
+        />
+        {/* Nouvelle route pour la page de succès */}
+        <Route
+          path="/success"
+          element={
+            <PageTransition>
+              <Success />
             </PageTransition>
           }
         />
