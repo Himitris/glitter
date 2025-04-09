@@ -1,0 +1,9 @@
+# robots.txt for Glitter Production
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://glitter-production.com/sitemap.xml
+
+# Politique de mise en cache
+Crawl-delay: 10

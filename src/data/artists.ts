@@ -193,8 +193,8 @@ export const dj: Artist[] = [
     id: "elona",
     name: "Elona",
     image: [
-      "/images/artists/elona.png",
       "/images/artists/elona2.jpg",
+      "/images/artists/elona.png",
       "/images/artists/elona3.png",
       "/images/artists/elona4.png",
     ],

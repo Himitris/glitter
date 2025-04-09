@@ -4,12 +4,13 @@ import ArtistCard from "../components/artists/ArtistCard";
 import { useInView } from "react-intersection-observer";
 import GradientText from "../components/ui/GradientText";
 import Star from "../components/ui/Star";
-import { Disc, Music, MusicIcon } from "lucide-react";
 import { dj } from "../data/artists";
 import { typography } from "../utils/theme";
 import ParallaxBanner from "../components/ui/ParallaxBanner";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import ServiceCard from "../components/services/ServiceCard";
+import Seo from "../components/seo/Seo";
+import { seoConfig } from "../config/seo";
 
 // Services mis à jour pour les DJs
 const djServicesUpdated = [
@@ -57,116 +58,124 @@ const DJs = () => {
     threshold: 0.05,
     rootMargin: "0px 0px -20% 0px", // Ceci déclenchera l'animation encore plus tôt
   });
+  const { title, description, keywords, image, canonical } = seoConfig.djs;
 
   // Dans le futur, implémenter la fonctionnalité de filtrage réelle
   const filteredDJs = dj;
 
   return (
-    <div>
-      <ParallaxBanner
-        image="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1600&auto=format&fit=crop&q=80"
-        height="45vh"
-        className="mt-0"
-      >
-        <div className="text-center">
-          <AnimatedGradientText
-            as="h2"
-            gradient="primary"
-            className="text-4xl md:text-6xl font-bold mb-4"
-            speed="medium"
-          >
-            DJs & Producteurs
-          </AnimatedGradientText>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-200"
-          >
-            Découvrez les DJs qui nous font confiance
-          </motion.p>
-        </div>
-      </ParallaxBanner>
-
-      <Section>
-        <div className="grid md:grid-cols-3 gap-8 mb-20" ref={artistsRef}>
-          {djServicesUpdated.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={artistsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex"
-            >
-              <ServiceCard
-                key={index}
-                {...service}
-                color={
-                  service.color as
-                    | "production"
-                    | "administration"
-                    | "management"
-                    | "prestation"
-                }
-              />
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredDJs.map((dj, index) => (
-            <motion.div
-              key={dj.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <ArtistCard artist={dj} />
-            </motion.div>
-          ))}
-        </div>
-
-        {filteredDJs.length === 0 && (
-          <div className="text-center text-gray-500 py-12">
-            <p className="mb-4">Aucun DJ trouvé dans cette catégorie.</p>
-            <Star className="text-[#8C52FF] mx-auto" size="md" />
-          </div>
-        )}
-      </Section>
-
-    
-
-      <Section className="bg-white">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="flex justify-center items-center gap-2 mb-6">
-            <Star className="text-[#8C52FF]" size="sm" />
-            <GradientText
+    <>
+      <Seo
+        title={title}
+        description={description}
+        keywords={keywords}
+        image={image}
+        canonical={canonical}
+      />
+      <div>
+        <ParallaxBanner
+          image="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1600&auto=format&fit=crop&q=80"
+          height="45vh"
+          className="mt-0"
+        >
+          <div className="text-center">
+            <AnimatedGradientText
               as="h2"
-              gradient="administration"
-              className={typography.heading.h2 + " mb-6"}
+              gradient="primary"
+              className="text-4xl md:text-6xl font-bold mb-4"
+              speed="medium"
             >
-              REJOIGNEZ-NOUS!
-            </GradientText>
-            <Star className="text-[#8C52FF]" size="sm" />
+              DJs & Producteurs
+            </AnimatedGradientText>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-xl md:text-2xl text-gray-200"
+            >
+              Découvrez les DJs qui nous font confiance
+            </motion.p>
           </div>
-          <p className="text-gray-600 mb-8">
-            Vous êtes un artiste et souhaitez collaborer avec nous ? Nous sommes
-            toujours à la recherche de nouveaux talents pour enrichir notre
-            communauté.
-          </p>
-          <motion.a
-            href="/contact"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="inline-block bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
-          >
-            Contactez-nous
-          </motion.a>
-        </div>
-      </Section>
-    </div>
+        </ParallaxBanner>
+
+        <Section>
+          <div className="grid md:grid-cols-3 gap-8 mb-20" ref={artistsRef}>
+            {djServicesUpdated.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={artistsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex"
+              >
+                <ServiceCard
+                  key={index}
+                  {...service}
+                  color={
+                    service.color as
+                      | "production"
+                      | "administration"
+                      | "management"
+                      | "prestation"
+                  }
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredDJs.map((dj, index) => (
+              <motion.div
+                key={dj.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <ArtistCard artist={dj} />
+              </motion.div>
+            ))}
+          </div>
+
+          {filteredDJs.length === 0 && (
+            <div className="text-center text-gray-500 py-12">
+              <p className="mb-4">Aucun DJ trouvé dans cette catégorie.</p>
+              <Star className="text-[#8C52FF] mx-auto" size="md" />
+            </div>
+          )}
+        </Section>
+
+        <Section className="bg-white">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="flex justify-center items-center gap-2 mb-6">
+              <Star className="text-[#8C52FF]" size="sm" />
+              <GradientText
+                as="h2"
+                gradient="administration"
+                className={typography.heading.h2 + " mb-6"}
+              >
+                REJOIGNEZ-NOUS!
+              </GradientText>
+              <Star className="text-[#8C52FF]" size="sm" />
+            </div>
+            <p className="text-gray-600 mb-8">
+              Vous êtes un artiste et souhaitez collaborer avec nous ? Nous
+              sommes toujours à la recherche de nouveaux talents pour enrichir
+              notre communauté.
+            </p>
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="inline-block bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+            >
+              Contactez-nous
+            </motion.a>
+          </div>
+        </Section>
+      </div>
+    </>
   );
 };
 
