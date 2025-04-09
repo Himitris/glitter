@@ -46,17 +46,26 @@ const Contact = () => {
     if (validateForm(validationRules)) {
       setIsSubmitting(true);
 
-      // Le formulaire sera géré par Netlify Forms
-      // Nous n'avons pas besoin de fetch ici car Netlify intercepte la soumission
+      // Créer un objet FormData à partir du formulaire
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
 
-      // On ajoute un petit délai pour simuler le chargement et améliorer l'UX
-      setTimeout(() => {
-        setIsSubmitting(false);
-        showToast("Votre message a été envoyé avec succès!", "success");
-
-        // Le formulaire est maintenant soumis, Netlify s'occupera de l'envoyer par email
-        setFormSubmitted(true);
-      }, 1000);
+      // Convertir en URLSearchParams pour l'envoyer correctement
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      })
+        .then(() => {
+          setIsSubmitting(false);
+          showToast("Votre message a été envoyé avec succès!", "success");
+          setFormSubmitted(true);
+        })
+        .catch((error) => {
+          setIsSubmitting(false);
+          showToast("Une erreur s'est produite lors de l'envoi", "error");
+          console.error(error);
+        });
     }
   };
 
