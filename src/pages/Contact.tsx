@@ -50,16 +50,29 @@ const Contact = () => {
       const form = e.target as HTMLFormElement;
       const formData = new FormData(form);
 
-      // Convertir en URLSearchParams pour l'envoyer correctement
-      fetch("/", {
+      // Envoyer les données à Formspree
+      fetch("https://formspree.io/f/mvgkdzow", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as any).toString(),
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
       })
-        .then(() => {
-          setIsSubmitting(false);
-          showToast("Votre message a été envoyé avec succès!", "success");
-          setFormSubmitted(true);
+        .then((response) => {
+          if (response.ok) {
+            setIsSubmitting(false);
+            showToast("Votre message a été envoyé avec succès!", "success");
+            setFormSubmitted(true);
+            setValues({ name: "", email: "", message: "" });
+          } else {
+            response.json().then((data) => {
+              setIsSubmitting(false);
+              showToast(
+                data.error || "Une erreur s'est produite lors de l'envoi",
+                "error"
+              );
+            });
+          }
         })
         .catch((error) => {
           setIsSubmitting(false);
@@ -172,21 +185,8 @@ const Contact = () => {
                   <form
                     className="space-y-6"
                     onSubmit={handleSubmit}
-                    name="contact"
                     method="POST"
-                    data-netlify="true"
-                    netlify-honeypot="bot-field"
-                    action="/success"
                   >
-                    {/* Champs cachés pour Netlify Forms */}
-                    <input type="hidden" name="form-name" value="contact" />
-                    <div className="hidden">
-                      <label>
-                        Ne pas remplir si vous êtes humain:{" "}
-                        <input name="bot-field" />
-                      </label>
-                    </div>
-
                     <div className="space-y-2">
                       <label htmlFor="name" className="block text-gray-700">
                         Nom
