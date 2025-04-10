@@ -41,7 +41,7 @@ const Services = () => {
         name="Glitter Production - Services"
         description="Services de production, d'administration et de régie pour tous types d'événements artistiques."
         url="https://glitter-production.com/services"
-        image="/images/background/photo1.jpg"
+        image="/images/background/photo1.webp"
       />
       <div>
         <ParallaxBanner

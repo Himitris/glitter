@@ -95,8 +95,8 @@ export const artists: Artist[] = [
     id: "kimia",
     name: "KIMIA",
     image: [
-      "/images/artists/kimia.png",
-      "/images/artists/kimia2.jpg"
+      "/images/artists/kimia.webp",
+      "/images/artists/kimia2.webp"
     ],
     description:
       'La collaboration entre Kimia et le producteur Julien "Noko" Decoret mêle leurs univers, leurs deux animalités complémentaires teintées de différentes influences et chargées de poésie au service d\'une musique afro électro, transe.',
@@ -110,7 +110,7 @@ export const artists: Artist[] = [
     id: "altess-ego",
     name: "ALTESS EGO",
     image: [
-      "/images/artists/altesseego.png",
+      "/images/artists/altesseego.webp",
     ],
     description:
       "Basses musclées et beats tranchants, textures électriques tressées d'électro et section vocale chatoyante fondent l'ADN d'Altess Ego. On peut y déceler une dualité entre hip-hop railleur et RnB suave, entre sons organiques et ondes électroniques.",
@@ -123,7 +123,7 @@ export const artists: Artist[] = [
   {
     id: "kairos",
     name: "KAÎROS",
-    image: "/images/artists/kairos.png",
+    image: "/images/artists/kairos.webp",
     description:
       "Le mot « Kaîros » vient du grecque ancien et signifie, le bon moment, le moment opportun. Le projet s'appuie sur des moments chorégraphiques, précis et esthétiques, une rencontre entre le cirque et la danse, plus précisément l'acrobatie, la danse contemporaine et le hip hop.",
     socialLinks: {
@@ -133,7 +133,7 @@ export const artists: Artist[] = [
   {
     id: "melanie",
     name: "MELANIE LESAGE",
-    image: "/images/artists/melanie.jpg",
+    image: "/images/artists/melanie.webp",
     description:
       "Mélanie Lesage vous embarque sur un voilier le long des côtes françaises et vous invite dans l'intimité de sa cabine... Réchauffées par le timbre solaire de Mélanie, les chansons de ce jeune trio sont simples et légères, accompagnées par les notes d'un Rhodes, d'un Lapsteel et d'une Contrebasse. Laissez-vous happer par cet univers poétique et plongez la tête la première dans ce cocon Pop-Folk pour un moment hors du temps ! Vous y croiserez probablement Pomme, First Aid Kit ou Norah Jones.",
     socialLinks: {
@@ -145,7 +145,7 @@ export const artists: Artist[] = [
   {
     id: "cie-del-caravaggio",
     name: "CIE DEL CARAVAGGIO",
-    image: "/images/artists/cie.jpg",
+    image: "/images/artists/cie.webp",
     description:
       "« Abel » est le making of d'une pièce de théâtre, où ce qui est joué masque la véritable histoire. La comédienne, la seule à rester, déçue par le rôle attribué et les promesses non tenues, veut abandonner le projet. Le metteur en scène va tout mettre en œuvre pour ne pas la laisser partir. Entre débats et répétitions, il cherche la bonne fin, mais chaque scène est le déclencheur des nouvelles histoires plein des possibilités et problèmes. Seront-ils combien sur scène au salut final ?",
     socialLinks: {
@@ -156,8 +156,8 @@ export const artists: Artist[] = [
     id: "forro-da-lua",
     name: "FORRÓ DA LUA",
     image: [
-      "/images/artists/forrodalua.jpg",
-      "/images/artists/forrodalua2.png",
+      "/images/artists/forrodalua.webp",
+      "/images/artists/forrodalua2.webp",
     ],
     description:
       "Forró Da Lua c'est un bal en plein cœur, un hymne à la joie, un hymne à la vie. Au son des voix, de l'accordéon, du saxophone et de la zabumba, laissez-vous danser, semelles au plancher et tête dans les étoiles : le bonheur est juste là... Só alegria !",
@@ -171,7 +171,7 @@ export const dj: Artist[] = [
   {
     id: "bonnie-spacey",
     name: "Bonnie Spacey",
-    image: ["/images/artists/bonniespacey.jpg"],
+    image: ["/images/artists/bonniespacey.webp"],
     description:
       "La DJ et productrice berlinoise Bonnie Spacey enflamme les dancefloors à travers le monde depuis près d'une décennie. Elle brille tant derrière les platines que dans ses productions, s'étant immergée dans l'univers de la musique électronique dès son plus jeune âge. Fusionnant ces sons avec sa première passion, la guitare, Bonnie propose un mélange audacieux d'indie dance, de techno captivante et de dark disco.\n\nProductrice prolifique, elle a publié des titres sur des labels prestigieux comme Exploited, Phisica, Jeahmon!, et Lumière Noire, entre autres. En 2019, elle a fondé Critical Monday, où elle a sorti le single « Don't » qui a immédiatement rencontré le succès, soutenu par Dixon et Jennifer Cardini. Dédié à la fusion électrisante de la techno et du rock, Critical Monday se consacre définitivement à la musique de club, comme en témoignent les sorties de Curses, Rafael Cerato, Shubostar, Tony Y Not, Günce Aci et Mala Ika.",
     socialLinks: {
@@ -183,7 +183,7 @@ export const dj: Artist[] = [
   {
     id: "dame-fleuraux",
     name: "Dame Fleuraux",
-    image: ["/images/artists/damefleuraux.jpg"],
+    image: ["/images/artists/damefleuraux.webp"],
     description: "Description de Dame Fleuraux.",
     socialLinks: {
       instagram: "https://www.instagram.com/dame_fleuraux/",
@@ -193,10 +193,10 @@ export const dj: Artist[] = [
     id: "elona",
     name: "Elona",
     image: [
-      "/images/artists/elona2.jpg",
-      "/images/artists/elona.png",
-      "/images/artists/elona3.png",
-      "/images/artists/elona4.png",
+      "/images/artists/elona2.webp",
+      "/images/artists/elona.webp",
+      "/images/artists/elona3.webp",
+      "/images/artists/elona4.webp",
     ],
     description:
       "Curatrice, bassiste et productrice, sillonnent entre la house, break et electronica. Elle a notamment eu l'opportunité de mixer auprès de DJ reconnu·es tels que Dee Nasty, pionnier du hip-hop en France, Ian Pooley, figure emblématique de la house allemande, et Alpha Tracks, producteur influent de la scène techno contemporaine. Souhaitant avant tout offrir une expérience mouvementée et transcendante aux percussions entêtantes et frissonnantes, poussant les basses et jouant sur les contre-temps.",
@@ -205,7 +205,7 @@ export const dj: Artist[] = [
   {
     id: "khey-mysterio",
     name: "Khey Mysterio",
-    image: ["/images/artists/kheymysterio.jpg"],
+    image: ["/images/artists/kheymysterio.webp"],
     description: "Description de Khey Mysterio.",
     socialLinks: {
       instagram: "https://www.instagram.com/william_khey.mysterio/",
@@ -215,7 +215,7 @@ export const dj: Artist[] = [
   {
     id: "marie-prude",
     name: "Marie Prude",
-    image: "/images/artists/marieprude.png",
+    image: "/images/artists/marieprude.webp",
     description: "Description de Marie Prude.",
     socialLinks: {
       instagram: "https://www.instagram.com/marie_prude_music/",

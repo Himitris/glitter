@@ -17,7 +17,7 @@ const Success = () => {
       />
       <div>
         <ParallaxBanner
-          image="/images/photo3.jpg"
+          image="/images/photo3.webp"
           height="40vh"
           className="mt-0"
         >

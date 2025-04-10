@@ -93,7 +93,7 @@ const Contact = () => {
       />
       <div>
         <ParallaxBanner
-          image="/images/background/photo3.jpg"
+          image="/images/background/photo3.webp"
           height="45vh"
           className="mt-0"
         >

@@ -14,7 +14,7 @@ export const seoConfig = {
       "Tarn",
       "production musicale",
     ],
-    image: "/images/background/photo1.jpg",
+    image: "/images/background/photo1.webp",
     canonical: "/",
   },
   about: {
@@ -30,7 +30,7 @@ export const seoConfig = {
       "Landes",
       "Tarn",
     ],
-    image: "/images/background/photo1.jpg",
+    image: "/images/background/photo1.webp",
     canonical: "/about",
   },
   artists: {
@@ -98,7 +98,7 @@ export const seoConfig = {
       "production musicale Landes",
       "production musicale Tarn",
     ],
-    image: "/images/background/photo3.jpg",
+    image: "/images/background/photo3.webp",
     canonical: "/contact",
   },
 };

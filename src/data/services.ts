@@ -109,7 +109,7 @@ export const pastExperiences = [
     description:
       "Festival mêlant musique et sensibilisation à l'environnement marin, célébrant la culture surf et la préservation des océans.",
     services: ["Direction de production", "Régie cashless"],
-    logo: "/images/exp/ocean-fest.jpg",
+    logo: "/images/exp/ocean-fest.webp",
   },
   {
     title: "Little Festival",
