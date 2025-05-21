@@ -1,16 +1,19 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Section from "../components/ui/Section";
 import ArtistCard from "../components/artists/ArtistCard";
 import { useInView } from "react-intersection-observer";
 import GradientText from "../components/ui/GradientText";
 import Star from "../components/ui/Star";
-import { dj } from "../data/artists";
 import { typography } from "../utils/theme";
 import ParallaxBanner from "../components/ui/ParallaxBanner";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import ServiceCard from "../components/services/ServiceCard";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
+import { getAllDjs } from "../services/artistService";
+import { Artist } from "../types";
+import Loader from "../components/ui/Loader";
 
 // Services mis à jour pour les DJs
 const djServicesUpdated = [
@@ -56,12 +59,28 @@ const DJs = () => {
   const [artistsRef, artistsInView] = useInView({
     triggerOnce: true,
     threshold: 0.05,
-    rootMargin: "0px 0px -20% 0px", // Ceci déclenchera l'animation encore plus tôt
+    rootMargin: "0px 0px -20% 0px",
   });
-  const { title, description, keywords, image, canonical } = seoConfig.djs;
 
-  // Dans le futur, implémenter la fonctionnalité de filtrage réelle
-  const filteredDJs = dj;
+  const [djs, setDjs] = useState<Artist[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDjs = async () => {
+      try {
+        const data = await getAllDjs();
+        setDjs(data);
+      } catch (error) {
+        console.error("Erreur lors du chargement des DJs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDjs();
+  }, []);
+
+  const { title, description, keywords, image, canonical } = seoConfig.djs;
 
   return (
     <>
@@ -124,21 +143,27 @@ const DJs = () => {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredDJs.map((dj, index) => (
-              <motion.div
-                key={dj.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <ArtistCard artist={dj} />
-              </motion.div>
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex justify-center p-12">
+              <Loader size="lg" />
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {djs.map((dj, index) => (
+                <motion.div
+                  key={dj.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <ArtistCard artist={dj} />
+                </motion.div>
+              ))}
+            </div>
+          )}
 
-          {filteredDJs.length === 0 && (
+          {djs.length === 0 && !loading && (
             <div className="text-center text-gray-500 py-12">
               <p className="mb-4">Aucun DJ trouvé dans cette catégorie.</p>
               <Star className="text-[#8C52FF] mx-auto" size="md" />

@@ -1,24 +1,47 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Section from "../components/ui/Section";
 import ArtistCard from "../components/artists/ArtistCard";
-import { artists, artistServices } from "../data/artists";
+import { artistServices } from "../data/artists";
 import GradientText from "../components/ui/GradientText";
 import Star from "../components/ui/Star";
 import { typography } from "../utils/theme";
 import ParallaxBanner from "../components/ui/ParallaxBanner";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
-import ServiceCard from "../components/services/ServiceCard"; 
+import ServiceCard from "../components/services/ServiceCard";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
+import { getAllArtists } from "../services/artistService";
+import { Artist } from "../types";
+import Loader from "../components/ui/Loader";
 
 const Artists = () => {
   const [artistsRef, artistsInView] = useInView({
     triggerOnce: true,
     threshold: 0.05,
-    rootMargin: "0px 0px -20% 0px", // Ceci déclenchera l'animation encore plus tôt
+    rootMargin: "0px 0px -20% 0px",
   });
+
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchArtists = async () => {
+      try {
+        const data = await getAllArtists();
+        setArtists(data);
+      } catch (error) {
+        console.error("Erreur lors du chargement des artistes:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArtists();
+  }, []);
+
   const { title, description, keywords, image, canonical } = seoConfig.artists;
 
   return (
@@ -90,20 +113,26 @@ const Artists = () => {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 h-full">
-            {artists.map((artist, index) => (
-              <motion.div
-                key={artist.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-25%" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="h-full"
-              >
-                <ArtistCard artist={artist} />
-              </motion.div>
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex justify-center p-12">
+              <Loader size="lg" />
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 h-full">
+              {artists.map((artist, index) => (
+                <motion.div
+                  key={artist.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-25%" }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="h-full"
+                >
+                  <ArtistCard artist={artist} />
+                </motion.div>
+              ))}
+            </div>
+          )}
         </Section>
 
         <Section className="bg-gray-50">

@@ -171,7 +171,7 @@ export const dj: Artist[] = [
   {
     id: "bonnie-spacey",
     name: "Bonnie Spacey",
-    image: ["/images/artists/bonniespacey.webp"],
+    image: ["/images/djs/bonniespacey.webp"],
     description:
       "La DJ et productrice berlinoise Bonnie Spacey enflamme les dancefloors à travers le monde depuis près d'une décennie. Elle brille tant derrière les platines que dans ses productions, s'étant immergée dans l'univers de la musique électronique dès son plus jeune âge. Fusionnant ces sons avec sa première passion, la guitare, Bonnie propose un mélange audacieux d'indie dance, de techno captivante et de dark disco.\n\nProductrice prolifique, elle a publié des titres sur des labels prestigieux comme Exploited, Phisica, Jeahmon!, et Lumière Noire, entre autres. En 2019, elle a fondé Critical Monday, où elle a sorti le single « Don't » qui a immédiatement rencontré le succès, soutenu par Dixon et Jennifer Cardini. Dédié à la fusion électrisante de la techno et du rock, Critical Monday se consacre définitivement à la musique de club, comme en témoignent les sorties de Curses, Rafael Cerato, Shubostar, Tony Y Not, Günce Aci et Mala Ika.",
     socialLinks: {
@@ -183,7 +183,7 @@ export const dj: Artist[] = [
   {
     id: "dame-fleuraux",
     name: "Dame Fleuraux",
-    image: ["/images/artists/damefleuraux.webp"],
+    image: ["/images/djs/damefleuraux.webp"],
     description: "Description de Dame Fleuraux.",
     socialLinks: {
       instagram: "https://www.instagram.com/dame_fleuraux/",
@@ -193,10 +193,10 @@ export const dj: Artist[] = [
     id: "elona",
     name: "Elona",
     image: [
-      "/images/artists/elona2.webp",
-      "/images/artists/elona.webp",
-      "/images/artists/elona3.webp",
-      "/images/artists/elona4.webp",
+      "/images/djs/elona2.webp",
+      "/images/djs/elona.webp",
+      "/images/djs/elona3.webp",
+      "/images/djs/elona4.webp",
     ],
     description:
       "Curatrice, bassiste et productrice, sillonnent entre la house, break et electronica. Elle a notamment eu l'opportunité de mixer auprès de DJ reconnu·es tels que Dee Nasty, pionnier du hip-hop en France, Ian Pooley, figure emblématique de la house allemande, et Alpha Tracks, producteur influent de la scène techno contemporaine. Souhaitant avant tout offrir une expérience mouvementée et transcendante aux percussions entêtantes et frissonnantes, poussant les basses et jouant sur les contre-temps.",
@@ -205,7 +205,7 @@ export const dj: Artist[] = [
   {
     id: "khey-mysterio",
     name: "Khey Mysterio",
-    image: ["/images/artists/kheymysterio.webp"],
+    image: ["/images/djs/kheymysterio.webp"],
     description: "Description de Khey Mysterio.",
     socialLinks: {
       instagram: "https://www.instagram.com/william_khey.mysterio/",
@@ -215,7 +215,7 @@ export const dj: Artist[] = [
   {
     id: "marie-prude",
     name: "Marie Prude",
-    image: "/images/artists/marieprude.webp",
+    image: "/images/djs/marieprude.webp",
     description: "Description de Marie Prude.",
     socialLinks: {
       instagram: "https://www.instagram.com/marie_prude_music/",

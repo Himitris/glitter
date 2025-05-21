@@ -24,11 +24,18 @@ import Artists from "./pages/Artists";
 import DJs from "./pages/DJS";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
-import Success from "./pages/Success"; // Importation de la page Success
+import Success from "./pages/Success";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import AdminLogin from "./pages/AdminLogin";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
+import AdminDashboard from "./pages/AdminDashboard";
+import ArtistForm from "./pages/ArtistForm";
+import DeleteConfirmation from "./pages/DeleteConfirmation";
 
 // AnimatedRoutes component pour permettre les transitions de page
 const AnimatedRoutes = () => {
   const location = useLocation();
+  const { currentUser } = useAuth();
 
   return (
     <AnimatePresence mode="wait">
@@ -89,6 +96,89 @@ const AnimatedRoutes = () => {
             </PageTransition>
           }
         />
+        <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+        <Route
+          path="/admin/login"
+          element={
+            currentUser ? (
+              <Navigate to="/admin/dashboard" replace />
+            ) : (
+              <PageTransition>
+                <AdminLogin />
+              </PageTransition>
+            )
+          }
+        />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <AdminDashboard />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/artist/add"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <ArtistForm isEdit={false} type="artist" />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/artist/edit/:id"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <ArtistForm isEdit={true} type="artist" />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/dj/add"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <ArtistForm isEdit={false} type="dj" />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/dj/edit/:id"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <ArtistForm isEdit={true} type="dj" />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/artist/delete/:id"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <DeleteConfirmation type="artist" />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/dj/delete/:id"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <DeleteConfirmation type="dj" />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
@@ -100,18 +190,20 @@ function App() {
     <HelmetProvider>
       <ThemeProvider>
         <ToastProvider>
-          <Router>
-            <ScrollToTop />
-            <div className="min-h-screen bg-white text-gray-800">
-              <ScrollIndicator />
-              <Header />
-              <main className="pt-12 ">
-                <AnimatedRoutes />
-              </main>
-              <Footer />
-              <BackToTop />
-            </div>
-          </Router>
+          <AuthProvider>
+            <Router>
+              <ScrollToTop />
+              <div className="min-h-screen bg-white text-gray-800">
+                <ScrollIndicator />
+                <Header />
+                <main className="pt-12 ">
+                  <AnimatedRoutes />
+                </main>
+                <Footer />
+                <BackToTop />
+              </div>
+            </Router>
+          </AuthProvider>
         </ToastProvider>
       </ThemeProvider>
     </HelmetProvider>
