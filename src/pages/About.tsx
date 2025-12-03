@@ -65,7 +65,7 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-200"
+              className="text-xl md:text-2xl text-[#FFFFF6]"
             >
               Une structure dédiée à la production, l'administration et le
               management
@@ -76,22 +76,22 @@ const About = () => {
         <Section>
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center items-center gap-2 mb-6">
-              <Star className="text-[#FF4D8F]" size="sm" />
+              <Star className="text-[#EBABFF]" size="sm" />
               <AnimatedGradientText
                 as="h2"
                 className={`${typography.heading.h2}`}
               >
                 Notre Histoire
               </AnimatedGradientText>
-              <Star className="text-[#FF4D8F]" size="sm" />
+              <Star className="text-[#EBABFF]" size="sm" />
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="text-[#0B0B0B]/70 mb-8">
               Créée en 2024 par Chloé Jolly et Matisse Pellegrin, Glitter
               Productions est une structure dédiée à la production,
               l'administration et le management dans le domaine de la musique et
               du spectacle vivant, située entre les Landes et le Tarn.
             </p>
-            <p className="text-gray-600">
+            <p className="text-[#0B0B0B]/70">
               Forte de la passion et de l'expertise de ses fondatrices, Glitter
               Productions propose des services adaptés aux besoins des artistes
               et des événements artistiques en se positionnant comme un

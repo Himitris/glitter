@@ -63,17 +63,17 @@ const Services = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-200"
+              className="text-xl md:text-2xl text-[#FFFFF6]"
             >
               Des services adaptés aux besoins des artistes et des événements
             </motion.p>
           </div>
         </ParallaxBanner>
 
-        <Section className="bg-gray-50">
+        <Section className="bg-[#FFFFF6]">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <div className="flex justify-center items-center gap-2 mb-4">
-              <Star className="text-[#FFC74F]" size="sm" />
+              <Star className="text-[#FFFF73]" size="sm" />
               <GradientText
                 as="h2"
                 gradient="prestation"

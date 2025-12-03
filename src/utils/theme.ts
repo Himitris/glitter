@@ -1,48 +1,62 @@
-// Système de couleurs inspiré de la charte graphique Glitter Production
+// Système de couleurs - Charte graphique Glitter Production 2025
 export const colors = {
-  brand: {
-    purple: '#8C52FF',  // Violet - Production
-    pink: '#FF4D8F',    // Rose - Administration
-    orange: '#FF8C60',  // Orange - Management
-    yellow: '#FFC74F',  // Jaune - Prestation
+  // Couleurs primaires
+  primary: {
+    offWhite: '#FFFFF6',  // Off-White - Fond principal
+    offBlack: '#0B0B0B',  // Off-Black - Texte principal
   },
+  // Couleurs secondaires
+  brand: {
+    violet: '#775CFF',   // Violet - Production (RVB: 119/92/255)
+    rose: '#EBABFF',     // Rose - Administration (RVB: 235/171/255)
+    jaune: '#FFFF73',    // Jaune - Prestation (RVB: 255/255/115)
+    orange: '#FF7A42',   // Orange - Management (RVB: 255/122/66)
+  },
+  // Dégradés
   gradient: {
-    // Dégradé principal à quatre couleurs (comme dans l'image 1)
-    primary: 'from-[#8C52FF] via-[#FF4D8F] via-[#FF8C60] to-[#FFC74F]',
-    // Dégradé secondaire à deux couleurs
-    secondary: 'from-[#FF4D8F] to-[#FF8C60]',
+    // Dégradé Orange → Rose (haut gauche image 3)
+    orangeRose: 'from-[#FF7A42] to-[#EBABFF]',
+    // Dégradé Violet → Bleu (haut droite image 3)
+    violetBleu: 'from-[#775CFF] to-[#5C9FFF]',
+    // Dégradé Rose → Orange (bas gauche image 3)
+    roseOrange: 'from-[#EBABFF] to-[#FF7A42]',
+    // Dégradé Rose → Jaune (bas droite image 3)
+    roseJaune: 'from-[#EBABFF] to-[#FFFF73]',
+    // Dégradé principal à quatre couleurs
+    primary: 'from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]',
     // Dégradés spécifiques par activité
-    production: 'from-[#8C52FF] to-[#8C52FF]',
-    administration: 'from-[#FF4D8F] to-[#FF4D8F]',
-    management: 'from-[#FF8C60] to-[#FF8C60]',
-    prestation: 'from-[#FFC74F] to-[#FFC74F]',
+    production: 'from-[#775CFF] to-[#5C9FFF]',
+    administration: 'from-[#EBABFF] to-[#FF7A42]',
+    management: 'from-[#FF7A42] to-[#EBABFF]',
+    prestation: 'from-[#FFFF73] to-[#EBABFF]',
     // Dégradé pour les cartes (version claire)
-    card: 'from-white to-gray-50',
+    card: 'from-[#FFFFF6] to-white',
     // Dégradé light
-    light: 'from-gray-50 to-white',
+    light: 'from-white/50 to-[#FFFFF6]/50',
   },
   background: {
-    light: 'from-white to-gray-50',
-    glass: 'bg-white/80 backdrop-blur-sm',
+    light: 'from-[#FFFFF6] to-white',
+    glass: 'bg-[#FFFFF6]/80 backdrop-blur-sm',
+    dark: 'bg-[#0B0B0B]',
   },
   text: {
-    primary: 'text-gray-800',
-    secondary: 'text-gray-600',
-    gradient: 'bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] via-[#FF8C60] to-[#FFC74F] text-transparent bg-clip-text',
+    primary: 'text-[#0B0B0B]',
+    secondary: 'text-[#0B0B0B]/70',
+    gradient: 'bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73] text-transparent bg-clip-text',
   }
 } as const;
 
 // Système de typographie
 export const typography = {
   heading: {
-    h1: 'text-5xl md:text-7xl font-bold tracking-tight uppercase text-gray-800',
-    h2: 'text-3xl md:text-4xl font-bold uppercase text-gray-800',
-    h3: 'text-2xl font-bold uppercase text-gray-800',
-    gradient: 'bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] via-[#FF8C60] to-[#FFC74F] text-transparent bg-clip-text',
+    h1: 'text-5xl md:text-7xl font-bold tracking-tight text-[#0B0B0B]',
+    h2: 'text-3xl md:text-4xl font-bold text-[#0B0B0B]',
+    h3: 'text-2xl font-bold text-[#0B0B0B]',
+    gradient: 'bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73] text-transparent bg-clip-text',
   },
   body: {
-    base: 'text-gray-600',
-    large: 'text-lg text-gray-700',
+    base: 'text-[#0B0B0B]/70',
+    large: 'text-lg text-[#0B0B0B]/80',
     uppercase: 'uppercase tracking-wider text-sm',
   }
 } as const;
@@ -51,41 +65,46 @@ export const typography = {
 export const components = {
   card: {
     base: `
-      bg-white
-      border border-gray-200 rounded-2xl
+      bg-[#FFFFF6]
+      border-2 rounded-3xl
       backdrop-blur-sm
-      hover:border-gray-300 transition-all
+      transition-all duration-300
       overflow-hidden
     `,
-    hover: 'hover:border-[#FF4D8F]/30 hover:shadow-lg hover:shadow-[#FF4D8F]/10',
+    // Bordures avec dégradés colorés
+    borderViolet: 'border-transparent bg-gradient-to-br from-[#775CFF] to-[#EBABFF] p-[2px]',
+    borderRose: 'border-transparent bg-gradient-to-br from-[#EBABFF] to-[#FF7A42] p-[2px]',
+    borderJaune: 'border-transparent bg-gradient-to-br from-[#FFFF73] to-[#EBABFF] p-[2px]',
+    borderOrange: 'border-transparent bg-gradient-to-br from-[#FF7A42] to-[#EBABFF] p-[2px]',
+    hover: 'hover:shadow-2xl hover:shadow-[#EBABFF]/20 hover:scale-[1.02]',
   },
   logo: {
-    base: 'font-bold bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] via-[#FF8C60] to-[#FFC74F] text-transparent bg-clip-text',
+    base: 'font-bold bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73] text-transparent bg-clip-text',
   },
   button: {
-    base: 'rounded-full font-medium transition-all duration-300 uppercase tracking-wide',
+    base: 'rounded-full font-medium transition-all duration-300 tracking-wide border-2',
     primary: `
-      bg-gradient-to-r from-[#FF4D8F] to-[#FF8C60]
-      hover:opacity-90 text-white
-      px-6 py-3
+      bg-gradient-to-r from-[#EBABFF] to-[#FF7A42]
+      hover:opacity-90 text-[#0B0B0B]
+      px-8 py-3 border-[#0B0B0B]
     `,
     secondary: `
-      bg-gradient-to-r from-[#8C52FF]/10 to-[#FF4D8F]/10
-      border border-gray-300
-      hover:border-[#FF4D8F]/50 hover:bg-[#FF4D8F]/10
-      text-gray-800
-      px-6 py-3
+      bg-[#FFFFF6]
+      border-[#0B0B0B]
+      hover:bg-gradient-to-r hover:from-[#EBABFF]/10 hover:to-[#FF7A42]/10
+      text-[#0B0B0B]
+      px-8 py-3
     `,
     outline: `
-      border border-[#FF4D8F]
-      hover:bg-[#FF4D8F]/10
-      text-[#FF4D8F]
-      px-6 py-3
+      border-[#0B0B0B]
+      hover:bg-[#0B0B0B] hover:text-[#FFFFF6]
+      text-[#0B0B0B]
+      px-8 py-3
     `,
   },
   section: {
     base: 'py-20',
-    light: 'bg-gradient-to-br from-gray-50 to-white',
+    light: 'bg-gradient-to-br from-[#FFFFF6] to-white',
   },
   container: 'container mx-auto px-4',
 } as const;
@@ -94,23 +113,23 @@ export const components = {
 export const effects = {
   hover: {
     scale: 'hover:scale-105 transition-transform duration-300',
-    glow: 'hover:shadow-lg hover:shadow-pink-500/20 transition-shadow duration-300',
+    glow: 'hover:shadow-2xl hover:shadow-[#EBABFF]/30 transition-shadow duration-300',
   },
   gradient: {
     animate: 'animate-gradient bg-[size:400%_400%]',
   },
-  glass: 'backdrop-blur-sm bg-white/40',
+  glass: 'backdrop-blur-sm bg-[#FFFFF6]/40',
 } as const;
 
 // Style pour l'affichage des artistes façon charte graphique
 export const artistStyles = {
   card: {
-    container: 'overflow-hidden rounded-lg relative',
-    content: 'grid md:grid-cols-2 bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60]',
+    container: 'overflow-hidden rounded-3xl relative border-2',
+    content: 'grid md:grid-cols-2 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42]',
     textContainer: 'p-8 flex flex-col justify-center',
     imageContainer: 'relative aspect-square md:aspect-auto',
-    title: 'text-3xl font-bold mb-4 text-white uppercase',
-    description: 'text-white/90 uppercase text-sm tracking-wider leading-relaxed',
+    title: 'text-3xl font-bold mb-4 text-[#0B0B0B]',
+    description: 'text-[#0B0B0B]/80 text-sm tracking-wide leading-relaxed',
     socialLinks: 'flex space-x-4 mt-6'
   }
 } as const;

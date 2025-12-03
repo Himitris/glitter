@@ -17,8 +17,8 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
     : "hidden md:flex space-x-8";
     
   const itemClassName = (isActive: boolean) => `
-    relative text-gray-800 transition-colors tracking-wider uppercase text-sm font-medium
-    ${isActive ? 'text-[#FF4D8F]' : 'hover:text-[#FF4D8F]'}
+    relative text-[#0B0B0B] transition-colors tracking-wider uppercase text-sm font-medium
+    ${isActive ? 'text-[#775CFF]' : 'hover:text-[#775CFF]'}
   `;
   
   // Animation variants pour les items du menu mobile
@@ -58,8 +58,8 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
           >
             {route.label}
             {location.pathname === route.path && (
-              <motion.span 
-                className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r ${colors.gradient.secondary}`}
+              <motion.span
+                className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r ${colors.gradient.administration}`}
                 layoutId="activeIndicator"
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />

@@ -19,21 +19,26 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
     ? artist.image
     : [artist.image];
 
+  // Choisir une couleur de bordure de manière aléatoire basée sur l'index
+  const borderVariants = ['violet', 'rose', 'jaune', 'orange'] as const;
+  const borderVariant = borderVariants[Math.floor(Math.random() * borderVariants.length)];
+
   return (
     <motion.div
-      className="bg-white border border-gray-200 rounded-2xl overflow-hidden h-full flex flex-col"
+      className="bg-gradient-to-br from-[#775CFF] to-[#EBABFF] p-[2px] rounded-3xl h-full"
       initial={{ boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)" }}
       whileHover={{
         boxShadow:
-          "0 10px 25px -5px rgba(140, 82, 255, 0.15), 0 10px 10px -5px rgba(255, 77, 143, 0.1)",
-        borderColor: "rgba(255, 140, 96, 0.3)",
+          "0 20px 40px -10px rgba(119, 92, 255, 0.3), 0 10px 20px -5px rgba(235, 171, 255, 0.2)",
+        scale: 1.02,
       }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      {/* Carte avec effet de survol amélioré */}
-      <div className="aspect-square relative overflow-hidden">
+      <div className="bg-[#FFFFF6] rounded-3xl overflow-hidden h-full flex flex-col">
+        {/* Carte avec effet de survol amélioré */}
+        <div className="aspect-square relative overflow-hidden">
         <ImageCarousel
           images={artistImages}
           alt={artist.name}
@@ -59,9 +64,9 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
         >
           <Star className="text-white drop-shadow-lg" size="sm" />
         </motion.div>
-      </div>
+        </div>
 
-      <div className="p-6 flex flex-col flex-grow">
+        <div className="p-6 flex flex-col flex-grow">
         <motion.div
           animate={isHovered ? { y: [0, -3, 0] } : {}}
           transition={{
@@ -80,14 +85,14 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
         </motion.div>
 
         <div className="relative flex-grow mb-4">
-          <p className={`text-gray-600 mb-2 ${expanded ? "" : "line-clamp-4"}`}>
+          <p className={`text-[#0B0B0B]/70 mb-2 ${expanded ? "" : "line-clamp-4"}`}>
             {artist.description}
           </p>
 
           {artist.description.length > 150 && (
             <motion.button
               onClick={() => setExpanded(!expanded)}
-              className="text-[#FF4D8F] hover:text-[#FF8C60] transition-colors flex items-center text-sm font-medium mt-1"
+              className="text-[#775CFF] hover:text-[#EBABFF] transition-colors flex items-center text-sm font-medium mt-1"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -110,7 +115,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
               href={artist.socialLinks.spotify}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[#FF4D8F] transition-colors z-10"
+              className="text-[#0B0B0B]/60 hover:text-[#775CFF] transition-colors z-10"
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.2, y: -2 }}
               whileTap={{ scale: 0.9 }}
@@ -123,7 +128,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
               href={artist.socialLinks.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[#FF4D8F] transition-colors z-10"
+              className="text-[#0B0B0B]/60 hover:text-[#775CFF] transition-colors z-10"
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.2, y: -2 }}
               whileTap={{ scale: 0.9 }}
@@ -136,7 +141,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
               href={artist.socialLinks.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[#FF4D8F] transition-colors z-10"
+              className="text-[#0B0B0B]/60 hover:text-[#775CFF] transition-colors z-10"
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.2, y: -2 }}
               whileTap={{ scale: 0.9 }}
@@ -144,6 +149,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
               <Globe size={20} />
             </motion.a>
           )}
+        </div>
         </div>
       </div>
     </motion.div>

@@ -193,7 +193,7 @@ function App() {
           <AuthProvider>
             <Router>
               <ScrollToTop />
-              <div className="min-h-screen bg-white text-gray-800">
+              <div className="min-h-screen bg-[#FFFFF6] text-[#0B0B0B]">
                 <ScrollIndicator />
                 <Header />
                 <main className="pt-12 ">

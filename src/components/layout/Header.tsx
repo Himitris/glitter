@@ -48,7 +48,7 @@ const Header = () => {
 
   const headerClassName = `
     fixed w-full z-50 transition-all duration-300 pb-3
-    ${isScrolled ? 'bg-white/90 backdrop-blur-sm shadow-md' : 'bg-transparent'}
+    ${isScrolled ? 'bg-[#FFFFF6]/90 backdrop-blur-sm shadow-md' : 'bg-transparent'}
     ${visible ? 'translate-y-0' : '-translate-y-full'}
   `;
 
@@ -81,7 +81,7 @@ const Header = () => {
           </div>
 
           <motion.button
-            className="lg:hidden text-gray-800 p-2"
+            className="lg:hidden text-[#0B0B0B] p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             whileHover={{ scale: 1.1 }}
@@ -95,7 +95,7 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 bg-white/95 backdrop-blur-md z-40"
+              className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 bg-[#FFFFF6]/95 backdrop-blur-md z-40"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "calc(100vh - 4rem)" }}
               exit={{ opacity: 0, height: 0 }}
