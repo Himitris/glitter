@@ -36,7 +36,7 @@ const SchemaOrg: React.FC<SchemaOrgProps> = ({
   url,
   name,
   description,
-  logo = "https://glitter-production.com/images/logos/logo-noir-complete-png.png",
+  logo = "https://glitter-production.com/images/Logo/Logo-noir/Logo-complet.png",
   image,
   sameAs = [],
   startDate,

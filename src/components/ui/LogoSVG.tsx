@@ -26,12 +26,11 @@ const Logo: React.FC<LogoProps> = ({
     }
   };
 
-  // On utilise l'image logo-noir-png.png par défaut
-  // Si colorScheme est 'dark', on pourrait utiliser une version blanche du logo
+  // On utilise le logo blanc sur fond sombre, le logo noir sur fond clair
   const logoSrc =
     colorScheme === "dark"
-      ? "/images/logos/logo-noir-complete-png.png"
-      : "/images/logos/logo-noir-complete-png.png";
+      ? "/images/Logo/Logo-blanc/Logo-complet.svg"
+      : "/images/Logo/Logo-noir/Logo-complet.svg";
 
   return (
     <Link to="/" className={`block ${className}`}>

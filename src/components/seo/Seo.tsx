@@ -15,7 +15,7 @@ const Seo: React.FC<SeoProps> = ({
   title,
   description,
   canonical,
-  image = "/images/logos/logo-noir-complete-png.png", // Image par défaut
+  image = "/images/Logo/Logo-noir/Logo-complet.png", // Image par défaut
   type = "website",
   keywords = [],
   locale = "fr_FR",
