@@ -111,7 +111,7 @@ const DJs = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-200"
+              className="text-xl md:text-2xl text-[#FFFFF6]"
             >
               Découvrez les DJs qui nous font confiance
             </motion.p>
@@ -166,7 +166,7 @@ const DJs = () => {
           {djs.length === 0 && !loading && (
             <div className="text-center text-gray-500 py-12">
               <p className="mb-4">Aucun DJ trouvé dans cette catégorie.</p>
-              <Star className="text-[#8C52FF] mx-auto" size="md" />
+              <Star className="text-[#775CFF] mx-auto" size="md" />
             </div>
           )}
         </Section>
@@ -174,7 +174,7 @@ const DJs = () => {
         <Section className="bg-white">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center items-center gap-2 mb-6">
-              <Star className="text-[#8C52FF]" size="sm" />
+              <Star className="text-[#775CFF]" size="sm" />
               <GradientText
                 as="h2"
                 gradient="administration"
@@ -182,9 +182,9 @@ const DJs = () => {
               >
                 REJOIGNEZ-NOUS!
               </GradientText>
-              <Star className="text-[#8C52FF]" size="sm" />
+              <Star className="text-[#775CFF]" size="sm" />
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="text-[#0B0B0B]/70 mb-8">
               Vous êtes un artiste et souhaitez collaborer avec nous ? Nous
               sommes toujours à la recherche de nouveaux talents pour enrichir
               notre communauté.
@@ -193,7 +193,7 @@ const DJs = () => {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+              className="inline-block bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
             >
               Contactez-nous
             </motion.a>
