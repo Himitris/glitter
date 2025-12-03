@@ -13,7 +13,7 @@ import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import Star from "../components/ui/Star";
 import { typography } from "../utils/theme";
 import Testimonials from "../components/home/Testimonials";
-import ParallaxBanner from "../components/ui/ParallaxBanner";
+import HeroBackground from "../components/ui/HeroBackground";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
@@ -87,12 +87,8 @@ const Home = () => {
         sameAs={["https://instagram.com/glitter_prod"]}
       />
       <div>
-        <ParallaxBanner
-          image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&auto=format&fit=crop&q=80"
-          height="100vh"
-          className="mt-0"
-        >
-          <div className="text-center">
+        <HeroBackground variant="mixed" className="min-h-screen flex items-center justify-center pt-20">
+          <div className="text-center container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -117,7 +113,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className={`text-xl md:text-2xl text-[#FFFFF6]`}
+                className={`text-xl md:text-2xl text-[#0B0B0B]/80`}
               >
                 Production d'événements uniques et mémorables
               </motion.p>
@@ -139,7 +135,7 @@ const Home = () => {
               </motion.div>
             </motion.div>
           </div>
-        </ParallaxBanner>
+        </HeroBackground>
 
         {/* Services Section */}
         <section className="py-20">

@@ -7,7 +7,7 @@ import { artistServices } from "../data/artists";
 import GradientText from "../components/ui/GradientText";
 import Star from "../components/ui/Star";
 import { typography } from "../utils/theme";
-import ParallaxBanner from "../components/ui/ParallaxBanner";
+import HeroBackground from "../components/ui/HeroBackground";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import ServiceCard from "../components/services/ServiceCard";
 import Seo from "../components/seo/Seo";
@@ -61,12 +61,8 @@ const Artists = () => {
         image="/images/artists/kimia.png"
       />
       <div>
-        <ParallaxBanner
-          image="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&auto=format&fit=crop&q=80"
-          height="45vh"
-          className="mt-0"
-        >
-          <div className="text-center">
+        <HeroBackground variant="violet" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
+          <div className="text-center container mx-auto px-4">
             <AnimatedGradientText
               as="h2"
               gradient="primary"
@@ -79,12 +75,12 @@ const Artists = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-[#FFFFF6]"
+              className="text-xl md:text-2xl text-[#0B0B0B]/80"
             >
               Découvrez les talents qui nous font confiance
             </motion.p>
           </div>
-        </ParallaxBanner>
+        </HeroBackground>
         <Section>
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16"
