@@ -29,8 +29,8 @@ const Logo: React.FC<LogoProps> = ({
   // On utilise le logo blanc sur fond sombre, le logo noir sur fond clair
   const logoSrc =
     colorScheme === "dark"
-      ? "/images/Logo/Logo-blanc/Logo-complet.svg"
-      : "/images/Logo/Logo-noir/Logo-complet.svg";
+      ? "/images/Logo/Logo-blanc/Logo-blanc.svg"
+      : "/images/Logo/Logo-noir/Logo-noir.svg";
 
   return (
     <Link to="/" className={`block ${className}`}>
