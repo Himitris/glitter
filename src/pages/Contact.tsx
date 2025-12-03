@@ -111,7 +111,7 @@ const Contact = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-200"
+              className="text-xl md:text-2xl text-[#FFFFF6]"
             >
               Discutons de votre projet ensemble
             </motion.p>
@@ -121,7 +121,7 @@ const Contact = () => {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <div className="flex justify-center items-center gap-2 mb-6">
-                <Star className="text-[#8C52FF]" size="sm" />
+                <Star className="text-[#775CFF]" size="sm" />
                 <GradientText
                   as="h2"
                   gradient="primary"
@@ -129,9 +129,9 @@ const Contact = () => {
                 >
                   Parlons de votre projet
                 </GradientText>
-                <Star className="text-[#8C52FF]" size="sm" />
+                <Star className="text-[#775CFF]" size="sm" />
               </div>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-[#0B0B0B]/70 max-w-2xl mx-auto">
                 Que vous soyez un artiste cherchant un accompagnement ou un
                 organisateur d'événement, nous sommes là pour vous aider à faire
                 briller votre projet.
@@ -140,8 +140,8 @@ const Contact = () => {
 
             <div className="grid md:grid-cols-2 gap-12">
               {/* Formulaire de contact */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-                <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-[#FF4D8F] to-[#FF8C60] text-transparent bg-clip-text">
+              <div className="bg-white border border-[#0B0B0B]/10 rounded-2xl p-8 shadow-sm">
+                <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-[#EBABFF] to-[#FF7A42] text-transparent bg-clip-text">
                   Envoyez-nous un message
                 </h3>
 
@@ -150,7 +150,7 @@ const Contact = () => {
                     <motion.div
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="mb-6 text-[#8C52FF]"
+                      className="mb-6 text-[#775CFF]"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -170,13 +170,13 @@ const Contact = () => {
                     <h4 className="text-xl font-semibold mb-2">
                       Message envoyé !
                     </h4>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-[#0B0B0B]/70 mb-4">
                       Merci de nous avoir contactés. Nous vous répondrons dans
                       les plus brefs délais.
                     </p>
                     <button
                       onClick={() => setFormSubmitted(false)}
-                      className="text-[#FF4D8F] hover:text-[#FF8C60] underline transition-colors"
+                      className="text-[#EBABFF] hover:text-[#FF7A42] underline transition-colors"
                     >
                       Envoyer un autre message
                     </button>
@@ -188,7 +188,7 @@ const Contact = () => {
                     method="POST"
                   >
                     <div className="space-y-2">
-                      <label htmlFor="name" className="block text-gray-700">
+                      <label htmlFor="name" className="block text-[#0B0B0B]">
                         Nom
                       </label>
                       <input
@@ -200,11 +200,11 @@ const Contact = () => {
                           handleChange(e, { required: true, minLength: 2 })
                         }
                         onBlur={() => handleBlur("name")}
-                        className={`w-full px-4 py-3 bg-gray-50 border ${
+                        className={`w-full px-4 py-3 bg-[#FFFFF6] border ${
                           touched.name && errors.name
                             ? "border-red-500"
-                            : "border-gray-300"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-gray-800`}
+                            : "border-[#0B0B0B]/20"
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EBABFF] focus:border-transparent text-[#0B0B0B]`}
                         placeholder="Votre nom"
                       />
                       {touched.name && errors.name && (
@@ -215,7 +215,7 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="email" className="block text-gray-700">
+                      <label htmlFor="email" className="block text-[#0B0B0B]">
                         Email
                       </label>
                       <input
@@ -227,11 +227,11 @@ const Contact = () => {
                           handleChange(e, { required: true, isEmail: true })
                         }
                         onBlur={() => handleBlur("email")}
-                        className={`w-full px-4 py-3 bg-gray-50 border ${
+                        className={`w-full px-4 py-3 bg-[#FFFFF6] border ${
                           touched.email && errors.email
                             ? "border-red-500"
-                            : "border-gray-300"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-gray-800`}
+                            : "border-[#0B0B0B]/20"
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EBABFF] focus:border-transparent text-[#0B0B0B]`}
                         placeholder="Votre email"
                       />
                       {touched.email && errors.email && (
@@ -242,7 +242,7 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="message" className="block text-gray-700">
+                      <label htmlFor="message" className="block text-[#0B0B0B]">
                         Message
                       </label>
                       <textarea
@@ -254,11 +254,11 @@ const Contact = () => {
                           handleChange(e, { required: true, minLength: 10 })
                         }
                         onBlur={() => handleBlur("message")}
-                        className={`w-full px-4 py-3 bg-gray-50 border ${
+                        className={`w-full px-4 py-3 bg-[#FFFFF6] border ${
                           touched.message && errors.message
                             ? "border-red-500"
-                            : "border-gray-300"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] focus:border-transparent text-gray-800`}
+                            : "border-[#0B0B0B]/20"
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EBABFF] focus:border-transparent text-[#0B0B0B]`}
                         placeholder="Comment pouvons-nous vous aider ?"
                       ></textarea>
                       {touched.message && errors.message && (
@@ -271,7 +271,7 @@ const Contact = () => {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       transition={{ type: "spring", stiffness: 300 }}
-                      className="w-full bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-white px-6 py-3 rounded-full hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                      className="w-full bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] text-white px-6 py-3 rounded-full hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
                       type="submit"
                       disabled={isSubmitting}
                     >
@@ -289,52 +289,52 @@ const Contact = () => {
 
               {/* Informations de contact */}
               <div>
-                <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-[#8C52FF] to-[#FF4D8F] text-transparent bg-clip-text">
+                <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-[#775CFF] to-[#EBABFF] text-transparent bg-clip-text">
                   Nos coordonnées
                 </h3>
 
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-r from-[#8C52FF] to-[#FF4D8F] p-3 rounded-full">
+                    <div className="bg-gradient-to-r from-[#775CFF] to-[#EBABFF] p-3 rounded-full">
                       <Mail className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-semibold text-gray-800 mb-1">
+                      <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">
                         Email
                       </h4>
-                      <p className="text-gray-600">
+                      <p className="text-[#0B0B0B]/70">
                         glitterproductions24@gmail.com
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-r from-[#FF4D8F] to-[#FF8C60] p-3 rounded-full">
+                    <div className="bg-gradient-to-r from-[#EBABFF] to-[#FF7A42] p-3 rounded-full">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-semibold text-gray-800 mb-1">
+                      <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">
                         Situation
                       </h4>
-                      <p className="text-gray-600">
+                      <p className="text-[#0B0B0B]/70">
                         Située entre les Landes et le Tarn
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-r from-[#FF8C60] to-[#FFC74F] p-3 rounded-full">
+                    <div className="bg-gradient-to-r from-[#FF7A42] to-[#FFC74F] p-3 rounded-full">
                       <Instagram className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-semibold text-gray-800 mb-1">
+                      <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">
                         Instagram
                       </h4>
                       <a
                         href="https://instagram.com/glitter_prod"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#FF4D8F] hover:text-[#FF8C60] transition-colors"
+                        className="text-[#EBABFF] hover:text-[#FF7A42] transition-colors"
                       >
                         @glitter_prod
                       </a>

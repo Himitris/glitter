@@ -2,12 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Typographie Neue Montreal - Charte Glitter 2025 */
 @font-face {
-    font-family: 'Frunchy Sage';
-    src: url('/Frunchy Sage/Frunchy.ttf') format('truetype'),
-        url('/Frunchy Sage/Frunchy.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal/NeueMontreal-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal/NeueMontreal-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal/NeueMontreal-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal/NeueMontreal-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fallback pour Frunchy Sage (décoratif) */
+@font-face {
+  font-family: 'Frunchy Sage';
+  src: url('/Frunchy Sage/Frunchy.ttf') format('truetype'),
+       url('/Frunchy Sage/Frunchy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variables CSS personnalisées pour la charte */
+@layer base {
+  :root {
+    /* Couleurs primaires */
+    --color-off-white: #FFFFF6;
+    --color-off-black: #0B0B0B;
+
+    /* Couleurs secondaires */
+    --color-violet: #775CFF;
+    --color-rose: #EBABFF;
+    --color-orange: #FF7A42;
+    --color-jaune: #FFFF73;
+  }
+
+  body {
+    @apply bg-glitter-off-white text-glitter-off-black;
+    font-family: 'Neue Montreal', 'Inter var', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Utilitaires personnalisés */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-blob-slow {
+    animation: blob 25s ease-in-out infinite;
+  }
 }
 
 @font-face {
