@@ -6,7 +6,7 @@ import Star from '../components/ui/Star';
 import { Briefcase, Users, FileText, Calendar, MapPin } from 'lucide-react';
 import { eventServices, pastExperiences } from '../data/services';
 import { typography } from '../utils/theme';
-import ParallaxBanner from '../components/ui/ParallaxBanner';
+import HeroBackground from '../components/ui/HeroBackground';
 import AnimatedGradientText from '../components/ui/AnimatedGradientText';
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
@@ -44,12 +44,8 @@ const Services = () => {
         image="/images/background/photo1.webp"
       />
       <div>
-        <ParallaxBanner
-          image="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&auto=format&fit=crop&q=80"
-          height="45vh"
-          className="mt-0"
-        >
-          <div className="text-center">
+        <HeroBackground variant="rose" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
+          <div className="text-center container mx-auto px-4">
             <AnimatedGradientText
               as="h2"
               gradient="primary"
@@ -63,12 +59,12 @@ const Services = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-[#FFFFF6]"
+              className="text-xl md:text-2xl text-[#0B0B0B]/80"
             >
               Des services adaptés aux besoins des artistes et des événements
             </motion.p>
           </div>
-        </ParallaxBanner>
+        </HeroBackground>
 
         <Section className="bg-[#FFFFF6]">
           <div className="max-w-3xl mx-auto text-center mb-16">

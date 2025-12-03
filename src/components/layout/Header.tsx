@@ -47,14 +47,17 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const headerClassName = `
-    fixed w-full z-50 transition-all duration-300 pb-3
-    ${isScrolled ? 'bg-[#FFFFF6]/90 backdrop-blur-sm shadow-md' : 'bg-transparent'}
+    fixed w-full z-50 transition-all duration-300
+    ${isScrolled ? 'bg-[#FFFFF6]/95 backdrop-blur-md' : 'bg-[#FFFFF6]/80 backdrop-blur-sm'}
     ${visible ? 'translate-y-0' : '-translate-y-full'}
   `;
 
   return (
     <header className={headerClassName}>
-      <div className="container mx-auto px-4 ">
+      {/* Bordure gradient colorée en bas du header */}
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
+
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between h-16 sm:h-20">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
