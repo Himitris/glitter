@@ -122,7 +122,7 @@ const DJs = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={artistsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex"
+                className="flex h-full"
               >
                 <ServiceCard
                   key={index}
