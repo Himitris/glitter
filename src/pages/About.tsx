@@ -52,10 +52,14 @@ const About = () => {
           className="min-h-[45vh] flex items-center justify-center pt-32 pb-16"
         >
           <div className="text-center container mx-auto px-4">
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
+            <AnimatedGradientText
+              as="h2"
+              gradient="primary"
+              className="text-4xl md:text-6xl font-bold mb-4"
+              speed="medium"
+            >
               À Propos de Nous
-            </h2>
-
+            </AnimatedGradientText>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
