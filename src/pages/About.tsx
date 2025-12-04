@@ -46,10 +46,10 @@ const About = () => {
       />
 
       <div>
-        <ColorfulBackground variant="violet-rose" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
-          image="/images/background/photo1.webp"
-          height="45vh"
-          className="mt-0"
+        <ColorfulBackground
+          variant="violet-rose"
+          intensity="strong"
+          className="min-h-[45vh] flex items-center justify-center pt-24 pb-16"
         >
           <div className="text-center">
             <AnimatedGradientText

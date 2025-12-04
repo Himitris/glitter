@@ -93,10 +93,6 @@ const Contact = () => {
       />
       <div>
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
-          image="/images/background/photo3.webp"
-          height="45vh"
-          className="mt-0"
-        >
           <div className="text-center">
             <AnimatedGradientText
               as="h2"
