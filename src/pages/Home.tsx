@@ -112,13 +112,13 @@ const Home = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#0B0B0B] leading-relaxed"
               >
-                <div className="mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
-                <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-                  <span className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-6 py-2 rounded-full border-2 border-[#0B0B0B] shadow-lg transform -rotate-1">
+                <div className="mb-3 md:mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
+                <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 lg:gap-4">
+                  <span className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-4 py-1.5 md:px-6 md:py-2 rounded-full border-2 border-[#0B0B0B] shadow-lg transform -rotate-1 text-lg md:text-2xl lg:text-4xl font-bold">
                     UNIQUES
                   </span>
-                  <span>ET</span>
-                  <span className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-6 py-2 rounded-full border-2 border-[#0B0B0B] shadow-lg transform rotate-1">
+                  <span className="text-lg md:text-2xl lg:text-4xl">ET</span>
+                  <span className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-4 py-1.5 md:px-6 md:py-2 rounded-full border-2 border-[#0B0B0B] shadow-lg transform rotate-1 text-lg md:text-2xl lg:text-4xl font-bold">
                     MÉMORABLES
                   </span>
                 </div>
