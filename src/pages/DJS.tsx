@@ -92,7 +92,7 @@ const DJs = () => {
         canonical={canonical}
       />
       <div>
-        <ColorfulBackground variant="orange-jaune" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
+        <ColorfulBackground variant="orange-jaune" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
           <div className="text-center container mx-auto px-4">
             <AnimatedGradientText
               as="h2"

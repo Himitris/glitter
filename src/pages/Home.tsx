@@ -87,7 +87,7 @@ const Home = () => {
         sameAs={["https://instagram.com/glitter_prod"]}
       />
       <div>
-        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-20">
+        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-32 md:pt-40">
           <div className="text-center container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
