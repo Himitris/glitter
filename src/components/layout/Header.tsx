@@ -113,13 +113,31 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 bg-[#FFFFF6]/95 backdrop-blur-md z-40"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "calc(100vh - 4rem)" }}
-              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
+              {/* Overlay avec backdrop */}
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-[#775CFF]/20 via-[#EBABFF]/20 to-[#FF7A42]/20 backdrop-blur-xl"
+                onClick={() => setIsMenuOpen(false)}
+              />
+
+              {/* Menu content */}
+              <motion.div
+                className="relative bg-[#FFFFF6] rounded-t-3xl shadow-2xl mx-4 mt-4 p-6 max-h-[calc(100vh-8rem)] overflow-y-auto"
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 100, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                {/* Bordure gradient en haut */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] rounded-t-3xl" />
+
+                <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
