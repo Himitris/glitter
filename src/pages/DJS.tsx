@@ -115,7 +115,7 @@ const DJs = () => {
         </ColorfulBackground>
 
         <Section>
-          <div className="grid md:grid-cols-3 gap-8 mb-20" ref={artistsRef}>
+          <div className="grid md:grid-cols-3 gap-8 mb-20 items-stretch" ref={artistsRef}>
             {djServicesUpdated.map((service, index) => (
               <motion.div
                 key={index}
