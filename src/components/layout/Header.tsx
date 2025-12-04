@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 import LogoSVG from '../ui/LogoSVG';
 
@@ -67,17 +68,29 @@ const Header = () => {
             transition={{ duration: 0.5 }}
             className="flex-shrink-0"
           >
-            {/* Logo avec taille adaptative et couleur selon scroll */}
-            <LogoSVG
-              colorScheme={isScrolled ? "light" : "dark"}
-              size="small"
-              className="block sm:hidden" // Petite taille sur mobile
-            />
-            <LogoSVG
-              colorScheme={isScrolled ? "light" : "dark"}
-              size="medium"
-              className="hidden sm:block" // Taille moyenne sur tablette et desktop
-            />
+            {/* Monogramme en haut, logo complet après scroll */}
+            {!isScrolled ? (
+              <Link to="/" className="block">
+                <img
+                  src="/images/Logo/Monogramme/Monogramme-blanc.png"
+                  alt="Glitter"
+                  className="h-12 sm:h-14 w-auto"
+                />
+              </Link>
+            ) : (
+              <>
+                <LogoSVG
+                  colorScheme="light"
+                  size="small"
+                  className="block sm:hidden"
+                />
+                <LogoSVG
+                  colorScheme="light"
+                  size="medium"
+                  className="hidden sm:block"
+                />
+              </>
+            )}
           </motion.div>
 
           {/* Navigation principale cachée en dessous de 1024px */}

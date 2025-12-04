@@ -88,43 +88,54 @@ const Home = () => {
       />
       <div>
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-32 md:pt-40">
-          <div className="text-center container mx-auto px-4">
+          <div className="text-center container mx-auto px-4 max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center gap-8"
             >
-              <div className="flex justify-center items-center gap-2 mb-6">
-                <Star className="text-white/80" size="sm" />
-                <Star className="text-white" size="md" />
-                <Star className="text-white/80" size="sm" />
-              </div>
+              {/* Logo Glitter */}
+              <motion.img
+                src="/images/Logo/Logo-blanc/Logo-blanc.svg"
+                alt="Glitter"
+                className="w-full max-w-md md:max-w-lg h-auto drop-shadow-2xl"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+              />
 
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white drop-shadow-lg">
-                Glitter Productions
-              </h1>
-
-              <motion.p
+              {/* Texte avec mots en évidence */}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl md:text-2xl text-white/95 drop-shadow-md"
+                className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#0B0B0B] leading-relaxed"
               >
-                Production d'événements uniques et mémorables
-              </motion.p>
+                <div className="mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
+                <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+                  <span className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-6 py-2 rounded-full border-2 border-[#0B0B0B] shadow-lg transform -rotate-1">
+                    UNIQUES
+                  </span>
+                  <span>ET</span>
+                  <span className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-6 py-2 rounded-full border-2 border-[#0B0B0B] shadow-lg transform rotate-1">
+                    MÉMORABLES
+                  </span>
+                </div>
+              </motion.div>
 
+              {/* Bouton CTA */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="mt-10"
+                className="mt-6"
               >
                 <motion.a
                   href="/services"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="inline-block bg-white text-[#775CFF] px-8 py-4 rounded-full hover:bg-[#FFFF73] hover:text-[#0B0B0B] transition-all tracking-wide font-bold text-lg shadow-xl"
+                  className="inline-block bg-white text-[#0B0B0B] px-8 py-4 rounded-full hover:bg-[#EBABFF] transition-all tracking-wide font-bold text-base md:text-lg shadow-xl border-2 border-[#0B0B0B]"
                 >
                   Découvrir nos services
                 </motion.a>
