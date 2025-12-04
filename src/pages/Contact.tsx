@@ -8,7 +8,7 @@ import { typography } from "../utils/theme";
 import { useFormValidation } from "../hooks/useFormValidation";
 import { useToast } from "../contexts/ToastContext";
 import Loader from "../components/ui/Loader";
-import ParallaxBanner from "../components/ui/ParallaxBanner";
+import ColorfulBackground from "../components/ui/ColorfulBackground";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
@@ -92,7 +92,7 @@ const Contact = () => {
         canonical={canonical}
       />
       <div>
-        <ParallaxBanner
+        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
           image="/images/background/photo3.webp"
           height="45vh"
           className="mt-0"
@@ -111,12 +111,12 @@ const Contact = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-[#FFFFF6]"
+              className="text-xl md:text-2xl text-white/95 drop-shadow-md"
             >
               Discutons de votre projet ensemble
             </motion.p>
           </div>
-        </ParallaxBanner>
+        </ColorfulBackground>
         <Section>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">

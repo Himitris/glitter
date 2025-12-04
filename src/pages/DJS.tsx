@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import GradientText from "../components/ui/GradientText";
 import Star from "../components/ui/Star";
 import { typography } from "../utils/theme";
-import HeroBackground from "../components/ui/HeroBackground";
+import ColorfulBackground from "../components/ui/ColorfulBackground";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import ServiceCard from "../components/services/ServiceCard";
 import Seo from "../components/seo/Seo";
@@ -92,7 +92,7 @@ const DJs = () => {
         canonical={canonical}
       />
       <div>
-        <HeroBackground variant="orange" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
+        <ColorfulBackground variant="orange-jaune" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
           <div className="text-center container mx-auto px-4">
             <AnimatedGradientText
               as="h2"
@@ -112,7 +112,7 @@ const DJs = () => {
               Découvrez les DJs qui nous font confiance
             </motion.p>
           </div>
-        </HeroBackground>
+        </ColorfulBackground>
 
         <Section>
           <div className="grid md:grid-cols-3 gap-8 mb-20" ref={artistsRef}>

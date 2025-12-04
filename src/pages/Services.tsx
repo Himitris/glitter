@@ -6,7 +6,7 @@ import Star from '../components/ui/Star';
 import { Briefcase, Users, FileText, Calendar, MapPin } from 'lucide-react';
 import { eventServices, pastExperiences } from '../data/services';
 import { typography } from '../utils/theme';
-import HeroBackground from '../components/ui/HeroBackground';
+import ColorfulBackground from '../components/ui/ColorfulBackground';
 import AnimatedGradientText from '../components/ui/AnimatedGradientText';
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
@@ -44,7 +44,7 @@ const Services = () => {
         image="/images/background/photo1.webp"
       />
       <div>
-        <HeroBackground variant="rose" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
+        <ColorfulBackground variant="rose-orange" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
           <div className="text-center container mx-auto px-4">
             <AnimatedGradientText
               as="h2"
@@ -64,7 +64,7 @@ const Services = () => {
               Des services adaptés aux besoins des artistes et des événements
             </motion.p>
           </div>
-        </HeroBackground>
+        </ColorfulBackground>
 
         <Section className="bg-[#FFFFF6]">
           <div className="max-w-3xl mx-auto text-center mb-16">

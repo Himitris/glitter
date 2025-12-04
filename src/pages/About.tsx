@@ -5,7 +5,7 @@ import GradientText from "../components/ui/GradientText";
 import Star from "../components/ui/Star";
 import { Instagram } from "lucide-react";
 import { typography } from "../utils/theme";
-import ParallaxBanner from "../components/ui/ParallaxBanner";
+import ColorfulBackground from "../components/ui/ColorfulBackground";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
@@ -46,7 +46,7 @@ const About = () => {
       />
 
       <div>
-        <ParallaxBanner
+        <ColorfulBackground variant="violet-rose" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
           image="/images/background/photo1.webp"
           height="45vh"
           className="mt-0"
@@ -65,13 +65,13 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-[#FFFFF6]"
+              className="text-xl md:text-2xl text-white/95 drop-shadow-md"
             >
               Une structure dédiée à la production, l'administration et le
               management
             </motion.p>
           </div>
-        </ParallaxBanner>
+        </ColorfulBackground>
 
         <Section>
           <div className="max-w-3xl mx-auto text-center">

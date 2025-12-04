@@ -7,7 +7,7 @@ import { artistServices } from "../data/artists";
 import GradientText from "../components/ui/GradientText";
 import Star from "../components/ui/Star";
 import { typography } from "../utils/theme";
-import HeroBackground from "../components/ui/HeroBackground";
+import ColorfulBackground from "../components/ui/ColorfulBackground";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import ServiceCard from "../components/services/ServiceCard";
 import Seo from "../components/seo/Seo";
@@ -61,7 +61,7 @@ const Artists = () => {
         image="/images/artists/kimia.png"
       />
       <div>
-        <HeroBackground variant="violet" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
+        <ColorfulBackground variant="violet-rose" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-24 pb-16">
           <div className="text-center container mx-auto px-4">
             <AnimatedGradientText
               as="h2"
@@ -80,7 +80,7 @@ const Artists = () => {
               Découvrez les talents qui nous font confiance
             </motion.p>
           </div>
-        </HeroBackground>
+        </ColorfulBackground>
         <Section>
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16"

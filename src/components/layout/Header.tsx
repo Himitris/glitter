@@ -47,15 +47,17 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const headerClassName = `
-    fixed w-full z-50 transition-all duration-300
-    ${isScrolled ? 'bg-[#FFFFF6]/95 backdrop-blur-md' : 'bg-[#FFFFF6]/80 backdrop-blur-sm'}
+    fixed w-full z-50 transition-all duration-500
+    ${isScrolled ? 'bg-[#FFFFF6]/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}
     ${visible ? 'translate-y-0' : '-translate-y-full'}
   `;
 
   return (
     <header className={headerClassName}>
-      {/* Bordure gradient colorée en bas du header */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
+      {/* Bordure gradient colorée en bas du header (visible seulement quand scrollé) */}
+      {isScrolled && (
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
+      )}
 
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between h-16 sm:h-20">
@@ -65,14 +67,14 @@ const Header = () => {
             transition={{ duration: 0.5 }}
             className="flex-shrink-0"
           >
-            {/* Logo avec taille adaptative selon l'écran */}
+            {/* Logo avec taille adaptative et couleur selon scroll */}
             <LogoSVG
-              colorScheme="light"
+              colorScheme={isScrolled ? "light" : "dark"}
               size="small"
               className="block sm:hidden" // Petite taille sur mobile
             />
             <LogoSVG
-              colorScheme="light"
+              colorScheme={isScrolled ? "light" : "dark"}
               size="medium"
               className="hidden sm:block" // Taille moyenne sur tablette et desktop
             />
@@ -84,7 +86,7 @@ const Header = () => {
           </div>
 
           <motion.button
-            className="lg:hidden text-[#0B0B0B] p-2"
+            className={`lg:hidden p-2 transition-colors duration-300 ${isScrolled ? 'text-[#0B0B0B]' : 'text-white'}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             whileHover={{ scale: 1.1 }}

@@ -13,7 +13,7 @@ import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import Star from "../components/ui/Star";
 import { typography } from "../utils/theme";
 import Testimonials from "../components/home/Testimonials";
-import HeroBackground from "../components/ui/HeroBackground";
+import ColorfulBackground from "../components/ui/ColorfulBackground";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
@@ -87,7 +87,7 @@ const Home = () => {
         sameAs={["https://instagram.com/glitter_prod"]}
       />
       <div>
-        <HeroBackground variant="mixed" className="min-h-screen flex items-center justify-center pt-20">
+        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-20">
           <div className="text-center container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -96,24 +96,20 @@ const Home = () => {
               className="flex flex-col items-center"
             >
               <div className="flex justify-center items-center gap-2 mb-6">
-                <Star className="text-[#8C52FF]" size="sm" />
-                <Star className="text-[#FF4D8F]" size="md" />
-                <Star className="text-[#FF8C60]" size="sm" />
+                <Star className="text-white/80" size="sm" />
+                <Star className="text-white" size="md" />
+                <Star className="text-white/80" size="sm" />
               </div>
 
-              <AnimatedGradientText
-                as="h1"
-                className={typography.heading.h1}
-                speed="medium"
-              >
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white drop-shadow-lg">
                 Glitter Productions
-              </AnimatedGradientText>
+              </h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className={`text-xl md:text-2xl text-[#0B0B0B]/80`}
+                className="text-xl md:text-2xl text-white/95 drop-shadow-md"
               >
                 Production d'événements uniques et mémorables
               </motion.p>
@@ -128,14 +124,14 @@ const Home = () => {
                   href="/services"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="bg-gradient-to-r from-[#EBABFF] to-[#FF7A42] text-[#0B0B0B] px-8 py-4 rounded-full hover:opacity-90 transition-all tracking-wide font-semibold border-2 border-[#0B0B0B]"
+                  className="inline-block bg-white text-[#775CFF] px-8 py-4 rounded-full hover:bg-[#FFFF73] hover:text-[#0B0B0B] transition-all tracking-wide font-bold text-lg shadow-xl"
                 >
                   Découvrir nos services
                 </motion.a>
               </motion.div>
             </motion.div>
           </div>
-        </HeroBackground>
+        </ColorfulBackground>
 
         {/* Services Section */}
         <section className="py-20">
