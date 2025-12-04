@@ -97,7 +97,7 @@ const Home = () => {
             >
               {/* Logo Glitter */}
               <motion.img
-                src="/images/Logo/Logo-blanc/Logo-blanc.svg"
+                src="/images/Logo/Logo-blanc/Logo-blanc-2.svg"
                 alt="Glitter"
                 className="w-full max-w-md md:max-w-lg h-auto drop-shadow-2xl"
                 initial={{ opacity: 0, scale: 0.9 }}
