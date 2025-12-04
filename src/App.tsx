@@ -196,7 +196,7 @@ function App() {
               <div className="min-h-screen bg-[#FFFFF6] text-[#0B0B0B]">
                 <ScrollIndicator />
                 <Header />
-                <main className="pt-12 ">
+                <main>
                   <AnimatedRoutes />
                 </main>
                 <Footer />
