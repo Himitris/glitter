@@ -14,6 +14,7 @@ import { seoConfig } from "../config/seo";
 import { getAllDjs } from "../services/artistService";
 import { Artist } from "../types";
 import Loader from "../components/ui/Loader";
+import HighlightBadge from "../components/ui/HighlightBadge";
 
 // Services mis à jour pour les DJs
 const djServicesUpdated = [
@@ -103,14 +104,18 @@ const DJs = () => {
               DJs & Producteurs
             </AnimatedGradientText>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-[#0B0B0B]/80"
+              className="text-xl md:text-2xl text-[#0B0B0B]/80 flex flex-wrap items-center justify-center gap-2"
             >
-              Découvrez les DJs qui nous font confiance
-            </motion.p>
+              <span>Découvrez les</span>
+              <HighlightBadge color="orange" rotation={-2}>
+                DJs & PRODUCTEURS
+              </HighlightBadge>
+              <span>qui nous font confiance</span>
+            </motion.div>
           </div>
         </ColorfulBackground>
 
@@ -180,11 +185,13 @@ const DJs = () => {
               </GradientText>
               <Star className="text-[#775CFF]" size="sm" />
             </div>
-            <p className="text-[#0B0B0B]/70 mb-8">
-              Vous êtes un artiste et souhaitez collaborer avec nous ? Nous
-              sommes toujours à la recherche de nouveaux talents pour enrichir
-              notre communauté.
-            </p>
+            <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
+              <span>Vous êtes un artiste et souhaitez</span>
+              <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
+                COLLABORER
+              </HighlightBadge>
+              <span>avec nous ? Nous sommes toujours à la recherche de nouveaux talents pour enrichir notre communauté.</span>
+            </div>
             <motion.a
               href="/contact"
               whileHover={{ scale: 1.05 }}

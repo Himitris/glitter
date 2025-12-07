@@ -16,6 +16,7 @@ import SchemaOrg from "../components/seo/SchemaOrg";
 import { getAllArtists } from "../services/artistService";
 import { Artist } from "../types";
 import Loader from "../components/ui/Loader";
+import HighlightBadge from "../components/ui/HighlightBadge";
 
 const Artists = () => {
   const [artistsRef, artistsInView] = useInView({
@@ -71,14 +72,18 @@ const Artists = () => {
             >
               Nos Artistes
             </AnimatedGradientText>
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-[#0B0B0B]/80"
+              className="text-xl md:text-2xl text-[#0B0B0B]/80 flex flex-wrap items-center justify-center gap-2"
             >
-              Découvrez les talents qui nous font confiance
-            </motion.p>
+              <span>Découvrez les</span>
+              <HighlightBadge color="violet" rotation={-2}>
+                TALENTS
+              </HighlightBadge>
+              <span>qui nous font confiance</span>
+            </motion.div>
           </div>
         </ColorfulBackground>
         <Section>
@@ -144,11 +149,13 @@ const Artists = () => {
               </GradientText>
               <Star className="text-[#775CFF]" size="sm" />
             </div>
-            <p className="text-[#0B0B0B]/70 mb-8">
-              Vous êtes un artiste et souhaitez collaborer avec nous ? Nous
-              sommes toujours à la recherche de nouveaux talents pour enrichir
-              notre communauté.
-            </p>
+            <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
+              <span>Vous êtes un artiste et souhaitez collaborer avec nous ? Nous sommes toujours à la recherche de</span>
+              <HighlightBadge color="pink" rotation={1} className="text-sm md:text-base">
+                NOUVEAUX TALENTS
+              </HighlightBadge>
+              <span>pour enrichir notre communauté.</span>
+            </div>
             <motion.a
               href="/contact"
               whileHover={{ scale: 1.05 }}
