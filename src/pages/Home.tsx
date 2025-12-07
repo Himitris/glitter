@@ -18,6 +18,7 @@ import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
 import UpcomingEvent from "../components/home/UpcomingEvent";
+import HighlightBadge from "../components/ui/HighlightBadge";
 
 const Home = () => {
   const [ref, inView] = useInView({
@@ -114,13 +115,13 @@ const Home = () => {
               >
                 <div className="mb-3 md:mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
                 <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 lg:gap-4">
-                  <span className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-4 py-1.5 md:px-6 md:py-2 rounded-full border-2 border-[#0B0B0B] shadow-lg transform -rotate-1 text-lg md:text-2xl lg:text-4xl font-bold">
+                  <HighlightBadge color="yellow" rotation={-1} className="text-lg md:text-2xl lg:text-4xl">
                     UNIQUES
-                  </span>
+                  </HighlightBadge>
                   <span className="text-lg md:text-2xl lg:text-4xl">ET</span>
-                  <span className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-4 py-1.5 md:px-6 md:py-2 rounded-full border-2 border-[#0B0B0B] shadow-lg transform rotate-1 text-lg md:text-2xl lg:text-4xl font-bold">
+                  <HighlightBadge color="yellow" rotation={1} className="text-lg md:text-2xl lg:text-4xl">
                     MÉMORABLES
-                  </span>
+                  </HighlightBadge>
                 </div>
               </motion.div>
 
@@ -160,10 +161,13 @@ const Home = () => {
                 </AnimatedGradientText>
                 <Star className="text-[#775CFF]" size="sm" />
               </div>
-              <p className="text-[#0B0B0B]/70 max-w-2xl mx-auto mt-4">
-                Découvrez notre gamme complète de services adaptés aux besoins
-                des artistes et des organisateurs d'événements.
-              </p>
+              <div className="text-[#0B0B0B]/70 max-w-2xl mx-auto mt-4 flex flex-wrap items-center justify-center gap-2">
+                <span>Découvrez notre gamme</span>
+                <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
+                  COMPLÈTE
+                </HighlightBadge>
+                <span>de services adaptés aux besoins des artistes et des organisateurs d'événements.</span>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

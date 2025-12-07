@@ -1,155 +1,154 @@
-import React, { useState, memo } from "react";
-import { motion } from "framer-motion";
-import { Music, Instagram, Globe, ChevronDown, ChevronUp } from "lucide-react";
+import React, { memo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Music, Instagram, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { Artist } from "../../types";
-import GradientText from "../ui/GradientText";
-import Star from "../ui/Star";
-import ImageCarousel from "../ui/ImageCarousel"; // Assurez-vous d'importer le nouveau composant
 
 interface ArtistCardProps {
   artist: Artist;
 }
 
 const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
-  const [expanded, setExpanded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Gestion des images multiples ou simples
-  const artistImages = Array.isArray(artist.image)
-    ? artist.image
-    : [artist.image];
+  const images = Array.isArray(artist.image) ? artist.image : [artist.image];
+  const hasMultipleImages = images.length > 1;
 
-  // Choisir une couleur de bordure de manière aléatoire basée sur l'index
-  const borderVariants = ['violet', 'rose', 'jaune', 'orange'] as const;
-  const borderVariant = borderVariants[Math.floor(Math.random() * borderVariants.length)];
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-[#775CFF] to-[#EBABFF] p-[2px] rounded-3xl h-full"
-      initial={{ boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)" }}
-      whileHover={{
-        boxShadow:
-          "0 20px 40px -10px rgba(119, 92, 255, 0.3), 0 10px 20px -5px rgba(235, 171, 255, 0.2)",
-        scale: 1.02,
-      }}
+      className="w-full h-full group"
+      whileHover={{ y: -8 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="bg-[#FFFFF6] rounded-3xl overflow-hidden h-full flex flex-col">
-        {/* Carte avec effet de survol amélioré */}
-        <div className="aspect-square relative overflow-hidden">
-        <ImageCarousel
-          images={artistImages}
-          alt={artist.name}
-          className="w-full h-full"
-          isHovered={isHovered}
-        />
-        {/* Ajouter une petite étoile en haut à droite avec animation */}
-        <motion.div
-          className="absolute top-3 right-3 z-10"
-          animate={
-            isHovered
-              ? {
-                  rotate: [0, 15, 0, -15, 0],
-                  scale: [1, 1.2, 1],
-                }
-              : {}
-          }
-          transition={{
-            duration: 1.5,
-            repeat: isHovered ? Infinity : 0,
-            repeatDelay: 3,
-          }}
-        >
-          <Star className="text-white drop-shadow-lg" size="sm" />
-        </motion.div>
-        </div>
+      {/* Bordure gradient */}
+      <div className="bg-gradient-to-br from-[#775CFF] to-[#EBABFF] p-[2px] rounded-3xl h-full hover:shadow-2xl hover:shadow-[#775CFF]/20 transition-all duration-300">
+        <div className="bg-[#FFFFF6] rounded-3xl overflow-hidden h-full flex flex-col">
 
-        <div className="p-6 flex flex-col flex-grow">
-        <motion.div
-          animate={isHovered ? { y: [0, -3, 0] } : {}}
-          transition={{
-            duration: 1,
-            repeat: isHovered ? Infinity : 0,
-            repeatDelay: 2,
-          }}
-        >
-          <GradientText
-            as="h3"
-            gradient="primary"
-            className="text-2xl font-bold mb-3"
-          >
-            {artist.name}
-          </GradientText>
-        </motion.div>
+          {/* Image Container */}
+          <div className="relative aspect-square overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentImageIndex}
+                src={images[currentImageIndex]}
+                alt={artist.name}
+                className="w-full h-full object-cover"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05 }}
+              />
+            </AnimatePresence>
 
-        <div className="relative flex-grow mb-4">
-          <p className={`text-[#0B0B0B]/70 mb-2 ${expanded ? "" : "line-clamp-4"}`}>
-            {artist.description}
-          </p>
+            {/* Boutons de navigation pour images multiples */}
+            {hasMultipleImages && (
+              <>
+                <motion.button
+                  onClick={handlePrevImage}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white z-10"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronLeft size={20} className="text-[#0B0B0B]" />
+                </motion.button>
 
-          {artist.description.length > 150 && (
-            <motion.button
-              onClick={() => setExpanded(!expanded)}
-              className="text-[#775CFF] hover:text-[#EBABFF] transition-colors flex items-center text-sm font-medium mt-1"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {expanded ? (
-                <>
-                  Voir moins <ChevronUp size={16} className="ml-1" />
-                </>
-              ) : (
-                <>
-                  Lire plus <ChevronDown size={16} className="ml-1" />
-                </>
-              )}
-            </motion.button>
-          )}
-        </div>
+                <motion.button
+                  onClick={handleNextImage}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white z-10"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronRight size={20} className="text-[#0B0B0B]" />
+                </motion.button>
 
-        <div className="flex space-x-4 mt-auto">
-          {artist.socialLinks.spotify && (
-            <motion.a
-              href={artist.socialLinks.spotify}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#0B0B0B]/60 hover:text-[#775CFF] transition-colors z-10"
-              onClick={(e) => e.stopPropagation()}
-              whileHover={{ scale: 1.2, y: -2 }}
-              whileTap={{ scale: 0.9 }}
+                {/* Indicateurs de points */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentImageIndex(index);
+                      }}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex
+                          ? "bg-white w-6"
+                          : "bg-white/50 hover:bg-white/75"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {/* Overlay au hover avec liens sociaux */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-[#0B0B0B]/40 to-transparent flex items-end justify-center pb-6"
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
             >
-              <Music size={20} />
-            </motion.a>
-          )}
-          {artist.socialLinks.instagram && (
-            <motion.a
-              href={artist.socialLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#0B0B0B]/60 hover:text-[#775CFF] transition-colors z-10"
-              onClick={(e) => e.stopPropagation()}
-              whileHover={{ scale: 1.2, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Instagram size={20} />
-            </motion.a>
-          )}
-          {artist.socialLinks.website && (
-            <motion.a
-              href={artist.socialLinks.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#0B0B0B]/60 hover:text-[#775CFF] transition-colors z-10"
-              onClick={(e) => e.stopPropagation()}
-              whileHover={{ scale: 1.2, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Globe size={20} />
-            </motion.a>
-          )}
-        </div>
+              <div className="flex gap-4">
+                {artist.socialLinks.spotify && (
+                  <motion.a
+                    href={artist.socialLinks.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Music size={20} className="text-white" />
+                  </motion.a>
+                )}
+                {artist.socialLinks.instagram && (
+                  <motion.a
+                    href={artist.socialLinks.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Instagram size={20} className="text-white" />
+                  </motion.a>
+                )}
+                {artist.socialLinks.website && (
+                  <motion.a
+                    href={artist.socialLinks.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Globe size={20} className="text-white" />
+                  </motion.a>
+                )}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Contenu */}
+          <div className="p-6 flex flex-col flex-grow">
+            <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-[#775CFF] to-[#EBABFF] text-transparent bg-clip-text">
+              {artist.name}
+            </h3>
+
+            <p className="text-[#0B0B0B]/70 text-sm leading-relaxed line-clamp-3">
+              {artist.description}
+            </p>
+          </div>
+
         </div>
       </div>
     </motion.div>

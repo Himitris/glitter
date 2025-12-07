@@ -8,6 +8,7 @@ import { eventServices, pastExperiences } from '../data/services';
 import { typography } from '../utils/theme';
 import ColorfulBackground from '../components/ui/ColorfulBackground';
 import AnimatedGradientText from '../components/ui/AnimatedGradientText';
+import HighlightBadge from '../components/ui/HighlightBadge';
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
@@ -55,14 +56,21 @@ const Services = () => {
               Nos Services
             </AnimatedGradientText>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-[#0B0B0B]/80"
+              className="text-xl md:text-2xl text-[#0B0B0B]/80 flex flex-wrap items-center justify-center gap-2"
             >
-              Des services adaptés aux besoins des artistes et des événements
-            </motion.p>
+              <span>Des services</span>
+              <HighlightBadge color="yellow" rotation={-2}>
+                COMPLETS
+              </HighlightBadge>
+              <span>et</span>
+              <HighlightBadge color="yellow" rotation={2}>
+                PROFESSIONNELS
+              </HighlightBadge>
+            </motion.div>
           </div>
         </ColorfulBackground>
 
@@ -79,10 +87,13 @@ const Services = () => {
               </GradientText>
               <Star className="text-[#FFFF73]" size="sm" />
             </div>
-            <p className="text-[#0B0B0B]/70">
-              Glitter Productions propose des services de régie pour tous types
-              d'événements artistiques.
-            </p>
+            <div className="text-[#0B0B0B]/70 flex flex-wrap items-center justify-center gap-2">
+              <span>Glitter Productions propose des services</span>
+              <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
+                DE RÉGIE
+              </HighlightBadge>
+              <span>pour tous types d'événements artistiques.</span>
+            </div>
           </div>
 
           <div

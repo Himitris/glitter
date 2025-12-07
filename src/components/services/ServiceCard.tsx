@@ -21,12 +21,12 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description
     Users
   }[icon] || Music;
 
-  // Associe chaque couleur au département correspondant
+  // Associe chaque couleur au département correspondant - Amélioration de la lisibilité du jaune
   const colorMap = {
     "production": "text-[#775CFF]",
     "administration": "text-[#EBABFF]",
     "management": "text-[#FF7A42]",
-    "prestation": "text-[#FFFF73]"
+    "prestation": "text-[#D4A500]" // Jaune plus foncé pour meilleure lisibilité
   };
 
   // Bordures gradient par couleur
@@ -34,57 +34,74 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description
     "production": 'from-[#775CFF] to-[#EBABFF]',
     "administration": 'from-[#EBABFF] to-[#FF7A42]',
     "management": 'from-[#FF7A42] to-[#EBABFF]',
-    "prestation": 'from-[#FFFF73] to-[#EBABFF]'
+    "prestation": 'from-[#D4A500] to-[#EBABFF]' // Jaune doré
   };
 
-  // Couleurs très subtiles pour les icônes
+  // Couleurs pour les backgrounds d'icônes - plus visibles
   const iconBackgrounds = {
-    "production": 'from-[#775CFF]/10 to-[#EBABFF]/10',
-    "administration": 'from-[#EBABFF]/10 to-[#FF7A42]/10',
-    "management": 'from-[#FF7A42]/10 to-[#EBABFF]/10',
-    "prestation": 'from-[#FFFF73]/10 to-[#EBABFF]/10'
+    "production": 'from-[#775CFF]/15 to-[#EBABFF]/15',
+    "administration": 'from-[#EBABFF]/15 to-[#FF7A42]/15',
+    "management": 'from-[#FF7A42]/15 to-[#EBABFF]/15',
+    "prestation": 'from-[#D4A500]/15 to-[#EBABFF]/15'
+  };
+
+  // Couleurs pour les bullet points
+  const bulletColors = {
+    "production": 'bg-[#775CFF]',
+    "administration": 'bg-[#EBABFF]',
+    "management": 'bg-[#FF7A42]',
+    "prestation": 'bg-[#D4A500]'
   };
 
   return (
-    <div className="h-full">
-      {/* Bordure gradient subtile */}
-      <div className={`bg-gradient-to-br ${borderGradients[color]} p-[2px] rounded-3xl h-full hover:shadow-lg transition-shadow duration-300`}>
-        {/* Fond blanc pur, simple et élégant */}
-        <div className="relative bg-white rounded-3xl p-6 sm:p-8 h-full flex flex-col">
+    <motion.div
+      className="w-full h-full"
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+    >
+      {/* Bordure gradient avec ombre au hover */}
+      <div className={`bg-gradient-to-br ${borderGradients[color]} p-[2px] rounded-3xl h-[480px] hover:shadow-2xl hover:shadow-${color}/20 transition-all duration-300`}>
+        {/* Fond blanc avec hauteur fixe pour uniformité */}
+        <div className="relative bg-[#FFFFF6] rounded-3xl p-6 sm:p-8 h-[476px] flex flex-col overflow-hidden">
 
-          {/* Icon avec fond subtil */}
-          <div className="relative w-14 h-14 mb-5">
-            <div className={`absolute inset-0 bg-gradient-to-br ${iconBackgrounds[color]} rounded-xl`} />
+          {/* Icon avec fond plus prononcé */}
+          <div className="relative w-16 h-16 mb-6">
+            <div className={`absolute inset-0 bg-gradient-to-br ${iconBackgrounds[color]} rounded-2xl backdrop-blur-sm`} />
             <div className="relative flex items-center justify-center h-full">
-              <IconComponent className={`w-7 h-7 ${colorMap[color]}`} strokeWidth={2} />
+              <IconComponent className={`w-8 h-8 ${colorMap[color]}`} strokeWidth={2.5} />
             </div>
           </div>
 
-          {/* Title with gradient text */}
-          <GradientText as="h3" gradient={color} className="text-xl sm:text-2xl font-bold mb-3">
+          {/* Title avec meilleure hiérarchie */}
+          <h3 className={`text-xl sm:text-2xl font-bold mb-4 ${colorMap[color]}`}>
             {title}
-          </GradientText>
+          </h3>
 
-          <p className="text-[#0B0B0B]/60 mb-5 flex-grow text-sm sm:text-base leading-relaxed">
+          {/* Description - flex-grow pour pousser la liste en bas */}
+          <p className="text-[#0B0B0B]/60 mb-6 text-sm sm:text-base leading-relaxed">
             {description}
           </p>
 
-          {/* Liste des features */}
-          <ul className="space-y-2.5">
+          {/* Liste des features - toujours à la même hauteur */}
+          <ul className="space-y-3 mt-auto">
             {features.map((feature, index) => (
-              <li
+              <motion.li
                 key={index}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
                 className="flex items-start text-[#0B0B0B]/70 text-sm sm:text-base"
               >
-                {/* Simple dot coloré */}
-                <div className={`w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-gradient-to-r ${colors.gradient[color]}`} />
+                {/* Bullet point coloré plus visible */}
+                <div className={`w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0 ${bulletColors[color]}`} />
                 <span className="leading-relaxed">{feature}</span>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 });
 

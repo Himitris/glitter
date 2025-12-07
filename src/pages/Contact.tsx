@@ -12,6 +12,7 @@ import ColorfulBackground from "../components/ui/ColorfulBackground";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
+import HighlightBadge from "../components/ui/HighlightBadge";
 
 const Contact = () => {
   const { showToast } = useToast();
@@ -103,14 +104,18 @@ const Contact = () => {
               Contactez-nous
             </AnimatedGradientText>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-white/95 drop-shadow-md"
+              className="text-xl md:text-2xl text-white/95 drop-shadow-md flex flex-wrap items-center justify-center gap-2"
             >
-              Discutons de votre projet ensemble
-            </motion.p>
+              <span>Discutons de votre</span>
+              <HighlightBadge color="yellow" rotation={-2}>
+                PROJET
+              </HighlightBadge>
+              <span>ensemble</span>
+            </motion.div>
           </div>
         </ColorfulBackground>
         <Section>
@@ -127,11 +132,13 @@ const Contact = () => {
                 </GradientText>
                 <Star className="text-[#775CFF]" size="sm" />
               </div>
-              <p className="text-[#0B0B0B]/70 max-w-2xl mx-auto">
-                Que vous soyez un artiste cherchant un accompagnement ou un
-                organisateur d'événement, nous sommes là pour vous aider à faire
-                briller votre projet.
-              </p>
+              <div className="text-[#0B0B0B]/70 max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-2">
+                <span>Que vous soyez un artiste cherchant un accompagnement ou un organisateur d'événement, nous sommes là pour vous aider à faire</span>
+                <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
+                  BRILLER
+                </HighlightBadge>
+                <span>votre projet.</span>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-12">

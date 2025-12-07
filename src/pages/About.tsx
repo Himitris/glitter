@@ -7,6 +7,7 @@ import { Instagram } from "lucide-react";
 import { typography } from "../utils/theme";
 import ColorfulBackground from "../components/ui/ColorfulBackground";
 import AnimatedGradientText from "../components/ui/AnimatedGradientText";
+import HighlightBadge from "../components/ui/HighlightBadge";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 
@@ -60,15 +61,18 @@ const About = () => {
             >
               À Propos de Nous
             </AnimatedGradientText>
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-white/95 drop-shadow-md"
+              className="text-xl md:text-2xl text-white/95 drop-shadow-md flex flex-wrap items-center justify-center gap-2"
             >
-              Une structure dédiée à la production, l'administration et le
-              management
-            </motion.p>
+              <span>Une structure</span>
+              <HighlightBadge color="yellow" rotation={-1}>
+                DÉDIÉE
+              </HighlightBadge>
+              <span>à la production, l'administration et le management</span>
+            </motion.div>
           </div>
         </ColorfulBackground>
 
@@ -90,11 +94,12 @@ const About = () => {
               l'administration et le management dans le domaine de la musique et
               du spectacle vivant, située entre les Landes et le Tarn.
             </p>
-            <p className="text-[#0B0B0B]/70">
-              Forte de la passion et de l'expertise de ses fondatrices, Glitter
-              Productions propose des services adaptés aux besoins des artistes
-              et des événements artistiques en se positionnant comme un
-              véritable partenaire.
+            <p className="text-[#0B0B0B]/70 flex flex-wrap items-center justify-center gap-2">
+              <span>Forte de la passion et de l'expertise de ses fondatrices, Glitter Productions propose des services</span>
+              <HighlightBadge color="yellow" rotation={1}>
+                ADAPTÉS
+              </HighlightBadge>
+              <span>aux besoins des artistes et des événements artistiques en se positionnant comme un véritable partenaire.</span>
             </p>
           </div>
         </Section>
