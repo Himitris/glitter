@@ -55,7 +55,7 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description
 
   return (
     <motion.div
-      className="h-full"
+      className="w-full h-full"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
