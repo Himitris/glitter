@@ -163,7 +163,7 @@ const Home = () => {
               </div>
               <div className="text-[#0B0B0B]/70 max-w-2xl mx-auto mt-4 flex flex-wrap items-center justify-center gap-2">
                 <span>Découvrez notre gamme</span>
-                <HighlightBadge color="violet" rotation={-1} className="text-sm md:text-base">
+                <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
                   COMPLÈTE
                 </HighlightBadge>
                 <span>de services adaptés aux besoins des artistes et des organisateurs d'événements.</span>

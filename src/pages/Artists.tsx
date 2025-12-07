@@ -79,7 +79,7 @@ const Artists = () => {
               className="text-xl md:text-2xl text-[#0B0B0B]/80 flex flex-wrap items-center justify-center gap-2"
             >
               <span>Découvrez les</span>
-              <HighlightBadge color="violet" rotation={-2}>
+              <HighlightBadge color="yellow" rotation={-2}>
                 TALENTS
               </HighlightBadge>
               <span>qui nous font confiance</span>
@@ -151,7 +151,7 @@ const Artists = () => {
             </div>
             <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
               <span>Vous êtes un artiste et souhaitez collaborer avec nous ? Nous sommes toujours à la recherche de</span>
-              <HighlightBadge color="pink" rotation={1} className="text-sm md:text-base">
+              <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
                 NOUVEAUX TALENTS
               </HighlightBadge>
               <span>pour enrichir notre communauté.</span>

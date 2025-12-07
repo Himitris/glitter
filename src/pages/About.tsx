@@ -68,7 +68,7 @@ const About = () => {
               className="text-xl md:text-2xl text-white/95 drop-shadow-md flex flex-wrap items-center justify-center gap-2"
             >
               <span>Une structure</span>
-              <HighlightBadge color="pink" rotation={-1}>
+              <HighlightBadge color="yellow" rotation={-1}>
                 DÉDIÉE
               </HighlightBadge>
               <span>à la production, l'administration et le management</span>

@@ -111,7 +111,7 @@ const DJs = () => {
               className="text-xl md:text-2xl text-[#0B0B0B]/80 flex flex-wrap items-center justify-center gap-2"
             >
               <span>Découvrez les</span>
-              <HighlightBadge color="orange" rotation={-2}>
+              <HighlightBadge color="yellow" rotation={-2}>
                 DJs & PRODUCTEURS
               </HighlightBadge>
               <span>qui nous font confiance</span>

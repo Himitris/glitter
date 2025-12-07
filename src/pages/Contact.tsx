@@ -111,7 +111,7 @@ const Contact = () => {
               className="text-xl md:text-2xl text-white/95 drop-shadow-md flex flex-wrap items-center justify-center gap-2"
             >
               <span>Discutons de votre</span>
-              <HighlightBadge color="orange" rotation={-2}>
+              <HighlightBadge color="yellow" rotation={-2}>
                 PROJET
               </HighlightBadge>
               <span>ensemble</span>
@@ -134,7 +134,7 @@ const Contact = () => {
               </div>
               <div className="text-[#0B0B0B]/70 max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-2">
                 <span>Que vous soyez un artiste cherchant un accompagnement ou un organisateur d'événement, nous sommes là pour vous aider à faire</span>
-                <HighlightBadge color="pink" rotation={1} className="text-sm md:text-base">
+                <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
                   BRILLER
                 </HighlightBadge>
                 <span>votre projet.</span>
