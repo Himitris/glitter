@@ -1,6 +1,6 @@
 import { Instagram, Mail } from "lucide-react";
 import { motion } from "framer-motion";
-import LogoSVG from "../ui/LogoSVG";
+import { LogoSVG } from "../ui";
 
 const Footer = () => {
   return (

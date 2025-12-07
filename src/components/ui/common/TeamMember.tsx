@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Instagram, Globe, Music } from 'lucide-react';
-import GradientText from './GradientText';
-import Star from './Star';
+import { GradientText } from '../text';
+import { Star } from '../decorative';
 
 interface TeamMemberProps {
   name: string;

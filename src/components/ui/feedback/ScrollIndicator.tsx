@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { useThrottledScroll } from '../../hooks/useThrottledScroll';
+import { useThrottledScroll } from '../../../hooks/useThrottledScroll';
 
 const ScrollIndicator = () => {
   const [scrollPercentage, setScrollPercentage] = useState(0);

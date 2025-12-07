@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
-import { useThrottledScroll } from '../../hooks/useThrottledScroll';
+import { useThrottledScroll } from '../../../hooks/useThrottledScroll';
 
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);

@@ -3,7 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
-import LogoSVG from '../ui/LogoSVG';
+import { LogoSVG } from "../ui";
 import { useThrottledScroll } from '../../hooks/useThrottledScroll';
 
 const Header = () => {

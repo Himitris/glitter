@@ -1,5 +1,5 @@
 import React from 'react';
-import { components, effects } from '../../utils/theme';
+import { components, effects } from '../../../utils/theme';
 
 interface CardProps {
   children: React.ReactNode;
