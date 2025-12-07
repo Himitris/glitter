@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,23 +14,25 @@ import ScrollToTop from "./components/layout/ScrollToTop";
 import PageTransition from "./components/layout/PageTransition";
 import ScrollIndicator from "./components/ui/ScrollIndicator";
 import BackToTop from "./components/ui/BackToTop";
+import Loader from "./components/ui/Loader";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ToastProvider } from "./contexts/ToastContext";
 
-// Pages
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Artists from "./pages/Artists";
-import DJs from "./pages/DJS";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
-import Success from "./pages/Success";
+// Pages - Lazy loaded for better performance
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Artists = lazy(() => import("./pages/Artists"));
+const DJs = lazy(() => import("./pages/DJS"));
+const Services = lazy(() => import("./pages/Services"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Success = lazy(() => import("./pages/Success"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const ArtistForm = lazy(() => import("./pages/ArtistForm"));
+const DeleteConfirmation = lazy(() => import("./pages/DeleteConfirmation"));
+
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import AdminLogin from "./pages/AdminLogin";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
-import AdminDashboard from "./pages/AdminDashboard";
-import ArtistForm from "./pages/ArtistForm";
-import DeleteConfirmation from "./pages/DeleteConfirmation";
 
 // AnimatedRoutes component pour permettre les transitions de page
 const AnimatedRoutes = () => {
@@ -39,7 +41,14 @@ const AnimatedRoutes = () => {
 
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center bg-[#FFFFF6]">
+            <Loader size="lg" />
+          </div>
+        }
+      >
+        <Routes location={location} key={location.pathname}>
         <Route
           path="/"
           element={
@@ -181,6 +190,7 @@ const AnimatedRoutes = () => {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };

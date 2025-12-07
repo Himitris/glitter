@@ -1,5 +1,5 @@
 // Créez un nouveau fichier src/contexts/ThemeContext.tsx
-import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useEffect, ReactNode, useMemo, useCallback } from 'react';
 
 type ThemeType = 'dark';
 
@@ -25,15 +25,26 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme] = useState<ThemeType>('dark');
-  const [gradientIntensity, setGradientIntensity] = useState(70);
+  const [gradientIntensity, setGradientIntensityState] = useState(70);
 
   useEffect(() => {
     // Appliquer l'intensité du gradient aux variables CSS
     document.documentElement.style.setProperty('--gradient-opacity', `${gradientIntensity / 100}`);
   }, [gradientIntensity]);
 
+  // Mémoriser la fonction setter
+  const setGradientIntensity = useCallback((intensity: number) => {
+    setGradientIntensityState(intensity);
+  }, []);
+
+  // Mémoriser la valeur du contexte
+  const value = useMemo(
+    () => ({ theme, gradientIntensity, setGradientIntensity }),
+    [theme, gradientIntensity, setGradientIntensity]
+  );
+
   return (
-    <ThemeContext.Provider value={{ theme, gradientIntensity, setGradientIntensity }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );

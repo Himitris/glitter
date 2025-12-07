@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Instagram, Globe, Music } from 'lucide-react';
 import GradientText from './GradientText';
 import Star from './Star';
@@ -16,26 +16,26 @@ interface TeamMemberProps {
   };
 }
 
-const TeamMember: React.FC<TeamMemberProps> = ({ 
-  name, 
-  role, 
-  image, 
-  description, 
+const TeamMember: React.FC<TeamMemberProps> = memo(({
+  name,
+  role,
+  image,
+  description,
   department = 'production',
-  socialLinks 
+  socialLinks
 }) => {
-  // Map des couleurs par département
+  // Map des couleurs par département - Charte graphique 2025
   const colorMap = {
-    'production': '#8C52FF',
-    'administration': '#FF4D8F',
-    'management': '#FF8C60',
-    'prestation': '#FFC74F'
+    'production': '#775CFF',
+    'administration': '#EBABFF',
+    'management': '#FF7A42',
+    'prestation': '#FFFF73'
   };
-  
+
   const departmentColor = colorMap[department];
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden group">
+    <div className="bg-white border border-[#0B0B0B]/10 rounded-2xl overflow-hidden group">
       <div className="aspect-square relative overflow-hidden">
         <img
           src={image}
@@ -101,6 +101,8 @@ const TeamMember: React.FC<TeamMemberProps> = ({
       </div>
     </div>
   );
-};
+});
+
+TeamMember.displayName = 'TeamMember';
 
 export default TeamMember;

@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 import LogoSVG from '../ui/LogoSVG';
+import { useThrottledScroll } from '../../hooks/useThrottledScroll';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,28 +12,25 @@ const Header = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
-  // Effet pour la gestion du défilement et de la visibilité de la navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      
-      // Définir si l'on a scrollé 
-      setIsScrolled(currentScrollPos > 20);
+  // Optimisé avec throttling pour améliorer les performances
+  const handleScroll = useCallback(() => {
+    const currentScrollPos = window.scrollY;
 
-      // Basculer la visibilité en fonction de la direction du scroll
-      // Ne pas cacher la navbar si on est en haut de la page
-      if (currentScrollPos <= 20) {
-        setVisible(true);
-      } else {
-        setVisible(prevScrollPos > currentScrollPos || isMenuOpen);
-      }
-      
-      setPrevScrollPos(currentScrollPos);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Définir si l'on a scrollé
+    setIsScrolled(currentScrollPos > 20);
+
+    // Basculer la visibilité en fonction de la direction du scroll
+    // Ne pas cacher la navbar si on est en haut de la page
+    if (currentScrollPos <= 20) {
+      setVisible(true);
+    } else {
+      setVisible(prevScrollPos > currentScrollPos || isMenuOpen);
+    }
+
+    setPrevScrollPos(currentScrollPos);
   }, [prevScrollPos, isMenuOpen]);
+
+  useThrottledScroll(handleScroll, 100);
 
   // Empêcher le défilement du body quand le menu mobile est ouvert
   useEffect(() => {

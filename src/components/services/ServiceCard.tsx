@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Music, Film, Calendar, FileText, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import GradientText from '../ui/GradientText';
@@ -12,7 +12,7 @@ interface ServiceCardProps {
   color: "production" | "administration" | "management" | "prestation";
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ title, icon, description, features, color }) => {
+const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description, features, color }) => {
   const IconComponent = {
     Music,
     Film,
@@ -86,6 +86,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, icon, description, fea
       </div>
     </div>
   );
-};
+});
+
+ServiceCard.displayName = 'ServiceCard';
 
 export default ServiceCard;

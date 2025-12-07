@@ -1,5 +1,5 @@
 // Créez un nouveau fichier src/contexts/ToastContext.tsx
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useMemo, useCallback } from 'react';
 import Toast from '../components/ui/Toast';
 
 type ToastType = 'success' | 'error' | 'info';
@@ -33,16 +33,24 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     isVisible: false,
   });
 
-  const showToast = (message: string, type: ToastType) => {
+  // Mémoriser la fonction showToast
+  const showToast = useCallback((message: string, type: ToastType) => {
     setToast({ message, type, isVisible: true });
-  };
+  }, []);
 
-  const hideToast = () => {
+  // Mémoriser la fonction hideToast
+  const hideToast = useCallback(() => {
     setToast((prev) => ({ ...prev, isVisible: false }));
-  };
+  }, []);
+
+  // Mémoriser la valeur du contexte
+  const value = useMemo(
+    () => ({ showToast }),
+    [showToast]
+  );
 
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={value}>
       {children}
       <Toast
         message={toast.message}

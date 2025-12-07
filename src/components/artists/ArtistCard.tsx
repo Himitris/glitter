@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { motion } from "framer-motion";
 import { Music, Instagram, Globe, ChevronDown, ChevronUp } from "lucide-react";
 import { Artist } from "../../types";
@@ -10,7 +10,7 @@ interface ArtistCardProps {
   artist: Artist;
 }
 
-const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
+const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
   const [expanded, setExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -154,6 +154,8 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
       </div>
     </motion.div>
   );
-};
+});
+
+ArtistCard.displayName = 'ArtistCard';
 
 export default ArtistCard;
