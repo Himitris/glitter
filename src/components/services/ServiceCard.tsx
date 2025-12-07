@@ -60,9 +60,9 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
       {/* Bordure gradient avec ombre au hover */}
-      <div className={`bg-gradient-to-br ${borderGradients[color]} p-[2px] rounded-3xl h-full min-h-[440px] hover:shadow-2xl hover:shadow-${color}/20 transition-all duration-300`}>
-        {/* Fond blanc avec hauteur minimale fixe pour uniformité */}
-        <div className="relative bg-[#FFFFF6] rounded-3xl p-6 sm:p-8 h-full min-h-[436px] flex flex-col">
+      <div className={`bg-gradient-to-br ${borderGradients[color]} p-[2px] rounded-3xl h-[480px] hover:shadow-2xl hover:shadow-${color}/20 transition-all duration-300`}>
+        {/* Fond blanc avec hauteur fixe pour uniformité */}
+        <div className="relative bg-[#FFFFF6] rounded-3xl p-6 sm:p-8 h-[476px] flex flex-col overflow-hidden">
 
           {/* Icon avec fond plus prononcé */}
           <div className="relative w-16 h-16 mb-6">
