@@ -77,9 +77,9 @@ const Services = () => {
               >
                 Services aux Organisateurs d'Événements
               </GradientText>
-              <Star className="text-[#FFC74F]" size="sm" />
+              <Star className="text-[#FFFF73]" size="sm" />
             </div>
-            <p className="text-gray-600">
+            <p className="text-[#0B0B0B]/70">
               Glitter Productions propose des services de régie pour tous types
               d'événements artistiques.
             </p>
@@ -97,17 +97,17 @@ const Services = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="h-full"
               >
-                <div className="h-full bg-white border border-gray-200 rounded-xl overflow-hidden group hover:shadow-sm hover:border-[#FF4D8F]/30 transition-all p-5">
+                <div className="h-full bg-white border border-[#0B0B0B]/10 rounded-xl overflow-hidden group hover:shadow-sm hover:border-[#EBABFF]/30 transition-all p-5">
                   <div className="flex items-center gap-3 mb-3">
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center bg-${
                         service.color === "production"
-                          ? "[#8C52FF]"
+                          ? "[#775CFF]"
                           : service.color === "administration"
-                          ? "[#FF4D8F]"
+                          ? "[#EBABFF]"
                           : service.color === "management"
-                          ? "[#FF8C60]"
-                          : "[#FFC74F]"
+                          ? "[#FF7A42]"
+                          : "[#FFFF73]"
                       }/10`}
                     >
                       {service.icon === "Users" ? (
@@ -115,12 +115,12 @@ const Services = () => {
                           size={18}
                           className={`text-${
                             service.color === "production"
-                              ? "[#8C52FF]"
+                              ? "[#775CFF]"
                               : service.color === "administration"
-                              ? "[#FF4D8F]"
+                              ? "[#EBABFF]"
                               : service.color === "management"
-                              ? "[#FF8C60]"
-                              : "[#FFC74F]"
+                              ? "[#FF7A42]"
+                              : "[#FFFF73]"
                           }`}
                         />
                       ) : service.icon === "Briefcase" ? (
@@ -128,12 +128,12 @@ const Services = () => {
                           size={18}
                           className={`text-${
                             service.color === "production"
-                              ? "[#8C52FF]"
+                              ? "[#775CFF]"
                               : service.color === "administration"
-                              ? "[#FF4D8F]"
+                              ? "[#EBABFF]"
                               : service.color === "management"
-                              ? "[#FF8C60]"
-                              : "[#FFC74F]"
+                              ? "[#FF7A42]"
+                              : "[#FFFF73]"
                           }`}
                         />
                       ) : service.icon === "FileText" ? (
@@ -141,12 +141,12 @@ const Services = () => {
                           size={18}
                           className={`text-${
                             service.color === "production"
-                              ? "[#8C52FF]"
+                              ? "[#775CFF]"
                               : service.color === "administration"
-                              ? "[#FF4D8F]"
+                              ? "[#EBABFF]"
                               : service.color === "management"
-                              ? "[#FF8C60]"
-                              : "[#FFC74F]"
+                              ? "[#FF7A42]"
+                              : "[#FFFF73]"
                           }`}
                         />
                       ) : service.icon === "MapPin" ? (
@@ -154,12 +154,12 @@ const Services = () => {
                           size={18}
                           className={`text-${
                             service.color === "production"
-                              ? "[#8C52FF]"
+                              ? "[#775CFF]"
                               : service.color === "administration"
-                              ? "[#FF4D8F]"
+                              ? "[#EBABFF]"
                               : service.color === "management"
-                              ? "[#FF8C60]"
-                              : "[#FFC74F]"
+                              ? "[#FF7A42]"
+                              : "[#FFFF73]"
                           }`}
                         />
                       ) : (
@@ -167,12 +167,12 @@ const Services = () => {
                           size={18}
                           className={`text-${
                             service.color === "production"
-                              ? "[#8C52FF]"
+                              ? "[#775CFF]"
                               : service.color === "administration"
-                              ? "[#FF4D8F]"
+                              ? "[#EBABFF]"
                               : service.color === "management"
-                              ? "[#FF8C60]"
-                              : "[#FFC74F]"
+                              ? "[#FF7A42]"
+                              : "[#FFFF73]"
                           }`}
                         />
                       )}
@@ -193,7 +193,7 @@ const Services = () => {
                       {service.title}
                     </GradientText>
                   </div>
-                  <p className="text-gray-600 text-sm mb-3">
+                  <p className="text-[#0B0B0B]/70 text-sm mb-3">
                     {service.description}
                   </p>
                 </div>
@@ -205,7 +205,7 @@ const Services = () => {
         <Section>
           <div className="max-w-3xl mx-auto text-center mb-16">
             <div className="flex justify-center items-center gap-2 mb-4">
-              <Star className="text-[#8C52FF]" size="sm" />
+              <Star className="text-[#775CFF]" size="sm" />
               <GradientText
                 as="h2"
                 gradient="production"
@@ -213,9 +213,9 @@ const Services = () => {
               >
                 Nos Réalisations
               </GradientText>
-              <Star className="text-[#8C52FF]" size="sm" />
+              <Star className="text-[#775CFF]" size="sm" />
             </div>
-            <p className="text-gray-600">
+            <p className="text-[#0B0B0B]/70">
               Découvrez quelques-unes de nos expériences récentes dans
               l'organisation et la production d'événements.
             </p>
@@ -231,12 +231,12 @@ const Services = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={experiencesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#8C52FF]/10 transition-all h-full"
+                className="bg-white border border-[#0B0B0B]/10 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#775CFF]/10 transition-all h-full"
               >
                 {/* Structure horizontale avec logo à gauche et contenu à droite */}
                 <div className="grid grid-cols-4 h-full">
                   {/* Logo container - 1/4 de la largeur */}
-                  <div className="bg-gradient-to-br from-[#8C52FF]/5 to-[#FF4D8F]/5 flex items-center justify-center p-3">
+                  <div className="bg-gradient-to-br from-[#775CFF]/5 to-[#EBABFF]/5 flex items-center justify-center p-3">
                     <div className="w-full aspect-square bg-white rounded-lg shadow-sm flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105">
                       <img
                         src={exp.logo}
@@ -256,17 +256,17 @@ const Services = () => {
                       >
                         {exp.title}
                       </GradientText>
-                      <span className="bg-[#8C52FF]/10 text-[#8C52FF] px-2 py-1 rounded-full text-xs font-medium">
+                      <span className="bg-[#775CFF]/10 text-[#775CFF] px-2 py-1 rounded-full text-xs font-medium">
                         {exp.year}
                       </span>
                     </div>
 
-                    <div className="flex items-center text-gray-600 mb-2 text-xs">
-                      <MapPin size={12} className="mr-1 text-[#FF4D8F]" />
+                    <div className="flex items-center text-[#0B0B0B]/70 mb-2 text-xs">
+                      <MapPin size={12} className="mr-1 text-[#EBABFF]" />
                       <span>{exp.location}</span>
                     </div>
 
-                    <p className="text-gray-600 text-sm mb-3">
+                    <p className="text-[#0B0B0B]/70 text-sm mb-3">
                       {exp.description}
                     </p>
 
@@ -274,7 +274,7 @@ const Services = () => {
                       {exp.services.map((service, serviceIndex) => (
                         <span
                           key={serviceIndex}
-                          className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full text-xs"
+                          className="bg-[#0B0B0B]/5 text-[#0B0B0B] px-2 py-0.5 rounded-full text-xs"
                         >
                           {service}
                         </span>
@@ -291,7 +291,7 @@ const Services = () => {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-gradient-to-r from-[#8C52FF] via-[#FF4D8F] to-[#FF8C60] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity uppercase tracking-wider text-sm"
+              className="inline-block bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity uppercase tracking-wider text-sm"
             >
               Discuter de votre projet
             </motion.a>

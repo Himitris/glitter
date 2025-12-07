@@ -160,7 +160,7 @@ const DJs = () => {
           )}
 
           {djs.length === 0 && !loading && (
-            <div className="text-center text-gray-500 py-12">
+            <div className="text-center text-[#0B0B0B]/50 py-12">
               <p className="mb-4">Aucun DJ trouvé dans cette catégorie.</p>
               <Star className="text-[#775CFF] mx-auto" size="md" />
             </div>

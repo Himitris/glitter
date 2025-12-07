@@ -102,7 +102,7 @@ const About = () => {
         <Section>
           <div className="text-center mb-12">
             <div className="flex justify-center items-center gap-2 mb-6">
-              <Star className="text-[#8C52FF]" size="sm" />
+              <Star className="text-[#775CFF]" size="sm" />
               <GradientText
                 as="h2"
                 gradient="management"
@@ -110,7 +110,7 @@ const About = () => {
               >
                 Nos Fondatrices
               </GradientText>
-              <Star className="text-[#8C52FF]" size="sm" />
+              <Star className="text-[#775CFF]" size="sm" />
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-8 mb-16">
@@ -128,7 +128,7 @@ const About = () => {
           </div>
 
           <div className="text-center mt-16">
-            <p className="text-gray-600 mb-8">
+            <p className="text-[#0B0B0B]/70 mb-8">
               Leur complémentarité et leur vision commune de l'accompagnement
               artistique sont au cœur de la réussite de Glitter Productions.
             </p>
@@ -137,7 +137,7 @@ const About = () => {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 text-[#FF4D8F] hover:text-[#FF8C60] transition-colors"
+              className="inline-flex items-center gap-2 text-[#EBABFF] hover:text-[#FF7A42] transition-colors"
             >
               <Instagram size={20} />
               @glitter_prod

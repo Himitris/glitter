@@ -131,7 +131,7 @@ const Artists = () => {
           )}
         </Section>
 
-        <Section className="bg-gray-50">
+        <Section className="bg-[#FFFFF6]">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center items-center gap-2 mb-6">
               <Star className="text-[#775CFF]" size="sm" />

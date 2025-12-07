@@ -319,7 +319,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-r from-[#FF7A42] to-[#FFC74F] p-3 rounded-full">
+                    <div className="bg-gradient-to-r from-[#FF7A42] to-[#FFFF73] p-3 rounded-full">
                       <Instagram className="w-6 h-6 text-white" />
                     </div>
                     <div>
