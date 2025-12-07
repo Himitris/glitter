@@ -1,6 +1,6 @@
-import React, { memo } from "react";
-import { motion } from "framer-motion";
-import { Music, Instagram, Globe } from "lucide-react";
+import React, { memo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Music, Instagram, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { Artist } from "../../types";
 
 interface ArtistCardProps {
@@ -8,9 +8,20 @@ interface ArtistCardProps {
 }
 
 const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
-  // Obtenir la première image (ou l'image unique)
-  const mainImage = Array.isArray(artist.image) ? artist.image[0] : artist.image;
-  const hasMultipleImages = Array.isArray(artist.image) && artist.image.length > 1;
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const images = Array.isArray(artist.image) ? artist.image : [artist.image];
+  const hasMultipleImages = images.length > 1;
+
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <motion.div
@@ -24,21 +35,68 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
 
           {/* Image Container */}
           <div className="relative aspect-square overflow-hidden">
-            <img
-              src={mainImage}
-              alt={artist.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            />
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentImageIndex}
+                src={images[currentImageIndex]}
+                alt={artist.name}
+                className="w-full h-full object-cover"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05 }}
+              />
+            </AnimatePresence>
 
-            {/* Indicateur d'images multiples */}
+            {/* Boutons de navigation pour images multiples */}
             {hasMultipleImages && (
-              <div className="absolute bottom-3 right-3 bg-[#0B0B0B]/60 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium">
-                +{Array.isArray(artist.image) ? artist.image.length - 1 : 0}
-              </div>
+              <>
+                <motion.button
+                  onClick={handlePrevImage}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white z-10"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronLeft size={20} className="text-[#0B0B0B]" />
+                </motion.button>
+
+                <motion.button
+                  onClick={handleNextImage}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white z-10"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronRight size={20} className="text-[#0B0B0B]" />
+                </motion.button>
+
+                {/* Indicateurs de points */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentImageIndex(index);
+                      }}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex
+                          ? "bg-white w-6"
+                          : "bg-white/50 hover:bg-white/75"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
             )}
 
             {/* Overlay au hover avec liens sociaux */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-[#0B0B0B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-[#0B0B0B]/40 to-transparent flex items-end justify-center pb-6"
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="flex gap-4">
                 {artist.socialLinks.spotify && (
                   <motion.a
@@ -77,7 +135,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                   </motion.a>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Contenu */}
