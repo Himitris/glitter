@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Instagram, Send } from "lucide-react";
-import Section from "../components/ui/Section";
-import GradientText from "../components/ui/GradientText";
-import Star from "../components/ui/Star";
+import {
+  Section,
+  GradientText,
+  Star,
+  Loader,
+  ColorfulBackground,
+  AnimatedGradientText,
+  HighlightBadge,
+} from "../components/ui";
 import { typography } from "../utils/theme";
 import { useFormValidation } from "../hooks/useFormValidation";
 import { useToast } from "../contexts/ToastContext";
-import Loader from "../components/ui/Loader";
-import ColorfulBackground from "../components/ui/ColorfulBackground";
-import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
-import HighlightBadge from "../components/ui/HighlightBadge";
 
 const Contact = () => {
   const { showToast } = useToast();

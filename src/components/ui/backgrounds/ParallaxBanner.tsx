@@ -1,7 +1,7 @@
 // src/components/ui/ParallaxBanner.tsx
 import React, { useEffect, useState, useId } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import LazyImage from "./LazyImage"; // Utilisation du composant LazyImage existant
+import { LazyImage } from "../common"; // Utilisation du composant LazyImage existant
 
 interface ParallaxBannerProps {
   image: string;

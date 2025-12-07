@@ -2,9 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
-import Section from "../components/ui/Section";
-import ParallaxBanner from "../components/ui/ParallaxBanner";
-import AnimatedGradientText from "../components/ui/AnimatedGradientText";
+import { Section, ParallaxBanner, AnimatedGradientText } from "../components/ui";
 import Seo from "../components/seo/Seo";
 
 const Success = () => {

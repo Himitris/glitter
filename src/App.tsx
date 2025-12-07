@@ -12,9 +12,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import PageTransition from "./components/layout/PageTransition";
-import ScrollIndicator from "./components/ui/ScrollIndicator";
-import BackToTop from "./components/ui/BackToTop";
-import Loader from "./components/ui/Loader";
+import { ScrollIndicator, BackToTop, Loader } from "./components/ui";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ToastProvider } from "./contexts/ToastContext";
 

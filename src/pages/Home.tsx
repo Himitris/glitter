@@ -8,17 +8,19 @@ import {
   Briefcase,
   MapPin,
 } from "lucide-react";
-import GradientText from "../components/ui/GradientText";
-import AnimatedGradientText from "../components/ui/AnimatedGradientText";
-import Star from "../components/ui/Star";
+import {
+  GradientText,
+  AnimatedGradientText,
+  Star,
+  ColorfulBackground,
+  HighlightBadge,
+} from "../components/ui";
 import { typography } from "../utils/theme";
 import Testimonials from "../components/home/Testimonials";
-import ColorfulBackground from "../components/ui/ColorfulBackground";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
 import UpcomingEvent from "../components/home/UpcomingEvent";
-import HighlightBadge from "../components/ui/HighlightBadge";
 
 const Home = () => {
   const [ref, inView] = useInView({

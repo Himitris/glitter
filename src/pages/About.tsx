@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
-import Section from "../components/ui/Section";
-import TeamMember from "../components/ui/TeamMember";
-import GradientText from "../components/ui/GradientText";
-import Star from "../components/ui/Star";
+import {
+  Section,
+  TeamMember,
+  GradientText,
+  Star,
+  ColorfulBackground,
+  AnimatedGradientText,
+  HighlightBadge,
+} from "../components/ui";
 import { Instagram } from "lucide-react";
 import { typography } from "../utils/theme";
-import ColorfulBackground from "../components/ui/ColorfulBackground";
-import AnimatedGradientText from "../components/ui/AnimatedGradientText";
-import HighlightBadge from "../components/ui/HighlightBadge";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 

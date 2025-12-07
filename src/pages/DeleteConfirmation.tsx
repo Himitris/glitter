@@ -8,8 +8,7 @@ import {
   deleteDj,
 } from "../services/artistService";
 import { Artist } from "../types";
-import Section from "../components/ui/Section";
-import Loader from "../components/ui/Loader";
+import { Section, Loader } from "../components/ui";
 import Seo from "../components/seo/Seo";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 

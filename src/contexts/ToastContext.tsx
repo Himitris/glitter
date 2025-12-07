@@ -1,6 +1,6 @@
 // Créez un nouveau fichier src/contexts/ToastContext.tsx
 import React, { createContext, useState, useContext, ReactNode, useMemo, useCallback } from 'react';
-import Toast from '../components/ui/Toast';
+import { Toast } from '../components/ui';
 
 type ToastType = 'success' | 'error' | 'info';
 

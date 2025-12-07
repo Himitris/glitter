@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import Section from '../components/ui/Section';
-import GradientText from '../components/ui/GradientText';
-import Star from '../components/ui/Star';
+import {
+  Section,
+  GradientText,
+  Star,
+  ColorfulBackground,
+  AnimatedGradientText,
+  HighlightBadge,
+} from '../components/ui';
 import { Briefcase, Users, FileText, Calendar, MapPin } from 'lucide-react';
 import { eventServices, pastExperiences } from '../data/services';
 import { typography } from '../utils/theme';
-import ColorfulBackground from '../components/ui/ColorfulBackground';
-import AnimatedGradientText from '../components/ui/AnimatedGradientText';
-import HighlightBadge from '../components/ui/HighlightBadge';
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";

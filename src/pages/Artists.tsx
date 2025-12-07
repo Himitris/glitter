@@ -1,22 +1,24 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import Section from "../components/ui/Section";
+import {
+  Section,
+  GradientText,
+  Star,
+  ColorfulBackground,
+  AnimatedGradientText,
+  Loader,
+  HighlightBadge,
+} from "../components/ui";
 import ArtistCard from "../components/artists/ArtistCard";
 import { artistServices } from "../data/artists";
-import GradientText from "../components/ui/GradientText";
-import Star from "../components/ui/Star";
 import { typography } from "../utils/theme";
-import ColorfulBackground from "../components/ui/ColorfulBackground";
-import AnimatedGradientText from "../components/ui/AnimatedGradientText";
 import ServiceCard from "../components/services/ServiceCard";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
 import { getAllArtists } from "../services/artistService";
 import { Artist } from "../types";
-import Loader from "../components/ui/Loader";
-import HighlightBadge from "../components/ui/HighlightBadge";
 
 const Artists = () => {
   const [artistsRef, artistsInView] = useInView({
