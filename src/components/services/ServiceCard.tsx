@@ -28,42 +28,36 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description
 
   return (
     <div className="w-full h-full">
-      {/* Carte simple avec contour noir - hover CSS natif pour performance */}
-      <div className="border-2 border-[#0B0B0B] rounded-3xl h-[480px] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-        <div className="p-6 sm:p-8 h-full flex flex-col">
+      {/* Carte compacte et centrée */}
+      <div className="border-2 border-[#0B0B0B] rounded-2xl bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out h-full">
+        <div className="p-5 sm:p-6 h-full flex flex-col items-center text-center">
 
-          {/* Icon avec fond léger */}
+          {/* Icon centré avec fond léger */}
           <div
-            className="w-14 h-14 mb-6 rounded-xl flex items-center justify-center"
+            className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center"
             style={{ backgroundColor: `${accentColors[color]}15` }}
           >
             <IconComponent
-              className="w-7 h-7"
+              className="w-6 h-6"
               style={{ color: accentColors[color] }}
               strokeWidth={2}
             />
           </div>
 
-          {/* Title sobre */}
-          <h3 className="text-xl sm:text-2xl font-bold mb-4 text-[#0B0B0B]">
+          {/* Title centré */}
+          <h3 className="text-lg sm:text-xl font-bold mb-4 text-[#0B0B0B]">
             {title}
           </h3>
 
-          {/* Description */}
-          <p className="text-[#0B0B0B]/60 mb-6 text-sm sm:text-base leading-relaxed">
-            {description}
-          </p>
-
-          {/* Liste des features - sans animation pour performance */}
-          <ul className="space-y-3 mt-auto">
+          {/* Liste des features - centrée et compacte */}
+          <ul className="space-y-2 text-left w-full">
             {features.map((feature, index) => (
               <li
                 key={index}
-                className="flex items-start text-[#0B0B0B]/70 text-sm sm:text-base"
+                className="flex items-start text-[#0B0B0B]/70 text-sm"
               >
-                {/* Bullet point noir simple */}
-                <div className="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-[#0B0B0B]" />
-                <span className="leading-relaxed">{feature}</span>
+                <div className="w-1.5 h-1.5 rounded-full mt-1.5 mr-2.5 flex-shrink-0 bg-[#0B0B0B]/40" />
+                <span className="leading-snug">{feature}</span>
               </li>
             ))}
           </ul>
