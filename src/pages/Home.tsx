@@ -76,27 +76,6 @@ const Home = () => {
       />
       <div>
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-32 md:pt-40 relative">
-          {/* Stickers décoratifs sur le hero */}
-          <img
-            src="/images/Stickers/Boule-disco.png"
-            alt=""
-            className="absolute top-24 right-4 md:right-12 w-16 md:w-24 opacity-80 rotate-12 hidden sm:block"
-          />
-          <img
-            src="/images/Stickers/Strass/Strass-03.png"
-            alt=""
-            className="absolute top-40 left-4 md:left-16 w-8 md:w-12 opacity-70 hidden sm:block"
-          />
-          <img
-            src="/images/Stickers/Strass/Strass-06.png"
-            alt=""
-            className="absolute bottom-32 right-8 md:right-24 w-6 md:w-10 opacity-60 hidden sm:block"
-          />
-          <img
-            src="/images/Stickers/Coeur-01.png"
-            alt=""
-            className="absolute bottom-40 left-8 md:left-20 w-10 md:w-14 opacity-70 -rotate-12 hidden sm:block"
-          />
           <div className="text-center container mx-auto px-4 max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
@@ -206,23 +185,6 @@ const Home = () => {
           {/* Forme organique en arrière-plan */}
           <div className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-br from-[#EBABFF]/20 to-[#FF7A42]/20 rounded-[40%_60%_70%_30%/50%_40%_60%_50%] blur-3xl" />
           <div className="absolute bottom-10 left-10 w-48 h-48 bg-gradient-to-br from-[#775CFF]/20 to-[#EBABFF]/20 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-2xl" />
-
-          {/* Stickers décoratifs */}
-          <img
-            src="/images/Stickers/Strass/Strass-01.png"
-            alt=""
-            className="absolute top-8 left-12 w-8 opacity-60 hidden md:block"
-          />
-          <img
-            src="/images/Stickers/Strass/Strass-04.png"
-            alt=""
-            className="absolute bottom-12 right-16 w-10 opacity-50 hidden md:block"
-          />
-          <img
-            src="/images/Stickers/Coeur-02.png"
-            alt=""
-            className="absolute top-16 right-20 w-12 opacity-60 rotate-12 hidden md:block"
-          />
 
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-3xl font-bold mb-6 text-[#0B0B0B]">

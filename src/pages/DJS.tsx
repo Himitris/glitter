@@ -15,11 +15,11 @@ import { seoConfig } from "../config/seo";
 import { getAllDjs } from "../services/artistService";
 import { Artist } from "../types";
 
-// Services mis à jour pour les DJs
+// Services mis à jour pour les DJs avec stickers
 const djServicesUpdated = [
   {
     title: "Administration et Gestion",
-    icon: "FileText",
+    sticker: "/images/Stickers/Administration.png",
     description: "",
     features: [
       "Édition des contrats de cession et des factures",
@@ -27,11 +27,11 @@ const djServicesUpdated = [
       "Accompagnement à l'intermittence",
       "Gestion des droits d'auteur",
     ],
-    color: "administration",
+    color: "administration" as const,
   },
   {
     title: "Production Musicale",
-    icon: "Music",
+    sticker: "/images/Stickers/Production.png",
     description: "",
     features: [
       "Accompagnement artistique",
@@ -39,11 +39,11 @@ const djServicesUpdated = [
       "Production d'albums",
       "Stratégie de sortie",
     ],
-    color: "production",
+    color: "production" as const,
   },
   {
     title: "Production de Tournée",
-    icon: "Calendar",
+    sticker: "/images/Stickers/Dir-Prod.png",
     description: "",
     features: [
       "Élaboration des budgets de tournée",
@@ -51,7 +51,7 @@ const djServicesUpdated = [
       "Organisation des résidences",
       "Recherche de financements",
     ],
-    color: "prestation",
+    color: "prestation" as const,
   },
 ];
 

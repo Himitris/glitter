@@ -1,7 +1,7 @@
 export const eventServices = [
   {
     title: "Régie Artistes",
-    icon: "Users",
+    sticker: "/images/Stickers/Régie-artiste.png",
     description:
       "Coordination et gestion des besoins spécifiques des artistes, de leur arrivée à leur performance.",
     features: [
@@ -14,7 +14,7 @@ export const eventServices = [
   },
   {
     title: "Régie Cashless",
-    icon: "Briefcase",
+    sticker: "/images/Stickers/Administration.png",
     description:
       "Mise en place et gestion des systèmes de paiement sans espèces pour une fluidité optimale des transactions lors des événements.",
     features: [
@@ -27,7 +27,7 @@ export const eventServices = [
   },
   {
     title: "Régie Bénévole",
-    icon: "Users",
+    sticker: "/images/Stickers/Management.png",
     description:
       "Gestion du recrutement, de la formation et de la coordination des bénévoles pour assurer le bon déroulement de l'événement.",
     features: [
@@ -40,7 +40,7 @@ export const eventServices = [
   },
   {
     title: "Direction de Production",
-    icon: "Briefcase",
+    sticker: "/images/Stickers/Dir-Prod.png",
     description:
       "Supervision globale de la production, garantissant une organisation et une exécution sans faille de l'événement.",
     features: [
@@ -53,7 +53,7 @@ export const eventServices = [
   },
   {
     title: "Gestionnaire de Paies",
-    icon: "FileText",
+    sticker: "/images/Stickers/Administration.png",
     description:
       "Gestion précise et conforme des paies des artistes, techniciens et autres intervenants.",
     features: [
@@ -66,7 +66,7 @@ export const eventServices = [
   },
   {
     title: "Régie Site",
-    icon: "MapPin",
+    sticker: "/images/Stickers/Régie-site.png",
     description:
       "Organisation et gestion logistique des sites d'événements, incluant la mise en place des infrastructures et la coordination des équipes techniques.",
     features: [

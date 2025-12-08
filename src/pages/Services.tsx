@@ -5,7 +5,7 @@ import {
   ColorfulBackground,
   HighlightBadge,
 } from '../components/ui';
-import { Briefcase, Users, FileText, Calendar, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { eventServices, pastExperiences } from '../data/services';
 import { typography } from '../utils/theme';
 import Seo from "../components/seo/Seo";
@@ -96,83 +96,12 @@ const Services = () => {
               >
                 <div className="h-full bg-white border border-[#0B0B0B]/10 rounded-xl overflow-hidden group hover:shadow-sm hover:border-[#EBABFF]/30 transition-all p-5">
                   <div className="flex items-center gap-3 mb-3">
-                    <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center bg-${
-                        service.color === "production"
-                          ? "[#775CFF]"
-                          : service.color === "administration"
-                          ? "[#EBABFF]"
-                          : service.color === "management"
-                          ? "[#FF7A42]"
-                          : "[#FFFF73]"
-                      }/10`}
-                    >
-                      {service.icon === "Users" ? (
-                        <Users
-                          size={18}
-                          className={`text-${
-                            service.color === "production"
-                              ? "[#775CFF]"
-                              : service.color === "administration"
-                              ? "[#EBABFF]"
-                              : service.color === "management"
-                              ? "[#FF7A42]"
-                              : "[#FFFF73]"
-                          }`}
-                        />
-                      ) : service.icon === "Briefcase" ? (
-                        <Briefcase
-                          size={18}
-                          className={`text-${
-                            service.color === "production"
-                              ? "[#775CFF]"
-                              : service.color === "administration"
-                              ? "[#EBABFF]"
-                              : service.color === "management"
-                              ? "[#FF7A42]"
-                              : "[#FFFF73]"
-                          }`}
-                        />
-                      ) : service.icon === "FileText" ? (
-                        <FileText
-                          size={18}
-                          className={`text-${
-                            service.color === "production"
-                              ? "[#775CFF]"
-                              : service.color === "administration"
-                              ? "[#EBABFF]"
-                              : service.color === "management"
-                              ? "[#FF7A42]"
-                              : "[#FFFF73]"
-                          }`}
-                        />
-                      ) : service.icon === "MapPin" ? (
-                        <MapPin
-                          size={18}
-                          className={`text-${
-                            service.color === "production"
-                              ? "[#775CFF]"
-                              : service.color === "administration"
-                              ? "[#EBABFF]"
-                              : service.color === "management"
-                              ? "[#FF7A42]"
-                              : "[#FFFF73]"
-                          }`}
-                        />
-                      ) : (
-                        <Calendar
-                          size={18}
-                          className={`text-${
-                            service.color === "production"
-                              ? "[#775CFF]"
-                              : service.color === "administration"
-                              ? "[#EBABFF]"
-                              : service.color === "management"
-                              ? "[#FF7A42]"
-                              : "[#FFFF73]"
-                          }`}
-                        />
-                      )}
+                    <div className="w-10 h-10 flex items-center justify-center">
+                      <img
+                        src={service.sticker}
+                        alt={service.title}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <h3 className="text-lg font-bold text-[#0B0B0B]">
                       {service.title}

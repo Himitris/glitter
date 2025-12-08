@@ -1,30 +1,24 @@
 import React, { memo } from 'react';
-import { Music, Film, Calendar, FileText, Users } from 'lucide-react';
 
 interface ServiceCardProps {
   title: string;
-  icon: string;
+  sticker?: string;
   description: string;
   features: string[];
   color: "production" | "administration" | "management" | "prestation";
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description, features, color }) => {
-  const IconComponent = {
-    Music,
-    Film,
-    Calendar,
-    FileText,
-    Users
-  }[icon] || Music;
+// Mapping des couleurs vers les stickers par défaut
+const defaultStickers: Record<string, string> = {
+  "administration": "/images/Stickers/Administration.png",
+  "production": "/images/Stickers/Production.png",
+  "management": "/images/Stickers/Management.png",
+  "prestation": "/images/Stickers/Dir-Prod.png",
+};
 
-  // Couleur d'accent simple pour l'icône
-  const accentColors = {
-    "production": "#775CFF",
-    "administration": "#EBABFF",
-    "management": "#FF7A42",
-    "prestation": "#D4A500"
-  };
+const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, sticker, description, features, color }) => {
+  // Utiliser le sticker fourni ou celui par défaut selon la couleur
+  const stickerSrc = sticker || defaultStickers[color];
 
   return (
     <div className="w-full h-full">
@@ -32,15 +26,12 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description
       <div className="border-2 border-[#0B0B0B] rounded-2xl bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out h-full">
         <div className="p-5 sm:p-6 h-full flex flex-col items-center text-center">
 
-          {/* Icon centré avec fond léger */}
-          <div
-            className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: `${accentColors[color]}15` }}
-          >
-            <IconComponent
-              className="w-6 h-6"
-              style={{ color: accentColors[color] }}
-              strokeWidth={2}
+          {/* Sticker centré */}
+          <div className="w-14 h-14 mb-4 flex items-center justify-center">
+            <img
+              src={stickerSrc}
+              alt={title}
+              className="w-full h-full object-contain"
             />
           </div>
 
