@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useToast } from "../contexts/ToastContext";
 import { Artist } from "../types";
@@ -10,9 +10,10 @@ import {
   updateDj,
   getDjById,
 } from "../services/artistService";
+import { uploadImage } from "../services/cloudinaryService";
 import { Section, Loader } from "../components/ui";
 import Seo from "../components/seo/Seo";
-import { ArrowLeft, Info } from "lucide-react";
+import { ArrowLeft, Upload, X, Image as ImageIcon } from "lucide-react";
 
 interface ArtistFormProps {
   isEdit: boolean;
@@ -25,10 +26,13 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(isEdit);
+  const [uploading, setUploading] = useState(false);
 
   const [instagram, setInstagram] = useState("");
   const [spotify, setSpotify] = useState("");
   const [website, setWebsite] = useState("");
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -70,6 +74,69 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
 
     fetchArtist();
   }, [id, isEdit, type, showToast]);
+
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Vérifier le type de fichier
+    if (!file.type.startsWith("image/")) {
+      showToast("Veuillez sélectionner une image", "error");
+      return;
+    }
+
+    // Vérifier la taille (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      showToast("L'image ne doit pas dépasser 10MB", "error");
+      return;
+    }
+
+    setUploading(true);
+
+    try {
+      const folder = type === "artist" ? "artists" : "djs";
+      const result = await uploadImage(file, folder);
+
+      if (result.success && result.url) {
+        setImageUrl(result.url);
+        showToast("Image uploadée avec succès!", "success");
+      } else {
+        showToast(result.error || "Erreur lors de l'upload", "error");
+      }
+    } catch (error) {
+      console.error("Erreur upload:", error);
+      showToast("Erreur lors de l'upload de l'image", "error");
+    } finally {
+      setUploading(false);
+      // Reset l'input pour permettre de sélectionner le même fichier
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      // Simuler un changement de fichier
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      if (fileInputRef.current) {
+        fileInputRef.current.files = dataTransfer.files;
+        handleFileSelect({
+          target: { files: dataTransfer.files },
+        } as React.ChangeEvent<HTMLInputElement>);
+      }
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -249,57 +316,107 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
                 </div>
               </div>
 
+              {/* Section Upload d'image */}
               <div className="mb-6">
-                <label className="block text-gray-700 mb-2" htmlFor="imageUrl">
-                  Chemin de l'image *
-                </label>
-                <input
-                  type="text" // <- changé de "url" à "text"
-                  id="imageUrl"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="/images/artists/nom-image.webp"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F]"
-                  required
-                />
-                <div className="flex items-start mt-2 p-3 bg-blue-50 rounded-lg border border-blue-100">
-                  <Info
-                    size={16}
-                    className="text-blue-500 mr-2 mt-0.5 flex-shrink-0"
+                <label className="block text-gray-700 mb-2">Image *</label>
+
+                {/* Zone de drop */}
+                <div
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
+                  className={`
+                    relative border-2 border-dashed rounded-xl p-6 text-center transition-all
+                    ${uploading ? "border-[#775CFF] bg-[#775CFF]/5" : "border-gray-300 hover:border-[#FF4D8F]"}
+                  `}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                    id="image-upload"
                   />
-                  <p className="text-sm text-blue-700">
-                    Entrez le chemin relatif de l'image, par exemple :
-                    <code className="bg-blue-100 px-1 py-0.5 rounded">
-                      /images/artists/nom-image.webp
-                    </code>
-                    .
-                    <br />
-                    Pour les images externes, utilisez l'URL complète (ex :
-                    https://exemple.com/image.jpg).
-                  </p>
+
+                  {uploading ? (
+                    <div className="flex flex-col items-center">
+                      <Loader size="md" />
+                      <p className="mt-2 text-sm text-gray-600">
+                        Upload en cours...
+                      </p>
+                    </div>
+                  ) : (
+                    <label
+                      htmlFor="image-upload"
+                      className="cursor-pointer flex flex-col items-center"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#775CFF] to-[#FF4D8F] flex items-center justify-center mb-3">
+                        <Upload className="w-8 h-8 text-white" />
+                      </div>
+                      <p className="text-gray-700 font-medium">
+                        Cliquez pour uploader une image
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        ou glissez-déposez votre fichier ici
+                      </p>
+                      <p className="text-xs text-gray-400 mt-2">
+                        PNG, JPG, WEBP jusqu'à 10MB
+                      </p>
+                    </label>
+                  )}
                 </div>
 
-                {/* Reste du code inchangé */}
+                {/* URL manuelle (optionnel) */}
+                <div className="mt-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                    <span className="text-xs text-gray-400">ou</span>
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                  </div>
+                  <input
+                    type="text"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="Entrez une URL d'image directement"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] text-sm"
+                  />
+                </div>
+
+                {/* Prévisualisation */}
                 {imageUrl && (
-                  <div className="mt-3">
+                  <div className="mt-4">
                     <p className="text-sm text-gray-600 mb-2">
                       Prévisualisation :
                     </p>
-                    <div className="h-32 w-32 rounded-lg overflow-hidden border border-gray-200">
-                      <img
-                        src={imageUrl}
-                        alt="Prévisualisation"
-                        className="h-full w-full object-cover"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            "/images/placeholder.jpg";
-                          showToast(
-                            "Le chemin de l'image semble incorrect",
-                            "error"
-                          );
-                        }}
-                      />
+                    <div className="relative inline-block">
+                      <div className="h-40 w-40 rounded-xl overflow-hidden border-2 border-gray-200 shadow-sm">
+                        <img
+                          src={imageUrl}
+                          alt="Prévisualisation"
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src =
+                              "/images/placeholder.jpg";
+                          }}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setImageUrl("")}
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-md"
+                      >
+                        <X size={14} />
+                      </button>
                     </div>
+                  </div>
+                )}
+
+                {!imageUrl && (
+                  <div className="mt-4 flex items-center gap-2 text-amber-600 bg-amber-50 p-3 rounded-lg">
+                    <ImageIcon size={18} />
+                    <span className="text-sm">
+                      Aucune image sélectionnée. Uploadez ou entrez une URL.
+                    </span>
                   </div>
                 )}
               </div>
@@ -314,8 +431,8 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
                 </button>
                 <button
                   type="submit"
-                  disabled={loading}
-                  className="px-4 py-2 bg-gradient-to-r from-[#8C52FF] to-[#FF4D8F] text-white rounded-lg hover:opacity-90 transition-opacity flex items-center"
+                  disabled={loading || uploading}
+                  className="px-4 py-2 bg-gradient-to-r from-[#8C52FF] to-[#FF4D8F] text-white rounded-lg hover:opacity-90 transition-opacity flex items-center disabled:opacity-50"
                 >
                   {loading ? (
                     <Loader size="sm" />
