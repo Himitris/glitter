@@ -2,10 +2,7 @@ import { motion } from "framer-motion";
 import {
   Section,
   TeamMember,
-  GradientText,
-  Star,
   ColorfulBackground,
-  AnimatedGradientText,
   HighlightBadge,
 } from "../components/ui";
 import { Instagram } from "lucide-react";
@@ -55,14 +52,9 @@ const About = () => {
           className="min-h-[45vh] flex items-center justify-center pt-32 pb-16"
         >
           <div className="text-center container mx-auto px-4">
-            <AnimatedGradientText
-              as="h2"
-              gradient="primary"
-              className="text-4xl md:text-6xl font-bold mb-4"
-              speed="medium"
-            >
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
               À Propos de Nous
-            </AnimatedGradientText>
+            </h2>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -80,16 +72,9 @@ const About = () => {
 
         <Section>
           <div className="max-w-3xl mx-auto text-center">
-            <div className="flex justify-center items-center gap-2 mb-6">
-              <Star className="text-[#EBABFF]" size="sm" />
-              <AnimatedGradientText
-                as="h2"
-                className={`${typography.heading.h2}`}
-              >
-                Notre Histoire
-              </AnimatedGradientText>
-              <Star className="text-[#EBABFF]" size="sm" />
-            </div>
+            <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
+              Notre Histoire
+            </h2>
             <p className="text-[#0B0B0B]/70 mb-8">
               Créée en 2024 par Chloé Jolly et Matisse Pellegrin, Glitter
               Productions est une structure dédiée à la production,
@@ -108,17 +93,9 @@ const About = () => {
 
         <Section>
           <div className="text-center mb-12">
-            <div className="flex justify-center items-center gap-2 mb-6">
-              <Star className="text-[#775CFF]" size="sm" />
-              <GradientText
-                as="h2"
-                gradient="management"
-                className={typography.heading.h2}
-              >
-                Nos Fondatrices
-              </GradientText>
-              <Star className="text-[#775CFF]" size="sm" />
-            </div>
+            <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
+              Nos Fondatrices
+            </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             {founders.map((member, index) => (

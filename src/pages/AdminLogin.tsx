@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import Seo from "../components/seo/Seo";
-import Section from "../components/ui/Section";
-import Loader from "../components/ui/Loader";
+import { Section, Loader } from "../components/ui";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");

@@ -3,10 +3,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import {
   Section,
-  GradientText,
-  Star,
   ColorfulBackground,
-  AnimatedGradientText,
   Loader,
   HighlightBadge,
 } from "../components/ui";
@@ -66,14 +63,9 @@ const Artists = () => {
       <div>
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
           <div className="text-center container mx-auto px-4">
-            <AnimatedGradientText
-              as="h2"
-              gradient="primary"
-              className="text-4xl md:text-6xl font-bold mb-4"
-              speed="medium"
-            >
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
               Nos Artistes
-            </AnimatedGradientText>
+            </h2>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -140,17 +132,9 @@ const Artists = () => {
 
         <Section className="bg-[#FFFFF6]">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="flex justify-center items-center gap-2 mb-6">
-              <Star className="text-[#775CFF]" size="sm" />
-              <GradientText
-                as="h2"
-                gradient="administration"
-                className={typography.heading.h2 + " mb-6"}
-              >
-                REJOIGNEZ-NOUS!
-              </GradientText>
-              <Star className="text-[#775CFF]" size="sm" />
-            </div>
+            <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
+              REJOIGNEZ-NOUS!
+            </h2>
             <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
               <span>Vous êtes un artiste et souhaitez collaborer avec nous ? Nous sommes toujours à la recherche de</span>
               <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
@@ -162,7 +146,7 @@ const Artists = () => {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+              className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 transition-colors"
             >
               Contactez-nous
             </motion.a>

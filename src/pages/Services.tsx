@@ -2,10 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
   Section,
-  GradientText,
-  Star,
   ColorfulBackground,
-  AnimatedGradientText,
   HighlightBadge,
 } from '../components/ui';
 import { Briefcase, Users, FileText, Calendar, MapPin } from 'lucide-react';
@@ -49,14 +46,9 @@ const Services = () => {
       <div>
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
           <div className="text-center container mx-auto px-4">
-            <AnimatedGradientText
-              as="h2"
-              gradient="primary"
-              className="text-4xl md:text-6xl font-bold mb-4"
-              speed="medium"
-            >
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
               Nos Services
-            </AnimatedGradientText>
+            </h2>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -78,17 +70,9 @@ const Services = () => {
 
         <Section className="bg-[#FFFFF6]">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <div className="flex justify-center items-center gap-2 mb-4">
-              <Star className="text-[#FFFF73]" size="sm" />
-              <GradientText
-                as="h2"
-                gradient="prestation"
-                className={typography.heading.h2}
-              >
-                Services aux Organisateurs d'Événements
-              </GradientText>
-              <Star className="text-[#FFFF73]" size="sm" />
-            </div>
+            <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
+              Services aux Organisateurs d'Événements
+            </h2>
             <div className="text-[#0B0B0B]/70 flex flex-wrap items-center justify-center gap-2">
               <span>Glitter Productions propose des services</span>
               <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
@@ -190,21 +174,9 @@ const Services = () => {
                         />
                       )}
                     </div>
-                    <GradientText
-                      as="h3"
-                      gradient={
-                        service.color as
-                          | "primary"
-                          | "secondary"
-                          | "production"
-                          | "administration"
-                          | "management"
-                          | "prestation"
-                      }
-                      className="text-lg font-bold"
-                    >
+                    <h3 className="text-lg font-bold text-[#0B0B0B]">
                       {service.title}
-                    </GradientText>
+                    </h3>
                   </div>
                   <p className="text-[#0B0B0B]/70 text-sm mb-3">
                     {service.description}
@@ -217,17 +189,9 @@ const Services = () => {
 
         <Section>
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <div className="flex justify-center items-center gap-2 mb-4">
-              <Star className="text-[#775CFF]" size="sm" />
-              <GradientText
-                as="h2"
-                gradient="production"
-                className={typography.heading.h2}
-              >
-                Nos Réalisations
-              </GradientText>
-              <Star className="text-[#775CFF]" size="sm" />
-            </div>
+            <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
+              Nos Réalisations
+            </h2>
             <p className="text-[#0B0B0B]/70">
               Découvrez quelques-unes de nos expériences récentes dans
               l'organisation et la production d'événements.
@@ -262,13 +226,9 @@ const Services = () => {
                   {/* Description container - 3/4 de la largeur */}
                   <div className="p-4 col-span-3 flex flex-col">
                     <div className="flex justify-between items-start mb-2">
-                      <GradientText
-                        as="h3"
-                        gradient="production"
-                        className="text-lg font-bold"
-                      >
+                      <h3 className="text-lg font-bold text-[#0B0B0B]">
                         {exp.title}
-                      </GradientText>
+                      </h3>
                       <span className="bg-[#775CFF]/10 text-[#775CFF] px-2 py-1 rounded-full text-xs font-medium">
                         {exp.year}
                       </span>
@@ -304,7 +264,7 @@ const Services = () => {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity uppercase tracking-wider text-sm"
+              className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 transition-colors uppercase tracking-wider text-sm"
             >
               Discuter de votre projet
             </motion.a>

@@ -9,9 +9,6 @@ import {
   MapPin,
 } from "lucide-react";
 import {
-  GradientText,
-  AnimatedGradientText,
-  Star,
   ColorfulBackground,
   HighlightBadge,
 } from "../components/ui";
@@ -151,18 +148,9 @@ const Home = () => {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <div className="flex justify-center items-center gap-2">
-                <Star className="text-[#775CFF]" size="sm" />
-                <AnimatedGradientText
-                  as="h2"
-                  gradient="primary"
-                  className={typography.heading.h2 + " inline-block"}
-                  speed="medium"
-                >
-                  Nos Services
-                </AnimatedGradientText>
-                <Star className="text-[#775CFF]" size="sm" />
-              </div>
+              <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
+                Nos Services
+              </h2>
               <div className="text-[#0B0B0B]/70 max-w-2xl mx-auto mt-4 flex flex-wrap items-center justify-center gap-2">
                 <span>Découvrez notre gamme</span>
                 <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
@@ -173,12 +161,7 @@ const Home = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {allServices.map((service, index) => {
-                // Alterner les couleurs de bordure pour chaque carte
-                const borderVariants = ['violet', 'rose', 'orange', 'jaune'] as const;
-                const borderVariant = borderVariants[index % borderVariants.length];
-
-                return (
+              {allServices.map((service, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -187,26 +170,16 @@ const Home = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="relative group"
                   >
-                    {/* Bordure gradient */}
-                    <div className={`bg-gradient-to-br ${
-                      borderVariant === 'violet' ? 'from-[#775CFF] to-[#EBABFF]' :
-                      borderVariant === 'rose' ? 'from-[#EBABFF] to-[#FF7A42]' :
-                      borderVariant === 'orange' ? 'from-[#FF7A42] to-[#EBABFF]' :
-                      'from-[#FFFF73] to-[#EBABFF]'
-                    } p-[2px] rounded-3xl h-full group-hover:shadow-2xl group-hover:shadow-[#EBABFF]/30 transition-all duration-300`}>
+                    {/* Bordure noire simple */}
+                    <div className="border-2 border-[#0B0B0B] rounded-3xl h-full group-hover:shadow-xl transition-all duration-300">
                       <div className="relative p-8 rounded-3xl bg-[#FFFFF6] h-full flex flex-col items-center">
                         <div className="mb-6 flex justify-center">
                           {service.icon}
                         </div>
                         <div className="text-center w-full">
-                          <AnimatedGradientText
-                            as="h3"
-                            gradient={service.color}
-                            className="text-xl font-bold mb-4 text-center inline-block"
-                            speed="fast"
-                          >
+                          <h3 className="text-xl font-bold mb-4 text-center text-[#0B0B0B]">
                             {service.title}
-                          </AnimatedGradientText>
+                          </h3>
                         </div>
                         <p className="text-[#0B0B0B]/70 text-center">
                           {service.description}
@@ -214,8 +187,7 @@ const Home = () => {
                       </div>
                     </div>
                   </motion.div>
-                );
-              })}
+              ))}
             </div>
           </div>
         </section>
@@ -227,13 +199,9 @@ const Home = () => {
           <div className="absolute bottom-10 left-10 w-48 h-48 bg-gradient-to-br from-[#775CFF]/20 to-[#EBABFF]/20 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-2xl" />
 
           <div className="container mx-auto px-4 text-center relative z-10">
-            <AnimatedGradientText
-              as="h2"
-              className="text-3xl font-bold mb-6"
-              speed="medium"
-            >
+            <h2 className="text-3xl font-bold mb-6 text-[#0B0B0B]">
               Prêt à faire briller votre projet ?
-            </AnimatedGradientText>
+            </h2>
             <p className="text-[#0B0B0B]/70 mb-8 max-w-2xl mx-auto">
               Découvrez comment Glitter Productions peut transformer votre
               vision en réalité éclatante. Contactez-nous dès aujourd'hui pour
@@ -243,7 +211,7 @@ const Home = () => {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-gradient-to-r from-[#EBABFF] to-[#FF7A42] text-[#0B0B0B] px-8 py-4 rounded-full hover:opacity-90 transition-opacity tracking-wide font-semibold border-2 border-[#0B0B0B]"
+              className="inline-block bg-[#0B0B0B] text-white px-8 py-4 rounded-full hover:bg-[#0B0B0B]/80 transition-colors tracking-wide font-semibold"
             >
               Contactez-nous
             </motion.a>
