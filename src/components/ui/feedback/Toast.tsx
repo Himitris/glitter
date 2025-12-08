@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -11,24 +11,39 @@ interface ToastProps {
 
 const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
   const [progress, setProgress] = useState(100);
-  
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const onCloseRef = useRef(onClose);
+
+  // Keep onClose ref updated
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
+  // Handle auto-close when progress reaches 0
+  useEffect(() => {
+    if (progress <= 0) {
+      onCloseRef.current();
+    }
+  }, [progress]);
+
   useEffect(() => {
     if (isVisible) {
       setProgress(100);
-      const interval = setInterval(() => {
+      intervalRef.current = setInterval(() => {
         setProgress((prev) => {
           if (prev <= 0) {
-            clearInterval(interval);
-            onClose();
+            if (intervalRef.current) clearInterval(intervalRef.current);
             return 0;
           }
           return prev - 1;
         });
       }, 30); // 3 seconds total duration
 
-      return () => clearInterval(interval);
+      return () => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+      };
     }
-  }, [isVisible, onClose]);
+  }, [isVisible]);
 
   const colors = {
     success: 'from-[#8C52FF] to-[#FF4D8F]',

@@ -12,6 +12,15 @@ export interface CloudinaryUploadResult {
 
 /**
  * Upload une image vers Cloudinary
+ *
+ * IMPORTANT: Vous devez créer un "upload preset" dans Cloudinary:
+ * 1. Allez sur https://console.cloudinary.com/settings/upload
+ * 2. Cliquez sur "Add upload preset"
+ * 3. Nommez-le "glitter_unsigned"
+ * 4. Mode: "Unsigned"
+ * 5. Folder: "glitter" (optionnel)
+ * 6. Sauvegardez
+ *
  * @param file - Le fichier image à uploader
  * @param folder - Le dossier de destination (ex: "artists", "djs")
  */
@@ -34,8 +43,18 @@ export const uploadImage = async (
     );
 
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error?.message || 'Erreur lors de l\'upload');
+      const errorData = await response.json();
+      const errorMessage = errorData.error?.message || 'Erreur lors de l\'upload';
+
+      // Message d'erreur plus explicite pour le preset manquant
+      if (errorMessage.includes('Upload preset not found') || errorMessage.includes('upload_preset')) {
+        throw new Error(
+          'Upload preset non trouvé. Créez un preset "glitter_unsigned" dans Cloudinary: ' +
+          'Settings > Upload > Add upload preset (mode: Unsigned)'
+        );
+      }
+
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();

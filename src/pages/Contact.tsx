@@ -3,11 +3,8 @@ import { motion } from "framer-motion";
 import { Mail, MapPin, Instagram, Send } from "lucide-react";
 import {
   Section,
-  GradientText,
-  Star,
   Loader,
   ColorfulBackground,
-  AnimatedGradientText,
   HighlightBadge,
 } from "../components/ui";
 import { typography } from "../utils/theme";
@@ -97,20 +94,15 @@ const Contact = () => {
       <div>
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
           <div className="text-center">
-            <AnimatedGradientText
-              as="h2"
-              gradient="primary"
-              className="text-4xl md:text-6xl font-bold mb-4"
-              speed="medium"
-            >
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
               Contactez-nous
-            </AnimatedGradientText>
+            </h2>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-white/95 drop-shadow-md flex flex-wrap items-center justify-center gap-2"
+              transition={{ duration: 0.5 }}
+              className="text-xl md:text-2xl text-[#0B0B0B]/80 flex flex-wrap items-center justify-center gap-2"
             >
               <span>Discutons de votre</span>
               <HighlightBadge color="yellow" rotation={-2}>
@@ -123,17 +115,9 @@ const Contact = () => {
         <Section>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <div className="flex justify-center items-center gap-2 mb-6">
-                <Star className="text-[#775CFF]" size="sm" />
-                <GradientText
-                  as="h2"
-                  gradient="primary"
-                  className={typography.heading.h2}
-                >
-                  Parlons de votre projet
-                </GradientText>
-                <Star className="text-[#775CFF]" size="sm" />
-              </div>
+              <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
+                Parlons de votre projet
+              </h2>
               <div className="text-[#0B0B0B]/70 max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-2">
                 <span>Que vous soyez un artiste cherchant un accompagnement ou un organisateur d'événement, nous sommes là pour vous aider à faire</span>
                 <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
@@ -146,7 +130,7 @@ const Contact = () => {
             <div className="grid md:grid-cols-2 gap-12">
               {/* Formulaire de contact */}
               <div className="bg-white border border-[#0B0B0B]/10 rounded-2xl p-8 shadow-sm">
-                <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-[#EBABFF] to-[#FF7A42] text-transparent bg-clip-text">
+                <h3 className="text-2xl font-bold mb-6 text-[#0B0B0B]">
                   Envoyez-nous un message
                 </h3>
 
@@ -155,7 +139,7 @@ const Contact = () => {
                     <motion.div
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="mb-6 text-[#775CFF]"
+                      className="mb-6 text-[#0B0B0B]"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +165,7 @@ const Contact = () => {
                     </p>
                     <button
                       onClick={() => setFormSubmitted(false)}
-                      className="text-[#EBABFF] hover:text-[#FF7A42] underline transition-colors"
+                      className="text-[#0B0B0B] hover:text-[#0B0B0B]/70 underline transition-colors"
                     >
                       Envoyer un autre message
                     </button>
@@ -209,7 +193,7 @@ const Contact = () => {
                           touched.name && errors.name
                             ? "border-red-500"
                             : "border-[#0B0B0B]/20"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EBABFF] focus:border-transparent text-[#0B0B0B]`}
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B0B0B]/30 focus:border-transparent text-[#0B0B0B]`}
                         placeholder="Votre nom"
                       />
                       {touched.name && errors.name && (
@@ -236,7 +220,7 @@ const Contact = () => {
                           touched.email && errors.email
                             ? "border-red-500"
                             : "border-[#0B0B0B]/20"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EBABFF] focus:border-transparent text-[#0B0B0B]`}
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B0B0B]/30 focus:border-transparent text-[#0B0B0B]`}
                         placeholder="Votre email"
                       />
                       {touched.email && errors.email && (
@@ -263,7 +247,7 @@ const Contact = () => {
                           touched.message && errors.message
                             ? "border-red-500"
                             : "border-[#0B0B0B]/20"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EBABFF] focus:border-transparent text-[#0B0B0B]`}
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B0B0B]/30 focus:border-transparent text-[#0B0B0B]`}
                         placeholder="Comment pouvons-nous vous aider ?"
                       ></textarea>
                       {touched.message && errors.message && (
@@ -273,10 +257,8 @@ const Contact = () => {
                       )}
                     </div>
 
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                      className="w-full bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] text-white px-6 py-3 rounded-full hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                    <button
+                      className="w-full bg-[#0B0B0B] text-white px-6 py-3 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2"
                       type="submit"
                       disabled={isSubmitting}
                     >
@@ -287,20 +269,20 @@ const Contact = () => {
                           <Send size={18} /> Envoyer
                         </>
                       )}
-                    </motion.button>
+                    </button>
                   </form>
                 )}
               </div>
 
               {/* Informations de contact */}
               <div>
-                <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-[#775CFF] to-[#EBABFF] text-transparent bg-clip-text">
+                <h3 className="text-2xl font-bold mb-6 text-[#0B0B0B]">
                   Nos coordonnées
                 </h3>
 
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-r from-[#775CFF] to-[#EBABFF] p-3 rounded-full">
+                    <div className="bg-[#0B0B0B] p-3 rounded-full">
                       <Mail className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -314,7 +296,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-r from-[#EBABFF] to-[#FF7A42] p-3 rounded-full">
+                    <div className="bg-[#0B0B0B] p-3 rounded-full">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -328,7 +310,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-r from-[#FF7A42] to-[#FFFF73] p-3 rounded-full">
+                    <div className="bg-[#0B0B0B] p-3 rounded-full">
                       <Instagram className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -339,7 +321,7 @@ const Contact = () => {
                         href="https://instagram.com/glitter_prod"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#EBABFF] hover:text-[#FF7A42] transition-colors"
+                        className="text-[#0B0B0B] hover:text-[#0B0B0B]/70 underline transition-colors"
                       >
                         @glitter_prod
                       </a>
