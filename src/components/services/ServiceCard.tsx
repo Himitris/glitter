@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import { Music, Film, Calendar, FileText, Users } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 interface ServiceCardProps {
   title: string;
@@ -28,13 +27,9 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description
   };
 
   return (
-    <motion.div
-      className="w-full h-full"
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-    >
-      {/* Carte simple avec contour noir */}
-      <div className="border-2 border-[#0B0B0B] rounded-3xl h-[480px] bg-[#FFFFF6] hover:shadow-xl transition-all duration-300">
+    <div className="w-full h-full">
+      {/* Carte simple avec contour noir - hover CSS natif pour performance */}
+      <div className="border-2 border-[#0B0B0B] rounded-3xl h-[480px] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
         <div className="p-6 sm:p-8 h-full flex flex-col">
 
           {/* Icon avec fond léger */}
@@ -59,26 +54,22 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, icon, description
             {description}
           </p>
 
-          {/* Liste des features */}
+          {/* Liste des features - sans animation pour performance */}
           <ul className="space-y-3 mt-auto">
             {features.map((feature, index) => (
-              <motion.li
+              <li
                 key={index}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
                 className="flex items-start text-[#0B0B0B]/70 text-sm sm:text-base"
               >
                 {/* Bullet point noir simple */}
                 <div className="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0 bg-[#0B0B0B]" />
                 <span className="leading-relaxed">{feature}</span>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 });
 

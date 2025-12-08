@@ -19,8 +19,9 @@ export default {
       fontFamily: {
         sans: ['Neue Montreal', 'Inter var', 'system-ui', 'sans-serif'],
       },
-      // Animations améliorées
+      // Animations optimisées pour performance
       animation: {
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
         'gradient': 'gradient 8s ease infinite',
         'gradient-slow': 'gradient 12s ease infinite',
         'gradient-medium': 'gradient 6s ease infinite',
@@ -33,6 +34,14 @@ export default {
         'shimmer': 'shimmer 2s linear infinite',
       },
       keyframes: {
+        fadeIn: {
+          '0%': {
+            opacity: '0',
+          },
+          '100%': {
+            opacity: '1',
+          },
+        },
         gradient: {
           '0%, 100%': {
             'background-position': '0% 50%',

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import {
   Calendar,
   Music,
@@ -13,17 +12,13 @@ import {
   HighlightBadge,
 } from "../components/ui";
 import { typography } from "../utils/theme";
-import Testimonials from "../components/home/Testimonials";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
-import UpcomingEvent from "../components/home/UpcomingEvent";
+import { useOptimizedAnimation } from "../hooks/useOptimizedAnimation";
 
 const Home = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { shouldReduceMotion, duration } = useOptimizedAnimation();
 
   // Récupérer les métadonnées SEO pour la page d'accueil
   const { title, description, keywords, image, canonical } = seoConfig.home;
@@ -90,28 +85,20 @@ const Home = () => {
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-32 md:pt-40">
           <div className="text-center container mx-auto px-4 max-w-4xl">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: duration.slow }}
               className="flex flex-col items-center gap-8"
             >
               {/* Logo Glitter */}
-              <motion.img
+              <img
                 src="/images/Logo/Logo-blanc/Logo-blanc-2.svg"
                 alt="Glitter"
-                className="w-full max-w-md md:max-w-lg h-auto drop-shadow-2xl"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1 }}
+                className="w-full max-w-md md:max-w-lg h-auto drop-shadow-2xl animate-fade-in"
               />
 
               {/* Texte avec mots en évidence */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#0B0B0B] leading-relaxed"
-              >
+              <div className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#0B0B0B] leading-relaxed">
                 <div className="mb-3 md:mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
                 <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 lg:gap-4">
                   <HighlightBadge color="yellow" rotation={-1} className="text-lg md:text-2xl lg:text-4xl">
@@ -122,24 +109,17 @@ const Home = () => {
                     MÉMORABLES
                   </HighlightBadge>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* Bouton CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="mt-6"
-              >
-                <motion.a
+              {/* Bouton CTA - CSS hover pour performance */}
+              <div className="mt-6">
+                <a
                   href="/services"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="inline-block bg-white text-[#0B0B0B] px-8 py-4 rounded-full hover:bg-[#EBABFF] transition-all tracking-wide font-bold text-base md:text-lg shadow-xl border-2 border-[#0B0B0B]"
+                  className="inline-block bg-white text-[#0B0B0B] px-8 py-4 rounded-full hover:bg-[#EBABFF] hover:scale-105 active:scale-95 transition-all duration-200 tracking-wide font-bold text-base md:text-lg shadow-xl border-2 border-[#0B0B0B]"
                 >
                   Découvrir nos services
-                </motion.a>
-              </motion.div>
+                </a>
+              </div>
             </motion.div>
           </div>
         </ColorfulBackground>
@@ -162,16 +142,12 @@ const Home = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {allServices.map((service, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-10%" }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="relative group"
                   >
-                    {/* Bordure noire simple */}
-                    <div className="border-2 border-[#0B0B0B] rounded-3xl h-full group-hover:shadow-xl transition-all duration-300">
+                    {/* Bordure noire simple - CSS natif pour hover */}
+                    <div className="border-2 border-[#0B0B0B] rounded-3xl h-full group-hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
                       <div className="relative p-8 rounded-3xl bg-[#FFFFF6] h-full flex flex-col items-center">
                         <div className="mb-6 flex justify-center">
                           {service.icon}
@@ -186,7 +162,7 @@ const Home = () => {
                         </p>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
               ))}
             </div>
           </div>
@@ -207,14 +183,12 @@ const Home = () => {
               vision en réalité éclatante. Contactez-nous dès aujourd'hui pour
               discuter de vos idées.
             </p>
-            <motion.a
+            <a
               href="/contact"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-[#0B0B0B] text-white px-8 py-4 rounded-full hover:bg-[#0B0B0B]/80 transition-colors tracking-wide font-semibold"
+              className="inline-block bg-[#0B0B0B] text-white px-8 py-4 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200 tracking-wide font-semibold"
             >
               Contactez-nous
-            </motion.a>
+            </a>
           </div>
         </section>
       </div>

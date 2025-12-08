@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { components } from '../../../utils/theme';
+import { useOptimizedAnimation } from '../../../hooks/useOptimizedAnimation';
 
 interface SectionProps {
   children: React.ReactNode;
@@ -16,9 +17,12 @@ const Section: React.FC<SectionProps> = ({
   className = '',
   delay = 0
 }) => {
+  const { shouldReduceMotion, duration } = useOptimizedAnimation();
+
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: shouldReduceMotion ? 0 : 0.05,
+    rootMargin: shouldReduceMotion ? '0px' : '0px 0px -50px 0px',
   });
 
   const baseClassName = `
@@ -30,9 +34,9 @@ const Section: React.FC<SectionProps> = ({
   return (
     <motion.section
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay }}
+      transition={{ duration: duration.slow, delay: shouldReduceMotion ? 0 : delay }}
       className={baseClassName}
     >
       <div className={components.container}>

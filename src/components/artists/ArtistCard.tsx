@@ -1,5 +1,4 @@
 import React, { memo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Music, Instagram, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { Artist } from "../../types";
 
@@ -24,50 +23,36 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
   };
 
   return (
-    <motion.div
-      className="w-full h-full group"
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-    >
-      {/* Carte simple avec contour noir */}
-      <div className="border-2 border-[#0B0B0B] rounded-3xl h-full bg-[#FFFFF6] overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
+    <div className="w-full h-full group">
+      {/* Carte simple - hover CSS natif pour performance */}
+      <div className="border-2 border-[#0B0B0B] rounded-3xl h-full bg-[#FFFFF6] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out flex flex-col">
 
         {/* Image Container */}
         <div className="relative aspect-square overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={currentImageIndex}
-              src={images[currentImageIndex]}
-              alt={artist.name}
-              className="w-full h-full object-cover"
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              whileHover={{ scale: 1.05 }}
-            />
-          </AnimatePresence>
+          {/* Image avec transition CSS simple */}
+          <img
+            src={images[currentImageIndex]}
+            alt={artist.name}
+            className="w-full h-full object-cover transition-opacity duration-200"
+            loading="lazy"
+          />
 
           {/* Boutons de navigation pour images multiples */}
           {hasMultipleImages && (
             <>
-              <motion.button
+              <button
                 onClick={handlePrevImage}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white z-10"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white active:scale-95 z-10"
               >
                 <ChevronLeft size={20} className="text-[#0B0B0B]" />
-              </motion.button>
+              </button>
 
-              <motion.button
+              <button
                 onClick={handleNextImage}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white z-10"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white active:scale-95 z-10"
               >
                 <ChevronRight size={20} className="text-[#0B0B0B]" />
-              </motion.button>
+              </button>
 
               {/* Indicateurs de points */}
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
@@ -78,7 +63,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                       e.preventDefault();
                       setCurrentImageIndex(index);
                     }}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
                       index === currentImageIndex
                         ? "bg-white w-6"
                         : "bg-white/50 hover:bg-white/75"
@@ -89,52 +74,41 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
             </>
           )}
 
-          {/* Overlay au hover avec liens sociaux */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-[#0B0B0B]/40 to-transparent flex items-end justify-center pb-6"
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
+          {/* Overlay au hover avec liens sociaux - CSS natif */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-[#0B0B0B]/40 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <div className="flex gap-4">
               {artist.socialLinks.spotify && (
-                <motion.a
+                <a
                   href={artist.socialLinks.spotify}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
                 >
                   <Music size={20} className="text-white" />
-                </motion.a>
+                </a>
               )}
               {artist.socialLinks.instagram && (
-                <motion.a
+                <a
                   href={artist.socialLinks.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
                 >
                   <Instagram size={20} className="text-white" />
-                </motion.a>
+                </a>
               )}
               {artist.socialLinks.website && (
-                <motion.a
+                <a
                   href={artist.socialLinks.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
                 >
                   <Globe size={20} className="text-white" />
-                </motion.a>
+                </a>
               )}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Contenu */}
@@ -149,7 +123,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
         </div>
 
       </div>
-    </motion.div>
+    </div>
   );
 });
 
