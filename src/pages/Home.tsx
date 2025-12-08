@@ -1,12 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  Calendar,
-  Music,
-  Users,
-  FileText,
-  Briefcase,
-  MapPin,
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import {
   ColorfulBackground,
   HighlightBadge,
@@ -23,41 +16,41 @@ const Home = () => {
   // Récupérer les métadonnées SEO pour la page d'accueil
   const { title, description, keywords, image, canonical } = seoConfig.home;
 
-  // Liste complète des services proposés
+  // Liste complète des services proposés avec stickers
   const allServices = [
     {
-      icon: <Calendar className="w-12 h-12 text-[#EBABFF]" />,
+      sticker: "/images/Stickers/Administration.png",
       title: "ADMINISTRATION",
       description: "Gestion administrative des projets artistiques",
       color: "administration" as "administration",
     },
     {
-      icon: <Music className="w-12 h-12 text-[#775CFF]" />,
+      sticker: "/images/Stickers/Production.png",
       title: "PRODUCTION",
       description: "Accompagnement complet pour les productions artistiques",
       color: "production" as "production",
     },
     {
-      icon: <Users className="w-12 h-12 text-[#FF7A42]" />,
+      sticker: "/images/Stickers/Management.png",
       title: "MANAGEMENT",
       description: "Développement de carrière et stratégie artistique",
       color: "management" as "management",
     },
     {
-      icon: <FileText className="w-12 h-12 text-[#FFFF73]" />,
+      sticker: "/images/Stickers/Régie-artiste.png",
       title: "RÉGIE ARTISTES",
       description:
         "Coordination des besoins des artistes durant les événements",
       color: "prestation" as "prestation",
     },
     {
-      icon: <Briefcase className="w-12 h-12 text-[#EBABFF]" />,
+      sticker: "/images/Stickers/Dir-Prod.png",
       title: "DIRECTION DE PRODUCTION",
       description: "Supervision globale de la production d'événements",
       color: "administration" as "administration",
     },
     {
-      icon: <MapPin className="w-12 h-12 text-[#775CFF]" />,
+      sticker: "/images/Stickers/Régie-site.png",
       title: "RÉGIE SITE",
       description: "Organisation et gestion logistique des sites d'événements",
       color: "production" as "production",
@@ -82,7 +75,28 @@ const Home = () => {
         sameAs={["https://instagram.com/glitter_prod"]}
       />
       <div>
-        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-32 md:pt-40">
+        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-32 md:pt-40 relative">
+          {/* Stickers décoratifs sur le hero */}
+          <img
+            src="/images/Stickers/Boule-disco.png"
+            alt=""
+            className="absolute top-24 right-4 md:right-12 w-16 md:w-24 opacity-80 rotate-12 hidden sm:block"
+          />
+          <img
+            src="/images/Stickers/Strass/Strass-03.png"
+            alt=""
+            className="absolute top-40 left-4 md:left-16 w-8 md:w-12 opacity-70 hidden sm:block"
+          />
+          <img
+            src="/images/Stickers/Strass/Strass-06.png"
+            alt=""
+            className="absolute bottom-32 right-8 md:right-24 w-6 md:w-10 opacity-60 hidden sm:block"
+          />
+          <img
+            src="/images/Stickers/Coeur-01.png"
+            alt=""
+            className="absolute bottom-40 left-8 md:left-20 w-10 md:w-14 opacity-70 -rotate-12 hidden sm:block"
+          />
           <div className="text-center container mx-auto px-4 max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
@@ -121,6 +135,23 @@ const Home = () => {
                 </a>
               </div>
             </motion.div>
+
+            {/* Scroll indicator */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
+              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            >
+              <span className="text-[#0B0B0B]/60 text-sm font-medium">Découvrir</span>
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ChevronDown className="w-6 h-6 text-[#0B0B0B]/60" />
+              </motion.div>
+            </motion.div>
           </div>
         </ColorfulBackground>
 
@@ -140,24 +171,26 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {allServices.map((service, index) => (
                   <div
                     key={index}
                     className="relative group"
                   >
-                    {/* Bordure noire simple - CSS natif pour hover */}
-                    <div className="border-2 border-[#0B0B0B] rounded-3xl h-full group-hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-                      <div className="relative p-8 rounded-3xl bg-[#FFFFF6] h-full flex flex-col items-center">
-                        <div className="mb-6 flex justify-center">
-                          {service.icon}
+                    {/* Carte de service avec sticker */}
+                    <div className="border-2 border-[#0B0B0B] rounded-2xl h-full group-hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
+                      <div className="relative p-6 rounded-2xl bg-[#FFFFF6] h-full flex flex-col items-center">
+                        <div className="mb-4 flex justify-center">
+                          <img
+                            src={service.sticker}
+                            alt={service.title}
+                            className="w-16 h-16 object-contain"
+                          />
                         </div>
-                        <div className="text-center w-full">
-                          <h3 className="text-xl font-bold mb-4 text-center text-[#0B0B0B]">
-                            {service.title}
-                          </h3>
-                        </div>
-                        <p className="text-[#0B0B0B]/70 text-center">
+                        <h3 className="text-lg font-bold mb-2 text-center text-[#0B0B0B]">
+                          {service.title}
+                        </h3>
+                        <p className="text-[#0B0B0B]/70 text-center text-sm">
                           {service.description}
                         </p>
                       </div>
@@ -173,6 +206,23 @@ const Home = () => {
           {/* Forme organique en arrière-plan */}
           <div className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-br from-[#EBABFF]/20 to-[#FF7A42]/20 rounded-[40%_60%_70%_30%/50%_40%_60%_50%] blur-3xl" />
           <div className="absolute bottom-10 left-10 w-48 h-48 bg-gradient-to-br from-[#775CFF]/20 to-[#EBABFF]/20 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-2xl" />
+
+          {/* Stickers décoratifs */}
+          <img
+            src="/images/Stickers/Strass/Strass-01.png"
+            alt=""
+            className="absolute top-8 left-12 w-8 opacity-60 hidden md:block"
+          />
+          <img
+            src="/images/Stickers/Strass/Strass-04.png"
+            alt=""
+            className="absolute bottom-12 right-16 w-10 opacity-50 hidden md:block"
+          />
+          <img
+            src="/images/Stickers/Coeur-02.png"
+            alt=""
+            className="absolute top-16 right-20 w-12 opacity-60 rotate-12 hidden md:block"
+          />
 
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-3xl font-bold mb-6 text-[#0B0B0B]">
