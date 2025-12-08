@@ -50,7 +50,7 @@ const About = () => {
 
       <div>
         <ColorfulBackground
-          variant="violet-rose"
+          variant="full-spectrum"
           intensity="strong"
           className="min-h-[45vh] flex items-center justify-center pt-32 pb-16"
         >
