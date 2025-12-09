@@ -341,7 +341,7 @@ const Home = () => {
                   <div className="text-center mt-8">
                     <a
                       href="/djs"
-                      className="inline-block bg-[#775CFF] text-white px-6 py-3 rounded-full hover:bg-[#5a45cc] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold"
+                      className="inline-block bg-[#775CFF] text-white px-6 py-3 rounded-full hover:bg-[#5a45cc] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold border-2 border-[#0B0B0B]"
                     >
                       Découvrir tous nos DJs →
                     </a>

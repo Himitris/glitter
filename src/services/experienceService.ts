@@ -47,13 +47,19 @@ export const getAllExperiences = async (): Promise<Experience[]> => {
 
 // Récupérer uniquement les expériences Firebase (pour l'admin)
 export const getFirebaseExperiences = async (): Promise<Experience[]> => {
-  const experiencesCollection = collection(db, "experiences");
-  const q = query(experiencesCollection, orderBy("year", "desc"));
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  } as Experience));
+  try {
+    const experiencesCollection = collection(db, "experiences");
+    const q = query(experiencesCollection, orderBy("year", "desc"));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    } as Experience));
+  } catch (error) {
+    console.error("Erreur Firebase lors du chargement des expériences:", error);
+    // Retourner un tableau vide en cas d'erreur
+    return [];
+  }
 };
 
 // Récupérer une expérience par ID
