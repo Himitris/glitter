@@ -75,13 +75,13 @@ const Home = () => {
         sameAs={["https://instagram.com/glitter_prod"]}
       />
       <div>
-        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex items-center justify-center pt-32 md:pt-40 relative">
-          <div className="text-center container mx-auto px-4 max-w-4xl">
+        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex flex-col items-center justify-center pt-32 md:pt-40 pb-20 relative">
+          <div className="text-center container mx-auto px-4 max-w-4xl flex-1 flex items-center">
             <motion.div
               initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: duration.slow }}
-              className="flex flex-col items-center gap-8"
+              className="flex flex-col items-center gap-8 w-full"
             >
               {/* Logo Glitter */}
               <img
@@ -114,28 +114,28 @@ const Home = () => {
                 </a>
               </div>
             </motion.div>
-
-            {/* Scroll indicator */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.5 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-            >
-              <span className="text-[#0B0B0B]/60 text-sm font-medium">Découvrir</span>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ChevronDown className="w-6 h-6 text-[#0B0B0B]/60" />
-              </motion.div>
-            </motion.div>
           </div>
+
+          {/* Scroll indicator - positionné en bas absolu */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+            className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          >
+            <span className="text-[#0B0B0B]/60 text-xs md:text-sm font-medium">Découvrir</span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ChevronDown className="w-5 h-5 md:w-6 md:h-6 text-[#0B0B0B]/60" />
+            </motion.div>
+          </motion.div>
         </ColorfulBackground>
 
         {/* Services Section */}
-        <section className="py-20">
+        <section className="py-20 bg-[#FFFFF6]">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
@@ -181,12 +181,8 @@ const Home = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="py-20 bg-gradient-to-br from-[#775CFF]/5 via-[#EBABFF]/5 to-[#FF7A42]/5 relative overflow-hidden">
-          {/* Forme organique en arrière-plan */}
-          <div className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-br from-[#EBABFF]/20 to-[#FF7A42]/20 rounded-[40%_60%_70%_30%/50%_40%_60%_50%] blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-48 h-48 bg-gradient-to-br from-[#775CFF]/20 to-[#EBABFF]/20 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-2xl" />
-
-          <div className="container mx-auto px-4 text-center relative z-10">
+        <section className="py-20 bg-[#FFFFF6]">
+          <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6 text-[#0B0B0B]">
               Prêt à faire briller votre projet ?
             </h2>
