@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Music, Instagram } from "lucide-react";
+import { useEffect, useState, useMemo } from "react";
 import {
   ColorfulBackground,
   HighlightBadge,
@@ -9,9 +10,44 @@ import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
 import { useOptimizedAnimation } from "../hooks/useOptimizedAnimation";
+import { getAllArtists, getAllDjs } from "../services/artistService";
+import { Artist } from "../types";
+
+// Fonction pour mélanger un tableau (Fisher-Yates)
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
 
 const Home = () => {
   const { shouldReduceMotion, duration } = useOptimizedAnimation();
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [djs, setDjs] = useState<Artist[]>([]);
+
+  // Charger les artistes et DJs au montage
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [artistsData, djsData] = await Promise.all([
+          getAllArtists(),
+          getAllDjs()
+        ]);
+        setArtists(artistsData);
+        setDjs(djsData);
+      } catch (error) {
+        console.error("Erreur lors du chargement:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Sélection aléatoire de 3 artistes et 3 DJs (mémorisé pour éviter les changements au re-render)
+  const featuredArtists = useMemo(() => shuffleArray(artists).slice(0, 3), [artists]);
+  const featuredDjs = useMemo(() => shuffleArray(djs).slice(0, 3), [djs]);
 
   // Récupérer les métadonnées SEO pour la page d'accueil
   const { title, description, keywords, image, canonical } = seoConfig.home;
@@ -234,6 +270,149 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        {/* Section Artistes & DJs */}
+        {(featuredArtists.length > 0 || featuredDjs.length > 0) && (
+          <section className="py-16 bg-[#FFFFF6] border-t border-[#0B0B0B]/10">
+            <div className="container mx-auto px-4">
+              {/* DJs */}
+              {featuredDjs.length > 0 && (
+                <div className="mb-16">
+                  <div className="flex items-center justify-between mb-8">
+                    <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
+                      Nos DJs
+                    </h2>
+                    <a
+                      href="/djs"
+                      className="text-[#775CFF] font-semibold hover:underline text-sm"
+                    >
+                      Voir tous →
+                    </a>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {featuredDjs.map((dj) => {
+                      const image = Array.isArray(dj.image) ? dj.image[0] : dj.image;
+                      return (
+                        <div
+                          key={dj.id}
+                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+                        >
+                          <div className="aspect-[4/3] overflow-hidden">
+                            <img
+                              src={image}
+                              alt={dj.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            {/* Overlay avec liens sociaux */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4">
+                              <div className="flex gap-3">
+                                {dj.socialLinks?.spotify && (
+                                  <a
+                                    href={dj.socialLinks.spotify}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
+                                  >
+                                    <Music size={18} className="text-white" />
+                                  </a>
+                                )}
+                                {dj.socialLinks?.instagram && (
+                                  <a
+                                    href={dj.socialLinks.instagram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
+                                  >
+                                    <Instagram size={18} className="text-white" />
+                                  </a>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="p-4">
+                            <h3 className="font-bold text-lg text-[#0B0B0B]">{dj.name}</h3>
+                            <p className="text-[#0B0B0B]/60 text-sm line-clamp-2 mt-1">
+                              {dj.description}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Artistes */}
+              {featuredArtists.length > 0 && (
+                <div>
+                  <div className="flex items-center justify-between mb-8">
+                    <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
+                      Nos Artistes
+                    </h2>
+                    <a
+                      href="/artists"
+                      className="text-[#775CFF] font-semibold hover:underline text-sm"
+                    >
+                      Voir tous →
+                    </a>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {featuredArtists.map((artist) => {
+                      const image = Array.isArray(artist.image) ? artist.image[0] : artist.image;
+                      return (
+                        <div
+                          key={artist.id}
+                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+                        >
+                          <div className="aspect-[4/3] overflow-hidden">
+                            <img
+                              src={image}
+                              alt={artist.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            {/* Overlay avec liens sociaux */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4">
+                              <div className="flex gap-3">
+                                {artist.socialLinks?.spotify && (
+                                  <a
+                                    href={artist.socialLinks.spotify}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
+                                  >
+                                    <Music size={18} className="text-white" />
+                                  </a>
+                                )}
+                                {artist.socialLinks?.instagram && (
+                                  <a
+                                    href={artist.socialLinks.instagram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
+                                  >
+                                    <Instagram size={18} className="text-white" />
+                                  </a>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="p-4">
+                            <h3 className="font-bold text-lg text-[#0B0B0B]">{artist.name}</h3>
+                            <p className="text-[#0B0B0B]/60 text-sm line-clamp-2 mt-1">
+                              {artist.description}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* Call to Action */}
         <section className="py-20 bg-[#FFFFF6]">
