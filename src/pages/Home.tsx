@@ -75,53 +75,56 @@ const Home = () => {
         sameAs={["https://instagram.com/glitter_prod"]}
       />
       <div>
-        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-screen flex flex-col items-center justify-center pt-32 md:pt-40 pb-20 relative">
-          <div className="text-center container mx-auto px-4 max-w-4xl flex-1 flex items-center">
-            <motion.div
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: duration.slow }}
-              className="flex flex-col items-center gap-8 w-full"
-            >
-              {/* Logo Glitter */}
-              <img
-                src="/images/Logo/Logo-blanc/Logo-blanc-2.svg"
-                alt="Glitter"
-                className="w-full max-w-md md:max-w-lg h-auto drop-shadow-2xl animate-fade-in"
-              />
+        <ColorfulBackground variant="full-spectrum" intensity="strong" className="h-screen flex flex-col pt-20 md:pt-24 relative">
+          {/* Contenu principal centré */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center container mx-auto px-4 max-w-4xl">
+              <motion.div
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: duration.slow }}
+                className="flex flex-col items-center gap-6 md:gap-8"
+              >
+                {/* Logo Glitter */}
+                <img
+                  src="/images/Logo/Logo-blanc/Logo-blanc-2.svg"
+                  alt="Glitter"
+                  className="w-full max-w-sm md:max-w-lg h-auto drop-shadow-2xl animate-fade-in"
+                />
 
-              {/* Texte avec mots en évidence */}
-              <div className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#0B0B0B] leading-relaxed">
-                <div className="mb-3 md:mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
-                <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 lg:gap-4">
-                  <HighlightBadge color="yellow" rotation={-1} className="text-lg md:text-2xl lg:text-4xl">
-                    UNIQUES
-                  </HighlightBadge>
-                  <span className="text-lg md:text-2xl lg:text-4xl">ET</span>
-                  <HighlightBadge color="yellow" rotation={1} className="text-lg md:text-2xl lg:text-4xl">
-                    MÉMORABLES
-                  </HighlightBadge>
+                {/* Texte avec mots en évidence */}
+                <div className="text-xl md:text-4xl lg:text-5xl font-bold text-[#0B0B0B] leading-relaxed">
+                  <div className="mb-2 md:mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
+                  <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 lg:gap-4">
+                    <HighlightBadge color="yellow" rotation={-1} className="text-base md:text-2xl lg:text-4xl">
+                      UNIQUES
+                    </HighlightBadge>
+                    <span className="text-base md:text-2xl lg:text-4xl">ET</span>
+                    <HighlightBadge color="yellow" rotation={1} className="text-base md:text-2xl lg:text-4xl">
+                      MÉMORABLES
+                    </HighlightBadge>
+                  </div>
                 </div>
-              </div>
 
-              {/* Bouton CTA - CSS hover pour performance */}
-              <div className="mt-6">
-                <a
-                  href="/services"
-                  className="inline-block bg-white text-[#0B0B0B] px-8 py-4 rounded-full hover:bg-[#EBABFF] hover:scale-105 active:scale-95 transition-all duration-200 tracking-wide font-bold text-base md:text-lg shadow-xl border-2 border-[#0B0B0B]"
-                >
-                  Découvrir nos services
-                </a>
-              </div>
-            </motion.div>
+                {/* Bouton CTA - CSS hover pour performance */}
+                <div className="mt-4 md:mt-6">
+                  <a
+                    href="/services"
+                    className="inline-block bg-white text-[#0B0B0B] px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-[#EBABFF] hover:scale-105 active:scale-95 transition-all duration-200 tracking-wide font-bold text-sm md:text-lg shadow-xl border-2 border-[#0B0B0B]"
+                  >
+                    Découvrir nos services
+                  </a>
+                </div>
+              </motion.div>
+            </div>
           </div>
 
-          {/* Scroll indicator - positionné en bas absolu */}
+          {/* Scroll indicator - en bas de l'écran */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
+            className="pb-6 md:pb-8 flex flex-col items-center gap-1 cursor-pointer"
             onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
           >
             <span className="text-[#0B0B0B]/60 text-xs md:text-sm font-medium">Découvrir</span>
