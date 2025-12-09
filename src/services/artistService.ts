@@ -10,21 +10,41 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { Artist } from "../types";
+import { artists as hardcodedArtists, dj as hardcodedDjs } from "../data/artists";
 
-// Récupérer tous les artistes
+// Récupérer tous les artistes (Firebase + hardcoded)
 export const getAllArtists = async (): Promise<Artist[]> => {
-  const artistsCollection = collection(db, "artists");
-  const snapshot = await getDocs(artistsCollection);
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Artist));
+  try {
+    const artistsCollection = collection(db, "artists");
+    const snapshot = await getDocs(artistsCollection);
+    const firebaseArtists = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Artist));
+
+    // Combiner Firebase + hardcoded (hardcoded en premier)
+    return [...hardcodedArtists, ...firebaseArtists];
+  } catch (error) {
+    console.error("Erreur Firebase, utilisation des données hardcoded:", error);
+    // En cas d'erreur Firebase, retourner les données hardcoded
+    return hardcodedArtists;
+  }
 };
 
 // Récupérer un artiste par ID
 export const getArtistById = async (id: string): Promise<Artist | null> => {
-  const artistDoc = doc(db, "artists", id);
-  const snapshot = await getDoc(artistDoc);
+  // Vérifier d'abord dans les hardcoded
+  const hardcodedArtist = hardcodedArtists.find(a => a.id === id);
+  if (hardcodedArtist) {
+    return hardcodedArtist;
+  }
 
-  if (snapshot.exists()) {
-    return { id: snapshot.id, ...snapshot.data() } as Artist;
+  try {
+    const artistDoc = doc(db, "artists", id);
+    const snapshot = await getDoc(artistDoc);
+
+    if (snapshot.exists()) {
+      return { id: snapshot.id, ...snapshot.data() } as Artist;
+    }
+  } catch (error) {
+    console.error("Erreur Firebase lors de la récupération de l'artiste:", error);
   }
 
   return null;
@@ -52,20 +72,39 @@ export const deleteArtist = async (id: string): Promise<void> => {
   await deleteDoc(doc(db, "artists", id));
 };
 
-// Récupérer tous les DJs
+// Récupérer tous les DJs (Firebase + hardcoded)
 export const getAllDjs = async (): Promise<Artist[]> => {
-  const djsCollection = collection(db, "djs");
-  const snapshot = await getDocs(djsCollection);
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Artist));
+  try {
+    const djsCollection = collection(db, "djs");
+    const snapshot = await getDocs(djsCollection);
+    const firebaseDjs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Artist));
+
+    // Combiner Firebase + hardcoded (hardcoded en premier)
+    return [...hardcodedDjs, ...firebaseDjs];
+  } catch (error) {
+    console.error("Erreur Firebase, utilisation des données hardcoded:", error);
+    // En cas d'erreur Firebase, retourner les données hardcoded
+    return hardcodedDjs;
+  }
 };
 
 // Récupérer un DJ par ID
 export const getDjById = async (id: string): Promise<Artist | null> => {
-  const djDoc = doc(db, "djs", id);
-  const snapshot = await getDoc(djDoc);
+  // Vérifier d'abord dans les hardcoded
+  const hardcodedDj = hardcodedDjs.find(dj => dj.id === id);
+  if (hardcodedDj) {
+    return hardcodedDj;
+  }
 
-  if (snapshot.exists()) {
-    return { id: snapshot.id, ...snapshot.data() } as Artist;
+  try {
+    const djDoc = doc(db, "djs", id);
+    const snapshot = await getDoc(djDoc);
+
+    if (snapshot.exists()) {
+      return { id: snapshot.id, ...snapshot.data() } as Artist;
+    }
+  } catch (error) {
+    console.error("Erreur Firebase lors de la récupération du DJ:", error);
   }
 
   return null;
