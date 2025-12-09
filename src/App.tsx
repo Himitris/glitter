@@ -27,6 +27,7 @@ const Success = lazy(() => import("./pages/Success"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const ArtistForm = lazy(() => import("./pages/ArtistForm"));
+const ExperienceForm = lazy(() => import("./pages/ExperienceForm"));
 const DeleteConfirmation = lazy(() => import("./pages/DeleteConfirmation"));
 
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
@@ -182,6 +183,36 @@ const AnimatedRoutes = () => {
             <ProtectedRoute>
               <PageTransition>
                 <DeleteConfirmation type="dj" />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/experience/add"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <ExperienceForm />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/experience/edit/:id"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <ExperienceForm />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/experience/delete/:id"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <DeleteConfirmation type="experience" />
               </PageTransition>
             </ProtectedRoute>
           }

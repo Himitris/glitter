@@ -7,17 +7,21 @@ import {
   getDjById,
   deleteDj,
 } from "../services/artistService";
-import { Artist } from "../types";
+import {
+  getExperienceById,
+  deleteExperience,
+} from "../services/experienceService";
+import { Artist, Experience } from "../types";
 import { Section, Loader } from "../components/ui";
 import Seo from "../components/seo/Seo";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 
 interface DeleteConfirmationProps {
-  type: "artist" | "dj";
+  type: "artist" | "dj" | "experience";
 }
 
 const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
-  const [item, setItem] = useState<Artist | null>(null);
+  const [item, setItem] = useState<Artist | Experience | null>(null);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
 
@@ -29,8 +33,14 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
     const fetchItem = async () => {
       if (id) {
         try {
-          const fetchedItem =
-            type === "artist" ? await getArtistById(id) : await getDjById(id);
+          let fetchedItem;
+          if (type === "artist") {
+            fetchedItem = await getArtistById(id);
+          } else if (type === "dj") {
+            fetchedItem = await getDjById(id);
+          } else {
+            fetchedItem = await getExperienceById(id);
+          }
 
           setItem(fetchedItem);
         } catch (error) {
@@ -53,14 +63,14 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
 
       if (type === "artist") {
         await deleteArtist(id);
-      } else {
+      } else if (type === "dj") {
         await deleteDj(id);
+      } else {
+        await deleteExperience(id);
       }
 
-      showToast(
-        `${type === "artist" ? "Artiste" : "DJ"} supprimé avec succès`,
-        "success"
-      );
+      const typeLabel = type === "artist" ? "Artiste" : type === "dj" ? "DJ" : "Expérience";
+      showToast(`${typeLabel} supprimé avec succès`, "success");
       navigate("/admin/dashboard");
     } catch (error) {
       console.error("Erreur lors de la suppression:", error);
@@ -111,11 +121,20 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
     );
   }
 
+  // Helper to get display name and image for both Artist/DJ and Experience
+  const isExperience = type === "experience";
+  const displayName = isExperience ? (item as Experience).title : (item as Artist).name;
+  const displayImage = isExperience
+    ? (item as Experience).logo
+    : Array.isArray((item as Artist).image)
+      ? (item as Artist).image[0]
+      : (item as Artist).image;
+
   return (
     <>
       <Seo
-        title={`Supprimer ${item.name} | Glitter Production`}
-        description={`Confirmation de suppression de ${item.name}`}
+        title={`Supprimer ${displayName} | Glitter Production`}
+        description={`Confirmation de suppression de ${displayName}`}
         canonical={`/admin/${type}/delete/${id}`}
       />
       <Section>
@@ -142,7 +161,7 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
                 </h2>
                 <p className="text-gray-600">
                   Vous êtes sur le point de supprimer{" "}
-                  <strong>{item.name}</strong>. Cette action ne peut pas être
+                  <strong>{displayName}</strong>. Cette action ne peut pas être
                   annulée.
                 </p>
               </div>
@@ -151,8 +170,8 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
             <div className="flex items-center p-4 bg-gray-50 rounded-lg mb-6">
               <div className="h-12 w-12 rounded-full overflow-hidden mr-4">
                 <img
-                  src={Array.isArray(item.image) ? item.image[0] : item.image}
-                  alt={item.name}
+                  src={displayImage}
+                  alt={displayName}
                   className="h-full w-full object-cover"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
@@ -161,7 +180,7 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
                 />
               </div>
               <div>
-                <p className="font-medium">{item.name}</p>
+                <p className="font-medium">{displayName}</p>
                 <p className="text-sm text-gray-500 truncate max-w-md">
                   {item.description}
                 </p>

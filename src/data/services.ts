@@ -14,7 +14,7 @@ export const eventServices = [
   },
   {
     title: "Régie Cashless",
-    sticker: "/images/Stickers/Administration.png",
+    sticker: "/images/Stickers/Boule-disco.png",
     description:
       "Mise en place et gestion des systèmes de paiement sans espèces pour une fluidité optimale des transactions lors des événements.",
     features: [
@@ -53,7 +53,7 @@ export const eventServices = [
   },
   {
     title: "Gestionnaire de Paies",
-    sticker: "/images/Stickers/Administration.png",
+    sticker: "/images/Stickers/Production.png",
     description:
       "Gestion précise et conforme des paies des artistes, techniciens et autres intervenants.",
     features: [

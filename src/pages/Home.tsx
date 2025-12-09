@@ -278,17 +278,14 @@ const Home = () => {
               {/* DJs */}
               {featuredDjs.length > 0 && (
                 <div className="mb-16">
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center justify-between mb-2">
                     <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
                       Nos DJs
                     </h2>
-                    <a
-                      href="/djs"
-                      className="text-[#775CFF] font-semibold hover:underline text-sm"
-                    >
-                      Voir tous →
-                    </a>
                   </div>
+                  <p className="text-[#0B0B0B]/60 mb-8">
+                    Découvrez une sélection de nos DJs talentueux — il y en a bien d'autres à explorer !
+                  </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredDjs.map((dj) => {
                       const image = Array.isArray(dj.image) ? dj.image[0] : dj.image;
@@ -340,23 +337,29 @@ const Home = () => {
                       );
                     })}
                   </div>
+                  {/* Bouton voir tous les DJs */}
+                  <div className="text-center mt-8">
+                    <a
+                      href="/djs"
+                      className="inline-block bg-[#775CFF] text-white px-6 py-3 rounded-full hover:bg-[#5a45cc] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold"
+                    >
+                      Découvrir tous nos DJs →
+                    </a>
+                  </div>
                 </div>
               )}
 
               {/* Artistes */}
               {featuredArtists.length > 0 && (
                 <div>
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center justify-between mb-2">
                     <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
                       Nos Artistes
                     </h2>
-                    <a
-                      href="/artists"
-                      className="text-[#775CFF] font-semibold hover:underline text-sm"
-                    >
-                      Voir tous →
-                    </a>
                   </div>
+                  <p className="text-[#0B0B0B]/60 mb-8">
+                    Voici quelques artistes que nous accompagnons — découvrez-en encore plus !
+                  </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredArtists.map((artist) => {
                       const image = Array.isArray(artist.image) ? artist.image[0] : artist.image;
@@ -407,6 +410,15 @@ const Home = () => {
                         </div>
                       );
                     })}
+                  </div>
+                  {/* Bouton voir tous les artistes */}
+                  <div className="text-center mt-8">
+                    <a
+                      href="/artists"
+                      className="inline-block bg-[#EBABFF] text-[#0B0B0B] px-6 py-3 rounded-full hover:bg-[#d98fee] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold border-2 border-[#0B0B0B]"
+                    >
+                      Découvrir tous nos artistes →
+                    </a>
                   </div>
                 </div>
               )}
