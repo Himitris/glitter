@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface ColorfulBackgroundProps {
   variant?: 'violet-rose' | 'rose-orange' | 'orange-jaune' | 'full-spectrum';
@@ -12,6 +12,7 @@ interface ColorfulBackgroundProps {
  * Composant de fond avec des couleurs VRAIMENT prononcées et assumées
  * Inspiré directement de l'image de la charte graphique Glitter 2025
  * Fonds colorés vibrants violet-rose-orange avec effet nuageux
+ * Optimisé pour mobile avec animations réduites
  */
 const ColorfulBackground: React.FC<ColorfulBackgroundProps> = ({
   variant = 'full-spectrum',
@@ -19,6 +20,21 @@ const ColorfulBackground: React.FC<ColorfulBackgroundProps> = ({
   children,
   intensity = 'strong',
 }) => {
+  const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Détection mobile côté client uniquement
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Sur mobile ou si reduced motion, pas d'animations
+  const shouldAnimate = !prefersReducedMotion && !isMobile;
   // Définir les palettes de couleurs selon la variante
   const colorSchemes = {
     'violet-rose': {
@@ -62,87 +78,97 @@ const ColorfulBackground: React.FC<ColorfulBackgroundProps> = ({
       {/* Fond de base avec gradient principal */}
       <div className={`absolute inset-0 bg-gradient-to-br ${colors.base}`} />
 
-      {/* Couches de gradients animés pour effet nuageux */}
+      {/* Couches de gradients - animés sur desktop, statiques sur mobile */}
       <div className="absolute inset-0">
         {/* Couche 1 - Haut gauche */}
-        <motion.div
-          className={`absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-gradient-to-br ${colors.layer1} ${blurIntensity[intensity]} opacity-90`}
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'easeInOut',
-          }}
-        />
+        {shouldAnimate ? (
+          <motion.div
+            className={`absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-gradient-to-br ${colors.layer1} ${blurIntensity[intensity]} opacity-90 will-change-transform`}
+            animate={{
+              x: [0, 30, 0],
+              y: [0, 20, 0],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              repeatType: 'reverse',
+              ease: 'linear',
+            }}
+          />
+        ) : (
+          <div className={`absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-gradient-to-br ${colors.layer1} ${blurIntensity[intensity]} opacity-90`} />
+        )}
 
         {/* Couche 2 - Centre droit */}
-        <motion.div
-          className={`absolute top-[10%] -right-[10%] w-[60%] h-[80%] bg-gradient-to-bl ${colors.layer2} ${blurIntensity[intensity]} opacity-85`}
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'easeInOut',
-          }}
-        />
+        {shouldAnimate ? (
+          <motion.div
+            className={`absolute top-[10%] -right-[10%] w-[60%] h-[80%] bg-gradient-to-bl ${colors.layer2} ${blurIntensity[intensity]} opacity-85 will-change-transform`}
+            animate={{
+              x: [0, -25, 0],
+              y: [0, 25, 0],
+            }}
+            transition={{
+              duration: 30,
+              repeat: Infinity,
+              repeatType: 'reverse',
+              ease: 'linear',
+            }}
+          />
+        ) : (
+          <div className={`absolute top-[10%] -right-[10%] w-[60%] h-[80%] bg-gradient-to-bl ${colors.layer2} ${blurIntensity[intensity]} opacity-85`} />
+        )}
 
         {/* Couche 3 - Bas (uniquement pour full-spectrum) */}
         {variant === 'full-spectrum' && colors.layer3 && (
-          <motion.div
-            className={`absolute -bottom-[10%] left-[20%] w-[70%] h-[60%] bg-gradient-to-t ${colors.layer3} ${blurIntensity[intensity]} opacity-80`}
-            animate={{
-              x: [0, 30, 0],
-              y: [0, -30, 0],
-              scale: [1, 1.08, 1],
-            }}
-            transition={{
-              duration: 22,
-              repeat: Infinity,
-              repeatType: 'reverse',
-              ease: 'easeInOut',
-            }}
-          />
+          shouldAnimate ? (
+            <motion.div
+              className={`absolute -bottom-[10%] left-[20%] w-[70%] h-[60%] bg-gradient-to-t ${colors.layer3} ${blurIntensity[intensity]} opacity-80 will-change-transform`}
+              animate={{
+                x: [0, 20, 0],
+                y: [0, -20, 0],
+              }}
+              transition={{
+                duration: 28,
+                repeat: Infinity,
+                repeatType: 'reverse',
+                ease: 'linear',
+              }}
+            />
+          ) : (
+            <div className={`absolute -bottom-[10%] left-[20%] w-[70%] h-[60%] bg-gradient-to-t ${colors.layer3} ${blurIntensity[intensity]} opacity-80`} />
+          )
         )}
 
-        {/* Accents lumineux subtils */}
-        <motion.div
-          className={`absolute top-[30%] left-[15%] w-[40%] h-[40%] bg-gradient-to-br ${colors.accent} blur-3xl opacity-60`}
-          animate={{
-            opacity: [0.4, 0.7, 0.4],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'easeInOut',
-          }}
-        />
+        {/* Accents lumineux - seulement sur desktop */}
+        {shouldAnimate && (
+          <>
+            <motion.div
+              className={`absolute top-[30%] left-[15%] w-[40%] h-[40%] bg-gradient-to-br ${colors.accent} blur-3xl opacity-60 will-change-[opacity]`}
+              animate={{
+                opacity: [0.4, 0.6, 0.4],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                repeatType: 'reverse',
+                ease: 'linear',
+              }}
+            />
 
-        <motion.div
-          className={`absolute bottom-[20%] right-[20%] w-[35%] h-[35%] bg-gradient-to-tl ${colors.accent} blur-3xl opacity-50`}
-          animate={{
-            opacity: [0.3, 0.6, 0.3],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'easeInOut',
-            delay: 2,
-          }}
-        />
+            <motion.div
+              className={`absolute bottom-[20%] right-[20%] w-[35%] h-[35%] bg-gradient-to-tl ${colors.accent} blur-3xl opacity-50 will-change-[opacity]`}
+              animate={{
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{
+                duration: 12,
+                repeat: Infinity,
+                repeatType: 'reverse',
+                ease: 'linear',
+              }}
+            />
+          </>
+        )}
       </div>
 
       {/* Overlay léger pour adoucir si nécessaire */}

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
   Section,
@@ -7,7 +7,6 @@ import {
   HighlightBadge,
 } from "../components/ui";
 import ArtistCard from "../components/artists/ArtistCard";
-import { useInView } from "react-intersection-observer";
 import { typography } from "../utils/theme";
 import ServiceCard from "../components/services/ServiceCard";
 import Seo from "../components/seo/Seo";
@@ -56,14 +55,9 @@ const djServicesUpdated = [
 ];
 
 const DJs = () => {
-  const [artistsRef, artistsInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.05,
-    rootMargin: "0px 0px -20% 0px",
-  });
-
   const [djs, setDjs] = useState<Artist[]>([]);
   const [loading, setLoading] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const fetchDjs = async () => {
@@ -114,17 +108,14 @@ const DJs = () => {
         </ColorfulBackground>
 
         <Section>
-          <div className="grid md:grid-cols-3 gap-8 mb-20 items-stretch" ref={artistsRef}>
+          <div className="grid md:grid-cols-3 gap-8 mb-20 items-stretch">
             {djServicesUpdated.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={artistsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex h-full"
+                className="flex h-full animate-fade-in"
+                style={{ animationDelay: prefersReducedMotion ? '0ms' : `${index * 50}ms` }}
               >
                 <ServiceCard
-                  key={index}
                   {...service}
                   color={
                     service.color as
@@ -134,7 +125,7 @@ const DJs = () => {
                       | "prestation"
                   }
                 />
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -145,15 +136,13 @@ const DJs = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {djs.map((dj, index) => (
-                <motion.div
+                <div
                   key={dj.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="animate-fade-in"
+                  style={{ animationDelay: prefersReducedMotion ? '0ms' : `${Math.min(index, 5) * 50}ms` }}
                 >
                   <ArtistCard artist={dj} />
-                </motion.div>
+                </div>
               ))}
             </div>
           )}
@@ -177,14 +166,12 @@ const DJs = () => {
               </HighlightBadge>
               <span>avec nous ? Nous sommes toujours à la recherche de nouveaux talents pour enrichir notre communauté.</span>
             </div>
-            <motion.a
+            <a
               href="/contact"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 transition-colors"
+              className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200"
             >
               Contactez-nous
-            </motion.a>
+            </a>
           </div>
         </Section>
       </div>

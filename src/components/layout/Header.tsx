@@ -107,29 +107,29 @@ const Header = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Menu avec animation améliorée */}
-        <AnimatePresence>
+        {/* Mobile Menu - optimisé pour performance */}
+        <AnimatePresence mode="wait">
           {isMenuOpen && (
             <motion.div
-              className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 z-40"
+              className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 z-40 will-change-[opacity]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.2 }}
             >
-              {/* Overlay avec backdrop */}
+              {/* Overlay simple sans blur (performance mobile) */}
               <div
-                className="absolute inset-0 bg-gradient-to-br from-[#775CFF]/20 via-[#EBABFF]/20 to-[#FF7A42]/20 backdrop-blur-xl"
+                className="absolute inset-0 bg-[#0B0B0B]/40"
                 onClick={() => setIsMenuOpen(false)}
               />
 
-              {/* Menu content */}
+              {/* Menu content - animation GPU-accélérée */}
               <motion.div
-                className="relative bg-[#FFFFF6] rounded-t-3xl shadow-2xl mx-4 mt-4 p-6 max-h-[calc(100vh-8rem)] overflow-y-auto"
-                initial={{ y: 100, opacity: 0 }}
+                className="relative bg-[#FFFFF6] rounded-t-3xl shadow-2xl mx-4 mt-4 p-6 max-h-[calc(100vh-8rem)] overflow-y-auto will-change-transform"
+                initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 100, opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                exit={{ y: 50, opacity: 0 }}
+                transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               >
                 {/* Bordure gradient en haut */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] rounded-t-3xl" />

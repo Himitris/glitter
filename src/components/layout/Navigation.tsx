@@ -21,35 +21,39 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
     ${isActive ? 'text-[#775CFF]' : 'hover:text-[#775CFF]'}
   `;
   
-  // Animation variants pour les items du menu mobile
+  // Animation variants optimisées pour le menu mobile
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.05, // Réduit de 0.1 à 0.05
+        duration: 0.15
       }
     }
   };
-  
+
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 10 }, // Réduit de 20 à 10
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.15, ease: "easeOut" }
+    }
   };
 
   return (
-    <motion.nav 
+    <motion.nav
       className={baseClassName}
       variants={isMobile ? containerVariants : {}}
       initial={isMobile ? "hidden" : false}
       animate={isMobile ? "show" : false}
     >
-      {routes.map((route, index) => (
+      {routes.map((route) => (
         <motion.div
           key={route.path}
-          variants={isMobile ? itemVariants : {}} 
-          whileHover={!isMobile ? { scale: 1.05 } : {}}
-          transition={{ type: "spring", stiffness: 300 }}
+          variants={isMobile ? itemVariants : {}}
+          className={!isMobile ? "hover:scale-105 transition-transform duration-150" : ""}
         >
           <Link
             to={route.path}
@@ -58,10 +62,8 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
           >
             {route.label}
             {location.pathname === route.path && (
-              <motion.span
+              <span
                 className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r ${colors.gradient.administration}`}
-                layoutId="activeIndicator"
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />
             )}
           </Link>

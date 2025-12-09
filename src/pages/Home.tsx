@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronDown, Music, Instagram } from "lucide-react";
+import { ChevronDown, Music, Instagram, Sparkles, Target, Handshake } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import {
   ColorfulBackground,
@@ -238,32 +238,32 @@ const Home = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#775CFF]/10 flex items-center justify-center">
-                  <span className="text-2xl">✨</span>
+              <div className="text-center group">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#775CFF] to-[#775CFF]/70 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
+                  <Sparkles className="w-7 h-7 text-white" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Expertise</h3>
-                <p className="text-[#0B0B0B]/70 text-sm">
+                <p className="text-[#0B0B0B]/70 text-sm leading-relaxed">
                   Une équipe passionnée avec une solide expérience dans l'événementiel artistique.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#EBABFF]/20 flex items-center justify-center">
-                  <span className="text-2xl">🎯</span>
+              <div className="text-center group">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#EBABFF] to-[#EBABFF]/70 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
+                  <Target className="w-7 h-7 text-white" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Sur-mesure</h3>
-                <p className="text-[#0B0B0B]/70 text-sm">
+                <p className="text-[#0B0B0B]/70 text-sm leading-relaxed">
                   Des solutions adaptées à chaque projet, qu'il soit intimiste ou d'envergure.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#FF7A42]/10 flex items-center justify-center">
-                  <span className="text-2xl">🤝</span>
+              <div className="text-center group">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#FF7A42] to-[#FF7A42]/70 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
+                  <Handshake className="w-7 h-7 text-white" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Accompagnement</h3>
-                <p className="text-[#0B0B0B]/70 text-sm">
+                <p className="text-[#0B0B0B]/70 text-sm leading-relaxed">
                   Un suivi personnalisé de A à Z pour la réussite de votre événement.
                 </p>
               </div>
