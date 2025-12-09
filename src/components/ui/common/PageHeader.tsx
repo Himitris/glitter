@@ -16,6 +16,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, backgroundImag
             src={backgroundImage}
             alt={title}
             className="w-full h-full object-cover"
+            loading="lazy"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30" />

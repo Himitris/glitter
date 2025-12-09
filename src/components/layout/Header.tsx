@@ -125,14 +125,14 @@ const Header = () => {
 
               {/* Menu content - animation GPU-accélérée */}
               <motion.div
-                className="relative bg-[#FFFFF6] rounded-t-3xl shadow-2xl mx-4 mt-4 p-6 max-h-[calc(100vh-8rem)] overflow-y-auto will-change-transform"
+                className="relative bg-[#FFFFF6] rounded-3xl shadow-2xl mx-4 mt-4 p-6 pb-8 border-2 border-[#0B0B0B] will-change-transform"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 50, opacity: 0 }}
                 transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               >
                 {/* Bordure gradient en haut */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] rounded-t-3xl" />
+                <div className="absolute top-0 left-4 right-4 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] rounded-full -translate-y-0.5" />
 
                 <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
               </motion.div>

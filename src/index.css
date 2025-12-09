@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Typographie Neue Montreal - Charte Glitter 2025 */
+/* ================================================
+   Typographie - Charte Glitter Production 2025
+   ================================================ */
+
+/* Police principale: OT Neue Montreal */
 @font-face {
   font-family: 'Neue Montreal';
   src: url('/fonts/NeueMontreal/NeueMontreal-Light.otf') format('opentype');
@@ -13,9 +17,25 @@
 
 @font-face {
   font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal/NeueMontreal-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
   src: url('/fonts/NeueMontreal/NeueMontreal-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal/NeueMontreal-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -29,23 +49,51 @@
 
 @font-face {
   font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal/NeueMontreal-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
   src: url('/fonts/NeueMontreal/NeueMontreal-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
-/* Fallback pour Frunchy Sage (décoratif) */
 @font-face {
-  font-family: 'Frunchy Sage';
-  src: url('/Frunchy Sage/Frunchy.ttf') format('truetype'),
-       url('/Frunchy Sage/Frunchy.otf') format('opentype');
-  font-weight: normal;
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal/NeueMontreal-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Police secondaire: Fenul (fallback vers serif si non disponible)
+   Note: Ajouter les fichiers Fenul dans /public/fonts/Fenul/ si disponibles */
+@font-face {
+  font-family: 'Fenul';
+  src: local('Fenul Compressed SemiBold'),
+       url('/fonts/Fenul/Fenul-CompressedSemiBold.otf') format('opentype');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
-/* Variables CSS personnalisées pour la charte */
+@font-face {
+  font-family: 'Fenul';
+  src: local('Fenul Compressed SemiBold Italic'),
+       url('/fonts/Fenul/Fenul-CompressedSemiBoldItalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ================================================
+   Variables CSS
+   ================================================ */
 @layer base {
   :root {
     /* Couleurs primaires */
@@ -57,17 +105,23 @@
     --color-rose: #EBABFF;
     --color-orange: #FF7A42;
     --color-jaune: #FFFF73;
+
+    /* Polices */
+    --font-primary: 'Neue Montreal', system-ui, sans-serif;
+    --font-secondary: 'Fenul', 'Playfair Display', Georgia, serif;
   }
 
   body {
     @apply bg-glitter-off-white text-glitter-off-black;
-    font-family: 'Neue Montreal', 'Inter var', system-ui, sans-serif;
+    font-family: var(--font-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Utilitaires personnalisés */
+/* ================================================
+   Utilitaires personnalisés
+   ================================================ */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -76,19 +130,9 @@
   .animate-blob-slow {
     animation: blob 25s ease-in-out infinite;
   }
-}
 
-@font-face {
-  font-family: 'Neue Montreal';
-  src: url('/fonts/NeueMontreal/NeueMontreal-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
+  /* Typographie secondaire pour titres décoratifs */
+  .font-display {
+    font-family: var(--font-secondary);
+  }
 }
-
-@font-face {
-  font-family: 'Neue Montreal';
-  src: url('/fonts/NeueMontreal/NeueMontreal-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-}
-

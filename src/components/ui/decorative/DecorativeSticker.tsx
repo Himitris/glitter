@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface DecorativeStickerProps {
   type: 'boule-disco' | 'coeur-01' | 'coeur-02' | `strass-${number}`;
@@ -12,6 +12,7 @@ interface DecorativeStickerProps {
 /**
  * Composant pour afficher les stickers décoratifs
  * Inclut : boule disco, coeurs, et strass
+ * Optimisé : animations désactivées sur mobile
  */
 const DecorativeSticker: React.FC<DecorativeStickerProps> = ({
   type,
@@ -20,6 +21,18 @@ const DecorativeSticker: React.FC<DecorativeStickerProps> = ({
   animated = true,
   animationType = 'float',
 }) => {
+  const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Désactiver animations sur mobile
+  const shouldAnimate = animated && !prefersReducedMotion && !isMobile;
   // Mapping des tailles
   const sizes = {
     sm: 'w-12 h-12',
@@ -72,8 +85,8 @@ const DecorativeSticker: React.FC<DecorativeStickerProps> = ({
     none: {},
   };
 
-  const Component = animated ? motion.img : 'img';
-  const animationProps = animated && animationType !== 'none'
+  const Component = shouldAnimate ? motion.img : 'img';
+  const animationProps = shouldAnimate && animationType !== 'none'
     ? animations[animationType]
     : {};
 

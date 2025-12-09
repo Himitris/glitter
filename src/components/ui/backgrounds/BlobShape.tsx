@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface BlobShapeProps {
   variant?: 'violet' | 'rose' | 'jaune' | 'orange';
@@ -16,6 +16,18 @@ const BlobShape: React.FC<BlobShapeProps> = ({
   animate = false,
   children,
 }) => {
+  const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Désactiver animations sur mobile ou si reduced motion
+  const shouldAnimate = animate && !prefersReducedMotion && !isMobile;
   // Définir les couleurs de bordure selon la variante
   const borderColors = {
     violet: 'from-[#775CFF] to-[#EBABFF]',
@@ -32,18 +44,18 @@ const BlobShape: React.FC<BlobShapeProps> = ({
     xl: 'w-96 h-96',
   };
 
-  // Animation de rotation douce
-  const animationVariants = animate
+  // Animation de rotation douce (désactivée sur mobile)
+  const animationVariants = shouldAnimate
     ? {
         animate: {
-          rotate: [0, 5, -5, 0],
-          scale: [1, 1.02, 1],
+          rotate: [0, 3, -3, 0],
+          scale: [1, 1.01, 1],
         },
         transition: {
-          duration: 8,
+          duration: 12,
           repeat: Infinity,
           repeatType: 'reverse' as const,
-          ease: 'easeInOut',
+          ease: 'linear',
         },
       }
     : {};
