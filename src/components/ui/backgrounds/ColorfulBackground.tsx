@@ -149,7 +149,7 @@ const ColorfulBackground: React.FC<ColorfulBackgroundProps> = ({
       <div className="absolute inset-0 bg-white/5" />
 
       {/* Contenu */}
-      <div className="relative z-10">
+      <div className="relative z-10 h-full flex flex-col">
         {children}
       </div>
     </div>

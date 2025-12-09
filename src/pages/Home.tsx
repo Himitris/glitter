@@ -180,6 +180,58 @@ const Home = () => {
                   </div>
               ))}
             </div>
+
+            <div className="text-center mt-10">
+              <a
+                href="/services"
+                className="inline-block text-[#775CFF] font-semibold hover:underline"
+              >
+                Voir tous nos services →
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Pourquoi Glitter Section */}
+        <section className="py-16 bg-[#FFFFF6] border-t border-[#0B0B0B]/10">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
+                Pourquoi Glitter ?
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#775CFF]/10 flex items-center justify-center">
+                  <span className="text-2xl">✨</span>
+                </div>
+                <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Expertise</h3>
+                <p className="text-[#0B0B0B]/70 text-sm">
+                  Une équipe passionnée avec une solide expérience dans l'événementiel artistique.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#EBABFF]/20 flex items-center justify-center">
+                  <span className="text-2xl">🎯</span>
+                </div>
+                <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Sur-mesure</h3>
+                <p className="text-[#0B0B0B]/70 text-sm">
+                  Des solutions adaptées à chaque projet, qu'il soit intimiste ou d'envergure.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#FF7A42]/10 flex items-center justify-center">
+                  <span className="text-2xl">🤝</span>
+                </div>
+                <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Accompagnement</h3>
+                <p className="text-[#0B0B0B]/70 text-sm">
+                  Un suivi personnalisé de A à Z pour la réussite de votre événement.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
