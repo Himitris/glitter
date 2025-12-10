@@ -12,18 +12,15 @@ const Header = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
-  // Hauteur approximative du bandeau coloré en haut des pages
-  const COLORED_HEADER_HEIGHT = 300;
-
   // Optimisé avec throttling pour améliorer les performances
   const handleScroll = useCallback(() => {
     const currentScrollPos = window.scrollY;
 
-    // Devenir blanc seulement après avoir dépassé le bandeau coloré
-    setIsScrolled(currentScrollPos > COLORED_HEADER_HEIGHT);
+    // Définir si l'on a scrollé (navbar devient blanche)
+    setIsScrolled(currentScrollPos > 20);
 
     // Basculer la visibilité en fonction de la direction du scroll
-    if (currentScrollPos <= COLORED_HEADER_HEIGHT) {
+    if (currentScrollPos <= 20) {
       setVisible(true);
     } else {
       setVisible(prevScrollPos > currentScrollPos || isMenuOpen);

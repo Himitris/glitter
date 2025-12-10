@@ -1,9 +1,12 @@
 # robots.txt for Glitter Production
+# https://glitter-production.com
+
 User-agent: *
 Allow: /
 
+# Bloquer les pages admin
+Disallow: /admin
+Disallow: /admin/
+
 # Sitemap
 Sitemap: https://glitter-production.com/sitemap.xml
-
-# Politique de mise en cache
-Crawl-delay: 10
