@@ -10,8 +10,9 @@
     <meta name="keywords" content="production événementielle, organisation concerts, événements musicaux, spectacles, Landes, Tarn, production musicale, régie artistes, management artistes" />
 
     <!-- Favicon et icônes -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/Logo/Monogramme/Monogramme-noir.png" />
     <link rel="icon" type="image/svg+xml" href="/images/Logo/Monogramme-sticker/Sticker-01.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/Logo/Monogramme-sticker/Sticker-01.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/Logo/Monogramme/Monogramme-noir.png" />
 
     <!-- Thème et couleurs -->
     <meta name="theme-color" content="#775CFF" />
@@ -44,10 +45,14 @@
     <!-- Preconnect pour performances -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://firebase.googleapis.com" crossorigin />
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <!-- Fonts - Optimized loading with display=swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" /></noscript>
 
     <!-- Données structurées JSON-LD (Organisation) -->
     <script type="application/ld+json">

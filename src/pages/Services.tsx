@@ -1,18 +1,31 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useState, useEffect } from 'react';
 import {
   Section,
   ColorfulBackground,
   HighlightBadge,
 } from '../components/ui';
 import { MapPin } from 'lucide-react';
-import { eventServices, pastExperiences } from '../data/services';
+import { eventServices } from '../data/services';
+import { getAllExperiences } from '../services/experienceService';
+import { Experience } from '../types';
 import { typography } from '../utils/theme';
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
 
 const Services = () => {
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      const data = await getAllExperiences();
+      setExperiences(data);
+    };
+    fetchExperiences();
+  }, []);
+
   const [servicesRef, servicesInView] = useInView({
     triggerOnce: true,
     threshold: 0.05,
@@ -131,9 +144,9 @@ const Services = () => {
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             ref={experiencesRef}
           >
-            {pastExperiences.map((exp, index) => (
+            {experiences.map((exp, index) => (
               <motion.div
-                key={index}
+                key={exp.id || index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={experiencesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
