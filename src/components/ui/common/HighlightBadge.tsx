@@ -40,8 +40,11 @@ const HighlightBadge: React.FC<HighlightBadgeProps> = ({
     rounded-full
     border-2 border-[#0B0B0B]
     shadow-lg
-    font-bold
+    font-display
+    font-semibold
+    italic
     leading-tight
+    tracking-wide
     ${className}
   `;
 

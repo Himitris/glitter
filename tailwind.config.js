@@ -18,6 +18,7 @@ export default {
       },
       fontFamily: {
         sans: ['Neue Montreal', 'Inter var', 'system-ui', 'sans-serif'],
+        display: ['Fenul', 'Playfair Display', 'Georgia', 'serif'],
       },
       // Animations optimisées pour performance
       animation: {

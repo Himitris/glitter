@@ -71,12 +71,10 @@
   font-display: swap;
 }
 
-/* Police secondaire: Fenul (fallback vers serif si non disponible)
-   Note: Ajouter les fichiers Fenul dans /public/fonts/Fenul/ si disponibles */
+/* Police secondaire: Fenul Compressed - Titres décoratifs */
 @font-face {
   font-family: 'Fenul';
-  src: local('Fenul Compressed SemiBold'),
-       url('/fonts/Fenul/Fenul-CompressedSemiBold.otf') format('opentype');
+  src: url('/fonts/Fenul/FenulCompressed-TRIAL-Semibold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -84,9 +82,24 @@
 
 @font-face {
   font-family: 'Fenul';
-  src: local('Fenul Compressed SemiBold Italic'),
-       url('/fonts/Fenul/Fenul-CompressedSemiBoldItalic.otf') format('opentype');
+  src: url('/fonts/Fenul/FenulCompressed-TRIAL-SemiboldItalic.otf') format('opentype');
   font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fenul';
+  src: url('/fonts/Fenul/FenulCompressed-TRIAL-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fenul';
+  src: url('/fonts/Fenul/FenulCompressed-TRIAL-BoldItalic.otf') format('opentype');
+  font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
