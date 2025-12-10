@@ -1,29 +1,32 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { useState, useEffect } from 'react';
+// Note: motion is still used in ColorfulBackground header animation
 import {
   Section,
   ColorfulBackground,
   HighlightBadge,
 } from '../components/ui';
 import { MapPin } from 'lucide-react';
-import { eventServices, pastExperiences } from '../data/services';
+import { eventServices } from '../data/services';
+import { getAllExperiences } from '../services/experienceService';
+import { Experience } from '../types';
 import { typography } from '../utils/theme';
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
+import { useOptimizedAnimation } from "../hooks/useOptimizedAnimation";
 
 const Services = () => {
-  const [servicesRef, servicesInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.05,
-    rootMargin: '0px 0px -10% 0px'
-  });
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const { shouldReduceMotion } = useOptimizedAnimation();
 
-  const [experiencesRef, experiencesInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.05,
-    rootMargin: '0px 0px -10% 0px'
-  });
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      const data = await getAllExperiences();
+      setExperiences(data);
+    };
+    fetchExperiences();
+  }, []);
 
   const { title, description, keywords, image, canonical } = seoConfig.services;
 
@@ -40,7 +43,7 @@ const Services = () => {
         type="LocalBusiness"
         name="Glitter Production - Services"
         description="Services de production, d'administration et de régie pour tous types d'événements artistiques."
-        url="https://glitter-production.com/services"
+        url="https://glitterprod.com/services"
         image="/images/background/photo1.webp"
       />
       <div>
@@ -82,17 +85,12 @@ const Services = () => {
             </div>
           </div>
 
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            ref={servicesRef}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {eventServices.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={servicesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="h-full"
+                className="h-full animate-fade-in"
+                style={{ animationDelay: shouldReduceMotion ? '0ms' : `${index * 50}ms` }}
               >
                 <div className="h-full bg-white border border-[#0B0B0B]/10 rounded-xl overflow-hidden group hover:shadow-sm hover:border-[#EBABFF]/30 transition-all p-5">
                   <div className="flex items-center gap-3 mb-3">
@@ -101,6 +99,7 @@ const Services = () => {
                         src={service.sticker}
                         alt={service.title}
                         className="w-full h-full object-contain"
+                        loading="lazy"
                       />
                     </div>
                     <h3 className="text-lg font-bold text-[#0B0B0B]">
@@ -111,7 +110,7 @@ const Services = () => {
                     {service.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </Section>
@@ -127,27 +126,23 @@ const Services = () => {
             </p>
           </div>
 
-          <div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-            ref={experiencesRef}
-          >
-            {pastExperiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={experiencesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white border border-[#0B0B0B]/10 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#775CFF]/10 transition-all h-full"
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {experiences.map((exp, index) => (
+              <div
+                key={exp.id || index}
+                className="bg-white border border-[#0B0B0B]/10 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#775CFF]/10 transition-all h-full animate-fade-in"
+                style={{ animationDelay: shouldReduceMotion ? '0ms' : `${index * 50}ms` }}
               >
                 {/* Structure horizontale avec logo à gauche et contenu à droite */}
                 <div className="grid grid-cols-4 h-full">
                   {/* Logo container - 1/4 de la largeur */}
                   <div className="bg-gradient-to-br from-[#775CFF]/5 to-[#EBABFF]/5 flex items-center justify-center p-3">
-                    <div className="w-full aspect-square bg-white rounded-lg shadow-sm flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105">
+                    <div className="w-full aspect-square bg-white rounded-lg shadow-sm flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105 will-change-transform">
                       <img
                         src={exp.logo}
                         alt={`${exp.title} logo`}
                         className="max-w-full max-h-full object-contain"
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -184,19 +179,17 @@ const Services = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           <div className="text-center mt-16">
-            <motion.a
+            <a
               href="/contact"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 transition-colors uppercase tracking-wider text-sm"
+              className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200 uppercase tracking-wider text-sm"
             >
               Discuter de votre projet
-            </motion.a>
+            </a>
           </div>
         </Section>
       </div>

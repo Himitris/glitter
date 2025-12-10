@@ -9,8 +9,10 @@ import { Instagram } from "lucide-react";
 import { typography } from "../utils/theme";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
+import { useOptimizedAnimation } from "../hooks/useOptimizedAnimation";
 
 const About = () => {
+  const { shouldReduceMotion, duration } = useOptimizedAnimation();
   // Récupérer les métadonnées SEO pour la page À propos
   const { title, description, keywords, image, canonical } = seoConfig.about;
 
@@ -99,15 +101,16 @@ const About = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             {founders.map((member, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-20%" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="animate-fade-in"
+                style={{
+                  animationDelay: shouldReduceMotion ? '0ms' : `${index * 100}ms`,
+                  animationDuration: shouldReduceMotion ? '0.1s' : `${duration.slow}s`,
+                }}
               >
-                <TeamMember key={index} {...member} />
-              </motion.div>
+                <TeamMember {...member} />
+              </div>
             ))}
           </div>
 

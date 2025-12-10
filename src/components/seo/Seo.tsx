@@ -21,7 +21,7 @@ const Seo: React.FC<SeoProps> = ({
   locale = "fr_FR",
 }) => {
   // URL canonique (URL complète de la page actuelle)
-  const siteUrl = "https://glitter-production.com"; // Remplacez par votre domaine réel
+  const siteUrl = "https://glitterprod.com"; // Remplacez par votre domaine réel
   const url = canonical ? `${siteUrl}${canonical}` : siteUrl;
 
   // Formatage du titre avec le nom du site

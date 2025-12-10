@@ -3,7 +3,7 @@ export const APP_CONFIG = {
   name: 'Glitter Production',
   shortName: 'Glitter',
   description: 'Production d\'événements uniques et mémorables',
-  url: 'https://glitter-production.com',
+  url: 'https://glitterprod.com',
   email: 'glitterproductions24@gmail.com',
   social: {
     instagram: 'https://instagram.com/glitter_prod',

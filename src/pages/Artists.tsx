@@ -51,7 +51,7 @@ const Artists = () => {
         type="Organization"
         name="Glitter Production - Artistes"
         description="Découvrez les artistes qui font confiance à Glitter Production pour leur production musicale et leur management."
-        url="https://glitter-production.com/artists"
+        url="https://glitterprod.com/artists"
         image="/images/artists/kimia.png"
       />
       <div>

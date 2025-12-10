@@ -1,5 +1,5 @@
 # robots.txt for Glitter Production
-# https://glitter-production.com
+# https://glitterprod.com
 
 User-agent: *
 Allow: /
@@ -9,4 +9,4 @@ Disallow: /admin
 Disallow: /admin/
 
 # Sitemap
-Sitemap: https://glitter-production.com/sitemap.xml
+Sitemap: https://glitterprod.com/sitemap.xml

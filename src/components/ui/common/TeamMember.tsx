@@ -36,11 +36,13 @@ const TeamMember: React.FC<TeamMemberProps> = memo(({
 
   return (
     <div className="bg-white border border-[#0B0B0B]/10 rounded-2xl overflow-hidden group">
-      <div className="aspect-square relative overflow-hidden">
+      <div className="aspect-square relative overflow-hidden bg-gray-100">
         <img
           src={image}
           alt={name}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="eager"
+          decoding="async"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
         />
         {/* Ajouter une étoile selon la charte */}
         <div className="absolute top-4 right-4">
