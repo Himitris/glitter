@@ -1,4 +1,4 @@
-import { Edit, LogOut, Plus, Trash, MapPin, Calendar, Upload } from "lucide-react";
+import { Edit, LogOut, Plus, Trash, MapPin, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Seo from "../components/seo/Seo";
@@ -6,46 +6,19 @@ import { Loader, Section } from "../components/ui";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import { getAllArtists, getAllDjs } from "../services/artistService";
-import { getFirebaseExperiences, deleteExperience } from "../services/experienceService";
-import { migrateAllData } from "../scripts/migrateArtists";
+import { getAllExperiences, deleteExperience } from "../services/experienceService";
 import { Artist, Experience } from "../types";
-import { pastExperiences } from "../data/services";
 
 const AdminDashboard = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [djs, setDjs] = useState<Artist[]>([]);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
-  const [migrating, setMigrating] = useState(false);
   const [activeTab, setActiveTab] = useState<"artists" | "djs" | "experiences">("artists");
 
   const { logout } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
-
-  const handleMigration = async () => {
-    if (!window.confirm("Voulez-vous importer les artistes et DJs initiaux dans Firebase ? Cette action ajoutera les données de base.")) {
-      return;
-    }
-
-    setMigrating(true);
-    try {
-      await migrateAllData();
-      showToast("Migration réussie ! Rechargez la page pour voir les données.", "success");
-      // Recharger les données
-      const [artistsData, djsData] = await Promise.all([
-        getAllArtists(),
-        getAllDjs(),
-      ]);
-      setArtists(artistsData);
-      setDjs(djsData);
-    } catch (error) {
-      console.error("Erreur lors de la migration:", error);
-      showToast("Erreur lors de la migration", "error");
-    } finally {
-      setMigrating(false);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +26,7 @@ const AdminDashboard = () => {
         const [artistsData, djsData, experiencesData] = await Promise.all([
           getAllArtists(),
           getAllDjs(),
-          getFirebaseExperiences(),
+          getAllExperiences(),
         ]);
 
         setArtists(artistsData);
@@ -93,16 +66,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // Combiner expériences Firebase et hardcoded pour l'affichage
-  const allExperiences = [
-    ...experiences,
-    ...pastExperiences.map((exp, index) => ({
-      ...exp,
-      id: `hardcoded-${index}`,
-      isHardcoded: true,
-    })),
-  ];
-
   return (
     <>
       <Seo
@@ -114,23 +77,12 @@ const AdminDashboard = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold">Dashboard Admin</h1>
-            <div className="flex gap-3">
-              {(artists.length === 0 && djs.length === 0) && (
-                <button
-                  onClick={handleMigration}
-                  disabled={migrating}
-                  className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Upload size={18} /> {migrating ? "Migration..." : "Importer données initiales"}
-                </button>
-              )}
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
-              >
-                <LogOut size={18} /> Déconnexion
-              </button>
-            </div>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
+            >
+              <LogOut size={18} /> Déconnexion
+            </button>
           </div>
 
           <div className="mb-6">
@@ -217,9 +169,9 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {allExperiences.length > 0 ? (
-                    allExperiences.map((exp: Experience & { isHardcoded?: boolean }) => (
-                      <tr key={exp.id} className={exp.isHardcoded ? "bg-gray-50" : ""}>
+                  {experiences.length > 0 ? (
+                    experiences.map((exp) => (
+                      <tr key={exp.id}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="h-12 w-12 rounded-lg overflow-hidden bg-gray-100">
                             <img
@@ -265,26 +217,20 @@ const AdminDashboard = () => {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          {exp.isHardcoded ? (
-                            <span className="text-xs text-gray-400 italic">
-                              En dur dans le code
-                            </span>
-                          ) : (
-                            <div className="flex space-x-2">
-                              <Link
-                                to={`/admin/experience/edit/${exp.id}`}
-                                className="text-indigo-600 hover:text-indigo-900"
-                              >
-                                <Edit size={18} />
-                              </Link>
-                              <button
-                                onClick={() => handleDeleteExperience(exp.id)}
-                                className="text-red-600 hover:text-red-900"
-                              >
-                                <Trash size={18} />
-                              </button>
-                            </div>
-                          )}
+                          <div className="flex space-x-2">
+                            <Link
+                              to={`/admin/experience/edit/${exp.id}`}
+                              className="text-indigo-600 hover:text-indigo-900"
+                            >
+                              <Edit size={18} />
+                            </Link>
+                            <button
+                              onClick={() => handleDeleteExperience(exp.id)}
+                              className="text-red-600 hover:text-red-900"
+                            >
+                              <Trash size={18} />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))
