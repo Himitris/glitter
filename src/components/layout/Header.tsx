@@ -12,16 +12,18 @@ const Header = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
+  // Hauteur approximative du bandeau coloré en haut des pages
+  const COLORED_HEADER_HEIGHT = 300;
+
   // Optimisé avec throttling pour améliorer les performances
   const handleScroll = useCallback(() => {
     const currentScrollPos = window.scrollY;
 
-    // Définir si l'on a scrollé
-    setIsScrolled(currentScrollPos > 20);
+    // Devenir blanc seulement après avoir dépassé le bandeau coloré
+    setIsScrolled(currentScrollPos > COLORED_HEADER_HEIGHT);
 
     // Basculer la visibilité en fonction de la direction du scroll
-    // Ne pas cacher la navbar si on est en haut de la page
-    if (currentScrollPos <= 20) {
+    if (currentScrollPos <= COLORED_HEADER_HEIGHT) {
       setVisible(true);
     } else {
       setVisible(prevScrollPos > currentScrollPos || isMenuOpen);
@@ -47,9 +49,7 @@ const Header = () => {
 
   const headerClassName = `
     fixed w-full z-50 transition-all duration-500
-    ${isScrolled
-      ? 'bg-[#FFFFF6]/95 backdrop-blur-md shadow-sm'
-      : 'bg-gradient-to-r from-[#EBABFF]/80 via-[#FFB5A7]/80 to-[#FF9F68]/80 backdrop-blur-sm'}
+    ${isScrolled ? 'bg-[#FFFFF6]/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}
     ${visible ? 'translate-y-0' : '-translate-y-full'}
   `;
 
