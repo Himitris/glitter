@@ -20,9 +20,9 @@ export default {
         sans: ['Neue Montreal', 'Inter var', 'system-ui', 'sans-serif'],
         display: ['Fenul', 'Playfair Display', 'Georgia', 'serif'],
       },
-      // Animations optimisées pour performance
+      // Animations optimisées pour performance (GPU-accelerated)
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'fade-in': 'fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards',
         'gradient': 'gradient 8s ease infinite',
         'gradient-slow': 'gradient 12s ease infinite',
         'gradient-medium': 'gradient 6s ease infinite',
@@ -38,9 +38,11 @@ export default {
         fadeIn: {
           '0%': {
             opacity: '0',
+            transform: 'translateY(8px) translateZ(0)',
           },
           '100%': {
             opacity: '1',
+            transform: 'translateY(0) translateZ(0)',
           },
         },
         gradient: {

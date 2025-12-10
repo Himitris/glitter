@@ -148,4 +148,16 @@
   .font-display {
     font-family: var(--font-secondary);
   }
+
+  /* GPU acceleration pour animations fluides */
+  .animate-fade-in {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Optimisation des images pour éviter le layout shift */
+  img {
+    content-visibility: auto;
+  }
 }
