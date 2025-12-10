@@ -1,7 +1,8 @@
-// Script de migration des artistes et DJs vers Firebase
+// Script de migration des artistes, DJs et expériences vers Firebase
 // À exécuter une seule fois pour peupler la base de données
 
 import { addArtist, addDj } from "../services/artistService";
+import { addExperience } from "../services/experienceService";
 
 // Données des artistes à migrer
 const artistsData = [
@@ -120,9 +121,98 @@ const djsData = [
   },
 ];
 
-// Fonction de migration
+// Données des expériences à migrer
+const experiencesData = [
+  {
+    title: "Electro Alternativ",
+    year: "2023",
+    location: "Toulouse",
+    description:
+      "Festival de musique électronique, avec une programmation axée sur les musiques électroniques alternatives et émergentes.",
+    services: ["Régie artistes", "Régie bénévoles"],
+    logo: "/images/exp/ea.jpg",
+  },
+  {
+    title: "Electrick Park",
+    year: "2023",
+    location: "Montpellier",
+    description:
+      "Festival en plein air réunissant les meilleurs artistes électro du moment dans un cadre naturel exceptionnel.",
+    services: [
+      "Régie artistes",
+      "Direction de production",
+      "Gestion des paies",
+    ],
+    logo: "/images/exp/eepk.jpg",
+  },
+  {
+    title: "Ocean Fest",
+    year: "2022",
+    location: "Biarritz",
+    description:
+      "Festival mêlant musique et sensibilisation à l'environnement marin, célébrant la culture surf et la préservation des océans.",
+    services: ["Direction de production", "Régie cashless"],
+    logo: "/images/exp/ocean-fest.webp",
+  },
+  {
+    title: "Little Festival",
+    year: "2022",
+    location: "Bordeaux",
+    description:
+      "Festival à taille humaine proposant une programmation éclectique entre électro, hip-hop et musiques actuelles.",
+    services: ["Régie bénévoles", "Planning", "Formation"],
+    logo: "/images/exp/little-festival.jpg",
+  },
+  {
+    title: "Regarts",
+    year: "2023",
+    location: "Toulouse",
+    description:
+      "Festival pluridisciplinaire mêlant arts visuels, performances et musique dans des lieux insolites de la ville.",
+    services: ["Production", "Régie artistes", "Régie bénévoles"],
+    logo: "/images/exp/regarts.jpg",
+  },
+  {
+    title: "Bulle de Jazz",
+    year: "2022",
+    location: "Albi",
+    description:
+      "Festival de jazz contemporain valorisant les nouvelles expressions de cette musique et ses fusions avec d'autres genres.",
+    services: ["Gestion des artistes", "Administration", "Coordination"],
+    logo: "/images/exp/bulle-de-jazz.jpg",
+  },
+  {
+    title: "La Cavale",
+    year: "2023",
+    location: "Montauban",
+    description:
+      "Événement éclectique et pluridisciplinaire créant un espace de liberté safe qui revendique une vision de la fête libre, pour tous.tes et sans concession.",
+    services: ["Production", "Logistique", "Régie site", "Régie artistes"],
+    logo: "/images/exp/la-cavale.jpg",
+  },
+  {
+    title: "L'Été de Vaour",
+    year: "2022",
+    location: "Vaour",
+    description:
+      "Festival rural dédié aux arts de la rue, au cirque et au théâtre, créant une effervescence artistique en milieu rural.",
+    services: ["Administration", "Logistique", "Régie artistes"],
+    logo: "/images/exp/ete-de-vaour.png",
+  },
+  {
+    title: "Rio Loco",
+    year: "2023",
+    location: "Toulouse",
+    description:
+      "Festival multiculturel explorant chaque année les musiques d'une région du monde différente, favorisant le dialogue interculturel.",
+    services: ["Direction technique", "Régie cashless", "Régie artistes"],
+    logo: "/images/exp/rio-loco.jpg",
+  },
+];
+
+// Fonction de migration complète
 export const migrateAllData = async () => {
-  console.log("🚀 Début de la migration des artistes et DJs...");
+  console.log("🚀 Début de la migration des artistes, DJs et expériences...");
 
   // Migrer les artistes
   console.log("\n📦 Migration des artistes...");
@@ -146,8 +236,33 @@ export const migrateAllData = async () => {
     }
   }
 
+  // Migrer les expériences
+  console.log("\n🎪 Migration des expériences...");
+  for (const experience of experiencesData) {
+    try {
+      const id = await addExperience(experience);
+      console.log(`✅ Expérience ajoutée: ${experience.title} (ID: ${id})`);
+    } catch (error) {
+      console.error(`❌ Erreur pour ${experience.title}:`, error);
+    }
+  }
+
   console.log("\n🎉 Migration terminée !");
 };
 
+// Fonction pour migrer uniquement les expériences
+export const migrateExperiences = async () => {
+  console.log("🎪 Migration des expériences...");
+  for (const experience of experiencesData) {
+    try {
+      const id = await addExperience(experience);
+      console.log(`✅ Expérience ajoutée: ${experience.title} (ID: ${id})`);
+    } catch (error) {
+      console.error(`❌ Erreur pour ${experience.title}:`, error);
+    }
+  }
+  console.log("\n🎉 Migration des expériences terminée !");
+};
+
 // Export des données brutes pour utilisation manuelle si nécessaire
-export { artistsData, djsData };
+export { artistsData, djsData, experiencesData };

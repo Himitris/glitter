@@ -47,7 +47,9 @@ const Header = () => {
 
   const headerClassName = `
     fixed w-full z-50 transition-all duration-500
-    ${isScrolled ? 'bg-[#FFFFF6]/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}
+    ${isScrolled
+      ? 'bg-[#FFFFF6]/95 backdrop-blur-md shadow-sm'
+      : 'bg-gradient-to-r from-[#EBABFF]/80 via-[#FFB5A7]/80 to-[#FF9F68]/80 backdrop-blur-sm'}
     ${visible ? 'translate-y-0' : '-translate-y-full'}
   `;
 
