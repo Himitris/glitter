@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Fonction helper pour vérifier si l'utilisateur est authentifié
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Règles pour les artistes
+    match /artists/{artistId} {
+      // Lecture publique (pour afficher sur le site)
+      allow read: if true;
+      // Écriture uniquement pour les utilisateurs authentifiés (admin)
+      allow create, update, delete: if isAuthenticated();
+    }
+
+    // Règles pour les DJs
+    match /djs/{djId} {
+      // Lecture publique
+      allow read: if true;
+      // Écriture uniquement pour les utilisateurs authentifiés (admin)
+      allow create, update, delete: if isAuthenticated();
+    }
+
+    // Règles pour les expériences
+    match /experiences/{experienceId} {
+      // Lecture publique
+      allow read: if true;
+      // Écriture uniquement pour les utilisateurs authentifiés (admin)
+      allow create, update, delete: if isAuthenticated();
+    }
+
+    // Bloquer tout le reste par défaut
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

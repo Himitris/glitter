@@ -12,41 +12,9 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { Experience } from "../types";
-import { pastExperiences } from "../data/services";
 
-// Récupérer toutes les expériences (Firebase + hardcoded)
+// Récupérer toutes les expériences (Firebase uniquement)
 export const getAllExperiences = async (): Promise<Experience[]> => {
-  try {
-    // Récupérer les expériences depuis Firebase
-    const experiencesCollection = collection(db, "experiences");
-    const q = query(experiencesCollection, orderBy("year", "desc"));
-    const snapshot = await getDocs(q);
-    const firebaseExperiences = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    } as Experience));
-
-    // Combiner avec les expériences hardcoded (leur donner un id basé sur l'index)
-    const hardcodedWithIds = pastExperiences.map((exp, index) => ({
-      ...exp,
-      id: `hardcoded-${index}`,
-      isHardcoded: true,
-    }));
-
-    // Retourner Firebase d'abord, puis hardcoded
-    return [...firebaseExperiences, ...hardcodedWithIds] as Experience[];
-  } catch (error) {
-    console.error("Erreur lors du chargement des expériences:", error);
-    // En cas d'erreur, retourner juste les hardcoded
-    return pastExperiences.map((exp, index) => ({
-      ...exp,
-      id: `hardcoded-${index}`,
-    })) as Experience[];
-  }
-};
-
-// Récupérer uniquement les expériences Firebase (pour l'admin)
-export const getFirebaseExperiences = async (): Promise<Experience[]> => {
   try {
     const experiencesCollection = collection(db, "experiences");
     const q = query(experiencesCollection, orderBy("year", "desc"));
@@ -56,32 +24,26 @@ export const getFirebaseExperiences = async (): Promise<Experience[]> => {
       ...doc.data(),
     } as Experience));
   } catch (error) {
-    console.error("Erreur Firebase lors du chargement des expériences:", error);
-    // Retourner un tableau vide en cas d'erreur
+    console.error("Erreur lors du chargement des expériences:", error);
     return [];
   }
 };
 
 // Récupérer une expérience par ID
 export const getExperienceById = async (id: string): Promise<Experience | null> => {
-  // Vérifier si c'est une expérience hardcoded
-  if (id.startsWith("hardcoded-")) {
-    const index = parseInt(id.replace("hardcoded-", ""));
-    const exp = pastExperiences[index];
-    if (exp) {
-      return { ...exp, id } as Experience;
+  try {
+    const experienceDoc = doc(db, "experiences", id);
+    const snapshot = await getDoc(experienceDoc);
+
+    if (snapshot.exists()) {
+      return { id: snapshot.id, ...snapshot.data() } as Experience;
     }
+
+    return null;
+  } catch (error) {
+    console.error("Erreur lors du chargement de l'expérience:", error);
     return null;
   }
-
-  const experienceDoc = doc(db, "experiences", id);
-  const snapshot = await getDoc(experienceDoc);
-
-  if (snapshot.exists()) {
-    return { id: snapshot.id, ...snapshot.data() } as Experience;
-  }
-
-  return null;
 };
 
 // Ajouter une nouvelle expérience
