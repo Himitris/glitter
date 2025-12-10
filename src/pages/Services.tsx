@@ -53,7 +53,7 @@ const Services = () => {
         type="LocalBusiness"
         name="Glitter Production - Services"
         description="Services de production, d'administration et de régie pour tous types d'événements artistiques."
-        url="https://glitter-production.com/services"
+        url="https://glitterprod.com/services"
         image="/images/background/photo1.webp"
       />
       <div>

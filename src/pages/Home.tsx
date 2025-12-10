@@ -106,7 +106,7 @@ const Home = () => {
         type="Organization"
         name="Glitter Production"
         description="Production d'événements uniques et mémorables."
-        url="https://glitter-production.com"
+        url="https://glitterprod.com"
         logo="/images/Logo/Logo-noir/Logo-noir.svg"
         sameAs={["https://instagram.com/glitter_prod"]}
       />

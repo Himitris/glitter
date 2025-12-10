@@ -36,7 +36,7 @@ const SchemaOrg: React.FC<SchemaOrgProps> = ({
   url,
   name,
   description,
-  logo = "https://glitter-production.com/images/Logo/Logo-noir/Logo-noir.svg",
+  logo = "https://glitterprod.com/images/Logo/Logo-noir/Logo-noir.svg",
   image,
   sameAs = [],
   startDate,
@@ -113,7 +113,7 @@ const SchemaOrg: React.FC<SchemaOrgProps> = ({
         organizer: {
           "@type": "Organization",
           name: "Glitter Production",
-          url: "https://glitter-production.com",
+          url: "https://glitterprod.com",
         },
       };
       break;
