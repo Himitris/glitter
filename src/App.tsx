@@ -29,6 +29,7 @@ const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const ArtistForm = lazy(() => import("./pages/ArtistForm"));
 const ExperienceForm = lazy(() => import("./pages/ExperienceForm"));
 const DeleteConfirmation = lazy(() => import("./pages/DeleteConfirmation"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
@@ -217,7 +218,14 @@ const AnimatedRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <NotFound />
+            </PageTransition>
+          }
+        />
       </Routes>
       </Suspense>
     </AnimatePresence>
