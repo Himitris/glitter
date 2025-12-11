@@ -7,8 +7,9 @@ import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
 import { useOptimizedAnimation } from "../hooks/useOptimizedAnimation";
-import { getAllArtists, getAllDjs } from "../services/artistService";
+import { getAllArtists, getAllDjs, FirebaseServiceError } from "../services/artistService";
 import { Artist } from "../types";
+import { useToast } from "../contexts/ToastContext";
 
 // Fonction pour mélanger un tableau (Fisher-Yates)
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -22,6 +23,7 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 
 const Home = () => {
   const { shouldReduceMotion, duration } = useOptimizedAnimation();
+  const { showToast } = useToast();
   const [artists, setArtists] = useState<Artist[]>([]);
   const [djs, setDjs] = useState<Artist[]>([]);
 
@@ -37,10 +39,15 @@ const Home = () => {
         setDjs(djsData);
       } catch (error) {
         console.error("Erreur lors du chargement:", error);
+        if (error instanceof FirebaseServiceError) {
+          showToast(error.message, "error");
+        } else {
+          showToast("Une erreur est survenue lors du chargement", "error");
+        }
       }
     };
     fetchData();
-  }, []);
+  }, [showToast]);
 
   // Sélection aléatoire de 3 artistes et 3 DJs (mémorisé pour éviter les changements au re-render)
   const featuredArtists = useMemo(
@@ -228,6 +235,8 @@ const Home = () => {
                         <img
                           src={service.sticker}
                           alt={service.title}
+                          width={64}
+                          height={64}
                           className="w-16 h-16 object-contain"
                         />
                       </div>
@@ -284,6 +293,8 @@ const Home = () => {
                             <img
                               src={image}
                               alt={dj.name}
+                              width={400}
+                              height={300}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               loading="lazy"
                             />
@@ -366,6 +377,8 @@ const Home = () => {
                             <img
                               src={image}
                               alt={artist.name}
+                              width={400}
+                              height={300}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               loading="lazy"
                             />

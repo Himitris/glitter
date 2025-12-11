@@ -18,6 +18,7 @@ import {
   invalidateCacheByPrefix,
   CACHE_KEYS,
 } from "./cacheService";
+import { FirebaseServiceError } from "./artistService";
 
 // Récupérer toutes les expériences (avec cache)
 export const getAllExperiences = async (): Promise<Experience[]> => {
@@ -37,7 +38,7 @@ export const getAllExperiences = async (): Promise<Experience[]> => {
     return experiences;
   } catch (error) {
     console.error("Erreur lors du chargement des expériences:", error);
-    return [];
+    throw new FirebaseServiceError("Impossible de charger les expériences", error);
   }
 };
 
@@ -60,7 +61,7 @@ export const getExperienceById = async (id: string): Promise<Experience | null> 
     return null;
   } catch (error) {
     console.error("Erreur lors du chargement de l'expérience:", error);
-    return null;
+    throw new FirebaseServiceError("Impossible de charger l'expérience", error);
   }
 };
 
@@ -68,9 +69,14 @@ export const getExperienceById = async (id: string): Promise<Experience | null> 
 export const addExperience = async (
   experience: Omit<Experience, "id">
 ): Promise<string> => {
-  const docRef = await addDoc(collection(db, "experiences"), experience);
-  invalidateCacheByPrefix("experience");
-  return docRef.id;
+  try {
+    const docRef = await addDoc(collection(db, "experiences"), experience);
+    invalidateCacheByPrefix("experience");
+    return docRef.id;
+  } catch (error) {
+    console.error("Erreur lors de l'ajout de l'expérience:", error);
+    throw new FirebaseServiceError("Impossible d'ajouter l'expérience", error);
+  }
 };
 
 // Mettre à jour une expérience
@@ -78,13 +84,23 @@ export const updateExperience = async (
   id: string,
   experienceData: Partial<Experience>
 ): Promise<void> => {
-  const experienceRef = doc(db, "experiences", id);
-  await updateDoc(experienceRef, experienceData);
-  invalidateCacheByPrefix("experience");
+  try {
+    const experienceRef = doc(db, "experiences", id);
+    await updateDoc(experienceRef, experienceData);
+    invalidateCacheByPrefix("experience");
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'expérience:", error);
+    throw new FirebaseServiceError("Impossible de mettre à jour l'expérience", error);
+  }
 };
 
 // Supprimer une expérience
 export const deleteExperience = async (id: string): Promise<void> => {
-  await deleteDoc(doc(db, "experiences", id));
-  invalidateCacheByPrefix("experience");
+  try {
+    await deleteDoc(doc(db, "experiences", id));
+    invalidateCacheByPrefix("experience");
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'expérience:", error);
+    throw new FirebaseServiceError("Impossible de supprimer l'expérience", error);
+  }
 };

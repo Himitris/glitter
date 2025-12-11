@@ -33,6 +33,8 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
           <img
             src={images[currentImageIndex]}
             alt={artist.name}
+            width={400}
+            height={400}
             className="w-full h-full object-cover transition-opacity duration-200"
             loading="lazy"
           />

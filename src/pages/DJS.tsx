@@ -11,8 +11,9 @@ import { typography } from "../utils/theme";
 import ServiceCard from "../components/services/ServiceCard";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
-import { getAllDjs } from "../services/artistService";
+import { getAllDjs, FirebaseServiceError } from "../services/artistService";
 import { Artist } from "../types";
+import { useToast } from "../contexts/ToastContext";
 
 // Services mis à jour pour les DJs avec stickers
 const djServicesUpdated = [
@@ -58,6 +59,7 @@ const DJs = () => {
   const [djs, setDjs] = useState<Artist[]>([]);
   const [loading, setLoading] = useState(true);
   const prefersReducedMotion = useReducedMotion();
+  const { showToast } = useToast();
 
   useEffect(() => {
     const fetchDjs = async () => {
@@ -66,13 +68,16 @@ const DJs = () => {
         setDjs(data);
       } catch (error) {
         console.error("Erreur lors du chargement des DJs:", error);
+        if (error instanceof FirebaseServiceError) {
+          showToast(error.message, "error");
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchDjs();
-  }, []);
+  }, [showToast]);
 
   const { title, description, keywords, image, canonical } = seoConfig.djs;
 
@@ -86,15 +91,20 @@ const DJs = () => {
         canonical={canonical}
       />
       <div>
+<<<<<<< HEAD
         <ColorfulBackground
           variant="full-spectrum"
           intensity="strong"
           className="min-h-[45vh] flex items-center justify-center pt-32 pb-16"
         >
+=======
+        {/* Hero Section */}
+        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
+>>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
           <div className="text-center container mx-auto px-4">
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
               DJs & Producteurs
-            </h2>
+            </h1>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -111,6 +121,7 @@ const DJs = () => {
           </div>
         </ColorfulBackground>
 
+<<<<<<< HEAD
         <Section>
           <div className="grid md:grid-cols-3 gap-8 mb-20 items-stretch">
             {djServicesUpdated.map((service, index) => (
@@ -122,21 +133,32 @@ const DJs = () => {
                     ? "0ms"
                     : `${index * 50}ms`,
                 }}
+=======
+        {/* Section Services */}
+        <section className="relative py-20 bg-[#FFFFF6]">
+          <div className="container mx-auto px-4">
+            {/* Titre de section */}
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+>>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
               >
-                <ServiceCard
-                  {...service}
-                  color={
-                    service.color as
-                      | "production"
-                      | "administration"
-                      | "management"
-                      | "prestation"
-                  }
-                />
-              </div>
-            ))}
-          </div>
+                <span className="inline-block bg-[#775CFF]/20 text-[#0B0B0B] px-4 py-1 rounded-full text-sm font-medium mb-4">
+                  Ce que nous proposons
+                </span>
+                <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
+                  Nos Services pour DJs
+                </h2>
+                <p className="text-[#0B0B0B]/60 max-w-2xl mx-auto">
+                  Un accompagnement sur-mesure pour booster votre carrière
+                </p>
+              </motion.div>
+            </div>
 
+<<<<<<< HEAD
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {loading
               ? // Skeleton cards pendant le chargement
@@ -156,8 +178,89 @@ const DJs = () => {
                     <ArtistCard artist={dj} />
                   </div>
                 ))}
+=======
+            {/* Grille de services */}
+            <div className="grid md:grid-cols-3 gap-8 items-stretch">
+              {djServicesUpdated.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: prefersReducedMotion ? 0 : index * 0.1 }}
+                  className="flex h-full"
+                >
+                  <ServiceCard
+                    {...service}
+                    color={
+                      service.color as
+                        | "production"
+                        | "administration"
+                        | "management"
+                        | "prestation"
+                    }
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
+        </section>
 
+        {/* Section DJs */}
+        <section className="relative py-20 bg-[#FFFFF6]">
+          <div className="container mx-auto px-4">
+            {/* Titre de section */}
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <span className="inline-block bg-[#EBABFF]/20 text-[#0B0B0B] px-4 py-1 rounded-full text-sm font-medium mb-4">
+                  Notre roster
+                </span>
+                <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
+                  Les DJs Glitter
+                </h2>
+                <p className="text-[#0B0B0B]/60 max-w-2xl mx-auto">
+                  Des artistes passionnés qui font vibrer les dance floors
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Grille de DJs */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {loading ? (
+                Array.from({ length: 6 }).map((_, index) => (
+                  <SkeletonCard key={index} variant="artist" />
+                ))
+              ) : (
+                djs.map((dj, index) => (
+                  <motion.div
+                    key={dj.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.4, delay: prefersReducedMotion ? 0 : Math.min(index, 5) * 0.1 }}
+                    className="h-full"
+                  >
+                    <ArtistCard artist={dj} />
+                  </motion.div>
+                ))
+              )}
+            </div>
+
+            {djs.length === 0 && !loading && (
+              <div className="text-center text-[#0B0B0B]/50 py-12">
+                <p>Aucun DJ trouvé dans cette catégorie.</p>
+              </div>
+            )}
+>>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
+          </div>
+        </section>
+
+<<<<<<< HEAD
           {djs.length === 0 && !loading && (
             <div className="text-center text-[#0B0B0B]/50 py-12">
               <p>Aucun DJ trouvé dans cette catégorie.</p>
@@ -166,11 +269,22 @@ const DJs = () => {
         </Section>
 
         <Section className="bg-[#FFFFF6] py-20">
+=======
+        {/* Section CTA - Rejoignez-nous */}
+        <section className="relative py-24 bg-[#FFFFF6]">
+>>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-3xl mx-auto text-center"
+            >
               <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
                 REJOIGNEZ-NOUS!
               </h2>
+<<<<<<< HEAD
               <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
                 <span>Vous êtes un artiste et souhaitez</span>
                 <HighlightBadge
@@ -178,6 +292,11 @@ const DJs = () => {
                   rotation={-1}
                   className="text-sm md:text-base"
                 >
+=======
+              <div className="text-[#0B0B0B]/70 mb-8 text-lg flex flex-wrap items-center justify-center gap-2">
+                <span>Vous êtes un DJ et souhaitez</span>
+                <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
+>>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
                   COLLABORER
                 </HighlightBadge>
                 <span>
@@ -185,15 +304,21 @@ const DJs = () => {
                   talents pour enrichir notre communauté.
                 </span>
               </div>
-              <a
+              <motion.a
                 href="/contact"
-                className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block bg-[#0B0B0B] text-white px-8 py-4 rounded-full hover:bg-[#0B0B0B]/80 transition-colors font-semibold shadow-lg"
               >
                 Contactez-nous
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           </div>
+<<<<<<< HEAD
         </Section>
+=======
+        </section>
+>>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
       </div>
     </>
   );
