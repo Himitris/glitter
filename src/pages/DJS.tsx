@@ -155,28 +155,26 @@ const DJs = () => {
           )}
         </Section>
 
-        <ColorfulBackground className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
-                REJOIGNEZ-NOUS!
-              </h2>
-              <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
-                <span>Vous êtes un artiste et souhaitez</span>
-                <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
-                  COLLABORER
-                </HighlightBadge>
-                <span>avec nous ? Nous sommes toujours à la recherche de nouveaux talents pour enrichir notre communauté.</span>
-              </div>
-              <a
-                href="/contact"
-                className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200"
-              >
-                Contactez-nous
-              </a>
+        <Section className="bg-[#FFFFF6]">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
+              REJOIGNEZ-NOUS!
+            </h2>
+            <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
+              <span>Vous êtes un artiste et souhaitez</span>
+              <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
+                COLLABORER
+              </HighlightBadge>
+              <span>avec nous ? Nous sommes toujours à la recherche de nouveaux talents pour enrichir notre communauté.</span>
             </div>
+            <a
+              href="/contact"
+              className="inline-block bg-[#0B0B0B] text-white px-8 py-3 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200"
+            >
+              Contactez-nous
+            </a>
           </div>
-        </ColorfulBackground>
+        </Section>
       </div>
     </>
   );
