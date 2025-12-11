@@ -69,7 +69,7 @@ const Header = () => {
             {!isScrolled ? (
               <Link to="/" className="block">
                 <img
-                  src="/images/Logo/Monogramme/Monogramme-blanc.png"
+                  src="/images/Logo/Monogramme/Monogramme-blanc.webp"
                   alt="Glitter"
                   className="h-12 sm:h-14 w-auto"
                 />
