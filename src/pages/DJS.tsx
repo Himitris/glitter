@@ -113,25 +113,8 @@ const DJs = () => {
           </div>
         </ColorfulBackground>
 
-        {/* Section Services - avec background gradient subtil */}
-        <section className="relative py-20 bg-gradient-to-b from-[#FFFFF6] to-[#775CFF]/5 overflow-hidden">
-          {/* Éléments décoratifs */}
-          <div className="absolute top-10 right-10 w-28 h-28 opacity-20 pointer-events-none hidden lg:block">
-            <img
-              src="/images/Stickers/Boule-disco.webp"
-              alt=""
-              className="w-full h-full object-contain animate-float-slow"
-            />
-          </div>
-          <div className="absolute bottom-16 left-10 w-20 h-20 opacity-15 pointer-events-none hidden lg:block">
-            <img
-              src="/images/Stickers/Strass/Strass-05.webp"
-              alt=""
-              className="w-full h-full object-contain animate-float"
-              style={{ animationDelay: '1.5s' }}
-            />
-          </div>
-
+        {/* Section Services */}
+        <section className="relative py-20 bg-[#FFFFF6]">
           <div className="container mx-auto px-4">
             {/* Titre de section */}
             <div className="text-center mb-12">
@@ -180,41 +163,9 @@ const DJs = () => {
           </div>
         </section>
 
-        {/* Séparateur décoratif */}
-        <div className="h-1 bg-gradient-to-r from-transparent via-[#EBABFF]/40 to-transparent" />
-
-        {/* Section DJs - avec background différent */}
-        <section className="relative py-20 bg-[#FFFFF6] overflow-hidden">
-          {/* Blob décoratif en arrière-plan */}
-          <div className="absolute -top-32 -left-32 w-80 h-80 bg-gradient-to-br from-[#EBABFF]/15 to-[#775CFF]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-gradient-to-br from-[#FF7A42]/10 to-[#FFFF73]/15 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Stickers décoratifs flottants */}
-          <div className="absolute top-32 left-16 w-16 h-16 opacity-15 pointer-events-none hidden xl:block">
-            <img
-              src="/images/Stickers/Strass/Strass-09.webp"
-              alt=""
-              className="w-full h-full object-contain animate-float"
-              style={{ animationDelay: '0.5s' }}
-            />
-          </div>
-          <div className="absolute bottom-40 right-20 w-20 h-20 opacity-10 pointer-events-none hidden xl:block">
-            <img
-              src="/images/Stickers/Strass/Strass-02.webp"
-              alt=""
-              className="w-full h-full object-contain animate-float-slow"
-            />
-          </div>
-          <div className="absolute top-1/2 right-8 w-12 h-12 opacity-20 pointer-events-none hidden xl:block">
-            <img
-              src="/images/Stickers/Strass/Strass-04.webp"
-              alt=""
-              className="w-full h-full object-contain animate-float"
-              style={{ animationDelay: '2s' }}
-            />
-          </div>
-
-          <div className="container mx-auto px-4 relative z-10">
+        {/* Section DJs */}
+        <section className="relative py-20 bg-[#FFFFF6]">
+          <div className="container mx-auto px-4">
             {/* Titre de section */}
             <div className="text-center mb-12">
               <motion.div
@@ -266,29 +217,8 @@ const DJs = () => {
         </section>
 
         {/* Section CTA - Rejoignez-nous */}
-        <section className="relative py-24 bg-gradient-to-br from-[#EBABFF]/10 via-[#775CFF]/5 to-[#FFFF73]/10 overflow-hidden">
-          {/* Bordures décoratives */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#EBABFF]/40 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#775CFF]/30 to-transparent" />
-
-          {/* Stickers décoratifs */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-10 w-28 h-28 opacity-20 pointer-events-none hidden lg:block">
-            <img
-              src="/images/Stickers/Coeur-01.webp"
-              alt=""
-              className="w-full h-full object-contain animate-float"
-            />
-          </div>
-          <div className="absolute bottom-10 right-16 w-24 h-24 opacity-15 pointer-events-none hidden lg:block">
-            <img
-              src="/images/Stickers/Boule-disco.webp"
-              alt=""
-              className="w-full h-full object-contain animate-float-slow"
-              style={{ animationDelay: '1s' }}
-            />
-          </div>
-
-          <div className="container mx-auto px-4 relative z-10">
+        <section className="relative py-24 bg-[#FFFFF6]">
+          <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
