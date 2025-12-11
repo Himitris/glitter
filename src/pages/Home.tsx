@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown, Music, Instagram } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
-import {
-  ColorfulBackground,
-  HighlightBadge,
-} from "../components/ui";
+import { ColorfulBackground, HighlightBadge } from "../components/ui";
 import { typography } from "../utils/theme";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
@@ -34,7 +31,7 @@ const Home = () => {
       try {
         const [artistsData, djsData] = await Promise.all([
           getAllArtists(),
-          getAllDjs()
+          getAllDjs(),
         ]);
         setArtists(artistsData);
         setDjs(djsData);
@@ -46,7 +43,10 @@ const Home = () => {
   }, []);
 
   // Sélection aléatoire de 3 artistes et 3 DJs (mémorisé pour éviter les changements au re-render)
-  const featuredArtists = useMemo(() => shuffleArray(artists).slice(0, 3), [artists]);
+  const featuredArtists = useMemo(
+    () => shuffleArray(artists).slice(0, 3),
+    [artists]
+  );
   const featuredDjs = useMemo(() => shuffleArray(djs).slice(0, 3), [djs]);
 
   // Récupérer les métadonnées SEO pour la page d'accueil
@@ -111,7 +111,11 @@ const Home = () => {
         sameAs={["https://instagram.com/glitter_prod"]}
       />
       <div>
-        <ColorfulBackground variant="full-spectrum" intensity="strong" className="h-screen flex flex-col pt-20 md:pt-24 relative">
+        <ColorfulBackground
+          variant="full-spectrum"
+          intensity="strong"
+          className="h-screen flex flex-col pt-20 md:pt-24 relative"
+        >
           {/* Contenu principal centré */}
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center container mx-auto px-4 max-w-4xl">
@@ -132,11 +136,21 @@ const Home = () => {
                 <div className="text-xl md:text-4xl lg:text-5xl font-bold text-[#0B0B0B] leading-relaxed">
                   <div className="mb-2 md:mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
                   <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 lg:gap-4">
-                    <HighlightBadge color="yellow" rotation={-1} className="text-base md:text-2xl lg:text-4xl">
+                    <HighlightBadge
+                      color="yellow"
+                      rotation={-1}
+                      className="text-base md:text-2xl lg:text-4xl"
+                    >
                       UNIQUES
                     </HighlightBadge>
-                    <span className="text-base md:text-2xl lg:text-4xl">ET</span>
-                    <HighlightBadge color="yellow" rotation={1} className="text-base md:text-2xl lg:text-4xl">
+                    <span className="text-base md:text-2xl lg:text-4xl">
+                      ET
+                    </span>
+                    <HighlightBadge
+                      color="yellow"
+                      rotation={1}
+                      className="text-base md:text-2xl lg:text-4xl"
+                    >
                       MÉMORABLES
                     </HighlightBadge>
                   </div>
@@ -161,12 +175,20 @@ const Home = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.5 }}
             className="pb-6 md:pb-8 flex flex-col items-center gap-1 cursor-pointer"
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            onClick={() =>
+              window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+            }
           >
-            <span className="text-[#0B0B0B]/60 text-xs md:text-sm font-medium">Découvrir</span>
+            <span className="text-[#0B0B0B]/60 text-xs md:text-sm font-medium">
+              Découvrir
+            </span>
             <motion.div
               animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
               <ChevronDown className="w-5 h-5 md:w-6 md:h-6 text-[#0B0B0B]/60" />
             </motion.div>
@@ -182,38 +204,42 @@ const Home = () => {
               </h2>
               <div className="text-[#0B0B0B]/70 max-w-2xl mx-auto mt-4 flex flex-wrap items-center justify-center gap-2">
                 <span>Découvrez notre gamme</span>
-                <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
+                <HighlightBadge
+                  color="yellow"
+                  rotation={-1}
+                  className="text-sm md:text-base"
+                >
                   COMPLÈTE
                 </HighlightBadge>
-                <span>de services adaptés aux besoins des artistes et des organisateurs d'événements.</span>
+                <span>
+                  de services adaptés aux besoins des artistes et des
+                  organisateurs d'événements.
+                </span>
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {allServices.map((service, index) => (
-                  <div
-                    key={index}
-                    className="relative group"
-                  >
-                    {/* Carte de service avec sticker */}
-                    <div className="border-2 border-[#0B0B0B] rounded-2xl h-full group-hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-                      <div className="relative p-6 rounded-2xl bg-[#FFFFF6] h-full flex flex-col items-center">
-                        <div className="mb-4 flex justify-center">
-                          <img
-                            src={service.sticker}
-                            alt={service.title}
-                            className="w-16 h-16 object-contain"
-                          />
-                        </div>
-                        <h3 className="text-lg font-bold mb-2 text-center text-[#0B0B0B]">
-                          {service.title}
-                        </h3>
-                        <p className="text-[#0B0B0B]/70 text-center text-sm">
-                          {service.description}
-                        </p>
+                <div key={index} className="relative group">
+                  {/* Carte de service avec sticker */}
+                  <div className="border-2 border-[#0B0B0B] rounded-2xl h-full group-hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
+                    <div className="relative p-6 rounded-2xl bg-[#FFFFF6] h-full flex flex-col items-center">
+                      <div className="mb-4 flex justify-center">
+                        <img
+                          src={service.sticker}
+                          alt={service.title}
+                          className="w-16 h-16 object-contain"
+                        />
                       </div>
+                      <h3 className="text-lg font-bold mb-2 text-center text-[#0B0B0B]">
+                        {service.title}
+                      </h3>
+                      <p className="text-[#0B0B0B]/70 text-center text-sm">
+                        {service.description}
+                      </p>
                     </div>
                   </div>
+                </div>
               ))}
             </div>
 
@@ -224,61 +250,6 @@ const Home = () => {
               >
                 Voir tous nos services →
               </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Pourquoi Glitter Section */}
-        <section className="py-16 bg-[#FFFFF6] border-t border-[#0B0B0B]/10">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
-                Pourquoi Glitter ?
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="text-center group">
-                <div className="w-16 h-16 mx-auto mb-4 group-hover:scale-105 transition-transform duration-200">
-                  <img
-                    src="/images/Stickers/Production.webp"
-                    alt="Expertise"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Expertise</h3>
-                <p className="text-[#0B0B0B]/70 text-sm leading-relaxed">
-                  Une équipe passionnée avec une solide expérience dans l'événementiel artistique.
-                </p>
-              </div>
-
-              <div className="text-center group">
-                <div className="w-16 h-16 mx-auto mb-4 group-hover:scale-105 transition-transform duration-200">
-                  <img
-                    src="/images/Stickers/Boule-disco.webp"
-                    alt="Sur-mesure"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Sur-mesure</h3>
-                <p className="text-[#0B0B0B]/70 text-sm leading-relaxed">
-                  Des solutions adaptées à chaque projet, qu'il soit intimiste ou d'envergure.
-                </p>
-              </div>
-
-              <div className="text-center group">
-                <div className="w-16 h-16 mx-auto mb-4 group-hover:scale-105 transition-transform duration-200">
-                  <img
-                    src="/images/Stickers/Coeur-02.webp"
-                    alt="Accompagnement"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <h3 className="font-bold text-lg mb-2 text-[#0B0B0B]">Accompagnement</h3>
-                <p className="text-[#0B0B0B]/70 text-sm leading-relaxed">
-                  Un suivi personnalisé de A à Z pour la réussite de votre événement.
-                </p>
-              </div>
             </div>
           </div>
         </section>
@@ -296,11 +267,14 @@ const Home = () => {
                     </h2>
                   </div>
                   <p className="text-[#0B0B0B]/60 mb-8">
-                    Découvrez une sélection de nos DJs talentueux — il y en a bien d'autres à explorer !
+                    Découvrez une sélection de nos DJs talentueux — il y en a
+                    bien d'autres à explorer !
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredDjs.map((dj) => {
-                      const image = Array.isArray(dj.image) ? dj.image[0] : dj.image;
+                      const image = Array.isArray(dj.image)
+                        ? dj.image[0]
+                        : dj.image;
                       return (
                         <div
                           key={dj.id}
@@ -333,14 +307,19 @@ const Home = () => {
                                     rel="noopener noreferrer"
                                     className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
                                   >
-                                    <Instagram size={18} className="text-white" />
+                                    <Instagram
+                                      size={18}
+                                      className="text-white"
+                                    />
                                   </a>
                                 )}
                               </div>
                             </div>
                           </div>
                           <div className="p-4">
-                            <h3 className="font-bold text-lg text-[#0B0B0B]">{dj.name}</h3>
+                            <h3 className="font-bold text-lg text-[#0B0B0B]">
+                              {dj.name}
+                            </h3>
                             <p className="text-[#0B0B0B]/60 text-sm line-clamp-2 mt-1">
                               {dj.description}
                             </p>
@@ -370,11 +349,14 @@ const Home = () => {
                     </h2>
                   </div>
                   <p className="text-[#0B0B0B]/60 mb-8">
-                    Voici quelques artistes que nous accompagnons — découvrez-en encore plus !
+                    Voici quelques artistes que nous accompagnons — découvrez-en
+                    encore plus !
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredArtists.map((artist) => {
-                      const image = Array.isArray(artist.image) ? artist.image[0] : artist.image;
+                      const image = Array.isArray(artist.image)
+                        ? artist.image[0]
+                        : artist.image;
                       return (
                         <div
                           key={artist.id}
@@ -407,14 +389,19 @@ const Home = () => {
                                     rel="noopener noreferrer"
                                     className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
                                   >
-                                    <Instagram size={18} className="text-white" />
+                                    <Instagram
+                                      size={18}
+                                      className="text-white"
+                                    />
                                   </a>
                                 )}
                               </div>
                             </div>
                           </div>
                           <div className="p-4">
-                            <h3 className="font-bold text-lg text-[#0B0B0B]">{artist.name}</h3>
+                            <h3 className="font-bold text-lg text-[#0B0B0B]">
+                              {artist.name}
+                            </h3>
                             <p className="text-[#0B0B0B]/60 text-sm line-clamp-2 mt-1">
                               {artist.description}
                             </p>
