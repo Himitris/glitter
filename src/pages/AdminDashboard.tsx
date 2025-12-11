@@ -1,4 +1,4 @@
-import { Edit, LogOut, Plus, Trash, MapPin, Calendar, Database } from "lucide-react";
+import { Edit, LogOut, Plus, Trash, MapPin, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Seo from "../components/seo/Seo";
@@ -6,119 +6,19 @@ import { Loader, Section } from "../components/ui";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import { getAllArtists, getAllDjs } from "../services/artistService";
-import { getAllExperiences, deleteExperience, addExperience } from "../services/experienceService";
+import { getAllExperiences, deleteExperience } from "../services/experienceService";
 import { Artist, Experience } from "../types";
-
-// TEMPORAIRE: Données des expériences à importer dans Firebase
-const SEED_EXPERIENCES = [
-  {
-    title: "Electro Alternativ",
-    year: "2023",
-    location: "Toulouse",
-    description: "Festival de musique électronique, avec une programmation axée sur les musiques électroniques alternatives et émergentes.",
-    services: ["Régie artistes", "Régie bénévoles"],
-    logo: "/images/exp/ea.jpg",
-  },
-  {
-    title: "Electrick Park",
-    year: "2023",
-    location: "Montpellier",
-    description: "Festival en plein air réunissant les meilleurs artistes électro du moment dans un cadre naturel exceptionnel.",
-    services: ["Régie artistes", "Direction de production", "Gestion des paies"],
-    logo: "/images/exp/eepk.jpg",
-  },
-  {
-    title: "Ocean Fest",
-    year: "2022",
-    location: "Biarritz",
-    description: "Festival mêlant musique et sensibilisation à l'environnement marin, célébrant la culture surf et la préservation des océans.",
-    services: ["Direction de production", "Régie cashless"],
-    logo: "/images/exp/ocean-fest.webp",
-  },
-  {
-    title: "Little Festival",
-    year: "2022",
-    location: "Bordeaux",
-    description: "Festival à taille humaine proposant une programmation éclectique entre électro, hip-hop et musiques actuelles.",
-    services: ["Régie bénévoles", "Planning", "Formation"],
-    logo: "/images/exp/little-festival.jpg",
-  },
-  {
-    title: "Regarts",
-    year: "2023",
-    location: "Toulouse",
-    description: "Festival pluridisciplinaire mêlant arts visuels, performances et musique dans des lieux insolites de la ville.",
-    services: ["Production", "Régie artistes", "Régie bénévoles"],
-    logo: "/images/exp/regarts.jpg",
-  },
-  {
-    title: "Bulle de Jazz",
-    year: "2022",
-    location: "Albi",
-    description: "Festival de jazz contemporain valorisant les nouvelles expressions de cette musique et ses fusions avec d'autres genres.",
-    services: ["Gestion des artistes", "Administration", "Coordination"],
-    logo: "/images/exp/bulle-de-jazz.jpg",
-  },
-  {
-    title: "La Cavale",
-    year: "2023",
-    location: "Montauban",
-    description: "Événement éclectique et pluridisciplinaire créant un espace de liberté safe qui revendique une vision de la fête libre, pour tous.tes et sans concession.",
-    services: ["Production", "Logistique", "Régie site", "Régie artistes"],
-    logo: "/images/exp/la-cavale.jpg",
-  },
-  {
-    title: "L'Été de Vaour",
-    year: "2022",
-    location: "Vaour",
-    description: "Festival rural dédié aux arts de la rue, au cirque et au théâtre, créant une effervescence artistique en milieu rural.",
-    services: ["Administration", "Logistique", "Régie artistes"],
-    logo: "/images/exp/ete-de-vaour.png",
-  },
-  {
-    title: "Rio Loco",
-    year: "2023",
-    location: "Toulouse",
-    description: "Festival multiculturel explorant chaque année les musiques d'une région du monde différente, favorisant le dialogue interculturel.",
-    services: ["Direction technique", "Régie cashless", "Régie artistes"],
-    logo: "/images/exp/rio-loco.jpg",
-  },
-];
 
 const AdminDashboard = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [djs, setDjs] = useState<Artist[]>([]);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
-  const [seeding, setSeeding] = useState(false);
   const [activeTab, setActiveTab] = useState<"artists" | "djs" | "experiences">("artists");
 
   const { logout } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
-
-  // TEMPORAIRE: Fonction pour importer toutes les expériences dans Firebase
-  const handleSeedExperiences = async () => {
-    if (!window.confirm("Importer les 9 expériences dans Firebase ?")) return;
-
-    setSeeding(true);
-    try {
-      let count = 0;
-      for (const exp of SEED_EXPERIENCES) {
-        await addExperience(exp);
-        count++;
-      }
-      showToast(`${count} expériences importées avec succès !`, "success");
-      // Recharger les expériences
-      const newExperiences = await getAllExperiences();
-      setExperiences(newExperiences);
-    } catch (error) {
-      console.error("Erreur lors de l'import:", error);
-      showToast("Erreur lors de l'import des expériences", "error");
-    } finally {
-      setSeeding(false);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -222,7 +122,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="mb-6 flex justify-end gap-3">
+          <div className="mb-6 flex justify-end">
             {activeTab !== "experiences" ? (
               <Link
                 to={`/admin/${activeTab === "artists" ? "artist" : "dj"}/add`}
@@ -232,24 +132,12 @@ const AdminDashboard = () => {
                 {activeTab === "artists" ? "artiste" : "DJ"}
               </Link>
             ) : (
-              <>
-                {/* TEMPORAIRE: Bouton pour importer les expériences */}
-                <button
-                  onClick={handleSeedExperiences}
-                  disabled={seeding || experiences.length > 0}
-                  className="flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  title={experiences.length > 0 ? "Des expériences existent déjà" : "Importer les 9 expériences"}
-                >
-                  <Database size={18} />
-                  {seeding ? "Import..." : "Importer les 9 expériences"}
-                </button>
-                <Link
-                  to="/admin/experience/add"
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#775CFF] to-[#EBABFF] text-white rounded-lg hover:opacity-90 transition-opacity"
-                >
-                  <Plus size={18} /> Ajouter une expérience
-                </Link>
-              </>
+              <Link
+                to="/admin/experience/add"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#775CFF] to-[#EBABFF] text-white rounded-lg hover:opacity-90 transition-opacity"
+              >
+                <Plus size={18} /> Ajouter une expérience
+              </Link>
             )}
           </div>
 
