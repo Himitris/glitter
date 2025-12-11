@@ -18,7 +18,7 @@ import { Artist } from "../types";
 const djServicesUpdated = [
   {
     title: "Administration et Gestion",
-    sticker: "/images/Stickers/Administration.png",
+    sticker: "/images/Stickers/Administration.webp",
     description: "",
     features: [
       "Édition des contrats de cession et des factures",
@@ -30,7 +30,7 @@ const djServicesUpdated = [
   },
   {
     title: "Production Musicale",
-    sticker: "/images/Stickers/Production.png",
+    sticker: "/images/Stickers/Production.webp",
     description: "",
     features: [
       "Accompagnement artistique",
@@ -42,7 +42,7 @@ const djServicesUpdated = [
   },
   {
     title: "Production de Tournée",
-    sticker: "/images/Stickers/Dir-Prod.png",
+    sticker: "/images/Stickers/Dir-Prod.webp",
     description: "",
     features: [
       "Élaboration des budgets de tournée",

@@ -10,10 +10,10 @@ interface ServiceCardProps {
 
 // Mapping des couleurs vers les stickers par défaut
 const defaultStickers: Record<string, string> = {
-  "administration": "/images/Stickers/Administration.png",
-  "production": "/images/Stickers/Production.png",
-  "management": "/images/Stickers/Management.png",
-  "prestation": "/images/Stickers/Dir-Prod.png",
+  "administration": "/images/Stickers/Administration.webp",
+  "production": "/images/Stickers/Production.webp",
+  "management": "/images/Stickers/Management.webp",
+  "prestation": "/images/Stickers/Dir-Prod.webp",
 };
 
 const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, sticker, description, features, color }) => {

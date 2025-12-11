@@ -55,38 +55,38 @@ const Home = () => {
   // Liste complète des services proposés avec stickers
   const allServices = [
     {
-      sticker: "/images/Stickers/Administration.png",
+      sticker: "/images/Stickers/Administration.webp",
       title: "ADMINISTRATION",
       description: "Gestion administrative des projets artistiques",
       color: "administration" as "administration",
     },
     {
-      sticker: "/images/Stickers/Production.png",
+      sticker: "/images/Stickers/Production.webp",
       title: "PRODUCTION",
       description: "Accompagnement complet pour les productions artistiques",
       color: "production" as "production",
     },
     {
-      sticker: "/images/Stickers/Management.png",
+      sticker: "/images/Stickers/Management.webp",
       title: "MANAGEMENT",
       description: "Développement de carrière et stratégie artistique",
       color: "management" as "management",
     },
     {
-      sticker: "/images/Stickers/Régie-artiste.png",
+      sticker: "/images/Stickers/Régie-artiste.webp",
       title: "RÉGIE ARTISTES",
       description:
         "Coordination des besoins des artistes durant les événements",
       color: "prestation" as "prestation",
     },
     {
-      sticker: "/images/Stickers/Dir-Prod.png",
+      sticker: "/images/Stickers/Dir-Prod.webp",
       title: "DIRECTION DE PRODUCTION",
       description: "Supervision globale de la production d'événements",
       color: "administration" as "administration",
     },
     {
-      sticker: "/images/Stickers/Régie-site.png",
+      sticker: "/images/Stickers/Régie-site.webp",
       title: "RÉGIE SITE",
       description: "Organisation et gestion logistique des sites d'événements",
       color: "production" as "production",
@@ -241,7 +241,7 @@ const Home = () => {
               <div className="text-center group">
                 <div className="w-16 h-16 mx-auto mb-4 group-hover:scale-105 transition-transform duration-200">
                   <img
-                    src="/images/Stickers/Production.png"
+                    src="/images/Stickers/Production.webp"
                     alt="Expertise"
                     className="w-full h-full object-contain"
                   />
@@ -255,7 +255,7 @@ const Home = () => {
               <div className="text-center group">
                 <div className="w-16 h-16 mx-auto mb-4 group-hover:scale-105 transition-transform duration-200">
                   <img
-                    src="/images/Stickers/Boule-disco.png"
+                    src="/images/Stickers/Boule-disco.webp"
                     alt="Sur-mesure"
                     className="w-full h-full object-contain"
                   />
@@ -269,7 +269,7 @@ const Home = () => {
               <div className="text-center group">
                 <div className="w-16 h-16 mx-auto mb-4 group-hover:scale-105 transition-transform duration-200">
                   <img
-                    src="/images/Stickers/Coeur-02.png"
+                    src="/images/Stickers/Coeur-02.webp"
                     alt="Accompagnement"
                     className="w-full h-full object-contain"
                   />
