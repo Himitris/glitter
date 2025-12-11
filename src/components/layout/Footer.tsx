@@ -8,14 +8,16 @@ const Footer = () => {
       {/* Bordure gradient colorée en haut */}
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
 
-      {/* Formes organiques décoratives en arrière-plan */}
+      {/* Formes organiques décoratives en arrière-plan - animation seulement quand visible */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
         <motion.div
           className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-[#775CFF]/20 to-[#EBABFF]/20 rounded-[40%_60%_70%_30%/50%_40%_60%_50%] blur-3xl"
-          animate={{
+          initial={{ rotate: 0, scale: 1 }}
+          whileInView={{
             rotate: [0, 10, -10, 0],
             scale: [1, 1.1, 0.9, 1],
           }}
+          viewport={{ once: false, amount: 0.1 }}
           transition={{
             duration: 20,
             repeat: Infinity,
@@ -25,10 +27,12 @@ const Footer = () => {
         />
         <motion.div
           className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-br from-[#FF7A42]/20 to-[#FFFF73]/20 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-3xl"
-          animate={{
+          initial={{ rotate: 0, scale: 1 }}
+          whileInView={{
             rotate: [0, -15, 15, 0],
             scale: [1, 0.9, 1.1, 1],
           }}
+          viewport={{ once: false, amount: 0.1 }}
           transition={{
             duration: 25,
             repeat: Infinity,
@@ -123,35 +127,11 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="border-t-2 border-gradient-to-r from-[#775CFF]/20 via-[#EBABFF]/20 to-[#FF7A42]/20 pt-8"
+          className="border-t-2 border-[#0B0B0B]/10 pt-8"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-[#0B0B0B]/70 text-sm">
-              &copy; {new Date().getFullYear()} Glitter Productions. Tous droits réservés.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <a
-                href="#"
-                className="text-[#0B0B0B]/70 hover:text-[#775CFF] transition-colors"
-              >
-                Politique de confidentialité
-              </a>
-              <span className="text-[#0B0B0B]/40">•</span>
-              <a
-                href="#"
-                className="text-[#0B0B0B]/70 hover:text-[#775CFF] transition-colors"
-              >
-                Conditions d'utilisation
-              </a>
-              <span className="text-[#0B0B0B]/40">•</span>
-              <a
-                href="#"
-                className="text-[#0B0B0B]/70 hover:text-[#775CFF] transition-colors"
-              >
-                Mentions légales
-              </a>
-            </div>
-          </div>
+          <p className="text-[#0B0B0B]/70 text-sm text-center">
+            &copy; {new Date().getFullYear()} Glitter Productions. Tous droits réservés.
+          </p>
         </motion.div>
       </div>
     </footer>

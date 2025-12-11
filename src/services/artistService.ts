@@ -17,6 +17,14 @@ import {
   CACHE_KEYS,
 } from "./cacheService";
 
+// Classe d'erreur personnalisée pour les erreurs Firebase
+export class FirebaseServiceError extends Error {
+  constructor(message: string, public readonly originalError?: unknown) {
+    super(message);
+    this.name = 'FirebaseServiceError';
+  }
+}
+
 // Récupérer tous les artistes depuis Firebase (avec cache)
 export const getAllArtists = async (): Promise<Artist[]> => {
   // Vérifier le cache d'abord
@@ -33,7 +41,7 @@ export const getAllArtists = async (): Promise<Artist[]> => {
     return artists;
   } catch (error) {
     console.error("Erreur lors de la récupération des artistes:", error);
-    return [];
+    throw new FirebaseServiceError("Impossible de charger les artistes", error);
   }
 };
 
@@ -52,21 +60,25 @@ export const getArtistById = async (id: string): Promise<Artist | null> => {
       setInCache(cacheKey, artist);
       return artist;
     }
+    return null;
   } catch (error) {
     console.error("Erreur lors de la récupération de l'artiste:", error);
+    throw new FirebaseServiceError("Impossible de charger l'artiste", error);
   }
-
-  return null;
 };
 
 // Ajouter un nouvel artiste
 export const addArtist = async (
   artist: Omit<Artist, "id">
 ): Promise<string> => {
-  const docRef = await addDoc(collection(db, "artists"), artist);
-  // Invalider le cache de la liste
-  invalidateCacheByPrefix("artist");
-  return docRef.id;
+  try {
+    const docRef = await addDoc(collection(db, "artists"), artist);
+    invalidateCacheByPrefix("artist");
+    return docRef.id;
+  } catch (error) {
+    console.error("Erreur lors de l'ajout de l'artiste:", error);
+    throw new FirebaseServiceError("Impossible d'ajouter l'artiste", error);
+  }
 };
 
 // Mettre à jour un artiste
@@ -74,17 +86,25 @@ export const updateArtist = async (
   id: string,
   artistData: Partial<Artist>
 ): Promise<void> => {
-  const artistRef = doc(db, "artists", id);
-  await updateDoc(artistRef, artistData);
-  // Invalider le cache
-  invalidateCacheByPrefix("artist");
+  try {
+    const artistRef = doc(db, "artists", id);
+    await updateDoc(artistRef, artistData);
+    invalidateCacheByPrefix("artist");
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'artiste:", error);
+    throw new FirebaseServiceError("Impossible de mettre à jour l'artiste", error);
+  }
 };
 
 // Supprimer un artiste
 export const deleteArtist = async (id: string): Promise<void> => {
-  await deleteDoc(doc(db, "artists", id));
-  // Invalider le cache
-  invalidateCacheByPrefix("artist");
+  try {
+    await deleteDoc(doc(db, "artists", id));
+    invalidateCacheByPrefix("artist");
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'artiste:", error);
+    throw new FirebaseServiceError("Impossible de supprimer l'artiste", error);
+  }
 };
 
 // Récupérer tous les DJs depuis Firebase (avec cache)
@@ -101,7 +121,7 @@ export const getAllDjs = async (): Promise<Artist[]> => {
     return djs;
   } catch (error) {
     console.error("Erreur lors de la récupération des DJs:", error);
-    return [];
+    throw new FirebaseServiceError("Impossible de charger les DJs", error);
   }
 };
 
@@ -120,18 +140,23 @@ export const getDjById = async (id: string): Promise<Artist | null> => {
       setInCache(cacheKey, dj);
       return dj;
     }
+    return null;
   } catch (error) {
     console.error("Erreur lors de la récupération du DJ:", error);
+    throw new FirebaseServiceError("Impossible de charger le DJ", error);
   }
-
-  return null;
 };
 
 // Ajouter un nouveau DJ
 export const addDj = async (dj: Omit<Artist, "id">): Promise<string> => {
-  const docRef = await addDoc(collection(db, "djs"), dj);
-  invalidateCacheByPrefix("dj");
-  return docRef.id;
+  try {
+    const docRef = await addDoc(collection(db, "djs"), dj);
+    invalidateCacheByPrefix("dj");
+    return docRef.id;
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du DJ:", error);
+    throw new FirebaseServiceError("Impossible d'ajouter le DJ", error);
+  }
 };
 
 // Mettre à jour un DJ
@@ -139,13 +164,23 @@ export const updateDj = async (
   id: string,
   djData: Partial<Artist>
 ): Promise<void> => {
-  const djRef = doc(db, "djs", id);
-  await updateDoc(djRef, djData);
-  invalidateCacheByPrefix("dj");
+  try {
+    const djRef = doc(db, "djs", id);
+    await updateDoc(djRef, djData);
+    invalidateCacheByPrefix("dj");
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour du DJ:", error);
+    throw new FirebaseServiceError("Impossible de mettre à jour le DJ", error);
+  }
 };
 
 // Supprimer un DJ
 export const deleteDj = async (id: string): Promise<void> => {
-  await deleteDoc(doc(db, "djs", id));
-  invalidateCacheByPrefix("dj");
+  try {
+    await deleteDoc(doc(db, "djs", id));
+    invalidateCacheByPrefix("dj");
+  } catch (error) {
+    console.error("Erreur lors de la suppression du DJ:", error);
+    throw new FirebaseServiceError("Impossible de supprimer le DJ", error);
+  }
 };
