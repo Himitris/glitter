@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import {
   Section,
   ColorfulBackground,
-  Loader,
   HighlightBadge,
+  SkeletonCard,
 } from "../components/ui";
 import ArtistCard from "../components/artists/ArtistCard";
 import { typography } from "../utils/theme";
@@ -129,13 +129,14 @@ const DJs = () => {
             ))}
           </div>
 
-          {loading ? (
-            <div className="flex justify-center p-12">
-              <Loader size="lg" />
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {djs.map((dj, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {loading ? (
+              // Skeleton cards pendant le chargement
+              Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonCard key={index} variant="artist" />
+              ))
+            ) : (
+              djs.map((dj, index) => (
                 <div
                   key={dj.id}
                   className="animate-fade-in"
@@ -143,9 +144,9 @@ const DJs = () => {
                 >
                   <ArtistCard artist={dj} />
                 </div>
-              ))}
-            </div>
-          )}
+              ))
+            )}
+          </div>
 
           {djs.length === 0 && !loading && (
             <div className="text-center text-[#0B0B0B]/50 py-12">

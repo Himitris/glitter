@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import {
   Section,
   ColorfulBackground,
-  Loader,
   HighlightBadge,
+  SkeletonCard,
 } from "../components/ui";
 import ArtistCard from "../components/artists/ArtistCard";
 import { artistServices } from "../data/artists";
@@ -96,13 +96,14 @@ const Artists = () => {
             ))}
           </div>
 
-          {loading ? (
-            <div className="flex justify-center p-12">
-              <Loader size="lg" />
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 h-full">
-              {artists.map((artist, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 h-full">
+            {loading ? (
+              // Skeleton cards pendant le chargement
+              Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonCard key={index} variant="artist" />
+              ))
+            ) : (
+              artists.map((artist, index) => (
                 <div
                   key={artist.id}
                   className="h-full animate-fade-in"
@@ -110,9 +111,9 @@ const Artists = () => {
                 >
                   <ArtistCard artist={artist} />
                 </div>
-              ))}
-            </div>
-          )}
+              ))
+            )}
+          </div>
         </Section>
 
         <Section className="bg-[#FFFFF6]">

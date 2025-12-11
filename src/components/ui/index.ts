@@ -12,3 +12,6 @@ export * from './feedback';
 
 // Common/shared components
 export * from './common';
+
+// Skeleton loading components
+export * from './skeleton';

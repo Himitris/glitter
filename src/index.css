@@ -82,25 +82,9 @@
 
 @font-face {
   font-family: 'Fenul';
-  src: url('/fonts/Fenul/FenulCompressed-TRIAL-SemiboldItalic.otf') format('opentype');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Fenul';
   src: url('/fonts/Fenul/FenulCompressed-TRIAL-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Fenul';
-  src: url('/fonts/Fenul/FenulCompressed-TRIAL-BoldItalic.otf') format('opentype');
-  font-weight: 700;
-  font-style: italic;
   font-display: swap;
 }
 

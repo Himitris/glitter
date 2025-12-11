@@ -5,6 +5,7 @@ import {
   Section,
   ColorfulBackground,
   HighlightBadge,
+  SkeletonCard,
 } from '../components/ui';
 import { MapPin } from 'lucide-react';
 import { eventServices } from '../data/services';
@@ -18,12 +19,17 @@ import { useOptimizedAnimation } from "../hooks/useOptimizedAnimation";
 
 const Services = () => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [loading, setLoading] = useState(true);
   const { shouldReduceMotion } = useOptimizedAnimation();
 
   useEffect(() => {
     const fetchExperiences = async () => {
-      const data = await getAllExperiences();
-      setExperiences(data);
+      try {
+        const data = await getAllExperiences();
+        setExperiences(data);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchExperiences();
   }, []);
@@ -127,60 +133,67 @@ const Services = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {experiences.map((exp, index) => (
-              <div
-                key={exp.id || index}
-                className="bg-white border border-[#0B0B0B]/10 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#775CFF]/10 transition-all h-full animate-fade-in"
-                style={{ animationDelay: shouldReduceMotion ? '0ms' : `${index * 50}ms` }}
-              >
-                {/* Structure horizontale avec logo à gauche et contenu à droite */}
-                <div className="grid grid-cols-4 h-full">
-                  {/* Logo container - 1/4 de la largeur */}
-                  <div className="bg-gradient-to-br from-[#775CFF]/5 to-[#EBABFF]/5 flex items-center justify-center p-3">
-                    <div className="w-full aspect-square bg-white rounded-lg shadow-sm flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105 will-change-transform">
-                      <img
-                        src={exp.logo}
-                        alt={`${exp.title} logo`}
-                        className="max-w-full max-h-full object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Description container - 3/4 de la largeur */}
-                  <div className="p-4 col-span-3 flex flex-col">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-bold text-[#0B0B0B]">
-                        {exp.title}
-                      </h3>
-                      <span className="bg-[#775CFF]/10 text-[#775CFF] px-2 py-1 rounded-full text-xs font-medium">
-                        {exp.year}
-                      </span>
+            {loading ? (
+              // Skeleton cards pendant le chargement
+              Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonCard key={index} variant="experience" />
+              ))
+            ) : (
+              experiences.map((exp, index) => (
+                <div
+                  key={exp.id || index}
+                  className="bg-white border border-[#0B0B0B]/10 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#775CFF]/10 transition-all h-full animate-fade-in"
+                  style={{ animationDelay: shouldReduceMotion ? '0ms' : `${index * 50}ms` }}
+                >
+                  {/* Structure horizontale avec logo à gauche et contenu à droite */}
+                  <div className="grid grid-cols-4 h-full">
+                    {/* Logo container - 1/4 de la largeur */}
+                    <div className="bg-gradient-to-br from-[#775CFF]/5 to-[#EBABFF]/5 flex items-center justify-center p-3">
+                      <div className="w-full aspect-square bg-white rounded-lg shadow-sm flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105 will-change-transform">
+                        <img
+                          src={exp.logo}
+                          alt={`${exp.title} logo`}
+                          className="max-w-full max-h-full object-contain"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
 
-                    <div className="flex items-center text-[#0B0B0B]/70 mb-2 text-xs">
-                      <MapPin size={12} className="mr-1 text-[#EBABFF]" />
-                      <span>{exp.location}</span>
-                    </div>
-
-                    <p className="text-[#0B0B0B]/70 text-sm mb-3">
-                      {exp.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-1 mt-auto">
-                      {exp.services.map((service, serviceIndex) => (
-                        <span
-                          key={serviceIndex}
-                          className="bg-[#0B0B0B]/5 text-[#0B0B0B] px-2 py-0.5 rounded-full text-xs"
-                        >
-                          {service}
+                    {/* Description container - 3/4 de la largeur */}
+                    <div className="p-4 col-span-3 flex flex-col">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-lg font-bold text-[#0B0B0B]">
+                          {exp.title}
+                        </h3>
+                        <span className="bg-[#775CFF]/10 text-[#775CFF] px-2 py-1 rounded-full text-xs font-medium">
+                          {exp.year}
                         </span>
-                      ))}
+                      </div>
+
+                      <div className="flex items-center text-[#0B0B0B]/70 mb-2 text-xs">
+                        <MapPin size={12} className="mr-1 text-[#EBABFF]" />
+                        <span>{exp.location}</span>
+                      </div>
+
+                      <p className="text-[#0B0B0B]/70 text-sm mb-3">
+                        {exp.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1 mt-auto">
+                        {exp.services.map((service, serviceIndex) => (
+                          <span
+                            key={serviceIndex}
+                            className="bg-[#0B0B0B]/5 text-[#0B0B0B] px-2 py-0.5 rounded-full text-xs"
+                          >
+                            {service}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
 
           <div className="text-center mt-16">

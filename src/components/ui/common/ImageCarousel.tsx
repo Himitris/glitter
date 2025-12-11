@@ -87,21 +87,25 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         </motion.div>
       </AnimatePresence>
 
-      {/* Indicateurs de navigation (points) avec animation améliorée */}
-      <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+      {/* Indicateurs de navigation (points) avec zone tactile agrandie */}
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
         {images.map((_, index) => (
           <motion.button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all backdrop-blur-sm ${
-              index === currentIndex
-                ? "bg-white scale-125 shadow-[0_0_5px_rgba(255,255,255,0.7)]"
-                : "bg-white/50 hover:bg-white/80"
-            }`}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
+            className="p-2 -m-1 touch-manipulation"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
             aria-label={`Voir l'image ${index + 1}`}
-          />
+          >
+            <span
+              className={`block w-2.5 h-2.5 rounded-full transition-all backdrop-blur-sm ${
+                index === currentIndex
+                  ? "bg-white scale-125 shadow-[0_0_5px_rgba(255,255,255,0.7)]"
+                  : "bg-white/50 hover:bg-white/80"
+              }`}
+            />
+          </motion.button>
         ))}
       </div>
 
@@ -114,28 +118,28 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
               animate={{ opacity: 0.9, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 backdrop-blur-sm rounded-full p-1.5 text-white hover:bg-black/60 transition-colors"
+              className="absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 backdrop-blur-sm rounded-full p-2.5 text-white hover:bg-black/60 transition-colors touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
               onClick={(e) => {
                 e.stopPropagation();
                 prevImage();
               }}
               aria-label="Image précédente"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={24} />
             </motion.button>
             <motion.button
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 0.9, x: 0 }}
               exit={{ opacity: 0, x: 10 }}
               transition={{ duration: 0.2 }}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 backdrop-blur-sm rounded-full p-1.5 text-white hover:bg-black/60 transition-colors"
+              className="absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 backdrop-blur-sm rounded-full p-2.5 text-white hover:bg-black/60 transition-colors touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
               onClick={(e) => {
                 e.stopPropagation();
                 nextImage();
               }}
               aria-label="Image suivante"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={24} />
             </motion.button>
           </>
         )}
