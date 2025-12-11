@@ -86,7 +86,11 @@ const DJs = () => {
         canonical={canonical}
       />
       <div>
-        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
+        <ColorfulBackground
+          variant="full-spectrum"
+          intensity="strong"
+          className="min-h-[45vh] flex items-center justify-center pt-32 pb-16"
+        >
           <div className="text-center container mx-auto px-4">
             <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
               DJs & Producteurs
@@ -113,7 +117,11 @@ const DJs = () => {
               <div
                 key={index}
                 className="flex h-full animate-fade-in"
-                style={{ animationDelay: prefersReducedMotion ? '0ms' : `${index * 50}ms` }}
+                style={{
+                  animationDelay: prefersReducedMotion
+                    ? "0ms"
+                    : `${index * 50}ms`,
+                }}
               >
                 <ServiceCard
                   {...service}
@@ -130,22 +138,24 @@ const DJs = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {loading ? (
-              // Skeleton cards pendant le chargement
-              Array.from({ length: 6 }).map((_, index) => (
-                <SkeletonCard key={index} variant="artist" />
-              ))
-            ) : (
-              djs.map((dj, index) => (
-                <div
-                  key={dj.id}
-                  className="animate-fade-in"
-                  style={{ animationDelay: prefersReducedMotion ? '0ms' : `${Math.min(index, 5) * 50}ms` }}
-                >
-                  <ArtistCard artist={dj} />
-                </div>
-              ))
-            )}
+            {loading
+              ? // Skeleton cards pendant le chargement
+                Array.from({ length: 6 }).map((_, index) => (
+                  <SkeletonCard key={index} variant="artist" />
+                ))
+              : djs.map((dj, index) => (
+                  <div
+                    key={dj.id}
+                    className="animate-fade-in"
+                    style={{
+                      animationDelay: prefersReducedMotion
+                        ? "0ms"
+                        : `${Math.min(index, 5) * 50}ms`,
+                    }}
+                  >
+                    <ArtistCard artist={dj} />
+                  </div>
+                ))}
           </div>
 
           {djs.length === 0 && !loading && (
@@ -155,7 +165,7 @@ const DJs = () => {
           )}
         </Section>
 
-        <ColorfulBackground className="py-20">
+        <Section className="bg-[#FFFFF6] py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
@@ -163,10 +173,17 @@ const DJs = () => {
               </h2>
               <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
                 <span>Vous êtes un artiste et souhaitez</span>
-                <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
+                <HighlightBadge
+                  color="yellow"
+                  rotation={-1}
+                  className="text-sm md:text-base"
+                >
                   COLLABORER
                 </HighlightBadge>
-                <span>avec nous ? Nous sommes toujours à la recherche de nouveaux talents pour enrichir notre communauté.</span>
+                <span>
+                  avec nous ? Nous sommes toujours à la recherche de nouveaux
+                  talents pour enrichir notre communauté.
+                </span>
               </div>
               <a
                 href="/contact"
@@ -176,7 +193,7 @@ const DJs = () => {
               </a>
             </div>
           </div>
-        </ColorfulBackground>
+        </Section>
       </div>
     </>
   );
