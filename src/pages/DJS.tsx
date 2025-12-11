@@ -91,16 +91,12 @@ const DJs = () => {
         canonical={canonical}
       />
       <div>
-<<<<<<< HEAD
+        {/* Hero Section */}
         <ColorfulBackground
           variant="full-spectrum"
           intensity="strong"
           className="min-h-[45vh] flex items-center justify-center pt-32 pb-16"
         >
-=======
-        {/* Hero Section */}
-        <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
->>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
           <div className="text-center container mx-auto px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
               DJs & Producteurs
@@ -121,19 +117,6 @@ const DJs = () => {
           </div>
         </ColorfulBackground>
 
-<<<<<<< HEAD
-        <Section>
-          <div className="grid md:grid-cols-3 gap-8 mb-20 items-stretch">
-            {djServicesUpdated.map((service, index) => (
-              <div
-                key={index}
-                className="flex h-full animate-fade-in"
-                style={{
-                  animationDelay: prefersReducedMotion
-                    ? "0ms"
-                    : `${index * 50}ms`,
-                }}
-=======
         {/* Section Services */}
         <section className="relative py-20 bg-[#FFFFF6]">
           <div className="container mx-auto px-4">
@@ -144,7 +127,6 @@ const DJs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
->>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
               >
                 <span className="inline-block bg-[#775CFF]/20 text-[#0B0B0B] px-4 py-1 rounded-full text-sm font-medium mb-4">
                   Ce que nous proposons
@@ -158,27 +140,6 @@ const DJs = () => {
               </motion.div>
             </div>
 
-<<<<<<< HEAD
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {loading
-              ? // Skeleton cards pendant le chargement
-                Array.from({ length: 6 }).map((_, index) => (
-                  <SkeletonCard key={index} variant="artist" />
-                ))
-              : djs.map((dj, index) => (
-                  <div
-                    key={dj.id}
-                    className="animate-fade-in"
-                    style={{
-                      animationDelay: prefersReducedMotion
-                        ? "0ms"
-                        : `${Math.min(index, 5) * 50}ms`,
-                    }}
-                  >
-                    <ArtistCard artist={dj} />
-                  </div>
-                ))}
-=======
             {/* Grille de services */}
             <div className="grid md:grid-cols-3 gap-8 items-stretch">
               {djServicesUpdated.map((service, index) => (
@@ -187,7 +148,10 @@ const DJs = () => {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: prefersReducedMotion ? 0 : index * 0.1 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: prefersReducedMotion ? 0 : index * 0.1,
+                  }}
                   className="flex h-full"
                 >
                   <ServiceCard
@@ -231,24 +195,27 @@ const DJs = () => {
 
             {/* Grille de DJs */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {loading ? (
-                Array.from({ length: 6 }).map((_, index) => (
-                  <SkeletonCard key={index} variant="artist" />
-                ))
-              ) : (
-                djs.map((dj, index) => (
-                  <motion.div
-                    key={dj.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.4, delay: prefersReducedMotion ? 0 : Math.min(index, 5) * 0.1 }}
-                    className="h-full"
-                  >
-                    <ArtistCard artist={dj} />
-                  </motion.div>
-                ))
-              )}
+              {loading
+                ? Array.from({ length: 6 }).map((_, index) => (
+                    <SkeletonCard key={index} variant="artist" />
+                  ))
+                : djs.map((dj, index) => (
+                    <motion.div
+                      key={dj.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{
+                        duration: 0.4,
+                        delay: prefersReducedMotion
+                          ? 0
+                          : Math.min(index, 5) * 0.1,
+                      }}
+                      className="h-full"
+                    >
+                      <ArtistCard artist={dj} />
+                    </motion.div>
+                  ))}
             </div>
 
             {djs.length === 0 && !loading && (
@@ -256,23 +223,11 @@ const DJs = () => {
                 <p>Aucun DJ trouvé dans cette catégorie.</p>
               </div>
             )}
->>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
           </div>
         </section>
 
-<<<<<<< HEAD
-          {djs.length === 0 && !loading && (
-            <div className="text-center text-[#0B0B0B]/50 py-12">
-              <p>Aucun DJ trouvé dans cette catégorie.</p>
-            </div>
-          )}
-        </Section>
-
-        <Section className="bg-[#FFFFF6] py-20">
-=======
         {/* Section CTA - Rejoignez-nous */}
         <section className="relative py-24 bg-[#FFFFF6]">
->>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -284,19 +239,13 @@ const DJs = () => {
               <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-6`}>
                 REJOIGNEZ-NOUS!
               </h2>
-<<<<<<< HEAD
-              <div className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
-                <span>Vous êtes un artiste et souhaitez</span>
+              <div className="text-[#0B0B0B]/70 mb-8 text-lg flex flex-wrap items-center justify-center gap-2">
+                <span>Vous êtes un DJ et souhaitez</span>
                 <HighlightBadge
                   color="yellow"
                   rotation={-1}
                   className="text-sm md:text-base"
                 >
-=======
-              <div className="text-[#0B0B0B]/70 mb-8 text-lg flex flex-wrap items-center justify-center gap-2">
-                <span>Vous êtes un DJ et souhaitez</span>
-                <HighlightBadge color="yellow" rotation={-1} className="text-sm md:text-base">
->>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
                   COLLABORER
                 </HighlightBadge>
                 <span>
@@ -314,11 +263,7 @@ const DJs = () => {
               </motion.a>
             </motion.div>
           </div>
-<<<<<<< HEAD
-        </Section>
-=======
         </section>
->>>>>>> claude/project-analysis-improvements-01QN3YimXfRnPsEhB97u9sPH
       </div>
     </>
   );
