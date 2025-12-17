@@ -1,4 +1,4 @@
-import { ArrowLeft, Plus, X, Upload } from "lucide-react";
+import { ArrowLeft, Plus, X, Upload, Link } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Seo from "../components/seo/Seo";
@@ -23,11 +23,12 @@ const ExperienceForm = () => {
 
   const [formData, setFormData] = useState<Omit<Experience, "id">>({
     title: "",
-    year: new Date().getFullYear().toString(),
+    year: "",
     location: "",
     description: "",
     services: [],
     logo: "",
+    website: "",
   });
 
   const [newService, setNewService] = useState("");
@@ -40,11 +41,12 @@ const ExperienceForm = () => {
           if (experience) {
             setFormData({
               title: experience.title,
-              year: experience.year,
-              location: experience.location,
-              description: experience.description,
-              services: experience.services,
-              logo: experience.logo,
+              year: experience.year || "",
+              location: experience.location || "",
+              description: experience.description || "",
+              services: experience.services || [],
+              logo: experience.logo || "",
+              website: experience.website || "",
             });
           } else {
             showToast("Expérience non trouvée", "error");
@@ -137,25 +139,9 @@ const ExperienceForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
+    // Validation - seul le titre est obligatoire
     if (!formData.title.trim()) {
       showToast("Le titre est requis", "error");
-      return;
-    }
-    if (!formData.location.trim()) {
-      showToast("Le lieu est requis", "error");
-      return;
-    }
-    if (!formData.description.trim()) {
-      showToast("La description est requise", "error");
-      return;
-    }
-    if (formData.services.length === 0) {
-      showToast("Ajoutez au moins un service", "error");
-      return;
-    }
-    if (!formData.logo) {
-      showToast("Le logo est requis", "error");
       return;
     }
 
@@ -177,12 +163,6 @@ const ExperienceForm = () => {
       setSubmitting(false);
     }
   };
-
-  // Générer les années (de 2015 à année actuelle + 1)
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: currentYear - 2015 + 2 }, (_, i) =>
-    (currentYear + 1 - i).toString()
-  );
 
   // Services suggérés
   const suggestedServices = [
@@ -245,44 +225,43 @@ const ExperienceForm = () => {
               />
             </div>
 
-            {/* Année et Lieu */}
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Année *
-                </label>
-                <select
-                  name="year"
-                  value={formData.year}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#775CFF] focus:border-transparent"
-                >
-                  {years.map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Lieu *
-                </label>
-                <input
-                  type="text"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#775CFF] focus:border-transparent"
-                  placeholder="Ex: Toulouse"
-                />
-              </div>
+            {/* Lieu */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Lieu
+              </label>
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#775CFF] focus:border-transparent"
+                placeholder="Ex: Toulouse"
+              />
+            </div>
+
+            {/* Site web */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                <span className="flex items-center gap-2">
+                  <Link size={16} />
+                  Site internet
+                </span>
+              </label>
+              <input
+                type="url"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#775CFF] focus:border-transparent"
+                placeholder="https://www.exemple.com"
+              />
             </div>
 
             {/* Description */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Description *
+                Description
               </label>
               <textarea
                 name="description"
@@ -290,14 +269,14 @@ const ExperienceForm = () => {
                 onChange={handleChange}
                 rows={3}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#775CFF] focus:border-transparent"
-                placeholder="Décrivez l'événement..."
+                placeholder="Décrivez la structure ou l'événement..."
               />
             </div>
 
             {/* Services */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Services fournis *
+                Services fournis
               </label>
 
               {/* Services ajoutés */}
@@ -364,7 +343,7 @@ const ExperienceForm = () => {
             {/* Logo */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Logo / Image *
+                Logo / Image
               </label>
 
               {formData.logo ? (
