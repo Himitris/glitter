@@ -47,8 +47,8 @@ const Services = () => {
       />
       <SchemaOrg
         type="LocalBusiness"
-        name="Glitter Production - Services"
-        description="Services de production, d'administration et de régie pour tous types d'événements artistiques."
+        name="Glitter Productions - Prestations"
+        description="Prestations de gestion administrative, subventions et paies pour structures culturelles à Toulouse."
         url="https://glitterprod.com/services"
         image="/images/background/photo1.webp"
       />
@@ -56,7 +56,7 @@ const Services = () => {
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
           <div className="text-center container mx-auto px-4">
             <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
-              Nos Services
+              Nos Prestations
             </h2>
 
             <motion.div
@@ -80,14 +80,14 @@ const Services = () => {
         <Section className="bg-[#FFFFF6]">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
-              Services aux Organisateurs d'Événements
+              Prestations pour Structures Culturelles
             </h2>
             <div className="text-[#0B0B0B]/70 flex flex-wrap items-center justify-center gap-2">
-              <span>Glitter Productions propose des services</span>
+              <span>Glitter Productions vous propose diverses</span>
               <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
-                DE RÉGIE
+                PRESTATIONS
               </HighlightBadge>
-              <span>pour tous types d'événements artistiques.</span>
+              <span>pour vos structures culturelles.</span>
             </div>
           </div>
 
@@ -124,11 +124,11 @@ const Services = () => {
         <Section>
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
-              Nos Réalisations
+              Nos Expériences
             </h2>
             <p className="text-[#0B0B0B]/70">
-              Découvrez quelques-unes de nos expériences récentes dans
-              l'organisation et la production d'événements.
+              Découvrez quelques-unes de nos expériences dans la gestion de
+              structures et la production d'événements.
             </p>
           </div>
 

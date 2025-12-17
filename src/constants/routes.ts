@@ -27,6 +27,6 @@ export const MAIN_NAV_ITEMS = [
   { label: 'À Propos', path: ROUTES.ABOUT },
   { label: 'Artistes', path: ROUTES.ARTISTS },
   { label: 'DJs', path: ROUTES.DJS },
-  { label: 'Services', path: ROUTES.SERVICES },
+  { label: 'Prestations', path: ROUTES.SERVICES },
   { label: 'Contact', path: ROUTES.CONTACT },
 ] as const;

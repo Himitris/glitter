@@ -1,4 +1,4 @@
-import { Instagram, Mail } from "lucide-react";
+import { Instagram, Mail, Linkedin, Facebook } from "lucide-react";
 import { motion } from "framer-motion";
 import { LogoSVG } from "../ui";
 
@@ -58,7 +58,7 @@ const Footer = () => {
               className="mb-4"
             />
             <p className="text-[#0B0B0B]/70 text-center md:text-left">
-              Production d'événements musicaux uniques et mémorables
+              Faire briller vos projets
             </p>
           </motion.div>
 
@@ -75,14 +75,14 @@ const Footer = () => {
             </h4>
             <div className="space-y-3">
               <a
-                href="mailto:glitterproductions24@gmail.com"
+                href="mailto:contact@glitterprod.com"
                 className="flex items-center justify-center md:justify-start gap-2 text-[#0B0B0B]/70 hover:text-[#775CFF] transition-colors group"
               >
                 <Mail size={18} className="group-hover:scale-110 transition-transform" />
-                <span>glitterproductions24@gmail.com</span>
+                <span>contact@glitterprod.com</span>
               </a>
               <p className="text-[#0B0B0B]/70">
-                📍 Située entre les Landes et le Tarn
+                📍 Toulouse
               </p>
             </div>
           </motion.div>
@@ -110,12 +110,24 @@ const Footer = () => {
                 <Instagram size={20} />
               </motion.a>
               <motion.a
-                href="mailto:glitterproductions24@gmail.com"
+                href="https://www.linkedin.com/company/glitter-productions"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-gradient-to-br from-[#EBABFF] to-[#FF7A42] flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
                 whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Mail size={20} />
+                <Linkedin size={20} />
+              </motion.a>
+              <motion.a
+                href="https://www.facebook.com/glitterproductions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF7A42] to-[#FFFF73] flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Facebook size={20} />
               </motion.a>
             </div>
           </motion.div>

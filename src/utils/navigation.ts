@@ -3,6 +3,6 @@ export const routes = [
   { path: '/about', label: 'À propos' },
   { path: '/artists', label: 'Artistes' },
   { path: '/djs', label: 'DJ Producteurs' },
-  { path: '/services', label: 'Services' },
+  { path: '/services', label: 'Prestations' },
   { path: '/contact', label: 'Contact' }
 ] as const;

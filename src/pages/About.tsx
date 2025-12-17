@@ -5,7 +5,6 @@ import {
   ColorfulBackground,
   HighlightBadge,
 } from "../components/ui";
-import { Instagram } from "lucide-react";
 import { typography } from "../utils/theme";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
@@ -67,7 +66,10 @@ const About = () => {
               <HighlightBadge color="yellow" rotation={-1}>
                 DÉDIÉE
               </HighlightBadge>
-              <span>à la production, l'administration et le management</span>
+              <span>au</span>
+              <HighlightBadge color="yellow" rotation={1}>
+                SPECTACLE VIVANT
+              </HighlightBadge>
             </motion.div>
           </div>
         </ColorfulBackground>
@@ -81,14 +83,18 @@ const About = () => {
               Créée en 2024 par Chloé Jolly et Matisse Pellegrin, Glitter
               Productions est une structure dédiée à la production,
               l'administration et le management dans le domaine de la musique et
-              du spectacle vivant, située entre les Landes et le Tarn.
+              du spectacle vivant, située à Toulouse.
             </p>
             <p className="text-[#0B0B0B]/70 flex flex-wrap items-center justify-center gap-2">
               <span>Forte de la passion et de l'expertise de ses fondatrices, Glitter Productions propose des services</span>
               <HighlightBadge color="yellow" rotation={1}>
                 ADAPTÉS
               </HighlightBadge>
-              <span>aux besoins des artistes et des événements artistiques en se positionnant comme un véritable partenaire.</span>
+              <span>aux besoins des artistes et des</span>
+              <HighlightBadge color="yellow" rotation={-1}>
+                STRUCTURES CULTURELLES
+              </HighlightBadge>
+              <span>en se positionnant comme un véritable partenaire.</span>
             </p>
           </div>
         </Section>
@@ -115,20 +121,14 @@ const About = () => {
           </div>
 
           <div className="text-center mt-16">
-            <p className="text-[#0B0B0B]/70 mb-8">
-              Leur complémentarité et leur vision commune de l'accompagnement
-              artistique sont au cœur de la réussite de Glitter Productions.
+            <p className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
+              <span>Leur complémentarité et leur vision commune de l'accompagnement
+              artistique sont au</span>
+              <HighlightBadge color="yellow" rotation={1}>
+                CŒUR
+              </HighlightBadge>
+              <span>de la réussite de Glitter Productions.</span>
             </p>
-            <motion.a
-              href="https://instagram.com/glitter_prod"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 text-[#EBABFF] hover:text-[#FF7A42] transition-colors"
-            >
-              <Instagram size={20} />
-              @glitter_prod
-            </motion.a>
           </div>
         </Section>
       </div>

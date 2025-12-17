@@ -10,16 +10,7 @@ import { useOptimizedAnimation } from "../hooks/useOptimizedAnimation";
 import { getAllArtists, getAllDjs, FirebaseServiceError } from "../services/artistService";
 import { Artist } from "../types";
 import { useToast } from "../contexts/ToastContext";
-
-// Fonction pour mélanger un tableau (Fisher-Yates)
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
+import { getFeaturedItems, FEATURED_ARTISTS, FEATURED_DJS } from "../config/displayOrder";
 
 const Home = () => {
   const { shouldReduceMotion, duration } = useOptimizedAnimation();
@@ -49,12 +40,15 @@ const Home = () => {
     fetchData();
   }, [showToast]);
 
-  // Sélection aléatoire de 3 artistes et 3 DJs (mémorisé pour éviter les changements au re-render)
+  // Sélection des artistes et DJs mis en avant selon l'ordre défini
   const featuredArtists = useMemo(
-    () => shuffleArray(artists).slice(0, 3),
+    () => getFeaturedItems(artists, FEATURED_ARTISTS).slice(0, 3),
     [artists]
   );
-  const featuredDjs = useMemo(() => shuffleArray(djs).slice(0, 3), [djs]);
+  const featuredDjs = useMemo(
+    () => getFeaturedItems(djs, FEATURED_DJS).slice(0, 3),
+    [djs]
+  );
 
   // Récupérer les métadonnées SEO pour la page d'accueil
   const { title, description, keywords, image, canonical } = seoConfig.home;
@@ -132,45 +126,42 @@ const Home = () => {
                 transition={{ duration: duration.slow }}
                 className="flex flex-col items-center gap-6 md:gap-8"
               >
-                {/* Logo Glitter */}
-                <img
-                  src="/images/Logo/Logo-blanc/Logo-blanc-2.svg"
-                  alt="Glitter"
-                  className="w-full max-w-sm md:max-w-lg h-auto drop-shadow-2xl animate-fade-in"
-                />
+                {/* Logo Glitter avec Productions */}
+                <div className="flex flex-col items-center">
+                  <img
+                    src="/images/Logo/Logo-blanc/Logo-blanc-2.svg"
+                    alt="Glitter"
+                    className="w-full max-w-sm md:max-w-lg h-auto drop-shadow-2xl animate-fade-in"
+                  />
+                  <span className="text-white text-2xl md:text-4xl font-bold tracking-widest mt-2 drop-shadow-lg">
+                    PRODUCTIONS
+                  </span>
+                </div>
 
                 {/* Texte avec mots en évidence */}
                 <div className="text-xl md:text-4xl lg:text-5xl font-bold text-[#0B0B0B] leading-relaxed">
-                  <div className="mb-2 md:mb-4">PRODUCTION D'ÉVÉNEMENTS</div>
                   <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 lg:gap-4">
+                    <span className="text-base md:text-2xl lg:text-4xl">
+                      FAIRE
+                    </span>
                     <HighlightBadge
                       color="yellow"
                       rotation={-1}
                       className="text-base md:text-2xl lg:text-4xl"
                     >
-                      UNIQUES
+                      BRILLER
                     </HighlightBadge>
                     <span className="text-base md:text-2xl lg:text-4xl">
-                      ET
+                      VOS
                     </span>
                     <HighlightBadge
                       color="yellow"
                       rotation={1}
                       className="text-base md:text-2xl lg:text-4xl"
                     >
-                      MÉMORABLES
+                      PROJETS
                     </HighlightBadge>
                   </div>
-                </div>
-
-                {/* Bouton CTA - CSS hover pour performance */}
-                <div className="mt-4 md:mt-6">
-                  <a
-                    href="/services"
-                    className="inline-block bg-white text-[#0B0B0B] px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-[#EBABFF] hover:scale-105 active:scale-95 transition-all duration-200 tracking-wide font-bold text-sm md:text-lg shadow-xl border-2 border-[#0B0B0B]"
-                  >
-                    Découvrir nos services
-                  </a>
                 </div>
               </motion.div>
             </div>
@@ -186,9 +177,6 @@ const Home = () => {
               window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
             }
           >
-            <span className="text-[#0B0B0B]/60 text-xs md:text-sm font-medium">
-              Découvrir
-            </span>
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{
@@ -220,7 +208,7 @@ const Home = () => {
                 </HighlightBadge>
                 <span>
                   de services adaptés aux besoins des artistes et des
-                  organisateurs d'événements.
+                  structures culturelles.
                 </span>
               </div>
             </div>
@@ -252,12 +240,25 @@ const Home = () => {
               ))}
             </div>
 
-            <div className="text-center mt-10">
+            {/* 3 boutons pour les différents services */}
+            <div className="flex flex-wrap justify-center gap-4 mt-10">
+              <a
+                href="/artists"
+                className="inline-block bg-[#EBABFF] text-[#0B0B0B] px-6 py-3 rounded-full hover:bg-[#d98fee] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold border-2 border-[#0B0B0B]"
+              >
+                Services aux Artistes
+              </a>
+              <a
+                href="/djs"
+                className="inline-block bg-[#775CFF] text-white px-6 py-3 rounded-full hover:bg-[#5a45cc] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold border-2 border-[#0B0B0B]"
+              >
+                Services aux DJ Producteurs
+              </a>
               <a
                 href="/services"
-                className="inline-block text-[#775CFF] font-semibold hover:underline"
+                className="inline-block bg-[#FFFF73] text-[#0B0B0B] px-6 py-3 rounded-full hover:bg-[#e6e666] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold border-2 border-[#0B0B0B]"
               >
-                Voir tous nos services →
+                Services aux Structures Culturelles
               </a>
             </div>
           </div>
@@ -267,93 +268,9 @@ const Home = () => {
         {(featuredArtists.length > 0 || featuredDjs.length > 0) && (
           <section className="py-16 bg-[#FFFFF6] border-t border-[#0B0B0B]/10">
             <div className="container mx-auto px-4">
-              {/* DJs */}
-              {featuredDjs.length > 0 && (
-                <div className="mb-16">
-                  <div className="flex items-center justify-between mb-2">
-                    <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
-                      Nos DJs
-                    </h2>
-                  </div>
-                  <p className="text-[#0B0B0B]/60 mb-8">
-                    Découvrez une sélection de nos DJs talentueux — il y en a
-                    bien d'autres à explorer !
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {featuredDjs.map((dj) => {
-                      const image = Array.isArray(dj.image)
-                        ? dj.image[0]
-                        : dj.image;
-                      return (
-                        <div
-                          key={dj.id}
-                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
-                        >
-                          <div className="aspect-[4/3] overflow-hidden">
-                            <img
-                              src={image}
-                              alt={dj.name}
-                              width={400}
-                              height={300}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              loading="lazy"
-                            />
-                            {/* Overlay avec liens sociaux */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4">
-                              <div className="flex gap-3">
-                                {dj.socialLinks?.spotify && (
-                                  <a
-                                    href={dj.socialLinks.spotify}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
-                                  >
-                                    <Music size={18} className="text-white" />
-                                  </a>
-                                )}
-                                {dj.socialLinks?.instagram && (
-                                  <a
-                                    href={dj.socialLinks.instagram}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
-                                  >
-                                    <Instagram
-                                      size={18}
-                                      className="text-white"
-                                    />
-                                  </a>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                          <div className="p-4">
-                            <h3 className="font-bold text-lg text-[#0B0B0B]">
-                              {dj.name}
-                            </h3>
-                            <p className="text-[#0B0B0B]/60 text-sm line-clamp-2 mt-1">
-                              {dj.description}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  {/* Bouton voir tous les DJs */}
-                  <div className="text-center mt-8">
-                    <a
-                      href="/djs"
-                      className="inline-block bg-[#775CFF] text-white px-6 py-3 rounded-full hover:bg-[#5a45cc] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold border-2 border-[#0B0B0B]"
-                    >
-                      Découvrir tous nos DJs →
-                    </a>
-                  </div>
-                </div>
-              )}
-
               {/* Artistes */}
               {featuredArtists.length > 0 && (
-                <div>
+                <div className="mb-16">
                   <div className="flex items-center justify-between mb-2">
                     <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
                       Nos Artistes
@@ -434,6 +351,90 @@ const Home = () => {
                   </div>
                 </div>
               )}
+
+              {/* DJs */}
+              {featuredDjs.length > 0 && (
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
+                      Nos DJs
+                    </h2>
+                  </div>
+                  <p className="text-[#0B0B0B]/60 mb-8">
+                    Découvrez une sélection de nos DJs talentueux — il y en a
+                    bien d'autres à explorer !
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {featuredDjs.map((dj) => {
+                      const image = Array.isArray(dj.image)
+                        ? dj.image[0]
+                        : dj.image;
+                      return (
+                        <div
+                          key={dj.id}
+                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+                        >
+                          <div className="aspect-[4/3] overflow-hidden">
+                            <img
+                              src={image}
+                              alt={dj.name}
+                              width={400}
+                              height={300}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            {/* Overlay avec liens sociaux */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4">
+                              <div className="flex gap-3">
+                                {dj.socialLinks?.spotify && (
+                                  <a
+                                    href={dj.socialLinks.spotify}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
+                                  >
+                                    <Music size={18} className="text-white" />
+                                  </a>
+                                )}
+                                {dj.socialLinks?.instagram && (
+                                  <a
+                                    href={dj.socialLinks.instagram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
+                                  >
+                                    <Instagram
+                                      size={18}
+                                      className="text-white"
+                                    />
+                                  </a>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="p-4">
+                            <h3 className="font-bold text-lg text-[#0B0B0B]">
+                              {dj.name}
+                            </h3>
+                            <p className="text-[#0B0B0B]/60 text-sm line-clamp-2 mt-1">
+                              {dj.description}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {/* Bouton voir tous les DJs */}
+                  <div className="text-center mt-8">
+                    <a
+                      href="/djs"
+                      className="inline-block bg-[#775CFF] text-white px-6 py-3 rounded-full hover:bg-[#5a45cc] hover:scale-105 active:scale-95 transition-all duration-200 font-semibold border-2 border-[#0B0B0B]"
+                    >
+                      Découvrir tous nos DJs →
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
           </section>
         )}
@@ -450,7 +451,7 @@ const Home = () => {
               discuter de vos idées.
             </p>
             <a
-              href="/contact"
+              href="mailto:contact@glitterprod.com"
               className="inline-block bg-[#0B0B0B] text-white px-8 py-4 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200 tracking-wide font-semibold"
             >
               Contactez-nous

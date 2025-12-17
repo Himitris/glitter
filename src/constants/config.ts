@@ -1,15 +1,17 @@
 // Configuration globale de l'application
 export const APP_CONFIG = {
-  name: 'Glitter Production',
+  name: 'Glitter Productions',
   shortName: 'Glitter',
-  description: 'Production d\'événements uniques et mémorables',
+  description: 'Faire briller vos projets',
   url: 'https://glitterprod.com',
-  email: 'glitterproductions24@gmail.com',
+  email: 'contact@glitterprod.com',
   social: {
     instagram: 'https://instagram.com/glitter_prod',
     instagramHandle: '@glitter_prod',
+    linkedin: 'https://www.linkedin.com/company/glitter-productions',
+    facebook: 'https://www.facebook.com/glitterproductions',
   },
-  location: 'Située entre les Landes et le Tarn',
+  location: 'Toulouse',
 } as const;
 
 // Couleurs de la charte graphique
