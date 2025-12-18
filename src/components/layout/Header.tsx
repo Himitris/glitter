@@ -110,7 +110,7 @@ const Header = () => {
         <AnimatePresence mode="wait">
           {isMenuOpen && (
             <motion.div
-              className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 z-40 will-change-[opacity]"
+              className="lg:hidden fixed top-0 left-0 right-0 bottom-0 z-40 will-change-[opacity]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -124,7 +124,7 @@ const Header = () => {
 
               {/* Menu content - animation GPU-accélérée */}
               <motion.div
-                className="relative bg-[#FFFFF6] rounded-3xl shadow-2xl mx-4 mt-4 p-6 pb-8 border-2 border-[#0B0B0B] will-change-transform"
+                className="relative bg-[#FFFFF6] rounded-3xl shadow-2xl mx-4 mt-24 sm:mt-28 p-6 pb-8 border-2 border-[#0B0B0B] will-change-transform"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 50, opacity: 0 }}
