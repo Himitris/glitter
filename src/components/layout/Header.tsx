@@ -110,18 +110,21 @@ const Header = () => {
         <AnimatePresence mode="wait">
           {isMenuOpen && (
             <motion.div
-              className="lg:hidden fixed inset-0 z-40 bg-[#FFFFF6]"
+              className="lg:hidden fixed inset-0 z-[60]"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             >
+              {/* Fond opaque */}
+              <div className="absolute inset-0 bg-[#FFFFF6]" />
+
               {/* Bordure gradient en haut */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73] z-10" />
 
               {/* Header du menu avec logo et bouton fermer */}
-              <div className="flex items-center justify-between px-6 py-6">
-                <div onClick={() => setIsMenuOpen(false)}>
+              <div className="relative z-10 flex items-center justify-between px-6 py-6">
+                <div onClick={() => setIsMenuOpen(false)} className="cursor-pointer">
                   <LogoSVG colorScheme="light" size="small" />
                 </div>
                 <button
@@ -134,12 +137,12 @@ const Header = () => {
               </div>
 
               {/* Navigation centrée */}
-              <div className="flex flex-col items-center justify-center h-[calc(100vh-150px)]">
+              <div className="relative z-10 flex flex-col items-center justify-center h-[calc(100vh-150px)]">
                 <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
               </div>
 
               {/* Décoration en bas */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FFFF73] via-[#FF7A42] via-[#EBABFF] to-[#775CFF]" />
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FFFF73] via-[#FF7A42] via-[#EBABFF] to-[#775CFF] z-10" />
             </motion.div>
           )}
         </AnimatePresence>
