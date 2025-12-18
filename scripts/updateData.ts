@@ -9,6 +9,7 @@
  * après avoir modifié l'import Firebase
  */
 
+import * as dotenv from "dotenv";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -20,6 +21,9 @@ import {
   deleteField,
 } from "firebase/firestore";
 
+// Charger les variables d'environnement depuis .env
+dotenv.config();
+
 // Configuration Firebase (utilise les variables d'environnement)
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_API_KEY,
@@ -29,6 +33,17 @@ const firebaseConfig = {
   messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.VITE_FIREBASE_APP_ID,
 };
+
+// Vérifier que la configuration est valide
+console.log("🔧 Configuration Firebase:");
+console.log("  - Project ID:", firebaseConfig.projectId || "❌ MANQUANT");
+console.log("  - Auth Domain:", firebaseConfig.authDomain || "❌ MANQUANT");
+
+if (!firebaseConfig.projectId || !firebaseConfig.apiKey) {
+  console.error("\n❌ Erreur: Configuration Firebase incomplète!");
+  console.error("Assurez-vous que le fichier .env existe avec les bonnes valeurs.");
+  process.exit(1);
+}
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
