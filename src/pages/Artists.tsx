@@ -92,11 +92,8 @@ const Artists = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <span className="inline-block bg-[#EBABFF]/20 text-[#0B0B0B] px-4 py-1 rounded-full text-sm font-medium mb-4">
-                  Ce que nous proposons
-                </span>
                 <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
-                  Nos Services pour Artistes
+                  Nos Services aux Artistes
                 </h2>
                 <p className="text-[#0B0B0B]/60 max-w-2xl mx-auto">
                   Un accompagnement complet pour développer votre carrière artistique

@@ -11,14 +11,14 @@ interface NavigationProps {
 
 const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }) => {
   const location = useLocation();
-  
+
   const baseClassName = isMobile
-    ? "flex flex-col space-y-6 p-6 pt-10"
+    ? "flex flex-col p-6"
     : "hidden md:flex space-x-8";
-    
+
   const itemClassName = (isActive: boolean) => `
-    relative text-[#0B0B0B] transition-colors tracking-wider uppercase text-sm font-medium
-    ${isActive ? 'text-[#775CFF]' : 'hover:text-[#775CFF]'}
+    relative transition-colors tracking-wider uppercase font-medium text-sm py-3
+    ${isActive ? 'text-[#775CFF]' : 'text-[#0B0B0B] hover:text-[#775CFF]'}
   `;
   
   // Animation variants optimisées pour le menu mobile
@@ -63,7 +63,7 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
             {route.label}
             {location.pathname === route.path && (
               <span
-                className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r ${colors.gradient.administration}`}
+                className={`absolute bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r ${colors.gradient.administration}`}
               />
             )}
           </Link>

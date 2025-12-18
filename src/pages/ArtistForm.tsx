@@ -141,9 +141,9 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation basique
-    if (!name.trim() || !description.trim() || !imageUrl.trim()) {
-      showToast("Veuillez remplir tous les champs obligatoires", "error");
+    // Validation basique - seul le nom est obligatoire
+    if (!name.trim()) {
+      showToast("Le nom est obligatoire", "error");
       return;
     }
 
@@ -160,8 +160,8 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
 
       const artistData: Omit<Artist, "id"> = {
         name,
-        description,
-        image: imageUrl,
+        description: description || "",
+        image: imageUrl || "/images/placeholder.jpg",
         socialLinks: socialLinks,
       };
 
@@ -257,7 +257,7 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
                   className="block text-gray-700 mb-2"
                   htmlFor="description"
                 >
-                  Description *
+                  Description
                 </label>
                 <textarea
                   id="description"
@@ -265,7 +265,7 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
                   onChange={(e) => setDescription(e.target.value)}
                   rows={6}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F]"
-                  required
+                  placeholder="Description de l'artiste ou du DJ..."
                 ></textarea>
               </div>
 
@@ -318,7 +318,7 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
 
               {/* Section Upload d'image */}
               <div className="mb-6">
-                <label className="block text-gray-700 mb-2">Image *</label>
+                <label className="block text-gray-700 mb-2">Image</label>
 
                 {/* Zone de drop */}
                 <div
@@ -326,7 +326,11 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
                   onDragOver={handleDragOver}
                   className={`
                     relative border-2 border-dashed rounded-xl p-6 text-center transition-all
-                    ${uploading ? "border-[#775CFF] bg-[#775CFF]/5" : "border-gray-300 hover:border-[#FF4D8F]"}
+                    ${
+                      uploading
+                        ? "border-[#775CFF] bg-[#775CFF]/5"
+                        : "border-gray-300 hover:border-[#FF4D8F]"
+                    }
                   `}
                 >
                   <input

@@ -1,4 +1,4 @@
-import { Edit, LogOut, Plus, Trash, MapPin, Calendar } from "lucide-react";
+import { Edit, LogOut, Plus, Trash, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Seo from "../components/seo/Seo";
@@ -158,7 +158,7 @@ const AdminDashboard = () => {
                       Événement
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Lieu / Année
+                      Lieu
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Services
@@ -192,11 +192,7 @@ const AdminDashboard = () => {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center text-sm text-gray-500">
                             <MapPin size={14} className="mr-1" />
-                            {exp.location}
-                          </div>
-                          <div className="flex items-center text-sm text-gray-500">
-                            <Calendar size={14} className="mr-1" />
-                            {exp.year}
+                            {exp.location || "-"}
                           </div>
                         </td>
                         <td className="px-6 py-4">

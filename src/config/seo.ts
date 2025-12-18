@@ -2,17 +2,17 @@
 
 export const seoConfig = {
   home: {
-    title: "Faire briller chaque moment",
+    title: "Faire briller vos projets",
     description:
-      "Glitter Production - Production d'événements uniques et mémorables. Concerts, spectacles et soirées privées dans les Landes et le Tarn.",
+      "Glitter Productions - Faire briller vos projets. Structure dédiée au spectacle vivant à Toulouse. Administration, production et management pour artistes et structures culturelles.",
     keywords: [
-      "production événementielle",
-      "organisation concerts",
-      "événements musicaux",
-      "spectacles",
-      "Landes",
-      "Tarn",
+      "spectacle vivant",
+      "administration artistes",
+      "structures culturelles",
+      "Toulouse",
       "production musicale",
+      "gestion paies",
+      "gestion subventions",
     ],
     image: "/images/background/photo1.webp",
     canonical: "/",
@@ -20,15 +20,15 @@ export const seoConfig = {
   about: {
     title: "À Propos de Nous | Production & Administration",
     description:
-      "Découvrez l'histoire de Glitter Production, fondée par Chloé Jolly et Matisse Pellegrin. Une structure dédiée à la production, l'administration et le management dans le spectacle vivant.",
+      "Découvrez l'histoire de Glitter Productions, fondée par Chloé Jolly et Matisse Pellegrin. Une structure dédiée au spectacle vivant à Toulouse.",
     keywords: [
-      "production musicale",
+      "spectacle vivant",
       "administration spectacle",
       "management artistes",
       "Chloé Jolly",
       "Matisse Pellegrin",
-      "Landes",
-      "Tarn",
+      "Toulouse",
+      "structures culturelles",
     ],
     image: "/images/background/photo1.webp",
     canonical: "/about",
@@ -70,19 +70,17 @@ export const seoConfig = {
     canonical: "/djs",
   },
   services: {
-    title: "Nos Services | Événements & Production",
+    title: "Nos Prestations | Services aux Structures Culturelles",
     description:
-      "Services de production, d'administration et de régie pour tous types d'événements artistiques. Régie artistes, cashless, bénévoles et direction de production.",
+      "Prestations de gestion administrative, subventions et paies pour structures culturelles. Services complets et professionnels à Toulouse.",
     keywords: [
-      "régie artistes",
-      "régie cashless",
-      "régie bénévole",
-      "direction production",
+      "gestion administrative",
+      "gestion subventions",
       "gestion paies",
-      "régie site",
-      "organisation événements",
-      "Landes",
-      "Tarn",
+      "structures culturelles",
+      "régie artistes",
+      "direction production",
+      "Toulouse",
     ],
     image: "/images/exp/ea.jpg",
     canonical: "/services",
@@ -90,13 +88,12 @@ export const seoConfig = {
   contact: {
     title: "Contactez-Nous | Discutons de Votre Projet",
     description:
-      "Contactez Glitter Production pour discuter de votre projet artistique ou événementiel. Production, administration et management entre les Landes et le Tarn.",
+      "Contactez Glitter Productions pour discuter de votre projet artistique. Production, administration et management à Toulouse.",
     keywords: [
-      "contact production événementielle",
-      "devis événement",
+      "contact production spectacle",
       "contact artistes",
-      "production musicale Landes",
-      "production musicale Tarn",
+      "structures culturelles Toulouse",
+      "administration spectacle",
     ],
     image: "/images/background/photo3.webp",
     canonical: "/contact",

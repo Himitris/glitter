@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Instagram, Send } from "lucide-react";
+import { Mail, MapPin, Instagram, Send, Linkedin, Facebook } from "lucide-react";
 import {
   Section,
   Loader,
@@ -119,7 +119,7 @@ const Contact = () => {
                 Parlons de votre projet
               </h2>
               <div className="text-[#0B0B0B]/70 max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-2">
-                <span>Que vous soyez un artiste cherchant un accompagnement ou un organisateur d'événement, nous sommes là pour vous aider à faire</span>
+                <span>Que vous soyez un artiste cherchant un accompagnement ou une structure culturelle, nous sommes là pour vous aider à faire</span>
                 <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
                   BRILLER
                 </HighlightBadge>
@@ -289,9 +289,12 @@ const Contact = () => {
                       <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">
                         Email
                       </h4>
-                      <p className="text-[#0B0B0B]/70">
-                        glitterproductions24@gmail.com
-                      </p>
+                      <a
+                        href="mailto:contact@glitterprod.com"
+                        className="text-[#0B0B0B] hover:text-[#0B0B0B]/70 underline transition-colors"
+                      >
+                        contact@glitterprod.com
+                      </a>
                     </div>
                   </div>
 
@@ -304,7 +307,7 @@ const Contact = () => {
                         Situation
                       </h4>
                       <p className="text-[#0B0B0B]/70">
-                        Située entre les Landes et le Tarn
+                        Toulouse
                       </p>
                     </div>
                   </div>
@@ -324,6 +327,44 @@ const Contact = () => {
                         className="text-[#0B0B0B] hover:text-[#0B0B0B]/70 underline transition-colors"
                       >
                         @glitter_prod
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-[#0B0B0B] p-3 rounded-full">
+                      <Linkedin className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">
+                        LinkedIn
+                      </h4>
+                      <a
+                        href="https://www.linkedin.com/company/glitter-productions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#0B0B0B] hover:text-[#0B0B0B]/70 underline transition-colors"
+                      >
+                        Glitter Productions
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-[#0B0B0B] p-3 rounded-full">
+                      <Facebook className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">
+                        Facebook
+                      </h4>
+                      <a
+                        href="https://www.facebook.com/glitterproductions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#0B0B0B] hover:text-[#0B0B0B]/70 underline transition-colors"
+                      >
+                        Glitter Productions
                       </a>
                     </div>
                   </div>

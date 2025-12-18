@@ -106,36 +106,34 @@ const Header = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Menu - optimisé pour performance */}
+        {/* Mobile Menu - menu déroulant */}
         <AnimatePresence mode="wait">
           {isMenuOpen && (
-            <motion.div
-              className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 bottom-0 z-40 will-change-[opacity]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {/* Overlay simple sans blur (performance mobile) */}
-              <div
-                className="absolute inset-0 bg-[#0B0B0B]/40"
+            <>
+              {/* Overlay pour fermer le menu */}
+              <motion.div
+                className="lg:hidden fixed inset-0 z-40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 onClick={() => setIsMenuOpen(false)}
               />
 
-              {/* Menu content - animation GPU-accélérée */}
+              {/* Menu content */}
               <motion.div
-                className="relative bg-[#FFFFF6] rounded-3xl shadow-2xl mx-4 mt-4 p-6 pb-8 border-2 border-[#0B0B0B] will-change-transform"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 50, opacity: 0 }}
-                transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                className="lg:hidden absolute top-full left-4 right-4 mt-2 bg-[#FFFFF6] rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
               >
                 {/* Bordure gradient en haut */}
-                <div className="absolute top-0 left-4 right-4 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42] rounded-full -translate-y-0.5" />
+                <div className="h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
 
                 <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
               </motion.div>
-            </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>

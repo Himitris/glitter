@@ -7,7 +7,7 @@ import {
   HighlightBadge,
   SkeletonCard,
 } from '../components/ui';
-import { MapPin } from 'lucide-react';
+import { MapPin, ExternalLink } from 'lucide-react';
 import { eventServices } from '../data/services';
 import { getAllExperiences } from '../services/experienceService';
 import { Experience } from '../types';
@@ -47,8 +47,8 @@ const Services = () => {
       />
       <SchemaOrg
         type="LocalBusiness"
-        name="Glitter Production - Services"
-        description="Services de production, d'administration et de régie pour tous types d'événements artistiques."
+        name="Glitter Productions - Prestations"
+        description="Prestations de gestion administrative, subventions et paies pour structures culturelles à Toulouse."
         url="https://glitterprod.com/services"
         image="/images/background/photo1.webp"
       />
@@ -56,7 +56,7 @@ const Services = () => {
         <ColorfulBackground variant="full-spectrum" intensity="strong" className="min-h-[45vh] flex items-center justify-center pt-32 pb-16">
           <div className="text-center container mx-auto px-4">
             <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#0B0B0B]">
-              Nos Services
+              Nos Prestations
             </h2>
 
             <motion.div
@@ -80,14 +80,14 @@ const Services = () => {
         <Section className="bg-[#FFFFF6]">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
-              Services aux Organisateurs d'Événements
+              Prestations pour Structures Culturelles
             </h2>
             <div className="text-[#0B0B0B]/70 flex flex-wrap items-center justify-center gap-2">
-              <span>Glitter Productions propose des services</span>
+              <span>Glitter Productions vous propose diverses</span>
               <HighlightBadge color="yellow" rotation={1} className="text-sm md:text-base">
-                DE RÉGIE
+                PRESTATIONS
               </HighlightBadge>
-              <span>pour tous types d'événements artistiques.</span>
+              <span>pour vos structures culturelles.</span>
             </div>
           </div>
 
@@ -124,11 +124,11 @@ const Services = () => {
         <Section>
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className={`${typography.heading.h2} text-[#0B0B0B] mb-4`}>
-              Nos Réalisations
+              Nos Expériences
             </h2>
             <p className="text-[#0B0B0B]/70">
-              Découvrez quelques-unes de nos expériences récentes dans
-              l'organisation et la production d'événements.
+              Découvrez quelques-unes de nos expériences dans la gestion de
+              structures et la production d'événements.
             </p>
           </div>
 
@@ -149,14 +149,22 @@ const Services = () => {
                   <div className="grid grid-cols-4 h-full">
                     {/* Logo container - 1/4 de la largeur */}
                     <div className="bg-gradient-to-br from-[#775CFF]/5 to-[#EBABFF]/5 flex items-center justify-center p-3">
-                      <div className="w-full aspect-square bg-white rounded-lg shadow-sm flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105 will-change-transform">
-                        <img
-                          src={exp.logo}
-                          alt={`${exp.title} logo`}
-                          className="max-w-full max-h-full object-contain"
-                          loading="lazy"
-                        />
-                      </div>
+                      {exp.logo ? (
+                        <div className="w-full aspect-square bg-white rounded-lg shadow-sm flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105 will-change-transform">
+                          <img
+                            src={exp.logo}
+                            alt={`${exp.title} logo`}
+                            className="max-w-full max-h-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-full aspect-square bg-gradient-to-br from-[#775CFF]/20 to-[#EBABFF]/20 rounded-lg flex items-center justify-center">
+                          <span className="text-2xl font-bold text-[#775CFF]">
+                            {exp.title?.charAt(0) || '?'}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Description container - 3/4 de la largeur */}
@@ -165,30 +173,44 @@ const Services = () => {
                         <h3 className="text-lg font-bold text-[#0B0B0B]">
                           {exp.title}
                         </h3>
-                        <span className="bg-[#775CFF]/10 text-[#775CFF] px-2 py-1 rounded-full text-xs font-medium">
-                          {exp.year}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center text-[#0B0B0B]/70 mb-2 text-xs">
-                        <MapPin size={12} className="mr-1 text-[#EBABFF]" />
-                        <span>{exp.location}</span>
-                      </div>
-
-                      <p className="text-[#0B0B0B]/70 text-sm mb-3">
-                        {exp.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1 mt-auto">
-                        {exp.services.map((service, serviceIndex) => (
-                          <span
-                            key={serviceIndex}
-                            className="bg-[#0B0B0B]/5 text-[#0B0B0B] px-2 py-0.5 rounded-full text-xs"
+                        {exp.website && (
+                          <a
+                            href={exp.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#775CFF] hover:text-[#5a45cc] transition-colors"
+                            title="Voir le site"
                           >
-                            {service}
-                          </span>
-                        ))}
+                            <ExternalLink size={16} />
+                          </a>
+                        )}
                       </div>
+
+                      {exp.location && (
+                        <div className="flex items-center text-[#0B0B0B]/70 mb-2 text-xs">
+                          <MapPin size={12} className="mr-1 text-[#EBABFF]" />
+                          <span>{exp.location}</span>
+                        </div>
+                      )}
+
+                      {exp.description && (
+                        <p className="text-[#0B0B0B]/70 text-sm mb-3">
+                          {exp.description}
+                        </p>
+                      )}
+
+                      {exp.services && exp.services.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-auto">
+                          {exp.services.map((service, serviceIndex) => (
+                            <span
+                              key={serviceIndex}
+                              className="bg-[#0B0B0B]/5 text-[#0B0B0B] px-2 py-0.5 rounded-full text-xs"
+                            >
+                              {service}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
