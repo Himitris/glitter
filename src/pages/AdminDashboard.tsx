@@ -1,6 +1,8 @@
-import { Edit, LogOut, Plus, Trash, MapPin, Calendar } from "lucide-react";
+import { Edit, LogOut, Plus, Trash, MapPin, Calendar, Database } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { doc, setDoc, updateDoc, collection, getDocs, deleteField } from "firebase/firestore";
+import { db } from "../firebase/config";
 import Seo from "../components/seo/Seo";
 import { Loader, Section } from "../components/ui";
 import { useAuth } from "../contexts/AuthContext";
@@ -15,10 +17,124 @@ const AdminDashboard = () => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"artists" | "djs" | "experiences">("artists");
+  const [migrating, setMigrating] = useState(false);
 
   const { logout } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
+
+  // ============================================================
+  // BOUTON TEMPORAIRE - MIGRATION DES DONNÉES
+  // À SUPPRIMER APRÈS UTILISATION
+  // ============================================================
+  const handleMigration = async () => {
+    if (!window.confirm(
+      "⚠️ ATTENTION: Cette action va:\n\n" +
+      "• Ajouter 4 nouvelles expériences (Cridacompany, Collektifin'Art, Le Circus, Ulysse)\n" +
+      "• Mettre à jour les expériences existantes (lieux, services, websites)\n" +
+      "• Supprimer le champ 'year' de toutes les expériences\n" +
+      "• Ajouter 7 nouveaux artistes\n" +
+      "• Ajouter 1 nouveau DJ (DARTA)\n\n" +
+      "Voulez-vous continuer?"
+    )) {
+      return;
+    }
+
+    setMigrating(true);
+
+    try {
+      // Nouvelles expériences
+      const newExperiences = [
+        { id: "cridacompany", title: "Cridacompany", location: "Toulouse", description: "Cridacompany est une compagnie de cirque franco-catalane créée à Toulouse en 2006 suite à la rencontre au Lido (Centre des Arts du Cirque de Toulouse) de Jur Domingo et Julien Vittecoq, metteurs en scène et chorégraphes.", services: ["Gestion administrative", "Gestionnaire de paies"], logo: "", website: "https://www.cridacompany.com" },
+        { id: "collektifin-art", title: "Collektifin'Art", location: "Toulouse", description: "Promotion de la culture Amazigh au travers des échanges interculturels.", services: ["Structuration", "Gestionnaire des paies"], logo: "", website: "" },
+        { id: "le-circus", title: "Le Circus", location: "Toulouse", description: "Centre d'arts alternatif. La philosophie du lieu est définie par le partage, la bienveillance, la bonne humeur, les échanges, le respect, l'écologie, l'humilité et la tolérance.", services: ["Gestion administrative", "Gestionnaire de paies"], logo: "", website: "" },
+        { id: "ulysse", title: "Ulysse, Maison d'artistes", location: "Figeac", description: "Depuis 18 ans, Ulysse Maison d'Artistes, coopérative culturelle basée à Figeac, a pour projet de rapprocher et mener conjointement un projet culturel de territoire et un projet d'accompagnement, de soutien à la création, de production, de diffusion au niveau national et international d'artistes musicien.nes.", services: ["Gestionnaire de subventions"], logo: "", website: "https://www.ulyssemaisondartistes.com" },
+      ];
+
+      // Mises à jour des expériences existantes
+      const experienceUpdates: Record<string, Record<string, unknown>> = {
+        "osX9fdgwHxBeuvbNlSgU": { description: "Structure toulousaine créée en 2001 ayant pour but de promouvoir les musiques actuelles et alternatives. Depuis plus de 20 ans, nos équipes œuvrent dans la production et l'organisation de concerts et de clubs. Son champ d'activités s'est élargi grâce à son service d'accompagnement d'artistes (Incubateur) et ses prestations de services pour les professionnels.", services: [], website: "https://www.regarts.org" },
+        "YtelMi6fcMRTLqzZEokq": { location: "Concots" },
+        "CCXKVjhSkXEh8J0PHEHg": { location: "Chatou", website: "https://www.electrikpark.com" },
+        "7LVmM3gMi9WMza79HzWv": { services: ["Régie artistes"], website: "https://www.rio-loco.org" },
+        "omnIbL7IOSfvzw10v2CF": { location: "Lisle sur Tarn", services: ["Direction de production", "Régie artistes"] },
+        "etzHTjv7ur2HCkEysSL1": { services: ["Administration", "Production", "Régie artistes"], website: "https://www.vaour.com" },
+        "KlQwIysPmCifcXs7I9Iz": { description: "Festival à taille humaine proposant une programmation éclectique entre électro et street art.", services: ["Régie bénévoles"] },
+        "8oF59NcG86qsUu5qnglw": { services: ["Direction de production", "Régie entrées"] },
+        "W2YHZw0nNtO90zRk0pkL": { website: "https://www.electro-alternativ.com" },
+      };
+
+      // Nouveaux artistes
+      const newArtists = [
+        { name: "Amalia Jaulin", description: "", image: "/images/placeholder.jpg", socialLinks: {} },
+        { name: "Rodolphe Macabéo", description: "", image: "/images/placeholder.jpg", socialLinks: {} },
+        { name: "Solène Weinachter", description: "", image: "/images/placeholder.jpg", socialLinks: {} },
+        { name: "Darta La", description: "", image: "/images/placeholder.jpg", socialLinks: {} },
+        { name: "Laura O'neill", description: "", image: "/images/placeholder.jpg", socialLinks: {} },
+        { name: "Manon Gasseng", description: "", image: "/images/placeholder.jpg", socialLinks: {} },
+        { name: "Zingabe", description: "", image: "/images/placeholder.jpg", socialLinks: {} },
+      ];
+
+      // Nouveau DJ
+      const newDjs = [{ name: "DARTA", description: "", image: "/images/placeholder.jpg", socialLinks: {} }];
+
+      // 1. Ajouter nouvelles expériences
+      for (const exp of newExperiences) {
+        await setDoc(doc(db, "experiences", exp.id), exp);
+        console.log("✅ Expérience ajoutée:", exp.title);
+      }
+
+      // 2. Mettre à jour expériences existantes
+      for (const [id, data] of Object.entries(experienceUpdates)) {
+        await updateDoc(doc(db, "experiences", id), { ...data, year: deleteField() });
+        console.log("✅ Expérience mise à jour:", id);
+      }
+
+      // 3. Supprimer year de toutes les expériences
+      const snapshot = await getDocs(collection(db, "experiences"));
+      for (const d of snapshot.docs) {
+        try {
+          await updateDoc(doc(db, "experiences", d.id), { year: deleteField() });
+        } catch {
+          // Ignorer si le champ n'existe pas
+        }
+      }
+      console.log("✅ Champ year supprimé de toutes les expériences");
+
+      // 4. Ajouter artistes
+      for (const artist of newArtists) {
+        await setDoc(doc(collection(db, "artists")), artist);
+        console.log("✅ Artiste ajouté:", artist.name);
+      }
+
+      // 5. Ajouter DJs
+      for (const dj of newDjs) {
+        await setDoc(doc(collection(db, "djs")), dj);
+        console.log("✅ DJ ajouté:", dj.name);
+      }
+
+      showToast("Migration terminée avec succès! Rechargez la page.", "success");
+
+      // Recharger les données
+      const [artistsData, djsData, experiencesData] = await Promise.all([
+        getAllArtists(),
+        getAllDjs(),
+        getAllExperiences(),
+      ]);
+      setArtists(artistsData);
+      setDjs(djsData);
+      setExperiences(experiencesData);
+
+    } catch (error) {
+      console.error("Erreur lors de la migration:", error);
+      showToast("Erreur lors de la migration: " + String(error), "error");
+    } finally {
+      setMigrating(false);
+    }
+  };
+  // ============================================================
+  // FIN BOUTON TEMPORAIRE
+  // ============================================================
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,12 +193,23 @@ const AdminDashboard = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold">Dashboard Admin</h1>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
-            >
-              <LogOut size={18} /> Déconnexion
-            </button>
+            <div className="flex gap-2">
+              {/* BOUTON TEMPORAIRE - À SUPPRIMER APRÈS UTILISATION */}
+              <button
+                onClick={handleMigration}
+                disabled={migrating}
+                className="flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Database size={18} /> {migrating ? "Migration..." : "Migrer données"}
+              </button>
+              {/* FIN BOUTON TEMPORAIRE */}
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
+              >
+                <LogOut size={18} /> Déconnexion
+              </button>
+            </div>
           </div>
 
           <div className="mb-6">
