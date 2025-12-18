@@ -116,17 +116,14 @@ const Header = () => {
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              {/* Gradient décoratif en haut */}
-              <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#775CFF]/20 to-transparent" />
-
               {/* Bordure gradient en haut */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
 
               {/* Header du menu avec logo et bouton fermer */}
               <div className="flex items-center justify-between px-6 py-6">
-                <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                <div onClick={() => setIsMenuOpen(false)}>
                   <LogoSVG colorScheme="light" size="small" />
-                </Link>
+                </div>
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className="p-2 text-[#0B0B0B] hover:text-[#775CFF] transition-colors"
@@ -137,7 +134,7 @@ const Header = () => {
               </div>
 
               {/* Navigation centrée */}
-              <div className="flex flex-col items-center justify-center h-[calc(100vh-120px)]">
+              <div className="flex flex-col items-center justify-center h-[calc(100vh-150px)]">
                 <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
               </div>
 
