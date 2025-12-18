@@ -63,7 +63,7 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
             {route.label}
             {location.pathname === route.path && (
               <span
-                className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r ${colors.gradient.administration}`}
+                className={`absolute bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r ${colors.gradient.administration}`}
               />
             )}
           </Link>

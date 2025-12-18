@@ -27,7 +27,7 @@ export const getAllExperiences = async (): Promise<Experience[]> => {
 
   try {
     const experiencesCollection = collection(db, "experiences");
-    const q = query(experiencesCollection, orderBy("year", "desc"));
+    const q = query(experiencesCollection, orderBy("title", "asc"));
     const snapshot = await getDocs(q);
     const experiences = snapshot.docs.map((doc) => ({
       id: doc.id,
