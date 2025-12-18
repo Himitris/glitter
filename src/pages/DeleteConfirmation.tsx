@@ -69,7 +69,8 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
         await deleteExperience(id);
       }
 
-      const typeLabel = type === "artist" ? "Artiste" : type === "dj" ? "DJ" : "Expérience";
+      const typeLabel =
+        type === "artist" ? "Artiste" : type === "dj" ? "DJ" : "Expérience";
       showToast(`${typeLabel} supprimé avec succès`, "success");
       navigate("/admin/dashboard");
     } catch (error) {
@@ -123,12 +124,14 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
 
   // Helper to get display name and image for both Artist/DJ and Experience
   const isExperience = type === "experience";
-  const displayName = isExperience ? (item as Experience).title : (item as Artist).name;
+  const displayName = isExperience
+    ? (item as Experience).title
+    : (item as Artist).name;
   const displayImage = isExperience
     ? (item as Experience).logo
     : Array.isArray((item as Artist).image)
-      ? (item as Artist).image[0]
-      : (item as Artist).image;
+    ? (item as Artist).image[0]
+    : (item as Artist).image;
 
   return (
     <>

@@ -326,7 +326,11 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
                   onDragOver={handleDragOver}
                   className={`
                     relative border-2 border-dashed rounded-xl p-6 text-center transition-all
-                    ${uploading ? "border-[#775CFF] bg-[#775CFF]/5" : "border-gray-300 hover:border-[#FF4D8F]"}
+                    ${
+                      uploading
+                        ? "border-[#775CFF] bg-[#775CFF]/5"
+                        : "border-gray-300 hover:border-[#FF4D8F]"
+                    }
                   `}
                 >
                   <input
