@@ -111,14 +111,12 @@ const Header = () => {
           {isMenuOpen && (
             <motion.div
               className="lg:hidden fixed inset-0 z-[60]"
+              style={{ backgroundColor: '#FFFFF6' }}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              {/* Fond opaque */}
-              <div className="absolute inset-0 bg-[#FFFFF6]" />
-
               {/* Bordure gradient en haut */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73] z-10" />
 
