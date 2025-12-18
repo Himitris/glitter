@@ -106,42 +106,34 @@ const Header = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Menu - plein écran avec slide depuis la droite */}
+        {/* Mobile Menu - menu déroulant */}
         <AnimatePresence mode="wait">
           {isMenuOpen && (
-            <motion.div
-              className="lg:hidden fixed inset-0 z-[60]"
-              style={{ backgroundColor: '#FFFFF6' }}
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              {/* Bordure gradient en haut */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73] z-10" />
+            <>
+              {/* Overlay pour fermer le menu */}
+              <motion.div
+                className="lg:hidden fixed inset-0 z-40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setIsMenuOpen(false)}
+              />
 
-              {/* Header du menu avec logo et bouton fermer */}
-              <div className="relative z-10 flex items-center justify-between px-6 py-6">
-                <div onClick={() => setIsMenuOpen(false)} className="cursor-pointer">
-                  <LogoSVG colorScheme="light" size="small" />
-                </div>
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-[#0B0B0B] hover:text-[#775CFF] transition-colors"
-                  aria-label="Fermer le menu"
-                >
-                  <X size={28} />
-                </button>
-              </div>
+              {/* Menu content */}
+              <motion.div
+                className="lg:hidden absolute top-full left-4 right-4 mt-2 bg-[#FFFFF6] rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                {/* Bordure gradient en haut */}
+                <div className="h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
 
-              {/* Navigation centrée */}
-              <div className="relative z-10 flex flex-col items-center justify-center h-[calc(100vh-150px)]">
                 <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
-              </div>
-
-              {/* Décoration en bas */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FFFF73] via-[#FF7A42] via-[#EBABFF] to-[#775CFF] z-10" />
-            </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>

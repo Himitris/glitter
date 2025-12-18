@@ -13,12 +13,11 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
   const location = useLocation();
 
   const baseClassName = isMobile
-    ? "flex flex-col items-center space-y-8"
+    ? "flex flex-col p-6"
     : "hidden md:flex space-x-8";
 
   const itemClassName = (isActive: boolean) => `
-    relative transition-colors tracking-wider uppercase font-medium
-    ${isMobile ? 'text-xl' : 'text-sm'}
+    relative transition-colors tracking-wider uppercase font-medium text-sm py-3
     ${isActive ? 'text-[#775CFF]' : 'text-[#0B0B0B] hover:text-[#775CFF]'}
   `;
   
