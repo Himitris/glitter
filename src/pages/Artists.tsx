@@ -54,8 +54,8 @@ const Artists = () => {
       />
       <SchemaOrg
         type="Organization"
-        name="Glitter Production - Artistes"
-        description="Découvrez les artistes qui font confiance à Glitter Production pour leur production musicale et leur management."
+        name="Glitter Productions - Artistes"
+        description="Découvrez les artistes qui font confiance à Glitter Productions pour leur production musicale et leur management."
         url="https://glitterprod.com/artists"
         image="/images/artists/kimia.png"
       />

@@ -1,6 +1,6 @@
 # 🎨 Guide d'Utilisation des Stickers et Composants
 
-Documentation complète pour utiliser les stickers et composants de la charte graphique Glitter Production 2025.
+Documentation complète pour utiliser les stickers et composants de la charte graphique Glitter Productions 2025.
 
 ---
 
@@ -11,22 +11,33 @@ Documentation complète pour utiliser les stickers et composants de la charte gr
 Affiche le logo Glitter avec différents backgrounds organiques.
 
 #### Import
+
 ```tsx
-import LogoSticker from '@/components/ui/LogoSticker';
+import LogoSticker from "@/components/ui/LogoSticker";
 ```
 
 #### Props
+
 ```tsx
 interface LogoStickerProps {
-  variant: 'sticker-01' | 'sticker-02' | 'sticker-03' | 'sticker-05' |
-           'sticker-06' | 'sticker-07' | 'sticker-08' | 'sticker-09' | 'sticker-10';
-  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  variant:
+    | "sticker-01"
+    | "sticker-02"
+    | "sticker-03"
+    | "sticker-05"
+    | "sticker-06"
+    | "sticker-07"
+    | "sticker-08"
+    | "sticker-09"
+    | "sticker-10";
+  size?: "sm" | "md" | "lg" | "xl" | "2xl";
   className?: string;
-  animated?: boolean;  // Default: true
+  animated?: boolean; // Default: true
 }
 ```
 
 #### Exemples
+
 ```tsx
 // Hero section
 <LogoSticker variant="sticker-03" size="xl" />
@@ -43,6 +54,7 @@ interface LogoStickerProps {
 ```
 
 #### Variantes
+
 - `sticker-01`, `sticker-02` : SVG (meilleure qualité, recommandé)
 - `sticker-03` à `sticker-10` : WebP optimisés
 
@@ -53,22 +65,30 @@ interface LogoStickerProps {
 Affiche les stickers officiels pour chaque service Glitter.
 
 #### Import
+
 ```tsx
-import ServiceSticker from '@/components/ui/ServiceSticker';
+import ServiceSticker from "@/components/ui/ServiceSticker";
 ```
 
 #### Props
+
 ```tsx
 interface ServiceStickerProps {
-  service: 'administration' | 'dir-prod' | 'management' |
-           'production' | 'regie-artiste' | 'regie-site';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  service:
+    | "administration"
+    | "dir-prod"
+    | "management"
+    | "production"
+    | "regie-artiste"
+    | "regie-site";
+  size?: "sm" | "md" | "lg" | "xl";
   className?: string;
-  animated?: boolean;  // Default: true
+  animated?: boolean; // Default: true
 }
 ```
 
 #### Exemples
+
 ```tsx
 // Dans ServiceCard
 <ServiceSticker service="production" size="lg" />
@@ -91,14 +111,15 @@ interface ServiceStickerProps {
 ```
 
 #### Mapping Couleurs
-| Service | Couleur | Code |
-|---------|---------|------|
-| Production | Violet | #775CFF |
-| Administration | Rose | #EBABFF |
-| Management | Orange | #FF7A42 |
-| Régie Artiste | Jaune | #FFFF73 |
-| Direction Prod | Rose | #EBABFF |
-| Régie Site | Violet | #775CFF |
+
+| Service        | Couleur | Code    |
+| -------------- | ------- | ------- |
+| Production     | Violet  | #775CFF |
+| Administration | Rose    | #EBABFF |
+| Management     | Orange  | #FF7A42 |
+| Régie Artiste  | Jaune   | #FFFF73 |
+| Direction Prod | Rose    | #EBABFF |
+| Régie Site     | Violet  | #775CFF |
 
 ---
 
@@ -107,11 +128,13 @@ interface ServiceStickerProps {
 Éléments décoratifs : boule disco, coeurs, strass.
 
 #### Import
+
 ```tsx
-import DecorativeSticker from '@/components/ui/DecorativeSticker';
+import DecorativeSticker from "@/components/ui/DecorativeSticker";
 ```
 
 #### Props
+
 ```tsx
 interface DecorativeStickerProps {
   type: 'boule-disco' | 'coeur-01' | 'coeur-02' | `strass-${1-9}`;
@@ -123,6 +146,7 @@ interface DecorativeStickerProps {
 ```
 
 #### Exemples
+
 ```tsx
 // Boule disco en rotation
 <DecorativeSticker
@@ -161,6 +185,7 @@ interface DecorativeStickerProps {
 ```
 
 #### Types d'Animations
+
 - `float` : Flottement vertical avec légère rotation (4s)
 - `rotate` : Rotation complète continue (20s)
 - `pulse` : Pulsation d'échelle (2s)
@@ -173,22 +198,25 @@ interface DecorativeStickerProps {
 Crée des stickers personnalisés avec texte.
 
 #### Import
+
 ```tsx
-import Sticker from '@/components/ui/Sticker';
+import Sticker from "@/components/ui/Sticker";
 ```
 
 #### Props
+
 ```tsx
 interface StickerProps {
-  variant?: 'violet' | 'rose' | 'orange' | 'jaune' | 'gradient';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "violet" | "rose" | "orange" | "jaune" | "gradient";
+  size?: "sm" | "md" | "lg";
   children: React.ReactNode;
   className?: string;
-  animate?: boolean;  // Default: true
+  animate?: boolean; // Default: true
 }
 ```
 
 #### Exemples
+
 ```tsx
 // Tags de catégorie
 <Sticker variant="violet" size="md">
@@ -223,22 +251,25 @@ interface StickerProps {
 Badges compacts pour tags et labels.
 
 #### Import
+
 ```tsx
-import Badge from '@/components/ui/Badge';
+import Badge from "@/components/ui/Badge";
 ```
 
 #### Props
+
 ```tsx
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'violet' | 'rose' | 'orange' | 'jaune' | 'outlined' | 'solid';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "violet" | "rose" | "orange" | "jaune" | "outlined" | "solid";
+  size?: "sm" | "md" | "lg";
   className?: string;
-  animated?: boolean;  // Default: false
+  animated?: boolean; // Default: false
 }
 ```
 
 #### Exemples
+
 ```tsx
 // Tags de service
 <Badge variant="violet" size="md">Production</Badge>
@@ -263,23 +294,26 @@ interface BadgeProps {
 Applique une bordure gradient à n'importe quel contenu.
 
 #### Import
+
 ```tsx
-import GradientBorder from '@/components/ui/GradientBorder';
+import GradientBorder from "@/components/ui/GradientBorder";
 ```
 
 #### Props
+
 ```tsx
 interface GradientBorderProps {
   children: React.ReactNode;
-  gradient?: 'violet' | 'rose' | 'orange' | 'jaune' | 'primary';
-  borderWidth?: '1' | '2' | '3' | '4';
-  rounded?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | 'blob';
+  gradient?: "violet" | "rose" | "orange" | "jaune" | "primary";
+  borderWidth?: "1" | "2" | "3" | "4";
+  rounded?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full" | "blob";
   className?: string;
   innerClassName?: string;
 }
 ```
 
 #### Exemples
+
 ```tsx
 // Card avec bordure
 <GradientBorder gradient="primary" borderWidth="2" rounded="3xl">
@@ -337,8 +371,12 @@ interface GradientBorderProps {
     <LogoSticker variant="sticker-03" size="2xl" className="mx-auto mb-8" />
     <h1 className="text-6xl font-bold mb-4">Glitter Productions</h1>
     <div className="flex gap-4 justify-center">
-      <Badge variant="violet" size="lg" animated>2025</Badge>
-      <Badge variant="rose" size="lg" animated>Nouveau</Badge>
+      <Badge variant="violet" size="lg" animated>
+        2025
+      </Badge>
+      <Badge variant="rose" size="lg" animated>
+        Nouveau
+      </Badge>
     </div>
   </div>
 </section>
@@ -351,9 +389,9 @@ interface GradientBorderProps {
 ```tsx
 <div className="grid md:grid-cols-3 gap-8">
   {[
-    { service: 'production', title: 'Production', color: 'violet' },
-    { service: 'administration', title: 'Administration', color: 'rose' },
-    { service: 'management', title: 'Management', color: 'orange' },
+    { service: "production", title: "Production", color: "violet" },
+    { service: "administration", title: "Administration", color: "rose" },
+    { service: "management", title: "Management", color: "orange" },
   ].map(({ service, title, color }) => (
     <GradientBorder
       key={service}
@@ -369,9 +407,7 @@ interface GradientBorderProps {
           className="mx-auto mb-4"
         />
         <h3 className="text-2xl font-bold mb-2">{title}</h3>
-        <p className="text-[#0B0B0B]/70">
-          Description du service...
-        </p>
+        <p className="text-[#0B0B0B]/70">Description du service...</p>
         <Badge variant={color as any} className="mt-4">
           En savoir plus
         </Badge>
@@ -400,11 +436,11 @@ interface GradientBorderProps {
       <img src="/artist.jpg" className="rounded-2xl mb-4" />
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold">Nom Artiste</h3>
-        <Sticker variant="violet" size="sm">DJ</Sticker>
+        <Sticker variant="violet" size="sm">
+          DJ
+        </Sticker>
       </div>
-      <p className="text-[#0B0B0B]/70 mt-2">
-        Description de l'artiste...
-      </p>
+      <p className="text-[#0B0B0B]/70 mt-2">Description de l'artiste...</p>
     </div>
   </GradientBorder>
 </div>
@@ -418,9 +454,21 @@ interface GradientBorderProps {
 <footer className="relative py-20 bg-[#FFFFF6]">
   {/* Decorative elements */}
   <div className="absolute inset-0 overflow-hidden opacity-20">
-    <LogoSticker variant="sticker-01" size="xl" className="absolute top-10 left-10" />
-    <LogoSticker variant="sticker-02" size="lg" className="absolute bottom-20 right-20" />
-    <DecorativeSticker type="strass-03" size="md" className="absolute top-1/2 left-1/4" />
+    <LogoSticker
+      variant="sticker-01"
+      size="xl"
+      className="absolute top-10 left-10"
+    />
+    <LogoSticker
+      variant="sticker-02"
+      size="lg"
+      className="absolute bottom-20 right-20"
+    />
+    <DecorativeSticker
+      type="strass-03"
+      size="md"
+      className="absolute top-1/2 left-1/4"
+    />
   </div>
 
   {/* Footer content */}
@@ -435,18 +483,21 @@ interface GradientBorderProps {
 ## 🎯 Bonnes Pratiques
 
 ### Performance
+
 - ✅ Utilisez `LogoSticker` variants SVG (01, 02) pour les grands logos
 - ✅ Les autres stickers sont en WebP optimisé (~80 KB au lieu de ~500 KB)
 - ✅ Ajoutez `loading="lazy"` automatiquement appliqué
 - ✅ Limitez les animations complexes à 3-4 par viewport
 
 ### Design
+
 - ✅ Respectez la hiérarchie des tailles (sm → md → lg → xl)
 - ✅ Utilisez `opacity-20` à `opacity-40` pour les décorations en background
 - ✅ Combinez `GradientBorder` + `ServiceSticker` pour un effet cohérent
 - ✅ Alternez les variants pour créer de la variété visuelle
 
 ### Accessibilité
+
 - ✅ Les images décoratives ont automatiquement des alt appropriés
 - ✅ Utilisez `Badge` pour du texte important (meilleur contraste)
 - ✅ Limitez les animations avec `animationType="none"` si nécessaire
@@ -483,6 +534,7 @@ interface GradientBorderProps {
 Une page complète de démonstration est disponible : `src/pages/StickersDemo.tsx`
 
 Pour l'utiliser :
+
 1. Ajoutez temporairement la route dans `App.tsx`
 2. Visitez `/stickers-demo`
 3. Testez tous les composants interactivement
@@ -499,4 +551,4 @@ Pour l'utiliser :
 ---
 
 **Version** : 1.0.0 - Décembre 2025
-**Charte** : Glitter Production 2025
+**Charte** : Glitter Productions 2025

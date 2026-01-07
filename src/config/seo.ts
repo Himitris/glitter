@@ -54,7 +54,7 @@ export const seoConfig = {
   djs: {
     title: "DJs & Producteurs | Collaboration & Management",
     description:
-      "Glitter Production accompagne les DJs et producteurs de musique électronique. Administration, production musicale et organisation de tournées pour les DJs.",
+      "Glitter Productions accompagne les DJs et producteurs de musique électronique. Administration, production musicale et organisation de tournées pour les DJs.",
     keywords: [
       "djs",
       "producteurs musique",
