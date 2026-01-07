@@ -1,6 +1,7 @@
 import React, { memo, useState } from "react";
 import { Music, Instagram, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { Artist } from "../../types";
+import ArtistModal from "./ArtistModal";
 
 interface ArtistCardProps {
   artist: Artist;
@@ -8,24 +9,31 @@ interface ArtistCardProps {
 
 const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const images = Array.isArray(artist.image) ? artist.image : [artist.image];
   const hasMultipleImages = images.length > 1;
 
   const handlePrevImage = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   const handleNextImage = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   return (
-    <div className="w-full h-full group">
-      {/* Carte simple - hover CSS natif pour performance */}
-      <div className="border-2 border-[#0B0B0B] rounded-3xl h-full bg-[#FFFFF6] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out flex flex-col">
+    <>
+      <div className="w-full h-full group">
+        {/* Carte simple - hover CSS natif pour performance */}
+        <div
+          onClick={() => setIsModalOpen(true)}
+          className="border-2 border-[#0B0B0B] rounded-3xl h-full bg-[#FFFFF6] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out flex flex-col cursor-pointer"
+        >
 
         {/* Image Container */}
         <div className="relative aspect-square overflow-hidden">
@@ -63,6 +71,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                     key={index}
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       setCurrentImageIndex(index);
                     }}
                     className={`w-2 h-2 rounded-full transition-all duration-200 ${
@@ -84,6 +93,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                   href={artist.socialLinks.spotify}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
                   className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
                 >
                   <Music size={20} className="text-white" />
@@ -94,6 +104,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                   href={artist.socialLinks.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
                   className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
                 >
                   <Instagram size={20} className="text-white" />
@@ -104,6 +115,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                   href={artist.socialLinks.website}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
                   className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
                 >
                   <Globe size={20} className="text-white" />
@@ -126,6 +138,14 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
 
       </div>
     </div>
+
+    {/* Modal */}
+    <ArtistModal
+      artist={artist}
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    />
+  </>
   );
 });
 

@@ -124,3 +124,18 @@ export function getFeaturedItems<T extends { name: string }>(
   );
   return sortByDisplayOrder(featured, featuredList);
 }
+
+/**
+ * Sélectionne aléatoirement N éléments d'un tableau
+ * @param items - Tableau d'artistes ou DJs
+ * @param count - Nombre d'éléments à sélectionner
+ * @returns Tableau avec N éléments aléatoires
+ */
+export function getRandomItems<T>(items: T[], count: number): T[] {
+  if (items.length <= count) {
+    return [...items];
+  }
+
+  const shuffled = [...items].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}

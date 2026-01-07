@@ -15,9 +15,7 @@ import {
 import { Artist } from "../types";
 import { useToast } from "../contexts/ToastContext";
 import {
-  getFeaturedItems,
-  FEATURED_ARTISTS,
-  FEATURED_DJS,
+  getRandomItems,
 } from "../config/displayOrder";
 
 const Home = () => {
@@ -48,13 +46,13 @@ const Home = () => {
     fetchData();
   }, [showToast]);
 
-  // Sélection des artistes et DJs mis en avant selon l'ordre défini
+  // Sélection aléatoire de 3 artistes et 3 DJs
   const featuredArtists = useMemo(
-    () => getFeaturedItems(artists, FEATURED_ARTISTS).slice(0, 3),
+    () => getRandomItems(artists, 3),
     [artists]
   );
   const featuredDjs = useMemo(
-    () => getFeaturedItems(djs, FEATURED_DJS).slice(0, 3),
+    () => getRandomItems(djs, 3),
     [djs]
   );
 
