@@ -3,6 +3,7 @@ export interface Artist {
   name: string;
   image: string | string[];
   description: string;
+  displayOrder?: number;
   socialLinks: {
     spotify?: string;
     instagram?: string;

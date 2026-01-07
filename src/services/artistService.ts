@@ -34,7 +34,12 @@ export class FirebaseServiceError extends Error {
 export const getAllArtists = async (): Promise<Artist[]> => {
   // Vérifier le cache d'abord
   const cached = getFromCache<Artist[]>(CACHE_KEYS.ARTISTS);
-  if (cached) return sortByDisplayOrder(cached, ARTISTS_DISPLAY_ORDER);
+  if (cached) {
+    // Trier par displayOrder si disponible, sinon par l'ordre de configuration
+    return cached.some(a => a.displayOrder !== undefined)
+      ? [...cached].sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999))
+      : sortByDisplayOrder(cached, ARTISTS_DISPLAY_ORDER);
+  }
 
   try {
     const artistsCollection = collection(db, "artists");
@@ -43,8 +48,10 @@ export const getAllArtists = async (): Promise<Artist[]> => {
 
     // Stocker dans le cache
     setInCache(CACHE_KEYS.ARTISTS, artists);
-    // Retourner les artistes triés selon l'ordre défini
-    return sortByDisplayOrder(artists, ARTISTS_DISPLAY_ORDER);
+    // Trier par displayOrder si disponible, sinon par l'ordre de configuration
+    return artists.some(a => a.displayOrder !== undefined)
+      ? [...artists].sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999))
+      : sortByDisplayOrder(artists, ARTISTS_DISPLAY_ORDER);
   } catch (error) {
     console.error("Erreur lors de la récupération des artistes:", error);
     throw new FirebaseServiceError("Impossible de charger les artistes", error);
@@ -116,7 +123,12 @@ export const deleteArtist = async (id: string): Promise<void> => {
 // Récupérer tous les DJs depuis Firebase (avec cache et tri)
 export const getAllDjs = async (): Promise<Artist[]> => {
   const cached = getFromCache<Artist[]>(CACHE_KEYS.DJS);
-  if (cached) return sortByDisplayOrder(cached, DJS_DISPLAY_ORDER);
+  if (cached) {
+    // Trier par displayOrder si disponible, sinon par l'ordre de configuration
+    return cached.some(d => d.displayOrder !== undefined)
+      ? [...cached].sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999))
+      : sortByDisplayOrder(cached, DJS_DISPLAY_ORDER);
+  }
 
   try {
     const djsCollection = collection(db, "djs");
@@ -124,8 +136,10 @@ export const getAllDjs = async (): Promise<Artist[]> => {
     const djs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Artist));
 
     setInCache(CACHE_KEYS.DJS, djs);
-    // Retourner les DJs triés selon l'ordre défini
-    return sortByDisplayOrder(djs, DJS_DISPLAY_ORDER);
+    // Trier par displayOrder si disponible, sinon par l'ordre de configuration
+    return djs.some(d => d.displayOrder !== undefined)
+      ? [...djs].sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999))
+      : sortByDisplayOrder(djs, DJS_DISPLAY_ORDER);
   } catch (error) {
     console.error("Erreur lors de la récupération des DJs:", error);
     throw new FirebaseServiceError("Impossible de charger les DJs", error);
@@ -189,5 +203,41 @@ export const deleteDj = async (id: string): Promise<void> => {
   } catch (error) {
     console.error("Erreur lors de la suppression du DJ:", error);
     throw new FirebaseServiceError("Impossible de supprimer le DJ", error);
+  }
+};
+
+// Mettre à jour l'ordre d'affichage de plusieurs artistes
+export const updateArtistsOrder = async (
+  artistsOrder: { id: string; displayOrder: number }[]
+): Promise<void> => {
+  try {
+    // Mettre à jour tous les artistes en parallèle
+    await Promise.all(
+      artistsOrder.map(({ id, displayOrder }) =>
+        updateDoc(doc(db, "artists", id), { displayOrder })
+      )
+    );
+    invalidateCacheByPrefix("artist");
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'ordre des artistes:", error);
+    throw new FirebaseServiceError("Impossible de mettre à jour l'ordre des artistes", error);
+  }
+};
+
+// Mettre à jour l'ordre d'affichage de plusieurs DJs
+export const updateDjsOrder = async (
+  djsOrder: { id: string; displayOrder: number }[]
+): Promise<void> => {
+  try {
+    // Mettre à jour tous les DJs en parallèle
+    await Promise.all(
+      djsOrder.map(({ id, displayOrder }) =>
+        updateDoc(doc(db, "djs", id), { displayOrder })
+      )
+    );
+    invalidateCacheByPrefix("dj");
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'ordre des DJs:", error);
+    throw new FirebaseServiceError("Impossible de mettre à jour l'ordre des DJs", error);
   }
 };
