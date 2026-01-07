@@ -24,6 +24,7 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [manualImageUrl, setManualImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(isEdit);
   const [uploading, setUploading] = useState(false);
@@ -136,6 +137,14 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
+  };
+
+  const handleAddManualUrl = () => {
+    if (manualImageUrl.trim()) {
+      setImageUrls((prev) => [...prev, manualImageUrl.trim()]);
+      setManualImageUrl("");
+      showToast("URL d'image ajoutée!", "success");
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -372,6 +381,41 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
                   )}
                 </div>
 
+                {/* Champ URL manuelle */}
+                <div className="mt-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                    <span className="text-xs text-gray-400 uppercase">ou ajouter un chemin manuel</span>
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                  </div>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={manualImageUrl}
+                      onChange={(e) => setManualImageUrl(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          handleAddManualUrl();
+                        }
+                      }}
+                      placeholder="/images/artists/nom-artiste.webp ou URL complète"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF4D8F] text-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddManualUrl}
+                      disabled={!manualImageUrl.trim()}
+                      className="px-4 py-2 bg-[#775CFF] text-white rounded-lg hover:bg-[#5a45cc] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                    >
+                      Ajouter
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    💡 Pour images en dur : /images/artists/nom.webp ou /images/djs/nom.webp
+                  </p>
+                </div>
+
                 {/* Galerie d'images */}
                 {imageUrls.length > 0 && (
                   <div className="mt-4">
@@ -404,6 +448,18 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
                               Principal
                             </div>
                           )}
+                          {/* Badge type d'image */}
+                          <div className="absolute top-2 left-2">
+                            {url.includes('cloudinary.com') ? (
+                              <div className="bg-green-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+                                Upload
+                              </div>
+                            ) : (
+                              <div className="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+                                Local
+                              </div>
+                            )}
+                          </div>
                         </div>
                       ))}
                     </div>

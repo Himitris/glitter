@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown, Music, Instagram } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
-import { ColorfulBackground, HighlightBadge } from "../components/ui";
+import { ColorfulBackground, HighlightBadge, ImageWithFallback } from "../components/ui";
 import { typography } from "../utils/theme";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";

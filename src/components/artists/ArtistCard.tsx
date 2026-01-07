@@ -2,6 +2,7 @@ import React, { memo, useState } from "react";
 import { Music, Instagram, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { Artist } from "../../types";
 import ArtistModal from "./ArtistModal";
+import { ImageWithFallback } from "../ui";
 
 interface ArtistCardProps {
   artist: Artist;
@@ -38,7 +39,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
         {/* Image Container */}
         <div className="relative aspect-square overflow-hidden">
           {/* Image avec transition CSS simple */}
-          <img
+          <ImageWithFallback
             src={images[currentImageIndex]}
             alt={artist.name}
             width={400}

@@ -15,3 +15,6 @@ export * from './common';
 
 // Skeleton loading components
 export * from './skeleton';
+
+// Image components
+export { default as ImageWithFallback } from './ImageWithFallback';

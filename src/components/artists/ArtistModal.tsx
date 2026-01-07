@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Music, Instagram, Globe } from "lucide-react";
 import { Artist } from "../../types";
+import { ImageWithFallback } from "../ui";
 
 interface ArtistModalProps {
   artist: Artist;
@@ -34,24 +35,27 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+          {/* Modal Container - Overlay + Contenu */}
+          <div
+            className="fixed inset-0 z-50 overflow-y-auto"
             onClick={onClose}
-            className="fixed inset-0 bg-[#0B0B0B]/80 backdrop-blur-sm z-50"
-          />
+          >
+            {/* Overlay Background */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-[#0B0B0B]/80 backdrop-blur-sm"
+            />
 
-          {/* Modal */}
-          <div className="fixed inset-0 z-50 overflow-y-auto">
+            {/* Modal Content */}
             <div className="min-h-screen px-4 flex items-center justify-center py-8">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="relative bg-[#FFFFF6] rounded-3xl border-2 border-[#0B0B0B] shadow-2xl max-w-4xl w-full overflow-hidden"
+                className="relative bg-[#FFFFF6] rounded-3xl border-2 border-[#0B0B0B] shadow-2xl max-w-4xl w-full overflow-hidden z-10"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Bouton de fermeture */}
@@ -66,7 +70,7 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                 <div className="grid md:grid-cols-2 gap-0">
                   {/* Section Image */}
                   <div className="relative aspect-square md:aspect-auto bg-[#0B0B0B]/5">
-                    <img
+                    <ImageWithFallback
                       src={images[currentImageIndex]}
                       alt={artist.name}
                       className="w-full h-full object-cover"
