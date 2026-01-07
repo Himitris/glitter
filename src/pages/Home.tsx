@@ -7,10 +7,18 @@ import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
 import { useOptimizedAnimation } from "../hooks/useOptimizedAnimation";
-import { getAllArtists, getAllDjs, FirebaseServiceError } from "../services/artistService";
+import {
+  getAllArtists,
+  getAllDjs,
+  FirebaseServiceError,
+} from "../services/artistService";
 import { Artist } from "../types";
 import { useToast } from "../contexts/ToastContext";
-import { getFeaturedItems, FEATURED_ARTISTS, FEATURED_DJS } from "../config/displayOrder";
+import {
+  getFeaturedItems,
+  FEATURED_ARTISTS,
+  FEATURED_DJS,
+} from "../config/displayOrder";
 
 const Home = () => {
   const { shouldReduceMotion, duration } = useOptimizedAnimation();
@@ -129,13 +137,10 @@ const Home = () => {
                 {/* Logo Glitter avec Productions */}
                 <div className="flex flex-col items-center">
                   <img
-                    src="/images/Logo/Logo-blanc/Logo-blanc-2.svg"
+                    src="/images/Logo/Logo-blanc/Logo-blanc.svg"
                     alt="Glitter"
                     className="w-full max-w-sm md:max-w-lg h-auto drop-shadow-2xl animate-fade-in"
                   />
-                  <span className="text-white text-2xl md:text-4xl font-bold tracking-widest mt-2 drop-shadow-lg">
-                    PRODUCTIONS
-                  </span>
                 </div>
 
                 {/* Texte avec mots en évidence */}
@@ -207,8 +212,8 @@ const Home = () => {
                   COMPLÈTE
                 </HighlightBadge>
                 <span>
-                  de services adaptés aux besoins des artistes et des
-                  structures culturelles.
+                  de services adaptés aux besoins des artistes et des structures
+                  culturelles.
                 </span>
               </div>
             </div>
@@ -357,7 +362,7 @@ const Home = () => {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <h2 className={`${typography.heading.h2} text-[#0B0B0B]`}>
-                      Nos DJs
+                      Nos DJs/Producteurs
                     </h2>
                   </div>
                   <p className="text-[#0B0B0B]/60 mb-8">

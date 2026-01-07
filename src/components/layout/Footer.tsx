@@ -21,8 +21,8 @@ const Footer = () => {
           transition={{
             duration: 20,
             repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'easeInOut',
+            repeatType: "reverse",
+            ease: "easeInOut",
           }}
         />
         <motion.div
@@ -36,8 +36,8 @@ const Footer = () => {
           transition={{
             duration: 25,
             repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'easeInOut',
+            repeatType: "reverse",
+            ease: "easeInOut",
           }}
         />
       </div>
@@ -52,11 +52,7 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center md:items-start"
           >
-            <LogoSVG
-              colorScheme="light"
-              size="medium"
-              className="mb-4"
-            />
+            <LogoSVG colorScheme="light" size="medium" className="mb-4" />
             <p className="text-[#0B0B0B]/70 text-center md:text-left">
               Faire briller vos projets
             </p>
@@ -78,11 +74,14 @@ const Footer = () => {
                 href="mailto:contact@glitterprod.com"
                 className="flex items-center justify-center md:justify-start gap-2 text-[#0B0B0B]/70 hover:text-[#775CFF] transition-colors group"
               >
-                <Mail size={18} className="group-hover:scale-110 transition-transform" />
+                <Mail
+                  size={18}
+                  className="group-hover:scale-110 transition-transform"
+                />
                 <span>contact@glitterprod.com</span>
               </a>
               <p className="text-[#0B0B0B]/70">
-                📍 Toulouse
+                📍 Entre Toulouse et les Landes
               </p>
             </div>
           </motion.div>
@@ -110,7 +109,7 @@ const Footer = () => {
                 <Instagram size={20} />
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/company/glitter-productions"
+                href="https://www.linkedin.com/company/glitter-productions31/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-gradient-to-br from-[#EBABFF] to-[#FF7A42] flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
@@ -120,7 +119,7 @@ const Footer = () => {
                 <Linkedin size={20} />
               </motion.a>
               <motion.a
-                href="https://www.facebook.com/glitterproductions"
+                href="https://www.facebook.com/profile.php?id=61585407986261"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF7A42] to-[#FFFF73] flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
@@ -142,7 +141,8 @@ const Footer = () => {
           className="border-t-2 border-[#0B0B0B]/10 pt-8"
         >
           <p className="text-[#0B0B0B]/70 text-sm text-center">
-            &copy; {new Date().getFullYear()} Glitter Productions. Tous droits réservés.
+            &copy; {new Date().getFullYear()} Glitter Productions. Tous droits
+            réservés.
           </p>
         </motion.div>
       </div>
