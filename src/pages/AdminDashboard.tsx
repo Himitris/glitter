@@ -251,11 +251,20 @@ const AdminDashboard = () => {
                       <tr key={exp.id}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="h-12 w-12 rounded-lg overflow-hidden bg-gray-100">
-                            <img
-                              src={exp.logo}
-                              alt={exp.title}
-                              className="h-full w-full object-cover"
-                            />
+                            {exp.logo ? (
+                              <img
+                                src={exp.logo}
+                                alt={exp.title}
+                                className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src = "/images/placeholder.jpg";
+                                }}
+                              />
+                            ) : (
+                              <div className="h-full w-full flex items-center justify-center text-gray-400">
+                                <span className="text-xs">Pas d'image</span>
+                              </div>
+                            )}
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">

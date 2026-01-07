@@ -32,6 +32,7 @@ const ExperienceForm = () => {
   });
 
   const [newService, setNewService] = useState("");
+  const [manualLogoUrl, setManualLogoUrl] = useState("");
 
   useEffect(() => {
     if (isEditing && id) {
@@ -347,40 +348,113 @@ const ExperienceForm = () => {
               </label>
 
               {formData.logo ? (
-                <div className="relative inline-block">
-                  <img
-                    src={formData.logo}
-                    alt="Logo preview"
-                    className="w-32 h-32 object-cover rounded-lg border border-gray-200"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setFormData((prev) => ({ ...prev, logo: "" }))}
-                    className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
-                  >
-                    <X size={14} />
-                  </button>
+                <div className="space-y-4">
+                  <div className="relative inline-block">
+                    <img
+                      src={formData.logo}
+                      alt="Logo preview"
+                      className="w-32 h-32 object-cover rounded-lg border-2 border-gray-200"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = "/images/placeholder.jpg";
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, logo: "" }))}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 shadow-md"
+                    >
+                      <X size={14} />
+                    </button>
+                    {/* Badge type d'image */}
+                    <div className="absolute -bottom-2 left-0 right-0 text-center">
+                      {formData.logo.includes('cloudinary.com') ? (
+                        <span className="inline-block bg-green-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+                          Upload
+                        </span>
+                      ) : (
+                        <span className="inline-block bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+                          Local
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    {formData.logo.startsWith('/')
+                      ? `📁 Chemin local : ${formData.logo}`
+                      : '☁️ Image hébergée sur Cloudinary'
+                    }
+                  </p>
                 </div>
               ) : (
-                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[#775CFF] transition-colors">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleLogoUpload}
-                    className="hidden"
-                    disabled={uploadingLogo}
-                  />
-                  {uploadingLogo ? (
-                    <Loader size="sm" />
-                  ) : (
-                    <>
-                      <Upload size={24} className="text-gray-400 mb-2" />
-                      <span className="text-sm text-gray-500">
-                        Cliquez pour uploader un logo
-                      </span>
-                    </>
-                  )}
-                </label>
+                <>
+                  <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[#775CFF] transition-colors">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLogoUpload}
+                      className="hidden"
+                      disabled={uploadingLogo}
+                    />
+                    {uploadingLogo ? (
+                      <Loader size="sm" />
+                    ) : (
+                      <>
+                        <Upload size={24} className="text-gray-400 mb-2" />
+                        <span className="text-sm text-gray-500">
+                          Cliquez pour uploader un logo
+                        </span>
+                        <span className="text-xs text-gray-400 mt-1">
+                          PNG, JPG jusqu'à 5MB
+                        </span>
+                      </>
+                    )}
+                  </label>
+
+                  {/* Champ URL manuelle */}
+                  <div className="mt-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="flex-1 h-px bg-gray-200"></div>
+                      <span className="text-xs text-gray-400 uppercase">ou ajouter un chemin manuel</span>
+                      <div className="flex-1 h-px bg-gray-200"></div>
+                    </div>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={manualLogoUrl}
+                        onChange={(e) => setManualLogoUrl(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            if (manualLogoUrl.trim()) {
+                              setFormData((prev) => ({ ...prev, logo: manualLogoUrl.trim() }));
+                              setManualLogoUrl("");
+                              showToast("Chemin d'image ajouté!", "success");
+                            }
+                          }
+                        }}
+                        placeholder="/images/exp/nom-experience.webp ou URL complète"
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#775CFF] focus:border-transparent text-sm"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (manualLogoUrl.trim()) {
+                            setFormData((prev) => ({ ...prev, logo: manualLogoUrl.trim() }));
+                            setManualLogoUrl("");
+                            showToast("Chemin d'image ajouté!", "success");
+                          }
+                        }}
+                        disabled={!manualLogoUrl.trim()}
+                        className="px-4 py-2 bg-[#775CFF] text-white rounded-lg hover:bg-[#5a45cc] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                      >
+                        Ajouter
+                      </button>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      💡 Pour images en dur : /images/exp/nom.webp ou URL complète
+                    </p>
+                  </div>
+                </>
               )}
             </div>
 
