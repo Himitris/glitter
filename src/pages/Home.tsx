@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown, Music, Instagram } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { ColorfulBackground, HighlightBadge, ImageWithFallback } from "../components/ui";
 import { typography } from "../utils/theme";
 import Seo from "../components/seo/Seo";
@@ -453,12 +454,12 @@ const Home = () => {
               vision en réalité éclatante. Contactez-nous dès aujourd'hui pour
               discuter de vos idées.
             </p>
-            <a
-              href="mailto:contact@glitterprod.com"
+            <Link
+              to="/contact"
               className="inline-block bg-[#0B0B0B] text-white px-8 py-4 rounded-full hover:bg-[#0B0B0B]/80 hover:scale-105 active:scale-95 transition-all duration-200 tracking-wide font-semibold"
             >
               Contactez-nous
-            </a>
+            </Link>
           </div>
         </section>
       </div>
