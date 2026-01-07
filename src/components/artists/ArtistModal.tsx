@@ -55,7 +55,7 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="relative bg-[#FFFFF6] rounded-3xl border-2 border-[#0B0B0B] shadow-2xl max-w-4xl w-full overflow-hidden z-10"
+                className="relative bg-[#FFFFF6] rounded-3xl border-2 border-[#0B0B0B] shadow-2xl max-w-4xl w-full overflow-hidden z-10 max-h-[85vh]"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Bouton de fermeture */}
@@ -67,9 +67,9 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                 </button>
 
                 {/* Contenu du modal */}
-                <div className="grid md:grid-cols-2 gap-0">
+                <div className="grid md:grid-cols-2 gap-0 h-full max-h-[85vh]">
                   {/* Section Image */}
-                  <div className="relative aspect-square md:aspect-auto bg-[#0B0B0B]/5">
+                  <div className="relative h-64 md:h-full bg-[#0B0B0B]/5">
                     <ImageWithFallback
                       src={images[currentImageIndex]}
                       alt={artist.name}
@@ -112,12 +112,12 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                   </div>
 
                   {/* Section Informations */}
-                  <div className="p-8 flex flex-col">
-                    <h2 className="text-4xl font-bold text-[#0B0B0B] mb-4">
+                  <div className="p-8 flex flex-col h-full overflow-hidden">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#0B0B0B] mb-4">
                       {artist.name}
                     </h2>
 
-                    <div className="flex-1 overflow-y-auto">
+                    <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#0B0B0B]/20 scrollbar-track-transparent">
                       <p className="text-[#0B0B0B]/80 leading-relaxed whitespace-pre-line">
                         {artist.description}
                       </p>

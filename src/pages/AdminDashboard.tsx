@@ -1,4 +1,4 @@
-import { Edit, LogOut, Plus, Trash, MapPin, Download } from "lucide-react";
+import { Edit, LogOut, Plus, Trash, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Seo from "../components/seo/Seo";
@@ -7,7 +7,6 @@ import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import { getAllArtists, getAllDjs } from "../services/artistService";
 import { getAllExperiences, deleteExperience } from "../services/experienceService";
-import { migrateAllImages } from "../services/imageMigrationService";
 import { Artist, Experience } from "../types";
 
 const AdminDashboard = () => {
@@ -16,10 +15,6 @@ const AdminDashboard = () => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"artists" | "djs" | "experiences">("artists");
-
-  // États pour la migration d'images
-  const [isMigrating, setIsMigrating] = useState(false);
-  const [migrationProgress, setMigrationProgress] = useState({ current: 0, total: 0, message: "" });
 
   const { logout } = useAuth();
   const { showToast } = useToast();
@@ -47,49 +42,6 @@ const AdminDashboard = () => {
 
     fetchData();
   }, [showToast]);
-
-  const handleMigrateImages = async () => {
-    if (!confirm("Voulez-vous migrer toutes les images hardcodées vers la base de données ? Cette opération peut prendre quelques minutes.")) {
-      return;
-    }
-
-    setIsMigrating(true);
-    setMigrationProgress({ current: 0, total: 0, message: "Démarrage de la migration..." });
-
-    try {
-      const result = await migrateAllImages((current, total, message) => {
-        setMigrationProgress({ current, total, message });
-      });
-
-      if (result.success) {
-        showToast(
-          `Migration terminée ! ${result.artistsUpdated} artistes et ${result.djsUpdated} DJs mis à jour.`,
-          "success"
-        );
-
-        if (result.errors.length > 0) {
-          console.error("Erreurs de migration:", result.errors);
-          showToast(`${result.errors.length} erreur(s) détectée(s). Consultez la console.`, "warning");
-        }
-
-        // Recharge les données
-        const [artistsData, djsData] = await Promise.all([
-          getAllArtists(),
-          getAllDjs(),
-        ]);
-        setArtists(artistsData);
-        setDjs(djsData);
-      } else {
-        showToast("Erreur lors de la migration des images", "error");
-      }
-    } catch (error) {
-      console.error("Erreur migration:", error);
-      showToast("Erreur lors de la migration des images", "error");
-    } finally {
-      setIsMigrating(false);
-      setMigrationProgress({ current: 0, total: 0, message: "" });
-    }
-  };
 
   const handleLogout = async () => {
     try {
@@ -170,30 +122,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="mb-6 flex justify-between items-center">
-            {/* Bouton de migration (temporaire) */}
-            {activeTab !== "experiences" && (
-              <button
-                onClick={handleMigrateImages}
-                disabled={isMigrating}
-                className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isMigrating ? (
-                  <>
-                    <Loader size="sm" />
-                    {migrationProgress.total > 0
-                      ? `${migrationProgress.current}/${migrationProgress.total}`
-                      : "Migration..."}
-                  </>
-                ) : (
-                  <>
-                    <Download size={18} />
-                    Migrer images hardcodées
-                  </>
-                )}
-              </button>
-            )}
-
+          <div className="mb-6 flex justify-end">
             {activeTab !== "experiences" ? (
               <Link
                 to={`/admin/${activeTab === "artists" ? "artist" : "dj"}/add`}
@@ -211,25 +140,6 @@ const AdminDashboard = () => {
               </Link>
             )}
           </div>
-
-          {/* Message de progression de la migration */}
-          {isMigrating && migrationProgress.message && (
-            <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800 font-medium">
-                {migrationProgress.message}
-              </p>
-              {migrationProgress.total > 0 && (
-                <div className="mt-2 w-full bg-blue-200 rounded-full h-2">
-                  <div
-                    className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                    style={{
-                      width: `${(migrationProgress.current / migrationProgress.total) * 100}%`,
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-          )}
 
           {loading ? (
             <div className="flex justify-center p-12">
