@@ -1,4 +1,4 @@
-import { Instagram, Mail, Linkedin, Facebook } from "lucide-react";
+import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { LogoSVG } from "../ui";
 
@@ -50,11 +50,22 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-center md:items-start"
+            className="flex flex-col items-center md:items-start relative"
           >
             <LogoSVG colorScheme="light" size="medium" className="mb-4" />
-            <p className="text-[#0B0B0B]/70 text-center md:text-left">
+            <p className="text-[#0B0B0B]/70 text-center md:text-left flex items-center gap-2">
               Faire briller vos projets
+              <motion.img
+                src="/images/Stickers/Coeur-02.webp"
+                alt="Coeur"
+                className="w-6 h-6 inline-block"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
             </p>
           </motion.div>
 
@@ -102,31 +113,43 @@ const Footer = () => {
                 href="https://instagram.com/glitter_prod"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-gradient-to-br from-[#775CFF] to-[#EBABFF] flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
+                className="w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform"
                 whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Instagram size={20} />
+                <img
+                  src="/images/Réseaux sociaux/Instagram.png"
+                  alt="Instagram"
+                  className="w-full h-full object-contain"
+                />
               </motion.a>
               <motion.a
                 href="https://www.linkedin.com/company/glitter-productions31/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-gradient-to-br from-[#EBABFF] to-[#FF7A42] flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
+                className="w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform"
                 whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Linkedin size={20} />
+                <img
+                  src="/images/Réseaux sociaux/Linkedin.png"
+                  alt="LinkedIn"
+                  className="w-full h-full object-contain"
+                />
               </motion.a>
               <motion.a
                 href="https://www.facebook.com/profile.php?id=61585407986261"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF7A42] to-[#FFFF73] flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
+                className="w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform"
                 whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Facebook size={20} />
+                <img
+                  src="/images/Réseaux sociaux/Facebook.png"
+                  alt="Facebook"
+                  className="w-full h-full object-contain"
+                />
               </motion.a>
             </div>
           </motion.div>

@@ -120,15 +120,43 @@ const About = () => {
             ))}
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-16 relative">
             <p className="text-[#0B0B0B]/70 mb-8 flex flex-wrap items-center justify-center gap-2">
               <span>Leur complémentarité et leur vision commune de l'accompagnement
               artistique sont au</span>
               <HighlightBadge color="yellow" rotation={1}>
                 CŒUR
               </HighlightBadge>
+              <motion.img
+                src="/images/Stickers/Coeur-01.webp"
+                alt="Coeur"
+                className="w-12 h-12 inline-block"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  delay: 0.5
+                }}
+                whileHover={{ scale: 1.2, rotate: 15 }}
+              />
               <span>de la réussite de Glitter Productions.</span>
             </p>
+            {/* Icône boule disco décorative */}
+            <motion.img
+              src="/images/Stickers/Boule-disco.webp"
+              alt="Boule disco"
+              className="absolute -right-8 -top-8 w-20 h-20 hidden md:block"
+              animate={{
+                rotate: [0, 360],
+                y: [0, -10, 0]
+              }}
+              transition={{
+                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+              }}
+            />
           </div>
         </Section>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, Music, Instagram, Globe } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Music, Globe } from "lucide-react";
 import { Artist } from "../../types";
 import { ImageWithFallback } from "../ui";
 
@@ -148,7 +148,11 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                               rel="noopener noreferrer"
                               className="flex items-center gap-2 bg-gradient-to-r from-[#FF4D8F] to-[#EBABFF] text-white px-4 py-2 rounded-full hover:opacity-90 transition-opacity"
                             >
-                              <Instagram size={18} />
+                              <img
+                                src="/images/Réseaux sociaux/Instagram.png"
+                                alt="Instagram"
+                                className="w-5 h-5 object-contain"
+                              />
                               <span className="text-sm font-medium">Instagram</span>
                             </a>
                           )}

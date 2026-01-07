@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { Music, Instagram, Globe, ChevronLeft, ChevronRight } from "lucide-react";
+import { Music, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { Artist } from "../../types";
 import ArtistModal from "./ArtistModal";
 import { ImageWithFallback } from "../ui";
@@ -106,9 +106,13 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
+                  className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150 w-10 h-10 flex items-center justify-center"
                 >
-                  <Instagram size={20} className="text-white" />
+                  <img
+                    src="/images/Réseaux sociaux/Instagram.png"
+                    alt="Instagram"
+                    className="w-6 h-6 object-contain"
+                  />
                 </a>
               )}
               {artist.socialLinks.website && (

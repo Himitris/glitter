@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Instagram, Send, Linkedin, Facebook } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 import {
   Section,
   Loader,
@@ -313,8 +313,12 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="bg-[#0B0B0B] p-3 rounded-full">
-                      <Instagram className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 flex items-center justify-center">
+                      <img
+                        src="/images/Réseaux sociaux/Instagram.png"
+                        alt="Instagram"
+                        className="w-12 h-12 object-contain"
+                      />
                     </div>
                     <div>
                       <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">
@@ -332,8 +336,12 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="bg-[#0B0B0B] p-3 rounded-full">
-                      <Linkedin className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 flex items-center justify-center">
+                      <img
+                        src="/images/Réseaux sociaux/Linkedin.png"
+                        alt="LinkedIn"
+                        className="w-12 h-12 object-contain"
+                      />
                     </div>
                     <div>
                       <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">
@@ -351,8 +359,12 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="bg-[#0B0B0B] p-3 rounded-full">
-                      <Facebook className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 flex items-center justify-center">
+                      <img
+                        src="/images/Réseaux sociaux/Facebook.png"
+                        alt="Facebook"
+                        className="w-12 h-12 object-contain"
+                      />
                     </div>
                     <div>
                       <h4 className="text-xl font-semibold text-[#0B0B0B] mb-1">

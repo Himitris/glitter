@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronDown, Music, Instagram } from "lucide-react";
+import { ChevronDown, Music } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ColorfulBackground, HighlightBadge, ImageWithFallback } from "../components/ui";
@@ -321,11 +321,12 @@ const Home = () => {
                                     href={artist.socialLinks.instagram}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
+                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors w-9 h-9 flex items-center justify-center"
                                   >
-                                    <Instagram
-                                      size={18}
-                                      className="text-white"
+                                    <img
+                                      src="/images/Réseaux sociaux/Instagram.png"
+                                      alt="Instagram"
+                                      className="w-5 h-5 object-contain"
                                     />
                                   </a>
                                 )}
@@ -405,11 +406,12 @@ const Home = () => {
                                     href={dj.socialLinks.instagram}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
+                                    className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors w-9 h-9 flex items-center justify-center"
                                   >
-                                    <Instagram
-                                      size={18}
-                                      className="text-white"
+                                    <img
+                                      src="/images/Réseaux sociaux/Instagram.png"
+                                      alt="Instagram"
+                                      className="w-5 h-5 object-contain"
                                     />
                                   </a>
                                 )}

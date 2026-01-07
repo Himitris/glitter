@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Instagram, Globe, Music } from 'lucide-react';
+import { Globe, Music } from 'lucide-react';
 import { GradientText } from '../text';
 import { Star } from '../decorative';
 
@@ -73,9 +73,13 @@ const TeamMember: React.FC<TeamMemberProps> = memo(({
                 href={socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-gray-600 hover:text-[${departmentColor}] transition-colors`}
+                className="hover:scale-110 transition-transform"
               >
-                <Instagram size={20} />
+                <img
+                  src="/images/Réseaux sociaux/Instagram.png"
+                  alt="Instagram"
+                  className="w-6 h-6 object-contain"
+                />
               </a>
             )}
             {socialLinks.website && (
