@@ -50,63 +50,50 @@ function getNameVariants(name: string): string[] {
  * Retourne un tableau d'URLs d'images trouvées
  */
 function findArtistImages(name: string, type: "artist" | "dj"): string[] {
-  const folder = type === "artist" ? "artists" : "djs";
-  const variants = getNameVariants(name);
-  const images: string[] = [];
+  const normalizedName = normalizeArtistName(name);
 
-  // Mapping manuel pour les cas spéciaux (noms avec caractères spéciaux, etc.)
-  const manualMappings: Record<string, string[]> = {
-    // Artistes
-    "kimia": ["kimia.webp"],
-    "kairos": ["kairos.webp"],
-    "amaliajaulin": ["amaliajaulin.webp", "amaliajaulin1.webp"],
-    "altessego": ["altess.webp"],
-    "forrodalua": ["forro.webp"],
-    "rodolphe macabeo": ["rodolphe.webp"],
-    "rodolphemacabeo": ["rodolphe.webp"],
-    "soleneweinachter": ["solene.webp"],
-    "dartala": ["dartala.webp"],
-    "lauraoneill": ["laura.webp"],
-    "manongasseng": ["manongasseng.webp", "manongasseng2.webp"],
-    "melanielesage": ["melanie.webp"],
-    "zingabe": ["zingabe.webp", "zingabe2.webp", "zingabe3.webp"],
-    "ciedelcaravaggio": ["ciedelcaravaggio.webp"],
+  // Mapping manuel basé sur les VRAIS fichiers dans /public/images/artists et /public/images/djs
+  // Format: "nom normalisé": { folder: "artists" ou "djs", files: ["fichier1.webp", ...] }
+  const manualMappings: Record<string, { folder: string; files: string[] }> = {
+    // ===== ARTISTES =====
+    "kimia": { folder: "artists", files: ["kimia.webp", "kimia2.webp"] },
+    "kairos": { folder: "artists", files: ["kairos.webp"] },
+    "amaliajaulin": { folder: "artists", files: ["amaliajaulin.webp", "amaliajaulin1.webp"] },
+    "altessego": { folder: "artists", files: ["altesseego.webp"] },
+    "altesseego": { folder: "artists", files: ["altesseego.webp"] },
+    "forrodalua": { folder: "artists", files: ["forrodalua.webp", "forrodalua2.webp"] },
+    "ciedelcaravaggio": { folder: "artists", files: ["cie.webp"] },
+    "melanielesage": { folder: "artists", files: ["melanie.webp"] },
+    "zingabe": { folder: "artists", files: ["zingabe.webp", "zingabe2.webp", "zingabe3.webp"] },
+    "manongasseng": { folder: "artists", files: ["manongasseng.webp", "manongasseng2.webp"] },
 
-    // DJs
-    "darta": ["darta.webp"],
-    "damefleuraux": ["damefleuraux.webp"],
-    "bonniespacey": ["bonnie.webp"],
-    "aimee": ["aimee.webp"],
-    "antix2000": ["antix2000.webp", "antix20001.webp"],
-    "babzilla": ["babzilla.webp", "babzilla2.webp"],
-    "pierino": ["pierino.webp"],
-    "marius": ["marius.webp", "marius1.webp", "marius2.webp"],
-    "karlpeoti": ["karl.webp"],
-    "edarta": ["E-DARTA.webp"],
-    "elona": ["elona.webp"],
-    "kheymysterio": ["kheymysterio.webp"],
-    "marieprude": ["marieprude.webp"],
-    "threehomies": ["threehomies.webp", "threehomies1.webp", "threehomies2.webp"],
+    // ===== DJS =====
+    "bonniespacey": { folder: "djs", files: ["bonniespacey.webp"] },
+    "antix2000": { folder: "djs", files: ["antix2000.webp", "antix20001.webp"] },
+    "damefleuraux": { folder: "djs", files: ["damefleuraux.webp"] },
+    "babzilla": { folder: "djs", files: ["babzilla.webp", "babzilla2.webp"] },
+
+    // ATTENTION: Marius est un DJ mais ses fichiers sont dans /artists (erreur de rangement)
+    "marius": { folder: "artists", files: ["marius.webp", "marius1.webp", "marius2.webp"] },
+
+    "edarta": { folder: "djs", files: ["E-DARTA.webp"] },
+    "elona": { folder: "djs", files: ["elona.webp", "elona2.webp", "elona3.webp", "elona4.webp"] },
+    "kheymysterio": { folder: "djs", files: ["kheymysterio.webp"] },
+    "marieprude": { folder: "djs", files: ["marieprude.webp"] },
+
+    // Three Homies - fichiers dans /artists, à déterminer si artiste ou DJ
+    "threehomies": { folder: "artists", files: ["threehomies.webp", "threehomies1.webp", "threehomies2.webp"] },
   };
 
   // Cherche d'abord dans le mapping manuel
-  const normalizedName = normalizeArtistName(name);
   if (manualMappings[normalizedName]) {
-    return manualMappings[normalizedName].map(img => `/images/${folder}/${img}`);
+    const mapping = manualMappings[normalizedName];
+    return mapping.files.map(file => `/images/${mapping.folder}/${file}`);
   }
 
-  // Sinon, essaie les variantes automatiques
-  for (const variant of variants) {
-    // Cherche image principale
-    images.push(`/images/${folder}/${variant}.webp`);
-
-    // Cherche images numérotées (jusqu'à 5)
-    for (let i = 1; i <= 5; i++) {
-      images.push(`/images/${folder}/${variant}${i}.webp`);
-    }
-  }
-
-  return images;
+  // Si pas trouvé dans le mapping, retourne un tableau vide
+  // L'artiste recevra alors le placeholder
+  return [];
 }
 
 /**
