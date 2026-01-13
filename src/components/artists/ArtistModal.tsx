@@ -67,9 +67,9 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                 </button>
 
                 {/* Contenu du modal */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full max-h-[90vh] md:max-h-[85vh]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 max-h-[90vh] md:max-h-[85vh]">
                   {/* Section Image */}
-                  <div className="relative h-64 sm:h-72 md:h-full bg-[#0B0B0B]/5">
+                  <div className="relative h-48 sm:h-56 md:h-full bg-[#0B0B0B]/5">
                     <ImageWithFallback
                       src={images[currentImageIndex]}
                       alt={artist.name}
@@ -112,12 +112,12 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                   </div>
 
                   {/* Section Informations */}
-                  <div className="p-4 sm:p-6 md:p-8 flex flex-col h-full">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B0B0B] mb-3 md:mb-4 flex-shrink-0">
+                  <div className="p-4 sm:p-6 md:p-8 flex flex-col max-h-[calc(90vh-12rem)] sm:max-h-[calc(90vh-14rem)] md:h-full">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B0B0B] mb-2 sm:mb-3 md:mb-4 flex-shrink-0">
                       {artist.name}
                     </h2>
 
-                    <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#0B0B0B]/20 scrollbar-track-transparent min-h-0 mb-3 md:mb-4">
+                    <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#0B0B0B]/20 scrollbar-track-transparent min-h-0 mb-3 max-h-[40vh] sm:max-h-[45vh] md:max-h-none">
                       <p className="text-[#0B0B0B]/80 text-sm sm:text-base leading-relaxed whitespace-pre-line">
                         {artist.description}
                       </p>
@@ -125,7 +125,7 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
 
                     {/* Liens sociaux - toujours visibles */}
                     {(artist.socialLinks.spotify || artist.socialLinks.instagram || artist.socialLinks.website) && (
-                      <div className="flex-shrink-0 pt-3 md:pt-4 border-t border-[#0B0B0B]/10">
+                      <div className="flex-shrink-0 pt-3 border-t border-[#0B0B0B]/10">
                         <p className="text-xs sm:text-sm text-[#0B0B0B]/60 mb-2 font-medium">
                           Suivez {artist.name}
                         </p>
