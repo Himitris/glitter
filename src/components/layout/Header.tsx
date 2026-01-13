@@ -112,7 +112,7 @@ const Header = () => {
             <>
               {/* Overlay pour fermer le menu */}
               <motion.div
-                className="lg:hidden fixed inset-0 bg-black/20 z-40"
+                className="lg:hidden fixed inset-0 bg-[#0B0B0B]/40 backdrop-blur-sm z-40"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
