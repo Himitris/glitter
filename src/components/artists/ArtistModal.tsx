@@ -49,13 +49,13 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
             />
 
             {/* Modal Content */}
-            <div className="min-h-screen px-4 flex items-center justify-center py-8">
+            <div className="min-h-screen px-4 flex items-center justify-center py-4 md:py-8">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="relative bg-[#FFFFF6] rounded-3xl border-2 border-[#0B0B0B] shadow-2xl max-w-4xl w-full overflow-hidden z-10 max-h-[85vh]"
+                className="relative bg-[#FFFFF6] rounded-3xl border-2 border-[#0B0B0B] shadow-2xl max-w-4xl w-full overflow-hidden z-10 max-h-[90vh] md:max-h-[85vh]"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Bouton de fermeture */}
@@ -67,9 +67,9 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                 </button>
 
                 {/* Contenu du modal */}
-                <div className="grid md:grid-cols-2 gap-0 h-full max-h-[85vh]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full max-h-[90vh] md:max-h-[85vh]">
                   {/* Section Image */}
-                  <div className="relative h-64 md:h-full bg-[#0B0B0B]/5">
+                  <div className="relative h-48 sm:h-56 md:h-full bg-[#0B0B0B]/5">
                     <ImageWithFallback
                       src={images[currentImageIndex]}
                       alt={artist.name}
@@ -112,12 +112,12 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                   </div>
 
                   {/* Section Informations */}
-                  <div className="p-8 flex flex-col h-full overflow-hidden">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#0B0B0B] mb-4">
+                  <div className="p-4 sm:p-6 md:p-8 flex flex-col h-full overflow-hidden">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B0B0B] mb-3 md:mb-4">
                       {artist.name}
                     </h2>
 
-                    <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#0B0B0B]/20 scrollbar-track-transparent">
+                    <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#0B0B0B]/20 scrollbar-track-transparent min-h-0">
                       <p className="text-[#0B0B0B]/80 leading-relaxed whitespace-pre-line">
                         {artist.description}
                       </p>
@@ -125,20 +125,20 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
 
                     {/* Liens sociaux */}
                     {(artist.socialLinks.spotify || artist.socialLinks.instagram || artist.socialLinks.website) && (
-                      <div className="mt-6 pt-6 border-t border-[#0B0B0B]/10">
-                        <p className="text-sm text-[#0B0B0B]/60 mb-3 font-medium">
+                      <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-[#0B0B0B]/10">
+                        <p className="text-xs sm:text-sm text-[#0B0B0B]/60 mb-2 md:mb-3 font-medium">
                           Suivez {artist.name}
                         </p>
-                        <div className="flex gap-3">
+                        <div className="flex flex-wrap gap-2 md:gap-3">
                           {artist.socialLinks.spotify && (
                             <a
                               href={artist.socialLinks.spotify}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 bg-[#775CFF] text-white px-4 py-2 rounded-full hover:bg-[#5a45cc] transition-colors"
+                              className="flex items-center gap-1.5 md:gap-2 bg-[#775CFF] text-white px-3 md:px-4 py-2 rounded-full hover:bg-[#5a45cc] transition-colors text-xs sm:text-sm"
                             >
-                              <Music size={18} />
-                              <span className="text-sm font-medium">Spotify</span>
+                              <Music size={16} className="sm:w-[18px] sm:h-[18px]" />
+                              <span className="font-medium">Spotify</span>
                             </a>
                           )}
                           {artist.socialLinks.instagram && (
@@ -146,14 +146,14 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                               href={artist.socialLinks.instagram}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 bg-gradient-to-r from-[#FF4D8F] to-[#EBABFF] text-white px-4 py-2 rounded-full hover:opacity-90 transition-opacity"
+                              className="flex items-center gap-1.5 md:gap-2 bg-gradient-to-r from-[#FF4D8F] to-[#EBABFF] text-white px-3 md:px-4 py-2 rounded-full hover:opacity-90 transition-opacity text-xs sm:text-sm"
                             >
                               <img
                                 src="/images/Réseaux sociaux/Instagram.png"
                                 alt="Instagram"
-                                className="w-5 h-5 object-contain"
+                                className="w-4 h-4 sm:w-5 sm:h-5 object-contain"
                               />
-                              <span className="text-sm font-medium">Instagram</span>
+                              <span className="font-medium">Instagram</span>
                             </a>
                           )}
                           {artist.socialLinks.website && (
@@ -161,10 +161,10 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                               href={artist.socialLinks.website}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 bg-[#0B0B0B] text-white px-4 py-2 rounded-full hover:bg-[#0B0B0B]/80 transition-colors"
+                              className="flex items-center gap-1.5 md:gap-2 bg-[#0B0B0B] text-white px-3 md:px-4 py-2 rounded-full hover:bg-[#0B0B0B]/80 transition-colors text-xs sm:text-sm"
                             >
-                              <Globe size={18} />
-                              <span className="text-sm font-medium">Site Web</span>
+                              <Globe size={16} className="sm:w-[18px] sm:h-[18px]" />
+                              <span className="font-medium">Site Web</span>
                             </a>
                           )}
                         </div>

@@ -18,12 +18,15 @@ import { useToast } from "../contexts/ToastContext";
 import {
   getRandomItems,
 } from "../config/displayOrder";
+import ArtistModal from "../components/artists/ArtistModal";
 
 const Home = () => {
   const { shouldReduceMotion, duration } = useOptimizedAnimation();
   const { showToast } = useToast();
   const [artists, setArtists] = useState<Artist[]>([]);
   const [djs, setDjs] = useState<Artist[]>([]);
+  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Charger les artistes et DJs au montage
   useEffect(() => {
@@ -56,6 +59,17 @@ const Home = () => {
     () => getRandomItems(djs, 3),
     [djs]
   );
+
+  // Fonction pour ouvrir le modal
+  const handleOpenModal = (artist: Artist) => {
+    setSelectedArtist(artist);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedArtist(null);
+  };
 
   // Récupérer les métadonnées SEO pour la page d'accueil
   const { title, description, keywords, image, canonical } = seoConfig.home;
@@ -292,7 +306,8 @@ const Home = () => {
                       return (
                         <div
                           key={artist.id}
-                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+                          onClick={() => handleOpenModal(artist)}
+                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
                         >
                           <div className="aspect-[4/3] overflow-hidden">
                             <img
@@ -311,6 +326,7 @@ const Home = () => {
                                     href={artist.socialLinks.spotify}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
                                     className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
                                   >
                                     <Music size={18} className="text-white" />
@@ -321,6 +337,7 @@ const Home = () => {
                                     href={artist.socialLinks.instagram}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
                                     className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors w-9 h-9 flex items-center justify-center"
                                   >
                                     <img
@@ -377,7 +394,8 @@ const Home = () => {
                       return (
                         <div
                           key={dj.id}
-                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+                          onClick={() => handleOpenModal(dj)}
+                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
                         >
                           <div className="aspect-[4/3] overflow-hidden">
                             <img
@@ -396,6 +414,7 @@ const Home = () => {
                                     href={dj.socialLinks.spotify}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
                                     className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors"
                                   >
                                     <Music size={18} className="text-white" />
@@ -406,6 +425,7 @@ const Home = () => {
                                     href={dj.socialLinks.instagram}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
                                     className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-colors w-9 h-9 flex items-center justify-center"
                                   >
                                     <img
@@ -465,6 +485,15 @@ const Home = () => {
           </div>
         </section>
       </div>
+
+      {/* Modal pour les artistes */}
+      {selectedArtist && (
+        <ArtistModal
+          artist={selectedArtist}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </>
   );
 };
