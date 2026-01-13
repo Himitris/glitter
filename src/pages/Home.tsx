@@ -27,6 +27,25 @@ const Home = () => {
   const [djs, setDjs] = useState<Artist[]>([]);
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [itemsToShow, setItemsToShow] = useState(3);
+
+  // Adapter le nombre d'éléments affichés selon la taille de l'écran
+  useEffect(() => {
+    const updateItemsCount = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setItemsToShow(6); // 2 lignes de 3 sur desktop
+      } else if (width >= 640) {
+        setItemsToShow(4); // 2 lignes de 2 sur tablet
+      } else {
+        setItemsToShow(3); // 3 éléments sur mobile
+      }
+    };
+
+    updateItemsCount();
+    window.addEventListener('resize', updateItemsCount);
+    return () => window.removeEventListener('resize', updateItemsCount);
+  }, []);
 
   // Charger les artistes et DJs au montage
   useEffect(() => {
@@ -50,14 +69,14 @@ const Home = () => {
     fetchData();
   }, [showToast]);
 
-  // Sélection aléatoire de 3 artistes et 3 DJs
+  // Sélection aléatoire d'artistes et DJs selon la taille de l'écran
   const featuredArtists = useMemo(
-    () => getRandomItems(artists, 3),
-    [artists]
+    () => getRandomItems(artists, itemsToShow),
+    [artists, itemsToShow]
   );
   const featuredDjs = useMemo(
-    () => getRandomItems(djs, 3),
-    [djs]
+    () => getRandomItems(djs, itemsToShow),
+    [djs, itemsToShow]
   );
 
   // Fonction pour ouvrir le modal
