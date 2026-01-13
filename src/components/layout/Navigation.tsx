@@ -13,13 +13,13 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
   const location = useLocation();
 
   const baseClassName = isMobile
-    ? "flex flex-col py-4 gap-3"
+    ? "flex flex-col py-5 gap-5"
     : "hidden md:flex space-x-8";
 
   const itemClassName = (isActive: boolean) => `
-    relative transition-colors tracking-wider uppercase font-semibold text-lg py-4
+    relative transition-colors tracking-wider uppercase font-medium text-sm py-3
     ${isActive ? 'text-[#775CFF]' : 'text-[#0B0B0B] hover:text-[#775CFF]'}
-    ${isMobile ? 'text-center rounded-2xl hover:bg-[#775CFF]/8 active:bg-[#775CFF]/15 active:scale-[0.98]' : ''}
+    ${isMobile ? 'text-center' : ''}
   `;
   
   // Animation variants optimisées pour le menu mobile
@@ -64,7 +64,7 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
             {route.label}
             {location.pathname === route.path && (
               <span
-                className={`absolute ${isMobile ? 'bottom-1 left-1/2 -translate-x-1/2 w-16' : 'bottom-1 left-0 right-0'} h-1 rounded-full bg-gradient-to-r ${colors.gradient.administration}`}
+                className={`absolute ${isMobile ? 'bottom-0 left-1/2 -translate-x-1/2 w-10' : 'bottom-1 left-0 right-0'} h-0.5 rounded-full bg-gradient-to-r ${colors.gradient.administration}`}
               />
             )}
           </Link>
