@@ -112,7 +112,7 @@ const Header = () => {
             <>
               {/* Overlay pour fermer le menu */}
               <motion.div
-                className="lg:hidden fixed inset-0 z-40"
+                className="lg:hidden fixed inset-0 bg-black/20 z-40"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -127,6 +127,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
               >
                 {/* Bordure gradient en haut */}
                 <div className="h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />

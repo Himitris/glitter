@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { routes } from '../../utils/navigation';
-import { colors } from '../../utils/theme';
 
 interface NavigationProps {
   isMobile?: boolean;
@@ -13,13 +12,12 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
   const location = useLocation();
 
   const baseClassName = isMobile
-    ? "flex flex-col py-5 gap-5"
+    ? "flex flex-col items-center py-5 gap-5"
     : "hidden md:flex space-x-8";
 
   const itemClassName = (isActive: boolean) => `
-    relative transition-colors tracking-wider uppercase font-medium text-sm py-2.5 pb-1.5
+    relative inline-flex flex-col items-center transition-colors tracking-wider uppercase font-medium text-sm py-2 pb-1
     ${isActive ? 'text-[#775CFF]' : 'text-[#0B0B0B] hover:text-[#775CFF]'}
-    ${isMobile ? 'text-center mx-auto' : ''}
   `;
   
   // Animation variants optimisées pour le menu mobile
@@ -61,10 +59,15 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false, onItemClick }
             className={itemClassName(location.pathname === route.path)}
             onClick={onItemClick}
           >
-            {route.label}
-            {location.pathname === route.path && (
+            <span>{route.label}</span>
+            {location.pathname === route.path && isMobile && (
               <span
-                className={`absolute ${isMobile ? 'bottom-0.5 left-1/2 -translate-x-1/2 w-20' : 'bottom-1 left-0 right-0'} h-0.5 rounded-full bg-gradient-to-r ${colors.gradient.administration}`}
+                className="mt-0.5 h-0.5 w-full rounded-full bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42]"
+              />
+            )}
+            {location.pathname === route.path && !isMobile && (
+              <span
+                className="absolute bottom-1 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-[#775CFF] via-[#EBABFF] to-[#FF7A42]"
               />
             )}
           </Link>
