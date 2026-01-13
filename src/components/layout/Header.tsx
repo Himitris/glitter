@@ -105,39 +105,39 @@ const Header = () => {
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
         </div>
-
-        {/* Mobile Menu - menu déroulant */}
-        <AnimatePresence mode="wait">
-          {isMenuOpen && (
-            <>
-              {/* Overlay pour fermer le menu */}
-              <motion.div
-                className="lg:hidden fixed inset-0 bg-[#0B0B0B]/40 backdrop-blur-sm z-40"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => setIsMenuOpen(false)}
-              />
-
-              {/* Menu content */}
-              <motion.div
-                className="lg:hidden absolute top-full left-4 right-4 mt-2 bg-[#FFFFF6] rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Bordure gradient en haut */}
-                <div className="h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
-
-                <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* Mobile Menu - menu déroulant */}
+      <AnimatePresence mode="wait">
+        {isMenuOpen && (
+          <>
+            {/* Overlay pour fermer le menu */}
+            <motion.div
+              className="lg:hidden fixed inset-0 bg-[#0B0B0B]/40 backdrop-blur-sm z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* Menu content */}
+            <motion.div
+              className="lg:hidden absolute top-full left-4 right-4 mt-2 bg-[#FFFFF6] rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Bordure gradient en haut */}
+              <div className="h-1 bg-gradient-to-r from-[#775CFF] via-[#EBABFF] via-[#FF7A42] to-[#FFFF73]" />
+
+              <Navigation isMobile onItemClick={() => setIsMenuOpen(false)} />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
