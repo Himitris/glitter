@@ -145,7 +145,7 @@ const Home = () => {
       />
       <SchemaOrg
         type="Organization"
-        name="Glitter Production"
+        name="Glitter Productions"
         description="Production d'événements uniques et mémorables."
         url="https://glitterprod.com"
         logo="/images/Logo/Logo-noir/Logo-noir.svg"

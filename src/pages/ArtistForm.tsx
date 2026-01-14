@@ -222,10 +222,10 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
       <Seo
         title={`${isEdit ? "Modifier" : "Ajouter"} un ${
           type === "artist" ? "artiste" : "DJ"
-        } | Glitter Production`}
+        } | Glitter Productions`}
         description={`${isEdit ? "Modifier" : "Ajouter"} un ${
           type === "artist" ? "artiste" : "DJ"
-        } dans la base de données Glitter Production`}
+        } dans la base de données Glitter Productions`}
         canonical={`/admin/${type}/${isEdit ? "edit" : "add"}${
           isEdit ? `/${id}` : ""
         }`}

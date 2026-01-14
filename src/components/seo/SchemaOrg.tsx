@@ -112,7 +112,7 @@ const SchemaOrg: React.FC<SchemaOrgProps> = ({
         },
         organizer: {
           "@type": "Organization",
-          name: "Glitter Production",
+          name: "Glitter Productions",
           url: "https://glitterprod.com",
         },
       };

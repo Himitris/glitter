@@ -193,7 +193,7 @@ const ExperienceForm = () => {
     <>
       <Seo
         title={`${isEditing ? "Modifier" : "Ajouter"} une expérience | Admin`}
-        description="Gestion des expériences Glitter Production"
+        description="Gestion des expériences Glitter Productions"
         canonical={`/admin/experience/${isEditing ? "edit" : "add"}`}
       />
       <Section>

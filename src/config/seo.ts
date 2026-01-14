@@ -36,7 +36,7 @@ export const seoConfig = {
   artists: {
     title: "Nos Artistes | Talents & Collaborations",
     description:
-      "Découvrez les artistes qui font confiance à Glitter Production. Production musicale, administration, management et accompagnement personnalisé pour les artistes.",
+      "Découvrez les artistes qui font confiance à Glitter Productions. Production musicale, administration, management et accompagnement personnalisé pour les artistes.",
     keywords: [
       "artistes musicaux",
       "production artistes",

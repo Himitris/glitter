@@ -136,7 +136,7 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
   return (
     <>
       <Seo
-        title={`Supprimer ${displayName} | Glitter Production`}
+        title={`Supprimer ${displayName} | Glitter Productions`}
         description={`Confirmation de suppression de ${displayName}`}
         canonical={`/admin/${type}/delete/${id}`}
       />

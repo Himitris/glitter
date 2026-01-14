@@ -25,7 +25,7 @@ const Seo: React.FC<SeoProps> = ({
   const url = canonical ? `${siteUrl}${canonical}` : siteUrl;
 
   // Formatage du titre avec le nom du site
-  const fullTitle = `${title} | Glitter Production`;
+  const fullTitle = `${title} | Glitter Productions`;
 
   return (
     <Helmet>
@@ -44,7 +44,7 @@ const Seo: React.FC<SeoProps> = ({
       <meta property="og:type" content={type} />
       <meta property="og:image" content={`${siteUrl}${image}`} />
       <meta property="og:locale" content={locale} />
-      <meta property="og:site_name" content="Glitter Production" />
+      <meta property="og:site_name" content="Glitter Productions" />
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

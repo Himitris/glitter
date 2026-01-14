@@ -9,8 +9,8 @@ const Success = () => {
   return (
     <>
       <Seo
-        title="Message envoyé | Glitter Production"
-        description="Votre message a été envoyé avec succès à Glitter Production."
+        title="Message envoyé | Glitter Productions"
+        description="Votre message a été envoyé avec succès à Glitter Productions."
         canonical="/success"
       />
       <div>

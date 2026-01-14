@@ -123,8 +123,8 @@ const AdminDashboard = () => {
   return (
     <>
       <Seo
-        title="Dashboard Admin | Glitter Production"
-        description="Panneau d'administration Glitter Production"
+        title="Dashboard Admin | Glitter Productions"
+        description="Panneau d'administration Glitter Productions"
         canonical="/admin/dashboard"
       />
       <Section>

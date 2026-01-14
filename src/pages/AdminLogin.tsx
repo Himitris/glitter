@@ -31,7 +31,7 @@ const AdminLogin = () => {
   return (
     <>
       <Seo
-        title="Admin Login | Glitter Production"
+        title="Admin Login | Glitter Productions"
         description="Page de connexion à l'interface d'administration"
         canonical="/admin/login"
       />
