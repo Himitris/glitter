@@ -253,15 +253,16 @@ const Home = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {allServices.map((service, index) => (
                 <div key={index} className="relative group">
-                  {/* Carte de service avec sticker */}
-                  <div className="border-2 border-[#0B0B0B] rounded-2xl h-full group-hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-                    <div className="relative p-6 rounded-2xl bg-[#FFFFF6] h-full flex flex-col items-center">
+                  {/* Carte de service avec sticker - hover optimisé GPU */}
+                  <div className="card-hover-lift border-2 border-[#0B0B0B] rounded-2xl h-full bg-[#FFFFF6]">
+                    <div className="relative p-6 rounded-2xl h-full flex flex-col items-center">
                       <div className="mb-4 flex justify-center">
                         <img
                           src={service.sticker}
                           alt={service.title}
                           width={64}
                           height={64}
+                          loading="lazy"
                           className="w-16 h-16 object-contain"
                         />
                       </div>
@@ -326,7 +327,7 @@ const Home = () => {
                         <div
                           key={artist.id}
                           onClick={() => handleOpenModal(artist)}
-                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
+                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] card-hover-lift cursor-pointer"
                         >
                           <div className="aspect-[4/3] overflow-hidden relative">
                             <OptimizedImage
@@ -415,7 +416,7 @@ const Home = () => {
                         <div
                           key={dj.id}
                           onClick={() => handleOpenModal(dj)}
-                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
+                          className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] card-hover-lift cursor-pointer"
                         >
                           <div className="aspect-[4/3] overflow-hidden relative">
                             <OptimizedImage

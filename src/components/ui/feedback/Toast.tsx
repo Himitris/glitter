@@ -35,9 +35,9 @@ const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
             if (intervalRef.current) clearInterval(intervalRef.current);
             return 0;
           }
-          return prev - 1;
+          return prev - 2; // Décrémente de 2 au lieu de 1
         });
-      }, 30); // 3 seconds total duration
+      }, 60); // 60ms * 50 steps = 3 seconds, moins de re-renders
 
       return () => {
         if (intervalRef.current) clearInterval(intervalRef.current);
@@ -78,8 +78,8 @@ const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
                 <X size={18} />
               </button>
             </div>
-            <div 
-              className={`h-1 bg-gradient-to-r ${colors[type]}`}
+            <div
+              className={`h-1 bg-gradient-to-r ${colors[type]} transition-[width] duration-75 ease-linear`}
               style={{ width: `${progress}%` }}
             />
           </div>

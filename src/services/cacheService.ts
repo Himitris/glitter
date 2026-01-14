@@ -4,10 +4,12 @@
 interface CacheEntry<T> {
   data: T;
   timestamp: number;
+  ttl?: number; // TTL personnalisé par entrée
 }
 
 const cache = new Map<string, CacheEntry<unknown>>();
-const DEFAULT_TTL = 5 * 60 * 1000; // 5 minutes en millisecondes
+const DEFAULT_TTL = 30 * 60 * 1000; // 30 minutes pour les données statiques (artistes, DJs)
+const SHORT_TTL = 5 * 60 * 1000; // 5 minutes pour les données dynamiques
 
 /**
  * Récupère une valeur du cache si elle existe et n'est pas expirée
@@ -17,7 +19,8 @@ export function getFromCache<T>(key: string): T | null {
 
   if (!entry) return null;
 
-  const isExpired = Date.now() - entry.timestamp > DEFAULT_TTL;
+  const ttl = entry.ttl ?? DEFAULT_TTL;
+  const isExpired = Date.now() - entry.timestamp > ttl;
   if (isExpired) {
     cache.delete(key);
     return null;
@@ -28,13 +31,20 @@ export function getFromCache<T>(key: string): T | null {
 
 /**
  * Stocke une valeur dans le cache
+ * @param key - Clé du cache
+ * @param data - Données à stocker
+ * @param ttl - TTL personnalisé en ms (optionnel, défaut 30min)
  */
-export function setInCache<T>(key: string, data: T): void {
+export function setInCache<T>(key: string, data: T, ttl?: number): void {
   cache.set(key, {
     data,
     timestamp: Date.now(),
+    ttl,
   });
 }
+
+// Export du TTL court pour les données dynamiques
+export { SHORT_TTL };
 
 /**
  * Invalide une entrée spécifique du cache

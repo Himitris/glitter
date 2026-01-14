@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,10 +10,18 @@ import { useThrottledScroll } from '../../hooks/useThrottledScroll';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
-  // Optimisé avec throttling pour améliorer les performances
+  // Utilise useRef pour éviter les re-renders et les dépendances stale dans useCallback
+  const prevScrollPosRef = useRef(0);
+  const isMenuOpenRef = useRef(isMenuOpen);
+
+  // Synchroniser la ref avec l'état
+  useEffect(() => {
+    isMenuOpenRef.current = isMenuOpen;
+  }, [isMenuOpen]);
+
+  // Optimisé avec throttling - useCallback sans dépendances qui changent
   const handleScroll = useCallback(() => {
     const currentScrollPos = window.scrollY;
 
@@ -24,11 +32,11 @@ const Header = () => {
     if (currentScrollPos <= 20) {
       setVisible(true);
     } else {
-      setVisible(prevScrollPos > currentScrollPos || isMenuOpen);
+      setVisible(prevScrollPosRef.current > currentScrollPos || isMenuOpenRef.current);
     }
 
-    setPrevScrollPos(currentScrollPos);
-  }, [prevScrollPos, isMenuOpen]);
+    prevScrollPosRef.current = currentScrollPos;
+  }, []); // Plus de dépendances - utilise des refs
 
   useThrottledScroll(handleScroll, 100);
 
@@ -45,8 +53,9 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  // Utilise des transitions spécifiques au lieu de transition-all pour de meilleures performances
   const headerClassName = `
-    fixed w-full z-50 transition-all duration-500
+    fixed w-full z-50 transition-transform duration-300 ease-out
     ${isScrolled ? 'bg-[#FFFFF6]/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}
     ${visible ? 'translate-y-0' : '-translate-y-full'}
   `;
