@@ -1,7 +1,7 @@
 // src/components/ui/ParallaxBanner.tsx
 import React, { useEffect, useState, useId } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { LazyImage } from "../common"; // Utilisation du composant LazyImage existant
+import { OptimizedImage } from "../common";
 
 interface ParallaxBannerProps {
   image: string;
@@ -56,10 +56,12 @@ const ParallaxBanner: React.FC<ParallaxBannerProps> = ({
     >
       <motion.div className="absolute inset-0 w-full h-full" style={{ y }}>
         <div className="absolute inset-0 h-[120%]">
-          <LazyImage
+          <OptimizedImage
             src={image}
             alt="Background parallax"
-            className="w-full h-full object-cover"
+            className="object-cover"
+            containerClassName="w-full h-full"
+            priority
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30" />
