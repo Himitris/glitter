@@ -87,12 +87,15 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       className={`relative overflow-hidden ${containerClassName}`}
       style={containerStyle}
     >
-      {/* Skeleton simple - animate-pulse natif de Tailwind */}
+      {/* Skeleton avec indicateur de chargement */}
       {!isLoaded && !hasError && (
         <div
-          className="absolute inset-0 animate-pulse"
+          className="absolute inset-0 flex items-center justify-center"
           style={{ backgroundColor: placeholderColor }}
-        />
+        >
+          {/* Spinner élégant aux couleurs Glitter */}
+          <div className="w-8 h-8 rounded-full border-2 border-gray-300 border-t-[#775CFF] animate-spin" />
+        </div>
       )}
 
       {/* Placeholder d'erreur */}
