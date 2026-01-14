@@ -18,3 +18,4 @@ export * from './skeleton';
 
 // Image components
 export { default as ImageWithFallback } from './ImageWithFallback';
+export { OptimizedImage } from './common';

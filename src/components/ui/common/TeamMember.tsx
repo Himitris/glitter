@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { Globe, Music } from 'lucide-react';
 import { GradientText } from '../text';
 import { Star } from '../decorative';
+import OptimizedImage from './OptimizedImage';
 
 interface TeamMemberProps {
   name: string;
@@ -37,15 +38,16 @@ const TeamMember: React.FC<TeamMemberProps> = memo(({
   return (
     <div className="bg-white border border-[#0B0B0B]/10 rounded-2xl overflow-hidden group">
       <div className="aspect-square relative overflow-hidden bg-gray-100">
-        <img
+        <OptimizedImage
           src={image}
           alt={name}
-          loading="eager"
-          decoding="async"
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
+          aspectRatio="1/1"
+          priority
+          className="transition-transform duration-300 group-hover:scale-105 will-change-transform"
+          containerClassName="w-full h-full"
         />
         {/* Ajouter une étoile selon la charte */}
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 z-10">
           <Star className={`text-[${departmentColor}]`} size="sm" />
         </div>
       </div>

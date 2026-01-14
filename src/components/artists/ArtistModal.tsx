@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Music, Globe } from "lucide-react";
 import { Artist } from "../../types";
-import { ImageWithFallback } from "../ui";
+import { OptimizedImage } from "../ui";
 
 interface ArtistModalProps {
   artist: Artist;
@@ -70,10 +70,12 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-0 max-h-[90vh] md:max-h-[85vh]">
                   {/* Section Image */}
                   <div className="relative h-48 sm:h-56 md:h-full bg-[#0B0B0B]/5">
-                    <ImageWithFallback
+                    <OptimizedImage
                       src={images[currentImageIndex]}
                       alt={artist.name}
-                      className="w-full h-full object-contain md:object-cover"
+                      className="object-contain md:object-cover"
+                      containerClassName="w-full h-full"
+                      priority
                     />
 
                     {/* Navigation d'images */}

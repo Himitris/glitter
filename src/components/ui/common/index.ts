@@ -3,6 +3,7 @@ export { default as Badge } from './Badge';
 export { default as Section } from './Section';
 export { default as GradientBorder } from './GradientBorder';
 export { default as LazyImage } from './LazyImage';
+export { default as OptimizedImage } from './OptimizedImage';
 export { default as ImageCarousel } from './ImageCarousel';
 export { default as PageHeader } from './PageHeader';
 export { default as HighlightBadge } from './HighlightBadge';

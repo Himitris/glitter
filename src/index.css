@@ -146,4 +146,48 @@
   img {
     content-visibility: auto;
   }
+
+  /* Optimisation des transitions d'images */
+  .image-fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+
+  .image-fade-in.loaded {
+    opacity: 1;
+  }
+
+  /* Conteneur d'image avec aspect ratio préservé */
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #e5e7eb;
+  }
+
+  /* Empêcher le layout shift pendant le chargement */
+  .image-container::before {
+    content: "";
+    display: block;
+  }
+
+  .image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Optimisation du scroll pour les images */
+  .scroll-smooth-images {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Réduire les repaints pendant le scroll */
+  .will-change-scroll {
+    will-change: transform;
+    transform: translateZ(0);
+  }
 }

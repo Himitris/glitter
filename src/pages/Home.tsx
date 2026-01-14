@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ChevronDown, Music } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ColorfulBackground, HighlightBadge, ImageWithFallback } from "../components/ui";
+import { ColorfulBackground, HighlightBadge, OptimizedImage } from "../components/ui";
 import { typography } from "../utils/theme";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
@@ -328,17 +328,18 @@ const Home = () => {
                           onClick={() => handleOpenModal(artist)}
                           className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
                         >
-                          <div className="aspect-[4/3] overflow-hidden">
-                            <img
+                          <div className="aspect-[4/3] overflow-hidden relative">
+                            <OptimizedImage
                               src={image}
                               alt={artist.name}
                               width={400}
                               height={300}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              loading="lazy"
+                              aspectRatio="4/3"
+                              className="group-hover:scale-105 transition-transform duration-300"
+                              containerClassName="w-full h-full"
                             />
                             {/* Overlay avec liens sociaux */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4">
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4 z-10">
                               <div className="flex gap-3">
                                 {artist.socialLinks?.spotify && (
                                   <a
@@ -416,17 +417,18 @@ const Home = () => {
                           onClick={() => handleOpenModal(dj)}
                           className="group relative overflow-hidden rounded-2xl border-2 border-[#0B0B0B] bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
                         >
-                          <div className="aspect-[4/3] overflow-hidden">
-                            <img
+                          <div className="aspect-[4/3] overflow-hidden relative">
+                            <OptimizedImage
                               src={image}
                               alt={dj.name}
                               width={400}
                               height={300}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              loading="lazy"
+                              aspectRatio="4/3"
+                              className="group-hover:scale-105 transition-transform duration-300"
+                              containerClassName="w-full h-full"
                             />
                             {/* Overlay avec liens sociaux */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4">
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-center pb-4 z-10">
                               <div className="flex gap-3">
                                 {dj.socialLinks?.spotify && (
                                   <a
