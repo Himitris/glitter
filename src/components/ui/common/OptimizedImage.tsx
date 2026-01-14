@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
 interface OptimizedImageProps {
@@ -8,10 +8,10 @@ interface OptimizedImageProps {
   containerClassName?: string;
   width?: number;
   height?: number;
-  aspectRatio?: string; // ex: "4/3", "1/1", "16/9"
+  aspectRatio?: string;
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
   fallbackSrc?: string;
-  priority?: boolean; // Pour les images above-the-fold
+  priority?: boolean;
   placeholderColor?: string;
   onLoad?: () => void;
   onError?: () => void;
@@ -20,11 +20,10 @@ interface OptimizedImageProps {
 /**
  * Composant d'image optimisé avec :
  * - Lazy loading via IntersectionObserver
+ * - Pré-décodage avec img.decode() pour éviter les saccades
  * - Skeleton animé pendant le chargement
- * - Transition fluide à l'apparition
+ * - Transition fluide synchronisée avec requestAnimationFrame
  * - Fallback en cas d'erreur
- * - Support des dimensions fixes pour éviter le layout shift
- * - Mode priorité pour les images critiques (above-the-fold)
  */
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
@@ -41,19 +40,28 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   onLoad,
   onError,
 }) => {
-  const [imageState, setImageState] = useState<"loading" | "loaded" | "error">(
+  const [imageState, setImageState] = useState<"loading" | "decoded" | "error">(
     "loading"
   );
   const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const mountedRef = useRef(true);
 
   // Configuration de l'IntersectionObserver
   const { ref: containerRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "300px 0px", // Précharge 300px avant d'être visible
+    rootMargin: "400px 0px", // Précharge 400px avant (augmenté pour plus de marge)
     threshold: 0,
-    skip: priority, // Skip l'observer si c'est une image prioritaire
+    skip: priority,
   });
+
+  // Cleanup on unmount
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   // Réinitialiser quand src change
   useEffect(() => {
@@ -61,29 +69,56 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     setImageState("loading");
   }, [src, fallbackSrc]);
 
-  // Précharger l'image en mémoire pour une transition plus fluide
+  // Précharger ET pré-décoder l'image avant de l'afficher
   useEffect(() => {
     if (!currentSrc || (!inView && !priority)) return;
 
     const img = new Image();
+    imgRef.current = img;
     img.src = currentSrc;
 
-    if (img.complete) {
-      setImageState("loaded");
-      onLoad?.();
-    } else {
-      img.onload = () => {
-        setImageState("loaded");
-        onLoad?.();
-      };
-      img.onerror = () => {
-        if (currentSrc !== fallbackSrc) {
-          setCurrentSrc(fallbackSrc);
-        } else {
-          setImageState("error");
-          onError?.();
+    const handleLoad = async () => {
+      try {
+        // Pré-décoder l'image pour éviter les saccades
+        // decode() garantit que l'image est prête à être affichée sans jank
+        await img.decode();
+
+        if (!mountedRef.current) return;
+
+        // Synchroniser avec le prochain frame pour une transition fluide
+        requestAnimationFrame(() => {
+          if (mountedRef.current) {
+            setImageState("decoded");
+            onLoad?.();
+          }
+        });
+      } catch {
+        // decode() peut échouer sur certains navigateurs anciens
+        // Dans ce cas, on affiche quand même l'image
+        if (mountedRef.current) {
+          setImageState("decoded");
+          onLoad?.();
         }
-      };
+      }
+    };
+
+    const handleError = () => {
+      if (!mountedRef.current) return;
+
+      if (currentSrc !== fallbackSrc) {
+        setCurrentSrc(fallbackSrc);
+      } else {
+        setImageState("error");
+        onError?.();
+      }
+    };
+
+    if (img.complete && img.naturalWidth > 0) {
+      // Image déjà en cache
+      handleLoad();
+    } else {
+      img.onload = handleLoad;
+      img.onerror = handleError;
     }
 
     return () => {
@@ -92,30 +127,17 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     };
   }, [currentSrc, inView, priority, fallbackSrc, onLoad, onError]);
 
-  const handleImageLoad = useCallback(() => {
-    setImageState("loaded");
-    onLoad?.();
-  }, [onLoad]);
-
-  const handleImageError = useCallback(() => {
-    if (currentSrc !== fallbackSrc) {
-      setCurrentSrc(fallbackSrc);
-    } else {
-      setImageState("error");
-      onError?.();
-    }
-  }, [currentSrc, fallbackSrc, onError]);
-
   // Calculer le style du conteneur
   const containerStyle: React.CSSProperties = {
-    backgroundColor: imageState !== "loaded" ? placeholderColor : undefined,
+    backgroundColor: imageState !== "decoded" ? placeholderColor : undefined,
     ...(aspectRatio ? { aspectRatio } : {}),
     ...(width && height && !aspectRatio
       ? { aspectRatio: `${width} / ${height}` }
       : {}),
   };
 
-  const shouldRenderImage = priority || inView;
+  const shouldRenderImage = (priority || inView) && imageState !== "error";
+  const isVisible = imageState === "decoded";
 
   return (
     <div
@@ -125,9 +147,10 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     >
       {/* Skeleton de chargement avec animation shimmer */}
       <div
-        className={`absolute inset-0 transition-opacity duration-500 ease-out ${
-          imageState === "loaded" ? "opacity-0" : "opacity-100"
+        className={`absolute inset-0 transition-opacity duration-300 ease-out ${
+          isVisible ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
+        style={{ willChange: isVisible ? "auto" : "opacity" }}
         aria-hidden="true"
       >
         <div
@@ -156,22 +179,21 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       )}
 
       {/* Image - rendue seulement quand visible ou prioritaire */}
-      {shouldRenderImage && imageState !== "error" && (
+      {shouldRenderImage && (
         <img
-          ref={imageRef}
           src={currentSrc}
           alt={alt}
           width={width}
           height={height}
           loading={priority ? "eager" : "lazy"}
-          decoding={priority ? "sync" : "async"}
-          fetchPriority={priority ? "high" : "auto"}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-          className={`w-full h-full transition-opacity duration-500 ease-out ${
-            imageState === "loaded" ? "opacity-100" : "opacity-0"
+          decoding="async"
+          className={`w-full h-full transition-opacity duration-300 ease-out ${
+            isVisible ? "opacity-100" : "opacity-0"
           } ${className}`}
-          style={{ objectFit }}
+          style={{
+            objectFit,
+            willChange: isVisible ? "auto" : "opacity",
+          }}
         />
       )}
     </div>

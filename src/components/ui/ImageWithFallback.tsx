@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
 interface ImageWithFallbackProps {
@@ -14,7 +14,7 @@ interface ImageWithFallbackProps {
 
 /**
  * Composant Image avec fallback automatique vers placeholder
- * Inclut lazy loading avec skeleton et transitions fluides
+ * Inclut lazy loading avec skeleton, pré-décodage et transitions fluides
  */
 const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   src,
@@ -26,18 +26,27 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   loading = "lazy",
   priority = false,
 }) => {
-  const [imageState, setImageState] = useState<"loading" | "loaded" | "error">(
+  const [imageState, setImageState] = useState<"loading" | "decoded" | "error">(
     "loading"
   );
   const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc);
+  const mountedRef = useRef(true);
 
   // Configuration de l'IntersectionObserver
   const { ref, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "300px 0px",
+    rootMargin: "400px 0px",
     threshold: 0,
     skip: priority || loading === "eager",
   });
+
+  // Cleanup on unmount
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   // Réinitialiser quand src change
   useEffect(() => {
@@ -45,7 +54,7 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
     setImageState("loading");
   }, [src, fallbackSrc]);
 
-  // Précharger l'image
+  // Précharger et pré-décoder l'image
   useEffect(() => {
     const shouldLoad = priority || loading === "eager" || inView;
     if (!currentSrc || !shouldLoad) return;
@@ -53,17 +62,42 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
     const img = new Image();
     img.src = currentSrc;
 
-    if (img.complete) {
-      setImageState("loaded");
-    } else {
-      img.onload = () => setImageState("loaded");
-      img.onerror = () => {
-        if (currentSrc !== fallbackSrc) {
-          setCurrentSrc(fallbackSrc);
-        } else {
-          setImageState("error");
+    const handleLoad = async () => {
+      try {
+        // Pré-décoder l'image pour éviter les saccades
+        await img.decode();
+
+        if (!mountedRef.current) return;
+
+        // Synchroniser avec le prochain frame
+        requestAnimationFrame(() => {
+          if (mountedRef.current) {
+            setImageState("decoded");
+          }
+        });
+      } catch {
+        // Fallback si decode() n'est pas supporté
+        if (mountedRef.current) {
+          setImageState("decoded");
         }
-      };
+      }
+    };
+
+    const handleError = () => {
+      if (!mountedRef.current) return;
+
+      if (currentSrc !== fallbackSrc) {
+        setCurrentSrc(fallbackSrc);
+      } else {
+        setImageState("error");
+      }
+    };
+
+    if (img.complete && img.naturalWidth > 0) {
+      handleLoad();
+    } else {
+      img.onload = handleLoad;
+      img.onerror = handleError;
     }
 
     return () => {
@@ -72,15 +106,8 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
     };
   }, [currentSrc, inView, priority, loading, fallbackSrc]);
 
-  const handleError = useCallback(() => {
-    if (currentSrc !== fallbackSrc) {
-      setCurrentSrc(fallbackSrc);
-    } else {
-      setImageState("error");
-    }
-  }, [currentSrc, fallbackSrc]);
-
   const shouldRenderImage = priority || loading === "eager" || inView;
+  const isVisible = imageState === "decoded";
 
   // Calculer l'aspect ratio pour éviter le layout shift
   const aspectRatio = width && height ? `${width} / ${height}` : undefined;
@@ -93,9 +120,10 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
     >
       {/* Skeleton de chargement */}
       <div
-        className={`absolute inset-0 transition-opacity duration-500 ease-out ${
-          imageState === "loaded" ? "opacity-0 pointer-events-none" : "opacity-100"
+        className={`absolute inset-0 transition-opacity duration-300 ease-out ${
+          isVisible ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
+        style={{ willChange: isVisible ? "auto" : "opacity" }}
         aria-hidden="true"
       >
         <div
@@ -112,12 +140,11 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
           width={width}
           height={height}
           loading={priority ? "eager" : "lazy"}
-          decoding={priority ? "sync" : "async"}
-          onLoad={() => setImageState("loaded")}
-          onError={handleError}
-          className={`w-full h-full transition-opacity duration-500 ease-out ${
-            imageState === "loaded" ? "opacity-100" : "opacity-0"
+          decoding="async"
+          className={`w-full h-full transition-opacity duration-300 ease-out ${
+            isVisible ? "opacity-100" : "opacity-0"
           } ${className}`}
+          style={{ willChange: isVisible ? "auto" : "opacity" }}
         />
       )}
 
