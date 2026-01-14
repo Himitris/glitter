@@ -1,5 +1,4 @@
-import React, { memo, useState, useCallback } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React, { memo } from 'react';
 
 interface ServiceCardProps {
   title: string;
@@ -17,43 +16,27 @@ const defaultStickers: Record<string, string> = {
   "prestation": "/images/Stickers/Dir-Prod.webp",
 };
 
-const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, sticker, description, features, color }) => {
+const ServiceCard: React.FC<ServiceCardProps> = memo(({ title, sticker, features, color }) => {
   // Utiliser le sticker fourni ou celui par défaut selon la couleur
   const stickerSrc = sticker || defaultStickers[color];
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    rootMargin: '200px 0px',
-  });
-
-  const handleImageLoad = useCallback(() => {
-    setImageLoaded(true);
-  }, []);
 
   return (
-    <div className="w-full h-full" ref={ref}>
+    <div className="w-full h-full">
       {/* Carte compacte et centrée */}
       <div className="border-2 border-[#0B0B0B] rounded-2xl bg-[#FFFFF6] hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out h-full">
         <div className="p-5 sm:p-6 h-full flex flex-col items-center text-center">
 
-          {/* Sticker centré avec lazy loading */}
-          <div className="w-14 h-14 mb-4 flex items-center justify-center relative">
-            {!imageLoaded && (
-              <div className="absolute inset-0 bg-gray-100 rounded-lg animate-pulse" />
-            )}
-            {inView && (
-              <img
-                src={stickerSrc}
-                alt={title}
-                loading="lazy"
-                decoding="async"
-                onLoad={handleImageLoad}
-                className={`w-full h-full object-contain transition-opacity duration-300 ${
-                  imageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
-            )}
+          {/* Sticker centré - loading lazy natif suffit pour ces petites images */}
+          <div className="w-14 h-14 mb-4 flex items-center justify-center">
+            <img
+              src={stickerSrc}
+              alt={title}
+              width={56}
+              height={56}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-contain"
+            />
           </div>
 
           {/* Title centré */}
