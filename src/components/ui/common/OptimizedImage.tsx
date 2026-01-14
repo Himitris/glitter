@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 interface OptimizedImageProps {
@@ -18,12 +18,11 @@ interface OptimizedImageProps {
 }
 
 /**
- * Composant d'image optimisé avec :
- * - Lazy loading via IntersectionObserver
- * - Pré-décodage avec img.decode() pour éviter les saccades
- * - Skeleton animé pendant le chargement
- * - Transition fluide synchronisée avec requestAnimationFrame
- * - Fallback en cas d'erreur
+ * Composant d'image optimisé simplifié :
+ * - Lazy loading natif du navigateur (loading="lazy")
+ * - Décodage asynchrone (decoding="async")
+ * - Transition CSS pure sans JavaScript
+ * - Skeleton minimal avec animate-pulse
  */
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
@@ -40,110 +39,47 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   onLoad,
   onError,
 }) => {
-  const [imageState, setImageState] = useState<"loading" | "decoded" | "error">(
-    "loading"
-  );
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc);
-  const [hasBeenVisible, setHasBeenVisible] = useState(priority); // Track si l'image a déjà été visible
-  const mountedRef = useRef(true);
 
-  // Configuration de l'IntersectionObserver
+  // IntersectionObserver pour déclencher le rendu de l'image
   const { ref: containerRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "400px 0px",
-    threshold: 0,
+    rootMargin: "200px 0px",
     skip: priority,
   });
-
-  // Une fois visible, toujours rester visible (ne jamais cacher l'image)
-  useEffect(() => {
-    if (inView && !hasBeenVisible) {
-      setHasBeenVisible(true);
-    }
-  }, [inView, hasBeenVisible]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    mountedRef.current = true;
-    return () => {
-      mountedRef.current = false;
-    };
-  }, []);
 
   // Réinitialiser quand src change
   useEffect(() => {
     setCurrentSrc(src || fallbackSrc);
-    setImageState("loading");
+    setIsLoaded(false);
+    setHasError(false);
   }, [src, fallbackSrc]);
 
-  // Précharger ET pré-décoder l'image avant de l'afficher
-  useEffect(() => {
-    if (!currentSrc || !hasBeenVisible) return;
+  const handleLoad = () => {
+    setIsLoaded(true);
+    onLoad?.();
+  };
 
-    const img = new Image();
-    img.src = currentSrc;
-
-    const handleLoad = async () => {
-      try {
-        // Pré-décoder l'image pour éviter les saccades
-        // decode() garantit que l'image est prête à être affichée sans jank
-        await img.decode();
-
-        if (!mountedRef.current) return;
-
-        // Synchroniser avec le prochain frame pour une transition fluide
-        requestAnimationFrame(() => {
-          if (mountedRef.current) {
-            setImageState("decoded");
-            onLoad?.();
-          }
-        });
-      } catch {
-        // decode() peut échouer sur certains navigateurs anciens
-        // Dans ce cas, on affiche quand même l'image
-        if (mountedRef.current) {
-          setImageState("decoded");
-          onLoad?.();
-        }
-      }
-    };
-
-    const handleError = () => {
-      if (!mountedRef.current) return;
-
-      if (currentSrc !== fallbackSrc) {
-        setCurrentSrc(fallbackSrc);
-      } else {
-        setImageState("error");
-        onError?.();
-      }
-    };
-
-    if (img.complete && img.naturalWidth > 0) {
-      // Image déjà en cache
-      handleLoad();
+  const handleError = () => {
+    if (currentSrc !== fallbackSrc) {
+      setCurrentSrc(fallbackSrc);
     } else {
-      img.onload = handleLoad;
-      img.onerror = handleError;
+      setHasError(true);
+      onError?.();
     }
+  };
 
-    return () => {
-      img.onload = null;
-      img.onerror = null;
-    };
-  }, [currentSrc, hasBeenVisible, fallbackSrc, onLoad, onError]);
+  const shouldShowImage = priority || inView;
 
-  // Calculer le style du conteneur
   const containerStyle: React.CSSProperties = {
-    backgroundColor: imageState !== "decoded" ? placeholderColor : undefined,
+    backgroundColor: !isLoaded ? placeholderColor : undefined,
     ...(aspectRatio ? { aspectRatio } : {}),
     ...(width && height && !aspectRatio
       ? { aspectRatio: `${width} / ${height}` }
       : {}),
   };
-
-  const shouldRenderImage = hasBeenVisible && imageState !== "error";
-  const isVisible = imageState === "decoded";
 
   return (
     <div
@@ -151,22 +87,16 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       className={`relative overflow-hidden ${containerClassName}`}
       style={containerStyle}
     >
-      {/* Skeleton de chargement avec animation shimmer */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-300 ease-out ${
-          isVisible ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-        style={{ willChange: isVisible ? "auto" : "opacity" }}
-        aria-hidden="true"
-      >
+      {/* Skeleton simple - animate-pulse natif de Tailwind */}
+      {!isLoaded && !hasError && (
         <div
-          className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-shimmer"
-          style={{ backgroundSize: "200% 100%" }}
+          className="absolute inset-0 animate-pulse"
+          style={{ backgroundColor: placeholderColor }}
         />
-      </div>
+      )}
 
       {/* Placeholder d'erreur */}
-      {imageState === "error" && (
+      {hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
           <svg
             className="w-12 h-12 text-gray-400"
@@ -184,8 +114,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         </div>
       )}
 
-      {/* Image - rendue seulement quand visible ou prioritaire */}
-      {shouldRenderImage && (
+      {/* Image - le navigateur gère tout via loading="lazy" et decoding="async" */}
+      {shouldShowImage && !hasError && (
         <img
           src={currentSrc}
           alt={alt}
@@ -193,13 +123,12 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           height={height}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
-          className={`w-full h-full transition-opacity duration-300 ease-out ${
-            isVisible ? "opacity-100" : "opacity-0"
+          onLoad={handleLoad}
+          onError={handleError}
+          className={`w-full h-full transition-opacity duration-200 ${
+            isLoaded ? "opacity-100" : "opacity-0"
           } ${className}`}
-          style={{
-            objectFit,
-            willChange: isVisible ? "auto" : "opacity",
-          }}
+          style={{ objectFit }}
         />
       )}
     </div>
