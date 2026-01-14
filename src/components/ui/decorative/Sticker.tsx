@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 interface StickerProps {
   variant?: 'violet' | 'rose' | 'orange' | 'jaune' | 'gradient';
@@ -36,19 +35,12 @@ const Sticker: React.FC<StickerProps> = ({
     lg: 'p-6 text-lg',
   };
 
-  const animationProps = animate
-    ? {
-        whileHover: { scale: 1.05, rotate: 5 },
-        whileTap: { scale: 0.95 },
-        transition: { type: 'spring', stiffness: 300, damping: 20 },
-      }
-    : {};
+  const animationClass = animate
+    ? 'hover:scale-105 hover:rotate-[5deg] active:scale-95 transition-transform duration-200'
+    : '';
 
   return (
-    <motion.div
-      className={`relative inline-block ${className}`}
-      {...animationProps}
-    >
+    <div className={`relative inline-block ${animationClass} ${className}`}>
       {/* Bordure gradient avec forme organique */}
       <div
         className={`
@@ -72,7 +64,7 @@ const Sticker: React.FC<StickerProps> = ({
           {children}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

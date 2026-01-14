@@ -216,4 +216,34 @@
   .card-hover-lift:hover::after {
     opacity: 1;
   }
+
+  /* Toast animations */
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .animate-shrink-width {
+    animation: shrinkWidth 3s linear forwards;
+  }
+}
+
+/* Keyframes pour les animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shrinkWidth {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
 }

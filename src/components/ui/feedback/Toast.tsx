@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
 interface ToastProps {
@@ -10,40 +9,17 @@ interface ToastProps {
 }
 
 const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
-  const [progress, setProgress] = useState(100);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const onCloseRef = useRef(onClose);
-
-  // Keep onClose ref updated
-  useEffect(() => {
-    onCloseRef.current = onClose;
-  }, [onClose]);
-
-  // Handle auto-close when progress reaches 0
-  useEffect(() => {
-    if (progress <= 0) {
-      onCloseRef.current();
-    }
-  }, [progress]);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isVisible) {
-      setProgress(100);
-      intervalRef.current = setInterval(() => {
-        setProgress((prev) => {
-          if (prev <= 0) {
-            if (intervalRef.current) clearInterval(intervalRef.current);
-            return 0;
-          }
-          return prev - 2; // Décrémente de 2 au lieu de 1
-        });
-      }, 60); // 60ms * 50 steps = 3 seconds, moins de re-renders
-
+      // Auto-close après 3 secondes
+      timerRef.current = setTimeout(onClose, 3000);
       return () => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
+        if (timerRef.current) clearTimeout(timerRef.current);
       };
     }
-  }, [isVisible]);
+  }, [isVisible, onClose]);
 
   const colors = {
     success: 'from-[#8C52FF] to-[#FF4D8F]',
@@ -57,35 +33,28 @@ const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
     info: 'bg-blue-50 border-blue-100',
   };
 
+  if (!isVisible) return null;
+
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -50 }}
-          className="fixed top-4 right-4 z-50"
-        >
-          <div className={`bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden max-w-md ${bgColors[type]}`}>
-            <div className="flex items-center p-4">
-              <div className="flex-1">
-                <p className="text-gray-800">{message}</p>
-              </div>
-              <button
-                onClick={onClose}
-                className="ml-4 text-gray-400 hover:text-gray-600"
-              >
-                <X size={18} />
-              </button>
-            </div>
-            <div
-              className={`h-1 bg-gradient-to-r ${colors[type]} transition-[width] duration-75 ease-linear`}
-              style={{ width: `${progress}%` }}
-            />
+    <div className="fixed top-4 right-4 z-50 animate-slide-in">
+      <div className={`bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden max-w-md ${bgColors[type]}`}>
+        <div className="flex items-center p-4">
+          <div className="flex-1">
+            <p className="text-gray-800">{message}</p>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          <button
+            onClick={onClose}
+            className="ml-4 text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X size={18} />
+          </button>
+        </div>
+        {/* Barre de progression CSS animée */}
+        <div
+          className={`h-1 bg-gradient-to-r ${colors[type]} animate-shrink-width`}
+        />
+      </div>
+    </div>
   );
 };
 
