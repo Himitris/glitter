@@ -44,16 +44,23 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     "loading"
   );
   const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc);
-  const imgRef = useRef<HTMLImageElement | null>(null);
+  const [hasBeenVisible, setHasBeenVisible] = useState(priority); // Track si l'image a déjà été visible
   const mountedRef = useRef(true);
 
   // Configuration de l'IntersectionObserver
   const { ref: containerRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "400px 0px", // Précharge 400px avant (augmenté pour plus de marge)
+    rootMargin: "400px 0px",
     threshold: 0,
     skip: priority,
   });
+
+  // Une fois visible, toujours rester visible (ne jamais cacher l'image)
+  useEffect(() => {
+    if (inView && !hasBeenVisible) {
+      setHasBeenVisible(true);
+    }
+  }, [inView, hasBeenVisible]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -71,10 +78,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   // Précharger ET pré-décoder l'image avant de l'afficher
   useEffect(() => {
-    if (!currentSrc || (!inView && !priority)) return;
+    if (!currentSrc || !hasBeenVisible) return;
 
     const img = new Image();
-    imgRef.current = img;
     img.src = currentSrc;
 
     const handleLoad = async () => {
@@ -125,7 +131,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       img.onload = null;
       img.onerror = null;
     };
-  }, [currentSrc, inView, priority, fallbackSrc, onLoad, onError]);
+  }, [currentSrc, hasBeenVisible, fallbackSrc, onLoad, onError]);
 
   // Calculer le style du conteneur
   const containerStyle: React.CSSProperties = {
@@ -136,7 +142,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       : {}),
   };
 
-  const shouldRenderImage = (priority || inView) && imageState !== "error";
+  const shouldRenderImage = hasBeenVisible && imageState !== "error";
   const isVisible = imageState === "decoded";
 
   return (
