@@ -195,6 +195,7 @@ const ExperienceForm = () => {
         title={`${isEditing ? "Modifier" : "Ajouter"} une expérience | Admin`}
         description="Gestion des expériences Glitter Productions"
         canonical={`/admin/experience/${isEditing ? "edit" : "add"}`}
+        noindex
       />
       <Section>
         <div className="container mx-auto px-4 py-8 max-w-2xl">

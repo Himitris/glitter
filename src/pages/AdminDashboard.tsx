@@ -126,6 +126,7 @@ const AdminDashboard = () => {
         title="Dashboard Admin | Glitter Productions"
         description="Panneau d'administration Glitter Productions"
         canonical="/admin/dashboard"
+        noindex
       />
       <Section>
         <div className="container mx-auto px-4 py-8">

@@ -34,6 +34,7 @@ const AdminLogin = () => {
         title="Admin Login | Glitter Productions"
         description="Page de connexion à l'interface d'administration"
         canonical="/admin/login"
+        noindex
       />
       <Section>
         <div className="max-w-md mx-auto mt-10">
