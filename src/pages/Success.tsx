@@ -12,6 +12,7 @@ const Success = () => {
         title="Message envoyé | Glitter Productions"
         description="Votre message a été envoyé avec succès à Glitter Productions."
         canonical="/success"
+        noindex
       />
       <div>
         <ParallaxBanner

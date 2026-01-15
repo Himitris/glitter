@@ -139,6 +139,7 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ type }) => {
         title={`Supprimer ${displayName} | Glitter Productions`}
         description={`Confirmation de suppression de ${displayName}`}
         canonical={`/admin/${type}/delete/${id}`}
+        noindex
       />
       <Section>
         <div className="container mx-auto px-4 py-8">

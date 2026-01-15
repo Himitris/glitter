@@ -229,6 +229,7 @@ const ArtistForm: React.FC<ArtistFormProps> = ({ isEdit, type }) => {
         canonical={`/admin/${type}/${isEdit ? "edit" : "add"}${
           isEdit ? `/${id}` : ""
         }`}
+        noindex
       />
       <Section>
         <div className="container mx-auto px-4 py-8">

@@ -9,6 +9,7 @@ interface SeoProps {
   type?: "website" | "article";
   keywords?: string[];
   locale?: string;
+  noindex?: boolean; // Pour les pages admin/success
 }
 
 const Seo: React.FC<SeoProps> = ({
@@ -19,6 +20,7 @@ const Seo: React.FC<SeoProps> = ({
   type = "website",
   keywords = [],
   locale = "fr_FR",
+  noindex = false,
 }) => {
   // URL canonique (URL complète de la page actuelle)
   const siteUrl = "https://glitterprod.com"; // Remplacez par votre domaine réel
@@ -34,7 +36,7 @@ const Seo: React.FC<SeoProps> = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords.join(", ")} />
       <link rel="canonical" href={url} />
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
       <meta name="language" content="French" />
 
       {/* Open Graph - pour Facebook, LinkedIn, etc. */}
