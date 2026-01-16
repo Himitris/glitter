@@ -318,7 +318,7 @@ const Home = () => {
                     Voici quelques artistes que nous accompagnons — découvrez-en
                     encore plus !
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 optimized-grid">
                     {featuredArtists.map((artist) => {
                       const image = Array.isArray(artist.image)
                         ? artist.image[0]
@@ -407,7 +407,7 @@ const Home = () => {
                     Découvrez une sélection de nos DJs talentueux — il y en a
                     bien d'autres à explorer !
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 optimized-grid">
                     {featuredDjs.map((dj) => {
                       const image = Array.isArray(dj.image)
                         ? dj.image[0]

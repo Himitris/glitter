@@ -33,7 +33,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
         {/* Carte simple - hover CSS natif pour performance */}
         <div
           onClick={() => setIsModalOpen(true)}
-          className="border-2 border-[#0B0B0B] rounded-3xl h-full bg-[#FFFFF6] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out flex flex-col cursor-pointer"
+          className="border-2 border-[#0B0B0B] rounded-3xl h-full bg-[#FFFFF6] overflow-hidden hover:border-[#775CFF] transition-colors duration-200 ease-out flex flex-col cursor-pointer"
         >
 
         {/* Image Container */}
@@ -54,14 +54,14 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
             <>
               <button
                 onClick={handlePrevImage}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white active:scale-95 z-10"
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/95 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white active:scale-95 z-10"
               >
                 <ChevronLeft size={20} className="text-[#0B0B0B]" />
               </button>
 
               <button
                 onClick={handleNextImage}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white active:scale-95 z-10"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/95 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white active:scale-95 z-10"
               >
                 <ChevronRight size={20} className="text-[#0B0B0B]" />
               </button>
@@ -96,7 +96,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
+                  className="bg-white/30 p-3 rounded-full hover:bg-white/40 active:scale-95 transition-all duration-150"
                 >
                   <Music size={20} className="text-white" />
                 </a>
@@ -107,7 +107,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150 w-10 h-10 flex items-center justify-center"
+                  className="bg-white/30 p-2 rounded-full hover:bg-white/40 active:scale-95 transition-all duration-150 w-10 h-10 flex items-center justify-center"
                 >
                   <img
                     src="/images/Réseaux sociaux/Instagram.png"
@@ -122,7 +122,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="bg-white/20 backdrop-blur-sm p-3 rounded-full hover:bg-white/30 hover:scale-110 active:scale-95 transition-all duration-150"
+                  className="bg-white/30 p-3 rounded-full hover:bg-white/40 active:scale-95 transition-all duration-150"
                 >
                   <Globe size={20} className="text-white" />
                 </a>

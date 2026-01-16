@@ -225,6 +225,17 @@
   .animate-shrink-width {
     animation: shrinkWidth 3s linear forwards;
   }
+
+  /* Optimisation du scroll pour les grilles d'images */
+  .optimized-grid {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+  }
+
+  .optimized-grid > * {
+    content-visibility: auto;
+    contain: layout style paint;
+  }
 }
 
 /* Keyframes pour les animations */

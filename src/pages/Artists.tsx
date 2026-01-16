@@ -106,10 +106,10 @@ const Artists = () => {
               {artistServices.map((service, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: prefersReducedMotion ? 0 : index * 0.1 }}
+                  transition={{ duration: 0.3 }}
                   className="flex h-full"
                 >
                   <ServiceCard
@@ -152,7 +152,7 @@ const Artists = () => {
             </div>
 
             {/* Grille d'artistes */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 optimized-grid">
               {loading ? (
                 Array.from({ length: 6 }).map((_, index) => (
                   <SkeletonCard key={index} variant="artist" />
@@ -161,10 +161,10 @@ const Artists = () => {
                 artists.map((artist, index) => (
                   <motion.div
                     key={artist.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.4, delay: prefersReducedMotion ? 0 : Math.min(index, 5) * 0.1 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "0px" }}
+                    transition={{ duration: 0.3 }}
                     className="h-full"
                   >
                     <ArtistCard artist={artist} />
