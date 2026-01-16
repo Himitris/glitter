@@ -194,6 +194,8 @@
   /* Carte avec effet hover optimisé (GPU-accelerated) */
   .card-hover-lift {
     position: relative;
+    /* Force GPU layer for smooth scrolling */
+    transform: translateZ(0);
     transition: transform 0.2s ease-out;
   }
 
@@ -207,10 +209,14 @@
     transition: opacity 0.2s ease-out;
     pointer-events: none;
     z-index: -1;
+    /* Promote shadow layer to GPU */
+    transform: translateZ(0);
   }
 
   .card-hover-lift:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) translateZ(0);
+    /* Only use will-change during interaction */
+    will-change: transform;
   }
 
   .card-hover-lift:hover::after {
@@ -231,6 +237,33 @@
     /* Removed content-visibility to prevent image unloading on scroll */
     /* Content stays in DOM but rendering is optimized via contain */
     contain: layout style;
+  }
+
+  /* Optimisation GPU pour cartes - High refresh rate (90Hz+) */
+  .gpu-accelerated-card {
+    /* Force GPU layer promotion for smooth scrolling */
+    transform: translateZ(0);
+    will-change: auto;
+    /* Strict containment for maximum performance */
+    contain: strict;
+    /* Intrinsic size to prevent layout shifts */
+    contain-intrinsic-size: 400px 500px;
+  }
+
+  .gpu-accelerated-card:hover {
+    /* Only promote to GPU during interaction */
+    will-change: transform;
+  }
+
+  /* Optimisation images pour scroll fluide */
+  .optimized-image-container {
+    /* Force own compositor layer */
+    transform: translateZ(0);
+    /* Prevent paint on scroll */
+    contain: layout paint;
+    /* Hardware acceleration */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 }
 

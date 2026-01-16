@@ -33,7 +33,7 @@ const ArtistCard: React.FC<ArtistCardProps> = memo(({ artist }) => {
         {/* Carte simple - hover CSS natif pour performance */}
         <div
           onClick={() => setIsModalOpen(true)}
-          className="border-2 border-[#0B0B0B] rounded-3xl h-full bg-[#FFFFF6] overflow-hidden hover:border-[#775CFF] transition-colors duration-200 ease-out flex flex-col cursor-pointer"
+          className="gpu-accelerated-card border-2 border-[#0B0B0B] rounded-3xl h-full bg-[#FFFFF6] overflow-hidden hover:border-[#775CFF] transition-colors duration-200 ease-out flex flex-col cursor-pointer"
         >
 
         {/* Image Container */}

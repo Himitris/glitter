@@ -85,7 +85,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden ${containerClassName}`}
+      className={`optimized-image-container relative overflow-hidden ${containerClassName}`}
       style={containerStyle}
     >
       {/* Skeleton avec indicateur de chargement */}

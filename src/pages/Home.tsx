@@ -336,7 +336,7 @@ const Home = () => {
                               width={400}
                               height={300}
                               aspectRatio="4/3"
-                              className="group-hover:scale-105 transition-transform duration-300"
+                              className=""
                               containerClassName="w-full h-full"
                             />
                             {/* Overlay avec liens sociaux */}
@@ -425,7 +425,7 @@ const Home = () => {
                               width={400}
                               height={300}
                               aspectRatio="4/3"
-                              className="group-hover:scale-105 transition-transform duration-300"
+                              className=""
                               containerClassName="w-full h-full"
                             />
                             {/* Overlay avec liens sociaux */}
