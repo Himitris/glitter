@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Seo from "../components/seo/Seo";
 import { Loader, Section } from "../components/ui";
-import { useToast } from "../contexts/ToastContext";
+import { useToast } from "../hooks/useToast";
 import {
   addExperience,
   getExperienceById,

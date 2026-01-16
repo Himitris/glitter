@@ -1,6 +1,5 @@
-// @refresh reset
 // Créez un nouveau fichier src/contexts/ToastContext.tsx
-import React, { createContext, useState, useContext, ReactNode, useMemo, useCallback } from 'react';
+import React, { createContext, useState, ReactNode, useMemo, useCallback } from 'react';
 import { Toast } from '../components/ui';
 
 type ToastType = 'success' | 'error' | 'info';
@@ -9,15 +8,8 @@ interface ToastContextProps {
   showToast: (message: string, type: ToastType) => void;
 }
 
-const ToastContext = createContext<ToastContextProps | undefined>(undefined);
-
-export const useToast = () => {
-  const context = useContext(ToastContext);
-  if (!context) {
-    throw new Error('useToast must be used within a ToastProvider');
-  }
-  return context;
-};
+// Export du context pour que le hook puisse l'utiliser
+export const ToastContext = createContext<ToastContextProps | undefined>(undefined);
 
 interface ToastProviderProps {
   children: ReactNode;

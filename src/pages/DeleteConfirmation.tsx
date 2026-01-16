@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useToast } from "../contexts/ToastContext";
+import { useToast } from "../hooks/useToast";
 import {
   getArtistById,
   deleteArtist,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { useToast } from "../contexts/ToastContext";
+import { useToast } from "../hooks/useToast";
 import Seo from "../components/seo/Seo";
 import { Section, Loader } from "../components/ui";
 

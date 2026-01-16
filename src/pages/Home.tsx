@@ -14,7 +14,7 @@ import {
   FirebaseServiceError,
 } from "../services/artistService";
 import { Artist } from "../types";
-import { useToast } from "../contexts/ToastContext";
+import { useToast } from "../hooks/useToast";
 import {
   getRandomItems,
 } from "../config/displayOrder";

@@ -13,7 +13,7 @@ import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 import { getAllDjs, FirebaseServiceError } from "../services/artistService";
 import { Artist } from "../types";
-import { useToast } from "../contexts/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 // Services mis à jour pour les DJs avec stickers
 const djServicesUpdated = [

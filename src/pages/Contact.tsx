@@ -9,7 +9,7 @@ import {
 } from "../components/ui";
 import { typography } from "../utils/theme";
 import { useFormValidation } from "../hooks/useFormValidation";
-import { useToast } from "../contexts/ToastContext";
+import { useToast } from "../hooks/useToast";
 import Seo from "../components/seo/Seo";
 import { seoConfig } from "../config/seo";
 

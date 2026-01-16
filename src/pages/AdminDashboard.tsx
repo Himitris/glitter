@@ -5,7 +5,7 @@ import { Reorder } from "framer-motion";
 import Seo from "../components/seo/Seo";
 import { Loader, Section } from "../components/ui";
 import { useAuth } from "../contexts/AuthContext";
-import { useToast } from "../contexts/ToastContext";
+import { useToast } from "../hooks/useToast";
 import { getAllArtists, getAllDjs, updateArtistsOrder, updateDjsOrder } from "../services/artistService";
 import { getAllExperiences, deleteExperience } from "../services/experienceService";
 import { Artist, Experience } from "../types";

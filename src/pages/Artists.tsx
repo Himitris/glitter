@@ -15,7 +15,7 @@ import { seoConfig } from "../config/seo";
 import SchemaOrg from "../components/seo/SchemaOrg";
 import { getAllArtists, FirebaseServiceError } from "../services/artistService";
 import { Artist } from "../types";
-import { useToast } from "../contexts/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 const Artists = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
