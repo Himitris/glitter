@@ -46,7 +46,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   // IntersectionObserver pour déclencher le rendu de l'image
   const { ref: containerRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "50px 0px", // Réduit de 200px à 50px pour éviter les chargements prématurés
+    rootMargin: "100px 0px", // Zone tampon pour éviter rechargements lors scroll rapide
     threshold: 0.01, // Commence à charger dès que 1% de l'image est visible
     skip: priority,
   });

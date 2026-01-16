@@ -228,13 +228,9 @@
 
   /* Optimisation du scroll pour les grilles d'images */
   .optimized-grid {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 500px;
-  }
-
-  .optimized-grid > * {
-    content-visibility: auto;
-    contain: layout style paint;
+    /* Removed content-visibility to prevent image unloading on scroll */
+    /* Content stays in DOM but rendering is optimized via contain */
+    contain: layout style;
   }
 }
 
