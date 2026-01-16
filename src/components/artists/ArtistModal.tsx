@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Music, Globe } from "lucide-react";
 import { Artist } from "../../types";
@@ -24,8 +24,40 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
+  // Bloquer le scroll du body quand le modal est ouvert
+  useEffect(() => {
+    if (isOpen) {
+      // Sauvegarder la position actuelle du scroll
+      const scrollY = window.scrollY;
+      // Bloquer le scroll
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restaurer le scroll
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      // Restaurer la position de scroll
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+
+    return () => {
+      // Cleanup au démontage
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   // Reset index when modal opens
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen) {
       setCurrentImageIndex(0);
     }
@@ -45,7 +77,7 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-[#0B0B0B]/80 backdrop-blur-sm"
+              className="fixed inset-0 bg-[#0B0B0B]/85"
             />
 
             {/* Modal Content */}
@@ -61,7 +93,7 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                 {/* Bouton de fermeture */}
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors shadow-md"
+                  className="absolute top-4 right-4 z-10 bg-white/95 p-2 rounded-full hover:bg-white transition-colors shadow-md"
                 >
                   <X size={24} className="text-[#0B0B0B]" />
                 </button>
@@ -83,14 +115,14 @@ const ArtistModal: React.FC<ArtistModalProps> = ({ artist, isOpen, onClose }) =>
                       <>
                         <button
                           onClick={handlePrevImage}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-colors shadow-lg active:scale-95"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/95 p-3 rounded-full hover:bg-white transition-colors shadow-lg active:scale-95"
                         >
                           <ChevronLeft size={24} className="text-[#0B0B0B]" />
                         </button>
 
                         <button
                           onClick={handleNextImage}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-colors shadow-lg active:scale-95"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/95 p-3 rounded-full hover:bg-white transition-colors shadow-lg active:scale-95"
                         >
                           <ChevronRight size={24} className="text-[#0B0B0B]" />
                         </button>
