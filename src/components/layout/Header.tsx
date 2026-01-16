@@ -56,7 +56,7 @@ const Header = () => {
   // Utilise des transitions spécifiques au lieu de transition-all pour de meilleures performances
   const headerClassName = `
     fixed w-full z-50 transition-transform duration-300 ease-out
-    ${isScrolled ? 'bg-[#FFFFF6]/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}
+    ${isScrolled ? 'bg-[#FFFFF6]/98 shadow-sm' : 'bg-transparent'}
     ${visible ? 'translate-y-0' : '-translate-y-full'}
   `;
 

@@ -7,3 +7,4 @@ export { default as PageHeader } from './PageHeader';
 export { default as HighlightBadge } from './HighlightBadge';
 export { default as ValueCard } from './ValueCard';
 export { default as TeamMember } from './TeamMember';
+export { default as PrefetchLink } from './PrefetchLink';
