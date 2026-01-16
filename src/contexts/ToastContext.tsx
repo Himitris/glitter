@@ -1,3 +1,4 @@
+// @refresh reset
 // Créez un nouveau fichier src/contexts/ToastContext.tsx
 import React, { createContext, useState, useContext, ReactNode, useMemo, useCallback } from 'react';
 import { Toast } from '../components/ui';
